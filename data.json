@@ -161,7 +161,7 @@
       "cost": 70,
       "isUnique": false,
       "faction": "rebels",
-      "name": "1.4 Laser Cannon Team",
+      "name": "1.4 FD Laser Cannon Team",
       "type": "emplacement trooper",
       "rank": "support",
       "upgradeBar": ["comms", "generator"],
