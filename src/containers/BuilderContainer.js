@@ -16,9 +16,17 @@ import TopMenu from 'components/TopMenu';
 import ViewChangeButton from 'components/ViewChangeButton';
 import ViewCloseButton from 'components/ViewCloseButton';
 
-const lightTheme = createMuiTheme({
+const defaultTheme = createMuiTheme({
   palette: {
-    type: 'light'
+    primary: {
+      main: '#2196F3'
+    },
+    secondary: {
+      main: '#F50057'
+    },
+    error: {
+      main: '#FFF'
+    }
   }
 });
 const deathstarTheme = createMuiTheme({
@@ -66,8 +74,7 @@ const styles = {
   paper: {
     padding: '0.5rem',
     height: 'calc(100vh - 5rem)',
-    overflowY: 'scroll',
-    backgroundColor: 'rgb(41, 45, 64, 0.5)'
+    overflowY: 'scroll'
   },
   disabledCard: {
     borderRadius: '5px',
@@ -188,22 +195,26 @@ class BuilderContainer extends React.Component {
     });
     if (isDuplicate) return 'DISABLED';
     let isRequirementsMet = true;
-    const unitTags = {
-      [unit.name]: true,
-      [unit.faction]: true,
-      [unit.type]: true,
-      [unit.rank]: true
-    };
+    const unitTags = [
+      unit.name,
+      unit.faction,
+      unit.type,
+      unit.rank
+    ];
     const forceFaction = {
       rebels: 'light side',
       empire: 'dark side',
       '': ''
     };
     upgrade.requirements.forEach((requirement) => {
-      if (!(requirement in unitTags)) {
-        if (requirement === forceFaction[unit.faction]) return;
-        isRequirementsMet = false;
-      }
+      let matches = 0;
+      unitTags.forEach((tag) => {
+        console.log(tag, requirement, tag.includes(requirement));
+        if (tag.includes(requirement)) matches += 1;
+        if (requirement === forceFaction[unit.faction]) matches += 1;
+      });
+      if (matches === upgrade.requirements.length) isRequirementsMet = true;
+      else isRequirementsMet = false;
     });
     return isRequirementsMet ? 'EQUIPPABLE' : 'DISABLED';
   }
@@ -564,7 +575,7 @@ class BuilderContainer extends React.Component {
       }
     ];
     return (
-      <MuiThemeProvider theme={lightTheme}>
+      <MuiThemeProvider theme={defaultTheme}>
         <Title />
         <TopMenu list={list} />
         <ViewChangeButton

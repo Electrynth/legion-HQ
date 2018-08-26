@@ -19,8 +19,7 @@ const listItemStyles = {
   marginBottom: '0.25rem'
 };
 const listItemDivStyles = {
-  borderRadius: '5px',
-  backgroundColor: 'rgb(41, 45, 64, 0.75)'
+  borderRadius: '5px'
 };
 const upgradeDivStyles = {
   marginLeft: '0.5rem'
@@ -147,7 +146,6 @@ class SideMenuListItem extends React.Component {
               primary={(
                 <Typography
                   type="body2"
-                  color="error"
                 >
                   {unit.name}
                 </Typography>
@@ -155,7 +153,6 @@ class SideMenuListItem extends React.Component {
               secondary={(
                 <Typography
                   type="body2"
-                  color="error"
                 >
                   {unit.cost === unit.totalCost ? (
                     `${unit.cost}`

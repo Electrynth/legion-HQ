@@ -29,7 +29,7 @@ class TopMenu extends React.Component {
     list.units.forEach((unit) => {
       pointTotal += unit.totalCost;
     });
-    const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIcon.svg' : '/faction/empireIcon.svg';
+    const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconWhite.svg' : '/faction/empireIconWhite.svg';
     return (
       <Slide
         in
@@ -51,8 +51,8 @@ class TopMenu extends React.Component {
               }}
             />
             <Typography
-              variant="subheading"
               color="error"
+              variant="subheading"
             >
               {`${pointTotal}/800`}
             </Typography>
