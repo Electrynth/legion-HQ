@@ -16,6 +16,11 @@ import TopMenu from 'components/TopMenu';
 import ViewChangeButton from 'components/ViewChangeButton';
 import ViewCloseButton from 'components/ViewCloseButton';
 
+const lightTheme = createMuiTheme({
+  palette: {
+    type: 'light'
+  }
+});
 const deathstarTheme = createMuiTheme({
   palette: {
     primary: {
@@ -29,7 +34,6 @@ const deathstarTheme = createMuiTheme({
     }
   }
 });
-
 const hothTheme = createMuiTheme({
   palette: {
     primary: {
@@ -560,7 +564,7 @@ class BuilderContainer extends React.Component {
       }
     ];
     return (
-      <MuiThemeProvider theme={hothTheme}>
+      <MuiThemeProvider theme={lightTheme}>
         <Title />
         <TopMenu list={list} />
         <ViewChangeButton
