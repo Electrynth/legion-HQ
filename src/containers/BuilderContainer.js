@@ -19,13 +19,10 @@ import ViewCloseButton from 'components/ViewCloseButton';
 const defaultTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#2196F3'
+      main: '#00BCD4'
     },
     secondary: {
       main: '#F50057'
-    },
-    error: {
-      main: '#FFF'
     }
   }
 });

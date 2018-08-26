@@ -94,6 +94,6 @@ app.get('*', (req, res) => {
 });
 
 const port = 3000;
-const hostname = '127.0.0.1';
+const hostname = '0.0.0.0';
 
 app.listen(port, hostname, console.log(hostname, port));

@@ -29,7 +29,7 @@ class TopMenu extends React.Component {
     list.units.forEach((unit) => {
       pointTotal += unit.totalCost;
     });
-    const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconWhite.svg' : '/faction/empireIconWhite.svg';
+    const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconBlack.svg' : '/faction/empireIconBlack.svg';
     return (
       <Slide
         in
@@ -44,14 +44,8 @@ class TopMenu extends React.Component {
             <TextField
               style={textInputStyles}
               placeholder={list.title === '' ? 'Untitled' : list.title}
-              inputProps={{
-                style: {
-                  color: 'white'
-                }
-              }}
             />
             <Typography
-              color="error"
               variant="subheading"
             >
               {`${pointTotal}/800`}
