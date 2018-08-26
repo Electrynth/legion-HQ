@@ -778,6 +778,13 @@
       "commander": "Emperor Palpatine",
       "faction": "empire",
       "products": []
+    },
+    {
+      "pips": 2,
+      "name": "Reckless Diversion",
+      "commander": "Han Solo",
+      "faction": "rebels",
+      "products": []
     }
   ]
 }
