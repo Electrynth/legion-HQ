@@ -225,7 +225,7 @@ class BuilderContainer extends React.Component {
     // viewFilter: { rank, type: 'UNIT' }
     const { list, viewFilter } = this.state;
     if (viewFilter.type === 'UNIT_VIEW') {
-      if (viewFilter.unitIndex === unitIndex) return 'VIEW_ONLY';
+      if (list.units[viewFilter.unitIndex].id === unit.id) return 'VIEW_ONLY';
       return 'HIDDEN';
     }
     if (viewFilter.type !== 'UNIT') return 'HIDDEN';

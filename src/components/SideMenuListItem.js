@@ -29,47 +29,48 @@ const unitIconStyles = {
   width: 40,
   cursor: 'pointer',
   display: 'inline-block',
-  bottom: '0.2rem'
+  bottom: '0.2rem',
+  right: '1.5rem'
 };
 const commanderIconStyles = {
   position: 'absolute',
   height: '35px',
-  width: '40px',
-  top: '1.6rem',
-  left: '1.5rem',
+  width: '35px',
+  top: '0.5rem',
+  left: '2.65rem',
   zIndex: 10
 };
 const operativeIconStyles = {};
 const corpsIconStyles = {
   position: 'absolute',
-  height: '23px',
-  width: '23px',
-  top: '2.1rem',
-  left: '2rem',
+  height: '20px',
+  width: '20px',
+  top: '1rem',
+  left: '3.1rem',
   zIndex: 10
 };
 const specialIconStyles = {
   position: 'absolute',
-  height: '40px',
-  width: '40px',
-  top: '1.7rem',
-  left: '1.5rem',
+  height: '35px',
+  width: '35px',
+  top: '0.7rem',
+  left: '2.6rem',
   zIndex: 10
 };
 const supportIconStyles = {
   position: 'absolute',
-  height: '21px',
-  width: '21px',
-  top: '2.1rem',
-  left: '2.05rem',
+  height: '20px',
+  width: '20px',
+  top: '1rem',
+  left: '3.1rem',
   zIndex: 10
 };
 const heavyIconStyles = {
   position: 'absolute',
   height: '33px',
   width: '33px',
-  top: '1.8rem',
-  left: '1.7rem',
+  top: '0.7rem',
+  left: '2.75rem',
   zIndex: 10
 };
 const rankIconStyles = {
@@ -142,24 +143,11 @@ class SideMenuListItem extends React.Component {
               onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
             />
             <ListItemText
-              disableTypography
-              primary={(
-                <Typography
-                  type="body2"
-                >
-                  {unit.name}
-                </Typography>
-              )}
-              secondary={(
-                <Typography
-                  type="body2"
-                >
-                  {unit.cost === unit.totalCost ? (
-                    `${unit.cost}`
-                  ) : (
-                    `${unit.cost} (${unit.totalCost})`
-                  )}
-                </Typography>
+              primary={unit.name}
+              secondary={unit.cost === unit.totalCost ? (
+                `${unit.cost}`
+              ) : (
+                `${unit.cost} (${unit.totalCost})`
               )}
             />
             <ListItemSecondaryAction style={unitButtonStyles}>
