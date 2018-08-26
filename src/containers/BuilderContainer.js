@@ -115,6 +115,10 @@ const styles = {
   commandCardLarge: {
     maxWidth: '300px',
     maxHeight: '420px'
+  },
+  rankIcon: {
+    width: '25px',
+    height: '25px'
   }
 };
 
@@ -517,7 +521,13 @@ class BuilderContainer extends React.Component {
     const actions = [
       {
         name: 'Commander',
-        icon: <FileCopyIcon />,
+        icon: (
+          <img
+            alt="Commander"
+            src="/rankIcons/commander.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'commander'
@@ -525,7 +535,13 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Operative',
-        icon: <FileCopyIcon />,
+        icon: (
+          <img
+            alt="Operative"
+            src="/rankIcons/operative.svg"
+            style={{ width: '25px', height: '25px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'operative'
@@ -533,15 +549,27 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Corps',
-        icon: <FileCopyIcon />,
+        icon: (
+          <img
+            alt="Corps"
+            src="/rankIcons/corps.svg"
+            style={{ width: '20px', height: '20px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'corps'
         }
       },
       {
-        name: 'Special',
-        icon: <FileCopyIcon />,
+        name: 'Special Forces',
+        icon: (
+          <img
+            alt="Special Forces"
+            src="/rankIcons/special.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'special'
@@ -549,7 +577,13 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Support',
-        icon: <FileCopyIcon />,
+        icon: (
+          <img
+            alt="Support"
+            src="/rankIcons/support.svg"
+            style={{ width: '20px', height: '20px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'support'
@@ -557,7 +591,13 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Heavy',
-        icon: <FileCopyIcon />,
+        icon: (
+          <img
+            alt="Heavy"
+            src="/rankIcons/heavy.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        ),
         viewFilter: {
           type: 'UNIT',
           rank: 'heavy'
