@@ -10,6 +10,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
+import PortraitSharpIcon from '@material-ui/icons/PortraitSharp';
 import SideMenuListItem from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
@@ -261,77 +262,154 @@ class BuilderContainer extends React.Component {
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'heavy weapon'
-        }
+        },
+        icon: (
+          <img
+            alt="Heavy Weapon"
+            src="/upgradeTypeIcons/heavy%20weapon.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       personnel: {
         name: 'Personnel',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'personnel'
-        }
+        },
+        icon: (
+          <img
+            alt="Personnel"
+            src="/upgradeTypeIcons/personnel.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       force: {
         name: 'Force',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'force'
-        }
+        },
+        icon: (
+          <img
+            alt="Force"
+            src="/upgradeTypeIcons/force.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       command: {
         name: 'Command',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'command'
-        }
+        },
+        icon: (
+          <img
+            alt="Command"
+            src="/upgradeTypeIcons/command.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       hardpoint: {
         name: 'Hardpoint',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'hardpoint'
-        }
+        },
+        icon: (
+          <img
+            alt="Hardpoint"
+            src="/upgradeTypeIcons/hardpoint.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       gear: {
         name: 'Gear',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'gear'
-        }
+        },
+        icon: (
+          <img
+            alt="Gear"
+            src="/upgradeTypeIcons/gear.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       grenades: {
         name: 'Grenades',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'grenades'
-        }
+        },
+        icon: (
+          <img
+            alt="Grenades"
+            src="/upgradeTypeIcons/grenades.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       comms: {
         name: 'Comms',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'comms'
-        }
+        },
+        icon: (
+          <img
+            alt="Comms"
+            src="/upgradeTypeIcons/comms.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       pilot: {
         name: 'Pilot',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'pilot'
-        }
+        },
+        icon: (
+          <img
+            alt="Pilot"
+            src="/upgradeTypeIcons/pilot.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       training: {
         name: 'Training',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'training'
-        }
+        },
+        icon: (
+          <img
+            alt="Training"
+            src="/upgradeTypeIcons/training.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       },
       generator: {
         name: 'Generator',
         viewFilter: {
           type: 'UPGRADE',
           upgradeType: 'generator'
-        }
+        },
+        icon: (
+          <img
+            alt="Generator"
+            src="/upgradeTypeIcons/generator.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       }
     };
     const allUpgradeOptions = [];
@@ -605,7 +683,7 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Command',
-        icon: <FileCopyIcon />,
+        icon: <PortraitSharpIcon />,
         viewFilter: {
           type: 'COMMAND'
         }

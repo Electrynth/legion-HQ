@@ -193,6 +193,9 @@ class SideMenuListItem extends React.Component {
                           option.action({ unitIndex, upgradeIndex, ...option.viewFilter });
                         }}
                       >
+                        <ListItemIcon>
+                          {option.icon}
+                        </ListItemIcon>
                         {option.name}
                       </MenuItem>
                     ) : undefined
