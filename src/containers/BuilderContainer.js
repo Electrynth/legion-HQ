@@ -208,17 +208,16 @@ class BuilderContainer extends React.Component {
       empire: 'dark side',
       '': ''
     };
+    let requirementsMet = 0;
     upgrade.requirements.forEach((requirement) => {
-      let matches = 0;
-      unitTags.forEach((tag) => {
-        console.log(tag, requirement, tag.includes(requirement));
-        if (tag.includes(requirement)) matches += 1;
-        if (requirement === forceFaction[unit.faction]) matches += 1;
+      let matched = false;
+      unitTags.forEach((tag) => { 
+        if (tag.includes(requirement)) matched = true;
+        if (requirement === forceFaction[unit.faction]) matched = true; 
       });
-      if (matches === upgrade.requirements.length) isRequirementsMet = true;
-      else isRequirementsMet = false;
-    });
-    return isRequirementsMet ? 'EQUIPPABLE' : 'DISABLED';
+      if (matched) requirementsMet += 1;
+    }); 
+    return requirementsMet === upgrade.requirements.length ? 'EQUIPPABLE' : 'DISABLED';
   }
 
   getUnitEligibility = (unit, unitIndex) => {
@@ -469,11 +468,11 @@ class BuilderContainer extends React.Component {
     const card = JSON.parse(JSON.stringify(cards[cardId]));
     switch (type) {
       case 'UNIT':
-        list.units.push(card);
+        list.units.push(card); 
         break;
       case 'UPGRADE':
         list.units[viewFilter.unitIndex].upgradesEquipped[viewFilter.upgradeIndex] = card;
-        list.units[viewFilter.unitIndex].totalCost += card.cost;
+        list.units[viewFilter.unitIndex].totalCost += card.cost; 
         break;
       case 'COMMAND':
         list.commands.push(card);
@@ -495,7 +494,7 @@ class BuilderContainer extends React.Component {
 
   removeUnit = (unitIndex) => {
     const { list } = this.state;
-    const unit = list.units[unitIndex];
+    const unit = list.units[unitIndex]; 
     list.commands.forEach((command, commandIndex) => {
       if (command.commander === unit.name) this.removeCommand(commandIndex);
     });
@@ -504,7 +503,13 @@ class BuilderContainer extends React.Component {
     });
     if (unit.isUnique) list.uniques[unit.id] = false;
     list.units.splice(unitIndex, 1);
-    this.setState({ list });
+    this.setState({
+      list,
+      isViewMenuOpen: false,
+      viewFilter: {
+        type: 'LIST'
+      }
+    });
   }
 
   removeUpgrade = (unitIndex, upgradeIndex) => {
@@ -560,7 +565,7 @@ class BuilderContainer extends React.Component {
 
   changeViewFilter = newViewFilter => this.setState({ viewFilter: newViewFilter });
 
-  resetView = () => {
+  resetView = () => { 
     this.setState({
       isViewMenuOpen: false,
       viewFilter: {
