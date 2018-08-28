@@ -134,8 +134,7 @@ class SideMenuListItem extends React.Component {
             <img
               alt={unit.rank}
               style={rankIconStyles[unit.rank]}
-              src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
-              onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
+              src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`} 
             />
             <Avatar
               src={unit.iconLocation}
