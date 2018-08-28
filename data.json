@@ -204,7 +204,7 @@
       "name": "AT-RT",
       "type": "ground vehicle",
       "rank": "support",
-      "upgradeBar": ["pilot", "hardpoint", "hardpoint", "hardpoint", "comms"],
+      "upgradeBar": ["pilot", "hardpoint", "hardpoint", "comms"],
       "products": ["swl01", "swl04"]
     },
     {
