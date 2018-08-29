@@ -500,7 +500,7 @@ class BuilderContainer extends React.Component {
   removeCommand = (commandIndex) => {
     const { list } = this.state;
     const command = list.commands[commandIndex];
-    if (command.isUnique) list.uniques[command.id] = false;
+    list.uniques[command.id] = false;
     list.commands.splice(commandIndex, 1);
     this.setState({ list });
   }
