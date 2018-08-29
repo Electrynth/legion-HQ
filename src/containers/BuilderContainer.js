@@ -170,7 +170,6 @@ class BuilderContainer extends React.Component {
       if (equipped && equipped.id === upgrade.id) isDuplicate = true;
     });
     if (isDuplicate) return 'DISABLED';
-    let isRequirementsMet = true;
     const unitTags = [
       unit.name,
       unit.faction,
