@@ -11,7 +11,7 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
-import PortraitSharpIcon from '@material-ui/icons/PortraitSharp';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import SideMenuListItem from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
@@ -501,7 +501,6 @@ class BuilderContainer extends React.Component {
   removeCommand = (commandIndex) => {
     const { list } = this.state;
     const command = list.commands[commandIndex];
-    if (command.name === 'Standing Orders') return;
     if (command.isUnique) list.uniques[command.id] = false;
     list.commands.splice(commandIndex, 1);
     this.setState({ list });
@@ -672,7 +671,7 @@ class BuilderContainer extends React.Component {
       },
       {
         name: 'Command',
-        icon: <PortraitSharpIcon />,
+        icon: <GroupWorkIcon />,
         viewFilter: {
           type: 'COMMAND'
         }

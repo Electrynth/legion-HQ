@@ -68,6 +68,19 @@ class ListFooter extends React.Component {
           alignItems="center"
         >
           {sortedCommands.map((command, commandIndex) => {
+            if (command.name === 'Standing Orders') {
+              return (
+                <Grid item key={command.name}>
+                  <Chip
+                    color="primary"
+                    avatar={<Avatar>{this.getPipIcon(command.pips)}</Avatar>}
+                    label={command.name}
+                    onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
+              );
+            }
             return (
               <Grid item key={command.name}>
                 <Chip
@@ -75,7 +88,7 @@ class ListFooter extends React.Component {
                   avatar={<Avatar>{this.getPipIcon(command.pips)}</Avatar>}
                   label={command.name}
                   onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
-                  onDelete={() => removeCommand({ commandIndex })}
+                  onDelete={() => removeCommand(commandIndex)}
                   style={{ marginRight: '5px' }}
                 />
               </Grid>
@@ -86,7 +99,7 @@ class ListFooter extends React.Component {
           <TextField
             id="multiline-static"
             label="Notes"
-            margin="none"
+            margin="normal"
             multiline
             fullWidth
           />
