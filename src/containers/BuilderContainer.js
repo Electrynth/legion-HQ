@@ -14,6 +14,7 @@ import PortraitSharpIcon from '@material-ui/icons/PortraitSharp';
 import SideMenuListItem from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
+import ListFooter from 'components/ListFooter';
 import ViewChangeButton from 'components/ViewChangeButton';
 import ViewCloseButton from 'components/ViewCloseButton';
 
@@ -27,35 +28,7 @@ const defaultTheme = createMuiTheme({
     }
   }
 });
-const deathstarTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#292D40'
-    },
-    secondary: {
-      main: '#C6395B'
-    },
-    background: {
-      paper: '#D1E3F9'
-    }
-  }
-});
-const hothTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#292D40'
-    },
-    secondary: {
-      main: '#C6395B'
-    },
-    background: {
-      paper: '#D1E3F9'
-    },
-    error: {
-      main: '#FFF'
-    }
-  }
-});
+
 const styles = {
   fadeTransition: {
     display: 'inline-block'
@@ -211,12 +184,12 @@ class BuilderContainer extends React.Component {
     let requirementsMet = 0;
     upgrade.requirements.forEach((requirement) => {
       let matched = false;
-      unitTags.forEach((tag) => { 
+      unitTags.forEach((tag) => {
         if (tag.includes(requirement)) matched = true;
-        if (requirement === forceFaction[unit.faction]) matched = true; 
+        if (requirement === forceFaction[unit.faction]) matched = true;
       });
       if (matched) requirementsMet += 1;
-    }); 
+    });
     return requirementsMet === upgrade.requirements.length ? 'EQUIPPABLE' : 'DISABLED';
   }
 
@@ -468,11 +441,11 @@ class BuilderContainer extends React.Component {
     const card = JSON.parse(JSON.stringify(cards[cardId]));
     switch (type) {
       case 'UNIT':
-        list.units.push(card); 
+        list.units.push(card);
         break;
       case 'UPGRADE':
         list.units[viewFilter.unitIndex].upgradesEquipped[viewFilter.upgradeIndex] = card;
-        list.units[viewFilter.unitIndex].totalCost += card.cost; 
+        list.units[viewFilter.unitIndex].totalCost += card.cost;
         break;
       case 'COMMAND':
         list.commands.push(card);
@@ -494,7 +467,7 @@ class BuilderContainer extends React.Component {
 
   removeUnit = (unitIndex) => {
     const { list } = this.state;
-    const unit = list.units[unitIndex]; 
+    const unit = list.units[unitIndex];
     list.commands.forEach((command, commandIndex) => {
       if (command.commander === unit.name) this.removeCommand(commandIndex);
     });
@@ -565,7 +538,7 @@ class BuilderContainer extends React.Component {
 
   changeViewFilter = newViewFilter => this.setState({ viewFilter: newViewFilter });
 
-  resetView = () => { 
+  resetView = () => {
     this.setState({
       isViewMenuOpen: false,
       viewFilter: {
@@ -698,6 +671,7 @@ class BuilderContainer extends React.Component {
       <MuiThemeProvider theme={defaultTheme}>
         <Title />
         <TopMenu list={list} />
+        <ListFooter list={list} />
         <ViewChangeButton
           actions={actions}
           isVisible={viewFilter.type === 'LIST'}
