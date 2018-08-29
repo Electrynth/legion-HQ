@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Slide from '@material-ui/core/Slide';
 import Avatar from '@material-ui/core/Avatar';
@@ -12,6 +13,25 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+
+
+/*
+<IconButton color="inherit">
+  <DeleteIcon />
+</IconButton>
+<IconButton color="inherit">
+  <PrintIcon />
+</IconButton>
+<IconButton color="inherit">
+  <LinkIcon />
+</IconButton>
+<IconButton color="inherit">
+  <SaveIcon />
+</IconButton>
+<IconButton color="inherit">
+  <MoreVertIcon />
+</IconButton>
+*/
 
 class TopMenu extends React.Component {
   state = {};
@@ -52,21 +72,19 @@ class TopMenu extends React.Component {
               {`${pointTotal}/800`}
             </Typography>
             <div style={{ flexGrow: 1 }} />
-            <IconButton color="inherit">
-              <DeleteIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <PrintIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <LinkIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <SaveIcon />
-            </IconButton>
-            <IconButton color="inherit">
-              <MoreVertIcon />
-            </IconButton>
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://github.com/NicholasCBrown/legion-HQ"
+              style={{ textDecoration: 'none' }}
+            >
+              <Button
+                variant="contained"
+                color="inherit"
+              >
+                Under Development
+              </Button>
+            </a>
           </Toolbar>
         </AppBar>
       </Slide>

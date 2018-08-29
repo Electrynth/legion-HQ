@@ -1,3 +1,3 @@
-# legion-holotable
+# legion-HQ
 
-Legion Builder for FFG's Star Wars Legion game
+Legion List Builder for FFG's Star Wars Legion game
