@@ -40,7 +40,7 @@ const styles = {
     right: '1rem'
   },
   grid: {
-    paddingTop: '3rem'
+    paddingTop: '2.5rem'
   },
   paper: {
     padding: '0.5rem',
