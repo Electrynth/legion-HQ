@@ -671,7 +671,6 @@ class BuilderContainer extends React.Component {
       <MuiThemeProvider theme={defaultTheme}>
         <Title />
         <TopMenu list={list} />
-        <ListFooter list={list} />
         <ViewChangeButton
           actions={actions}
           isVisible={viewFilter.type === 'LIST'}
