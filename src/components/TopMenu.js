@@ -37,7 +37,10 @@ class TopMenu extends React.Component {
   state = {};
 
   render() {
-    const { list } = this.props;
+    const {
+      list,
+      changeListMode
+    } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
       width: 30,
@@ -46,6 +49,10 @@ class TopMenu extends React.Component {
     const textInputStyles = {
       width: '10vw'
     };
+    const buttonStyles = {
+      marginLeft: '0.5rem'
+    };
+    const maxPoints = list.mode === 'standard' ? 800 : 1600;
     let pointTotal = 0;
     list.units.forEach((unit) => {
       pointTotal += unit.totalCost;
@@ -66,11 +73,15 @@ class TopMenu extends React.Component {
               style={textInputStyles}
               placeholder={list.title === '' ? 'Untitled' : list.title}
             />
-            <Typography
-              variant="subheading"
+            <Button
+              size="small"
+              variant="contained"
+              color="primary"
+              onClick={changeListMode}
+              style={buttonStyles}
             >
-              {`${pointTotal}/800`}
-            </Typography>
+              {`${list.mode} ${pointTotal}/${maxPoints}`}
+            </Button>
             <div style={{ flexGrow: 1 }} />
             <a
               target="_blank"

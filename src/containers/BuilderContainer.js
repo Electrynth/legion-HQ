@@ -25,6 +25,9 @@ const defaultTheme = createMuiTheme({
     },
     secondary: {
       main: '#F50057'
+    },
+    error: {
+      main: '#000'
     }
   }
 });
@@ -104,8 +107,8 @@ class BuilderContainer extends React.Component {
       classes,
       list: {
         faction,
+        mode: 'standard',
         title: '',
-        pointTotal: 0,
         units: [],
         commands: [
           {
@@ -536,6 +539,12 @@ class BuilderContainer extends React.Component {
     this.setState({ list, viewFilter: { type: 'LIST' } });
   }
 
+  changeListMode = () => {
+    const { list } = this.state;
+    list.mode = list.mode === 'standard' ? 'grand army' : 'standard';
+    this.setState({ list });
+  }
+
   changeViewFilter = newViewFilter => this.setState({ viewFilter: newViewFilter });
 
   resetView = () => {
@@ -670,7 +679,10 @@ class BuilderContainer extends React.Component {
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title />
-        <TopMenu list={list} />
+        <TopMenu
+          list={list}
+          changeListMode={this.changeListMode}
+        />
         <ViewChangeButton
           actions={actions}
           isVisible={viewFilter.type === 'LIST'}
