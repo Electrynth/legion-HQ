@@ -25,9 +25,6 @@ const defaultTheme = createMuiTheme({
     },
     secondary: {
       main: '#F50057'
-    },
-    error: {
-      main: '#000'
     }
   }
 });

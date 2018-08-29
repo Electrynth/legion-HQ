@@ -52,10 +52,60 @@ class TopMenu extends React.Component {
     const buttonStyles = {
       marginLeft: '0.5rem'
     };
+    const rankIconStyles = {
+      commander: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '30px',
+        height: '20px'
+      },
+      operative: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '20px',
+        height: '20px'
+      },
+      corps: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '20px',
+        height: '20px'
+      },
+      special: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '40px',
+        height: '20px'
+      },
+      support: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '17px',
+        height: '20px'
+      },
+      heavy: {
+        bottom: '5px',
+        marginLeft: '5px',
+        width: '32px',
+        height: '20px'
+      }
+    };
+    let commanders = 0;
+    let operatives = 0;
+    let corps = 0;
+    let specials = 0;
+    let supports = 0;
+    let heavies = 0;
     const maxPoints = list.mode === 'standard' ? 800 : 1600;
     let pointTotal = 0;
     list.units.forEach((unit) => {
       pointTotal += unit.totalCost;
+      if (unit.rank === 'commander') commanders += 1;
+      if (unit.rank === 'operative') operatives += 1;
+      if (unit.rank === 'corps') corps += 1;
+      if (unit.rank === 'special') specials += 1;
+      if (unit.rank === 'support') supports += 1;
+      if (unit.rank === 'heavy') heavies += 1;
     });
     const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconBlack.svg' : '/faction/empireIconBlack.svg';
     return (
@@ -81,6 +131,42 @@ class TopMenu extends React.Component {
               style={buttonStyles}
             >
               {`${list.mode} ${pointTotal}/${maxPoints}`}
+              <img
+                alt="commander"
+                src="rankIcons/commander.svg"
+                style={rankIconStyles.commander}
+              />
+              {`:${commanders}/${list.mode === 'standard' ? '1-2' : '1-4'}`}
+              <img
+                alt="operative"
+                src="rankIcons/operative.svg"
+                style={rankIconStyles.operative}
+              />
+              {`:${operatives}/${list.mode === 'standard' ? '0-2' : '0-4'}`}
+              <img
+                alt="corps"
+                src="rankIcons/corps.svg"
+                style={rankIconStyles.corps}
+              />
+              {`:${corps}/${list.mode === 'standard' ? '3-6' : '6-10'}`}
+              <img
+                alt="special forces"
+                src="rankIcons/special.svg"
+                style={rankIconStyles.special}
+              />
+              {`:${specials}/${list.mode === 'standard' ? '0-3' : '0-5'}`}
+              <img
+                alt="support"
+                src="rankIcons/support.svg"
+                style={rankIconStyles.support}
+              />
+              {`:${supports}/${list.mode === 'standard' ? '0-3' : '0-5'}`}
+              <img
+                alt="heavy"
+                src="rankIcons/heavy.svg"
+                style={rankIconStyles.heavy}
+              />
+              {`:${heavies}/${list.mode === 'standard' ? '0-2' : '0-4'}`}
             </Button>
             <div style={{ flexGrow: 1 }} />
             <a
