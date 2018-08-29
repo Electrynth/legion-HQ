@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
+import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -34,7 +35,7 @@ const styles = {
     display: 'inline-block'
   },
   viewButton: {
-    zIndex: 10,
+    zIndex: 1700,
     position: 'absolute',
     top: '4.75rem',
     right: '1rem'
@@ -211,11 +212,12 @@ class BuilderContainer extends React.Component {
     // viewFilter: { type: 'COMMAND' }
     const { list, viewFilter } = this.state;
     if (viewFilter.type === 'COMMAND_VIEW') {
-      if (viewFilter.cardId === command.id) return 'VIEW_ONLY';
+      if (viewFilter.command.name === command.name) return 'VIEW_ONLY';
       return 'HIDDEN';
     }
     if (viewFilter.type !== 'COMMAND') return 'HIDDEN';
     if (!this.isValidFaction(command, list)) return 'HIDDEN';
+    if (list.commands.length === 7) return 'DISABLED';
     if (this.isUniqueAlreadyExist(command, list)) return 'DISABLED';
     if (command.commander !== '') {
       let isCommanderPresent = false;
@@ -449,6 +451,7 @@ class BuilderContainer extends React.Component {
         break;
       case 'COMMAND':
         list.commands.push(card);
+        list.commands.sort((c1, c2) => c1.pips - c2.pips);
         list.uniques[cardId] = true;
         break;
       default:
@@ -576,10 +579,12 @@ class BuilderContainer extends React.Component {
       cards,
       unitsById,
       upgradesById,
-      commandsById
+      commandsById,
+      width
     } = this.props;
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
+    const mobile = width === 'sm' || width === 'xs';
     const actions = [
       {
         name: 'Commander',
@@ -701,13 +706,17 @@ class BuilderContainer extends React.Component {
           alignItems="stretch"
           className={classes.grid}
         >
-          <Grid item xs={5}>
+          <Grid
+            item
+            xs={12}
+            md={5}
+          >
             <Slide
-              in
+              in={mobile ? viewFilter.type === 'LIST' : true}
               mountOnEnter
               unmountOnExit
               direction="right"
-              timeout={500}
+              timeout={250}
             >
               <Paper elevation={3} className={classes.paper}>
                 <div style={{ opacity: 1 }}>
@@ -725,17 +734,27 @@ class BuilderContainer extends React.Component {
                       </div>
                     ))}
                   </List>
+                  <Divider style={{ marginBottom: '10px' }} />
+                  <ListFooter
+                    list={list}
+                    changeViewFilter={this.changeViewFilter}
+                    removeCommand={this.removeCommand}
+                  />
                 </div>
               </Paper>
             </Slide>
           </Grid>
-          <Grid item xs>
+          <Grid
+            item
+            xs={12}
+            md={7}
+          >
             <Slide
-              in
+              in={mobile ? viewFilter.type !== 'LIST' : true}
               mountOnEnter
               unmountOnExit
               direction="left"
-              timeout={500}
+              timeout={250}
             >
               <div style={{ opacity: 1 }}>
                 <Paper elevation={3} className={classes.paper}>
@@ -842,32 +861,52 @@ class BuilderContainer extends React.Component {
                       );
                       return filtered;
                     }, [])}
-                    {commandsById.reduce((filtered, commandId, commandIndex) => {
-                      const command = cards[commandId];
-                      const eligibility = this.getCommandEligibility(command);
-                      filtered.push(
-                        <Fade
-                          unmountOnExit
-                          key={command.id}
-                          in={eligibility !== 'HIDDEN'}
-                          timeout={{
-                            enter: this.getTransitionDuration(commandIndex),
-                            exit: 0
-                          }}
-                          className={classes.fadeTransition}
-                          onClick={() => this.addCard(eligibility, 'COMMAND', commandId, cards)}
-                        >
-                          <Grid item>
-                            <img
-                              src={command.imageLocation}
-                              alt={command.name}
-                              className={this.getCardStyles('COMMAND', eligibility, classes)}
-                            />
-                          </Grid>
-                        </Fade>
-                      );
-                      return filtered;
-                    }, [])}
+                    {viewFilter.command && viewFilter.command.name === 'Standing Orders' ? (
+                      <Fade
+                        unmountOnExit
+                        in
+                        timeout={{
+                          enter: this.getTransitionDuration(1),
+                          exit: 0
+                        }}
+                        className={classes.fadeTransition}
+                      >
+                        <Grid item>
+                          <img
+                            src="/commands/Standing%20Orders.png"
+                            alt="Standing Orders"
+                            className={this.getCardStyles('COMMAND', 'VIEW_ONLY', classes)}
+                          />
+                        </Grid>
+                      </Fade>
+                    ) : (
+                      commandsById.reduce((filtered, commandId, commandIndex) => {
+                        const command = cards[commandId];
+                        const eligibility = this.getCommandEligibility(command);
+                        filtered.push(
+                          <Fade
+                            unmountOnExit
+                            key={command.id}
+                            in={eligibility !== 'HIDDEN'}
+                            timeout={{
+                              enter: this.getTransitionDuration(commandIndex),
+                              exit: 0
+                            }}
+                            className={classes.fadeTransition}
+                            onClick={() => this.addCard(eligibility, 'COMMAND', commandId, cards)}
+                          >
+                            <Grid item>
+                              <img
+                                src={command.imageLocation}
+                                alt={command.name}
+                                className={this.getCardStyles('COMMAND', eligibility, classes)}
+                              />
+                            </Grid>
+                          </Fade>
+                        );
+                        return filtered;
+                      }, [])
+                    )}
                   </Grid>
                 </Paper>
               </div>
@@ -879,4 +918,4 @@ class BuilderContainer extends React.Component {
   }
 }
 
-export default withStyles(styles)(BuilderContainer);
+export default withWidth()(withStyles(styles)(BuilderContainer));

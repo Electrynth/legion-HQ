@@ -134,7 +134,7 @@ class SideMenuListItem extends React.Component {
             <img
               alt={unit.rank}
               style={rankIconStyles[unit.rank]}
-              src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`} 
+              src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
             />
             <Avatar
               src={unit.iconLocation}
