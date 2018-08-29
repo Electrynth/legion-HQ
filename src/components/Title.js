@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 const Title = ({ faction }) => (
   <Helmet>
     <title>
-      Title
+      {`${faction.charAt(0).toUpperCase() + faction.substr(1)} | LEGION HQ`}
     </title>
   </Helmet>
 );

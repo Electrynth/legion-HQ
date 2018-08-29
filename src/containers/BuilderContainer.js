@@ -678,7 +678,7 @@ class BuilderContainer extends React.Component {
     ];
     return (
       <MuiThemeProvider theme={defaultTheme}>
-        <Title />
+        <Title faction={list.faction} />
         <TopMenu
           list={list}
           changeListMode={this.changeListMode}

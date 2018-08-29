@@ -10,7 +10,7 @@ export default class HomeContainer extends React.Component {
       <div>
         <Helmet>
           <title>
-            Home
+            Home | LEGION HQ
           </title>
         </Helmet>
         <Home />
