@@ -204,7 +204,7 @@
       "name": "AT-RT",
       "type": "ground vehicle",
       "rank": "support",
-      "upgradeBar": ["pilot", "hardpoint", "hardpoint", "comms"],
+      "upgradeBar": ["hardpoint", "comms"],
       "products": ["swl01", "swl04"]
     },
     {
@@ -481,6 +481,16 @@
       "cost": 25,
       "isUnique": false,
       "name": "AT-RT Flamethrower",
+      "type": "hardpoint",
+      "requirements": ["AT-RT"],
+      "products": ["swl01", "swl04"],
+      "faction": "rebels",
+      "rank": "upgrade"
+    },
+    {
+      "cost": 35,
+      "isUnique": false,
+      "name": "AT-RT Laser Cannon",
       "type": "hardpoint",
       "requirements": ["AT-RT"],
       "products": ["swl01", "swl04"],

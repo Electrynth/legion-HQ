@@ -62,7 +62,7 @@ const Home = ({ history }) => (
       <Grid item>
         <Typography
           color="inherit"
-          variant="display4"
+          variant="display3"
         >
           Legion HQ
         </Typography>
