@@ -22,7 +22,7 @@ const listItemDivStyles = {
   borderRadius: '5px'
 };
 const upgradeDivStyles = {
-  marginLeft: '0.5rem'
+  marginLeft: '1rem'
 };
 const unitIconStyles = {
   height: 40,
@@ -81,9 +81,7 @@ const rankIconStyles = {
   support: supportIconStyles,
   heavy: heavyIconStyles
 };
-const unitButtonStyles = {
-  top: '1.65rem'
-};
+
 const upgradeChipStyles = {
   marginRight: '0.1rem'
 };
@@ -115,8 +113,12 @@ class SideMenuListItem extends React.Component {
       upgradeOptions,
       menuOptions,
       removeUpgrade,
-      changeViewFilter
+      changeViewFilter,
+      mobile
     } = this.props;
+    const unitButtonStyles = {
+      right: mobile ? '3.5rem' : '0.5rem'
+    };
     return (
       <Slide
         in
@@ -152,7 +154,7 @@ class SideMenuListItem extends React.Component {
             <ListItemSecondaryAction style={unitButtonStyles}>
               <Grow
                 key="upgradeOptionButton"
-                in={isHovered}
+                in={true}
                 timeout={250}
               >
                 <IconButton
@@ -191,7 +193,7 @@ class SideMenuListItem extends React.Component {
               ) : undefined}
               <Grow
                 key="menuOptionButton"
-                in={isHovered}
+                in={true}
                 timeout={250}
               >
                 <IconButton

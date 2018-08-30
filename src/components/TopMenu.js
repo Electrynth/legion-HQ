@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import Popover from '@material-ui/core/Popover';
 import Slide from '@material-ui/core/Slide';
 import Avatar from '@material-ui/core/Avatar';
 import PrintIcon from '@material-ui/icons/Print';
@@ -34,7 +35,12 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 */
 
 class TopMenu extends React.Component {
-  state = {};
+  state = {
+  };
+
+  handlePopoverOpen = event => this.setState({ menuAnchor: event.currentTarget })
+
+  handlePopoverClose = () => this.setState({ menuAnchor: null });
 
   render() {
     const {
@@ -131,42 +137,6 @@ class TopMenu extends React.Component {
               style={buttonStyles}
             >
               {`${list.mode} ${pointTotal}/${maxPoints}`}
-              <img
-                alt="commander"
-                src="rankIcons/commander.svg"
-                style={rankIconStyles.commander}
-              />
-              {`:${commanders}/${list.mode === 'standard' ? '1-2' : '1-4'}`}
-              <img
-                alt="operative"
-                src="rankIcons/operative.svg"
-                style={rankIconStyles.operative}
-              />
-              {`:${operatives}/${list.mode === 'standard' ? '0-2' : '0-4'}`}
-              <img
-                alt="corps"
-                src="rankIcons/corps.svg"
-                style={rankIconStyles.corps}
-              />
-              {`:${corps}/${list.mode === 'standard' ? '3-6' : '6-10'}`}
-              <img
-                alt="special forces"
-                src="rankIcons/special.svg"
-                style={rankIconStyles.special}
-              />
-              {`:${specials}/${list.mode === 'standard' ? '0-3' : '0-5'}`}
-              <img
-                alt="support"
-                src="rankIcons/support.svg"
-                style={rankIconStyles.support}
-              />
-              {`:${supports}/${list.mode === 'standard' ? '0-3' : '0-5'}`}
-              <img
-                alt="heavy"
-                src="rankIcons/heavy.svg"
-                style={rankIconStyles.heavy}
-              />
-              {`:${heavies}/${list.mode === 'standard' ? '0-2' : '0-4'}`}
             </Button>
             <div style={{ flexGrow: 1 }} />
             <a

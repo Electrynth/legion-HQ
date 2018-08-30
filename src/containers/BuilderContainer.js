@@ -6,12 +6,16 @@ import List from '@material-ui/core/List';
 import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
+import red from '@material-ui/core/colors/red';
 import SideMenuListItem from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
@@ -94,6 +98,9 @@ const styles = {
   rankIcon: {
     width: '25px',
     height: '25px'
+  },
+  rankChipStyles: {
+    marginRight: '5px'
   }
 };
 
@@ -676,6 +683,49 @@ class BuilderContainer extends React.Component {
         }
       }
     ];
+    const rankCounts = {
+      commander: 0,
+      operative: 0,
+      corps: 0,
+      special: 0,
+      support: 0,
+      heavy: 0
+    };
+    const rankIconStyles = {
+      commander: {
+        width: '28px',
+        height: '28px',
+        marginLeft: '5px'
+      },
+      operative: {
+        width: '20px',
+        height: '20px',
+        marginLeft: '5px'
+      },
+      corps: {
+        width: '20px',
+        height: '20px',
+        marginLeft: '5px'
+      },
+      special: {
+        width: '35px',
+        height: '35px',
+        marginLeft: '5px'
+      },
+      support: {
+        width: '20px',
+        height: '20px',
+        marginLeft: '5px'
+      },
+      heavy: {
+        width: '35px',
+        height: '35px',
+        marginLeft: '5px'
+      }
+    };
+    list.units.forEach((unit) => {
+      rankCounts[unit.rank] += 1;
+    });
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title faction={list.faction} />
@@ -728,6 +778,7 @@ class BuilderContainer extends React.Component {
                           menuOptions={allMenuOptions[unitIndex]}
                           removeUpgrade={this.removeUpgrade}
                           changeViewFilter={this.changeViewFilter}
+                          mobile={mobile}
                         />
                       </div>
                     ))}
@@ -754,9 +805,96 @@ class BuilderContainer extends React.Component {
               direction="left"
               timeout={250}
             >
-              <div style={{ opacity: 1 }}>
-                <Paper elevation={3} className={classes.paper}>
+              <Paper elevation={3} className={classes.paper}>
+                <Grid
+                  container
+                  spacing={8}
+                  direction="column"
+                >
                   <Grid
+                    item
+                    container
+                    direction="row"
+                    spacing={8}
+                    justify="center"
+                    alignItems="flex-start"
+                  >
+                    {Object.entries(rankCounts).map(([rank, rankCount]) => {
+                      let isValidCount = false;
+                      if (list.mode === 'standard') {
+                        switch (rank) {
+                          case 'commander':
+                            isValidCount = rankCount > 0 && rankCount < 3;
+                            break;
+                          case 'operative':
+                            isValidCount = rankCount < 3;
+                            break;
+                          case 'corps':
+                            isValidCount = rankCount > 2 && rankCount < 7;
+                            break;
+                          case 'special':
+                            isValidCount = rankCount < 4;
+                            break;
+                          case 'support':
+                            isValidCount = rankCount < 4;
+                            break;
+                          case 'heavy':
+                            isValidCount = rankCount < 2;
+                            break;
+                          default:
+                            isValidCount = true;
+                        }
+                      } else if (list.mode === 'grand army') {
+                        switch (rank) {
+                          case 'commander':
+                            isValidCount = rankCount > 0 && rankCount < 5;
+                            break;
+                          case 'operative':
+                            isValidCount = rankCount < 5;
+                            break;
+                          case 'corps':
+                            isValidCount = rankCount > 5 && rankCount < 11;
+                            break;
+                          case 'special':
+                            isValidCount = rankCount < 6;
+                            break;
+                          case 'support':
+                            isValidCount = rankCount < 6;
+                            break;
+                          case 'heavy':
+                            isValidCount = rankCount < 5;
+                            break;
+                          default:
+                            isValidCount = true;
+                        }
+                      }
+                      return (
+                        <Grid item key={rank}>
+                          <Fade in>
+                            <Chip
+                              variant="outlined"
+                              avatar={(
+                                <img
+                                  alt={rank}
+                                  src={`/rankIcons/${rank}.svg`}
+                                  style={rankIconStyles[rank]}
+                                />
+                              )}
+                              label={(
+                                <Typography
+                                  color={isValidCount ? 'default' : 'secondary'}
+                                >
+                                  {rankCount}
+                                </Typography>
+                              )}
+                            />
+                          </Fade>
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
+                  <Grid
+                    item
                     container
                     spacing={8}
                     direction="row"
@@ -906,8 +1044,8 @@ class BuilderContainer extends React.Component {
                       }, [])
                     )}
                   </Grid>
-                </Paper>
-              </div>
+                </Grid>
+              </Paper>
             </Slide>
           </Grid>
         </Grid>

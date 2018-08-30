@@ -102,6 +102,7 @@ class ListFooter extends React.Component {
             margin="normal"
             multiline
             fullWidth
+            style={{ marginTop: '0px' }}
           />
         </Grid>
       </Grid>
