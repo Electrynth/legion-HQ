@@ -54,7 +54,7 @@ const Home = ({ history }) => (
   <Grow in>
     <Grid
       container
-      spacing={24}
+      spacing={8}
       direction="column"
       justify="center"
       alignItems="center"
