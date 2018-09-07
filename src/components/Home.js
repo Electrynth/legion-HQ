@@ -110,43 +110,43 @@ const Home = ({ history }) => (
           >
             <ListItem>
               <ListItemIcon>
-                <PrintIcon />
+                <PrintIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="Printing lists" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <ListAltIcon />
+                <ListAltIcon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="List text export" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <ShareIcon />
+                <ShareIcon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="List URL sharing" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <HttpsIcon />
+                <HttpsIcon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="HTTPS" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <AccountCircleIcon />
+                <AccountCircleIcon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="User accounts" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <SaveIcon />
+                <SaveIcon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="Saving lists" />
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <Brightness4Icon />
+                <Brightness4Icon color="secondary" />
               </ListItemIcon>
               <ListItemText primary="Night mode" />
             </ListItem>
