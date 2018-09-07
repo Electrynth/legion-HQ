@@ -120,7 +120,7 @@ class TopMenu extends React.Component {
         mountOnEnter
         unmountOnExit
         direction="down"
-        timeout={750}
+        timeout={500}
       >
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
