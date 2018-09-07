@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
 import BuilderContainer from 'containers/BuilderContainer';
+import ExportedListContainer from 'containers/ExportedListContainer';
 
 /*
 <div style={{ position: 'absolute', left: '50%', top: '50%' }}>
@@ -57,6 +58,10 @@ class App extends Component {
             <Route
               path="/empire"
               render={props => <BuilderContainer faction="empire" {...this.state} {...props} />}
+            />
+            <Route
+              path="/export"
+              render={props => <ExportedListContainer {...props} />}
             />
             <Redirect from="/" to="/home" />
           </Switch>

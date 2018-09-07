@@ -45,7 +45,8 @@ class TopMenu extends React.Component {
   render() {
     const {
       list,
-      changeListMode
+      changeListMode,
+      changeListTitle
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -125,8 +126,9 @@ class TopMenu extends React.Component {
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
             <Avatar style={avatarStyles} src={factionIconLocation} />
-            <TextField 
+            <TextField
               placeholder={list.title === '' ? 'Untitled' : list.title}
+              onChange={changeListTitle}
             />
             <div style={{ flexGrow: 1 }} />
             <Button
@@ -137,7 +139,7 @@ class TopMenu extends React.Component {
               style={buttonStyles}
             >
               {`${list.mode} ${pointTotal}/${maxPoints}`}
-            </Button> 
+            </Button>
           </Toolbar>
         </AppBar>
       </Slide>

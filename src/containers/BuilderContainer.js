@@ -126,7 +126,8 @@ class BuilderContainer extends React.Component {
             iconLocation: '/commandIcons/Standing%20Orders.png'
           }
         ],
-        uniques: {}
+        uniques: {},
+        notes: ''
       },
       isViewMenuOpen: false,
       viewFilter: {
@@ -550,6 +551,18 @@ class BuilderContainer extends React.Component {
     this.setState({ list });
   }
 
+  changeListTitle = (event) => {
+    const { list } = this.state;
+    list.title = event.target.value;
+    this.setState({ list });
+  }
+
+  changeListNotes = (event) => {
+    const { list } = this.state;
+    list.notes = event.target.value;
+    this.setState({ list });
+  }
+
   changeViewFilter = newViewFilter => this.setState({ viewFilter: newViewFilter });
 
   resetView = () => {
@@ -731,6 +744,7 @@ class BuilderContainer extends React.Component {
         <Title faction={list.faction} />
         <TopMenu
           list={list}
+          changeListTitle={this.changeListTitle}
           changeListMode={this.changeListMode}
         />
         <ViewChangeButton
@@ -786,6 +800,7 @@ class BuilderContainer extends React.Component {
                   <Divider style={{ marginBottom: '10px' }} />
                   <ListFooter
                     list={list}
+                    changeListNotes={this.changeListNotes}
                     changeViewFilter={this.changeViewFilter}
                     removeCommand={this.removeCommand}
                   />

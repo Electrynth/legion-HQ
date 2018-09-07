@@ -150,12 +150,6 @@ const Home = ({ history }) => (
               </ListItemIcon>
               <ListItemText primary="Night mode" />
             </ListItem>
-          
-         
-        
-       
-      
-     
           </List>
           <Grid
             container
