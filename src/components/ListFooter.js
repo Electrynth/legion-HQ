@@ -7,6 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import Tooltip from '@material-ui/core/Tooltip';
 import LooksOneIcon from '@material-ui/icons/LooksOne';
@@ -15,6 +16,11 @@ import LooksThreeIcon from '@material-ui/icons/Looks3';
 import LooksFourIcon from '@material-ui/icons/Looks4';
 import RemoveIcon from '@material-ui/icons/Remove';
 import CancelIcon from '@material-ui/icons/Cancel';
+import PrintIcon from '@material-ui/icons/Print';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
+import LinkIcon from '@material-ui/icons/Link';
 
 class ListFooter extends React.Component {
   state = {};
@@ -104,6 +110,39 @@ class ListFooter extends React.Component {
             fullWidth
             style={{ marginTop: '0px' }}
           />
+        </Grid>
+        <Grid
+          item
+          container
+          direction="row"
+          justify="center"
+          alignItems="center"
+        >
+          <Grid item>
+            <IconButton disabled color="inherit">
+              <SaveIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton color="inherit">
+              <PrintIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton color="inherit">
+              <ListAltIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton disabled color="inherit">
+              <LinkIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton disabled color="inherit">
+              <DeleteIcon />
+            </IconButton>
+          </Grid>
         </Grid>
       </Grid>
     );
