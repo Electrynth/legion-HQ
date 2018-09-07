@@ -767,7 +767,7 @@ class BuilderContainer extends React.Component {
               timeout={250}
             >
               <Paper elevation={3} className={classes.paper}>
-                <div style={{ opacity: 1 }}>
+                <div>
                   <List dense>
                     {list.units.map((unit, unitIndex) => (
                       <div key={`${unit.id}_${unitIndex}`}>
