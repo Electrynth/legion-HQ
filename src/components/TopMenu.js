@@ -125,10 +125,10 @@ class TopMenu extends React.Component {
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
             <Avatar style={avatarStyles} src={factionIconLocation} />
-            <TextField
-              style={textInputStyles}
+            <TextField 
               placeholder={list.title === '' ? 'Untitled' : list.title}
             />
+            <div style={{ flexGrow: 1 }} />
             <Button
               size="small"
               variant="contained"
@@ -137,21 +137,7 @@ class TopMenu extends React.Component {
               style={buttonStyles}
             >
               {`${list.mode} ${pointTotal}/${maxPoints}`}
-            </Button>
-            <div style={{ flexGrow: 1 }} />
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/NicholasCBrown/legion-HQ"
-              style={{ textDecoration: 'none' }}
-            >
-              <Button
-                variant="contained"
-                color="inherit"
-              >
-                Under Development
-              </Button>
-            </a>
+            </Button> 
           </Toolbar>
         </AppBar>
       </Slide>
