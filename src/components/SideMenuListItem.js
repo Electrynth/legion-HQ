@@ -5,6 +5,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,6 +14,11 @@ import Slide from '@material-ui/core/Slide';
 import Grow from '@material-ui/core/Grow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
+
+const countStyles = {
+  position: 'absolute',
+  left: '-3px'
+};
 
 const listItemStyles = {
   width: '100%',
@@ -25,53 +31,38 @@ const upgradeDivStyles = {
   marginLeft: '1rem'
 };
 const unitIconStyles = {
-  height: 40,
-  width: 40,
-  cursor: 'pointer',
-  display: 'inline-block',
-  bottom: '0.2rem',
-  right: '1.5rem'
 };
 const commanderIconStyles = {
-  position: 'absolute',
-  height: '35px',
-  width: '35px',
-  top: '0.5rem',
-  left: '2.65rem',
-  zIndex: 10
-};
-const operativeIconStyles = {};
-const corpsIconStyles = {
-  position: 'absolute',
+  position: 'relative',
   height: '20px',
-  width: '20px',
-  top: '1rem',
-  left: '3.1rem',
-  zIndex: 10
+  width: '20px'
+};
+const operativeIconStyles = {
+  position: 'relative',
+  height: '15px',
+  width: '15px'
+};
+const corpsIconStyles = {
+  position: 'relative',
+  height: '14px',
+  width: '14px'
 };
 const specialIconStyles = {
-  position: 'absolute',
-  height: '35px',
-  width: '35px',
-  top: '0.7rem',
-  left: '2.6rem',
-  zIndex: 10
+  position: 'relative',
+  height: '22px',
+  width: '22px',
+  top: '1px'
 };
 const supportIconStyles = {
-  position: 'absolute',
-  height: '20px',
-  width: '20px',
-  top: '1rem',
-  left: '3.1rem',
-  zIndex: 10
+  position: 'relative',
+  height: '15px',
+  width: '15px',
+  right: '1px'
 };
 const heavyIconStyles = {
-  position: 'absolute',
-  height: '33px',
-  width: '33px',
-  top: '0.7rem',
-  left: '2.75rem',
-  zIndex: 10
+  position: 'relative',
+  height: '20px',
+  width: '20px',
 };
 const rankIconStyles = {
   commander: commanderIconStyles,
@@ -114,7 +105,8 @@ class SideMenuListItem extends React.Component {
       menuOptions,
       removeUpgrade,
       changeViewFilter,
-      mobile
+      mobile,
+      count
     } = this.props;
     const unitButtonStyles = {
       right: mobile ? '3.5rem' : '0.5rem'
@@ -133,16 +125,35 @@ class SideMenuListItem extends React.Component {
           onMouseLeave={this.turnOffHovered}
         >
           <ListItem style={listItemStyles}>
-            <img
-              alt={unit.rank}
-              style={rankIconStyles[unit.rank]}
-              src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
-            />
-            <Avatar
-              src={unit.iconLocation}
-              style={unitIconStyles}
-              onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
-            />
+            <Slide
+              in={count > 1}
+              mountOnEnter
+              unmountOnExit
+              direction="right"
+              timeout={250}
+            >
+              <div style={countStyles}>
+                <Typography variant="title">
+                  {`${count}x`}
+                </Typography>
+              </div>
+            </Slide>
+            <Badge
+              color="primary"
+              badgeContent={(
+                <img
+                  alt={unit.rank}
+                  style={rankIconStyles[unit.rank]}
+                  src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
+                />
+              )}
+            >
+              <Avatar
+                src={unit.iconLocation}
+                style={unitIconStyles}
+                onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
+              />
+            </Badge>
             <ListItemText
               primary={unit.name}
               secondary={unit.cost === unit.totalCost ? (

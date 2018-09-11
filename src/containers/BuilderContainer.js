@@ -35,6 +35,11 @@ const defaultTheme = createMuiTheme({
 });
 
 const styles = {
+  unitCount: {
+    position: 'relative',
+    display: 'inline-block',
+    bottom: '200px'
+  },
   fadeTransition: {
     display: 'inline-block'
   },
@@ -736,6 +741,24 @@ class BuilderContainer extends React.Component {
         marginLeft: '5px'
       }
     };
+    const sideMenuItemCounts = {};
+    const sideMenuItems = [];
+    list.units.forEach((unit, unitIndex) => {
+      let unitString = unit.name;
+      unit.upgradesEquipped.forEach((upgrade) => {
+        if (upgrade) unitString = unitString.concat(upgrade.name);
+      });
+      if (unitString in sideMenuItemCounts) {
+        sideMenuItemCounts[unitString] += 1;
+      } else {
+        sideMenuItemCounts[unitString] = 1;
+        const sideMenuItem = {};
+        sideMenuItem.unit = unit;
+        sideMenuItem.unitIndex = unitIndex;
+        sideMenuItem.unitString = unitString;
+        sideMenuItems.push(sideMenuItem);
+      }
+    });
     list.units.forEach((unit) => {
       rankCounts[unit.rank] += 1;
     });
@@ -783,13 +806,14 @@ class BuilderContainer extends React.Component {
               <Paper elevation={3} className={classes.paper}>
                 <div>
                   <List dense>
-                    {list.units.map((unit, unitIndex) => (
-                      <div key={`${unit.id}_${unitIndex}`}>
+                    {sideMenuItems.map(sideMenuItem => (
+                      <div key={sideMenuItem.unitString}>
                         <SideMenuListItem
-                          unit={unit}
-                          unitIndex={unitIndex}
-                          upgradeOptions={allUpgradeOptions[unitIndex]}
-                          menuOptions={allMenuOptions[unitIndex]}
+                          count={sideMenuItemCounts[sideMenuItem.unitString]}
+                          unit={sideMenuItem.unit}
+                          unitIndex={sideMenuItem.unitIndex}
+                          upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
+                          menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
                           removeUpgrade={this.removeUpgrade}
                           changeViewFilter={this.changeViewFilter}
                           mobile={mobile}
@@ -916,16 +940,34 @@ class BuilderContainer extends React.Component {
                     justify="flex-start"
                     alignItems="flex-start"
                   >
-                    {viewFilter.type === 'LIST' && list.units.map((unit, unitIndex) => {
+                    {viewFilter.type === 'LIST' && sideMenuItems.map((sideMenuItem) => {
+                      const {
+                        unit,
+                        unitString,
+                        count
+                      } = sideMenuItem;
                       return (
                         <Grid
                           item
                           container
                           spacing={8}
                           xs={12}
-                          key={`${unit.id}_${unitIndex}`}
+                          key={unitString}
                         >
                           <Grid item xs>
+                            <Slide
+                              in={sideMenuItemCounts[unitString] > 1}
+                              mountOnEnter
+                              unmountOnExit
+                              direction="right"
+                              timeout={250}
+                            >
+                              <div className={classes.unitCount}>
+                                <Typography variant="title">
+                                  {`${sideMenuItemCounts[unitString]}x`}
+                                </Typography>
+                              </div>
+                            </Slide>
                             <img
                               src={unit.imageLocation}
                               alt={unit.name}
