@@ -23,17 +23,6 @@ import ListFooter from 'components/ListFooter';
 import ViewChangeButton from 'components/ViewChangeButton';
 import ViewCloseButton from 'components/ViewCloseButton';
 
-const defaultTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#00BCD4'
-    },
-    secondary: {
-      main: '#F50057'
-    }
-  }
-});
-
 const styles = {
   unitCount: {
     position: 'relative',
@@ -114,8 +103,19 @@ class BuilderContainer extends React.Component {
   constructor(props) {
     super(props);
     const { faction, classes } = this.props;
+    const defaultTheme = createMuiTheme({
+      palette: {
+        primary: {
+          main: '#BDBDBD'
+        },
+        secondary: {
+          main: '#D50000'
+        }
+      }
+    });
     this.state = {
       classes,
+      defaultTheme,
       list: {
         faction,
         mode: 'standard',
@@ -569,6 +569,12 @@ class BuilderContainer extends React.Component {
     this.setState({ list });
   }
 
+  changePrimaryTheme = (primaryColor) => {
+    const { defaultTheme } = this.state;
+    defaultTheme.palette.primary.main = primaryColor;
+    this.setState(defaultTheme);
+  }
+
   changeViewFilter = newViewFilter => this.setState({ viewFilter: newViewFilter });
 
   resetView = () => {
@@ -597,7 +603,8 @@ class BuilderContainer extends React.Component {
       list,
       viewFilter,
       isViewMenuOpen,
-      classes
+      classes,
+      defaultTheme
     } = this.state;
     const {
       cards,
@@ -770,6 +777,7 @@ class BuilderContainer extends React.Component {
           list={list}
           changeListTitle={this.changeListTitle}
           changeListMode={this.changeListMode}
+          changePrimaryTheme={this.changePrimaryTheme}
         />
         <ViewChangeButton
           actions={actions}
