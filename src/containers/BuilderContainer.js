@@ -38,7 +38,8 @@ const styles = {
   unitCount: {
     position: 'relative',
     display: 'inline-block',
-    bottom: '200px'
+    bottom: '200px',
+    paddingRight: '5px'
   },
   fadeTransition: {
     display: 'inline-block'
