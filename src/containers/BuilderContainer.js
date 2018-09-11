@@ -43,7 +43,7 @@ const styles = {
     paddingTop: '3rem'
   },
   mobileGrid: {
-    paddingTop: '5rem'
+    paddingTop: '4rem'
   },
   paper: {
     padding: '0.5rem',
