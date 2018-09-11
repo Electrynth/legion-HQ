@@ -48,7 +48,8 @@ class TopMenu extends React.Component {
     const {
       list,
       changeListMode,
-      changeListTitle
+      changeListTitle,
+      mobile
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -128,9 +129,11 @@ class TopMenu extends React.Component {
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
             <Grid container spacing={8} alignItems="flex-end">
-              <Grid item>
-                <Avatar style={avatarStyles} src={factionIconLocation} />
-              </Grid>
+              {!mobile && (
+                <Grid item>
+                  <Avatar style={avatarStyles} src={factionIconLocation} />
+                </Grid>
+              )}
               <Grid item>
                 <TextField
                   placeholder={list.title === '' ? 'Untitled' : list.title}

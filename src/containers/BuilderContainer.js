@@ -42,9 +42,6 @@ const styles = {
   grid: {
     paddingTop: '3rem'
   },
-  mobileGrid: {
-    paddingTop: '5rem'
-  },
   paper: {
     padding: '0.5rem',
     height: 'calc(100vh - 5rem)',
@@ -781,6 +778,7 @@ class BuilderContainer extends React.Component {
           changeListTitle={this.changeListTitle}
           changeListMode={this.changeListMode}
           changePrimaryTheme={this.changePrimaryTheme}
+          mobile={mobile}
         />
         <ViewChangeButton
           actions={actions}
@@ -801,7 +799,7 @@ class BuilderContainer extends React.Component {
           direction="row"
           justify="flex-start"
           alignItems="stretch"
-          className={mobile ? classes.mobileGrid : classes.grid}
+          className={classes.grid}
         >
           <Grid
             item
