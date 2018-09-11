@@ -125,11 +125,6 @@ class ListFooter extends React.Component {
           alignItems="center"
         >
           <Grid item>
-            <IconButton disabled color="inherit">
-              <SaveIcon />
-            </IconButton>
-          </Grid>
-          <Grid item>
             <div>
               <ReactToPrint
                 trigger={() => (
@@ -143,11 +138,6 @@ class ListFooter extends React.Component {
                 <ListText ref={el => (this.componentRef = el)} list={list} />
               </div>
             </div>
-          </Grid>
-          <Grid item>
-            <IconButton disabled color="inherit">
-              <LinkIcon />
-            </IconButton>
           </Grid>
           <Grid item>
             <div>
@@ -178,6 +168,16 @@ class ListFooter extends React.Component {
                 </Paper>
               </Modal>
             </div>
+          </Grid>
+          <Grid item>
+            <IconButton disabled color="inherit">
+              <SaveIcon />
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton disabled color="inherit">
+              <LinkIcon />
+            </IconButton>
           </Grid>
           <Grid item>
             <IconButton disabled color="inherit">

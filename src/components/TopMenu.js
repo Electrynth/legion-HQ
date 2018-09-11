@@ -2,12 +2,14 @@ import React from 'react';
 import ReactToPrint from 'react-to-print';
 import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
+import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Popover from '@material-ui/core/Popover';
 import Slide from '@material-ui/core/Slide';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Avatar from '@material-ui/core/Avatar';
 import PrintIcon from '@material-ui/icons/Print';
 import SaveIcon from '@material-ui/icons/Save';
@@ -125,21 +127,37 @@ class TopMenu extends React.Component {
       >
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
-            <Avatar style={avatarStyles} src={factionIconLocation} />
-            <TextField
-              placeholder={list.title === '' ? 'Untitled' : list.title}
-              onChange={changeListTitle}
-            />
+            <Grid container spacing={8} alignItems="flex-end">
+              <Grid item>
+                <Avatar style={avatarStyles} src={factionIconLocation} />
+              </Grid>
+              <Grid item>
+                <TextField
+                  placeholder={list.title === '' ? 'Untitled' : list.title}
+                  onChange={changeListTitle}
+                />
+              </Grid>
+              <Grid item>
+                <Typography variant="subheading">
+                  {`${pointTotal}/${maxPoints}`}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Button
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={changeListMode}
+                  style={buttonStyles}
+                >
+                  {`${list.mode}`}
+                </Button>
+              </Grid>
+            </Grid>
             <div style={{ flexGrow: 1 }} />
-            <Button
-              size="small"
-              variant="contained"
-              color="primary"
-              onClick={changeListMode}
-              style={buttonStyles}
-            >
-              {`${list.mode} ${pointTotal}/${maxPoints}`}
-            </Button>
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
           </Toolbar>
         </AppBar>
       </Slide>
