@@ -42,6 +42,9 @@ const styles = {
   grid: {
     paddingTop: '3rem'
   },
+  mobileGrid: {
+    paddingTop: '5rem'
+  },
   paper: {
     padding: '0.5rem',
     height: 'calc(100vh - 5rem)',
@@ -798,7 +801,7 @@ class BuilderContainer extends React.Component {
           direction="row"
           justify="flex-start"
           alignItems="stretch"
-          className={classes.grid}
+          className={mobile ? classes.mobileGrid : classes.grid}
         >
           <Grid
             item
