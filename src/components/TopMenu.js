@@ -138,11 +138,6 @@ class TopMenu extends React.Component {
                 />
               </Grid>
               <Grid item>
-                <Typography variant="subheading">
-                  {`${pointTotal}/${maxPoints}`}
-                </Typography>
-              </Grid>
-              <Grid item>
                 <Button
                   size="small"
                   variant="contained"
@@ -150,7 +145,9 @@ class TopMenu extends React.Component {
                   onClick={changeListMode}
                   style={buttonStyles}
                 >
-                  {`${list.mode}`}
+                  <Typography noWrap variant="body1">
+                    {`${pointTotal}/${maxPoints} ${list.mode}`}
+                  </Typography>
                 </Button>
               </Grid>
             </Grid>
