@@ -154,10 +154,6 @@ class TopMenu extends React.Component {
                 </Button>
               </Grid>
             </Grid>
-            <div style={{ flexGrow: 1 }} />
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
           </Toolbar>
         </AppBar>
       </Slide>
