@@ -116,7 +116,7 @@ const Home = ({ history }) => (
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <ListAltIcon color="secondary" />
+                <ListAltIcon color="primary" />
               </ListItemIcon>
               <ListItemText primary="List text export" />
             </ListItem>
