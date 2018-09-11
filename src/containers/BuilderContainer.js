@@ -961,7 +961,7 @@ class BuilderContainer extends React.Component {
                               mountOnEnter
                               unmountOnExit
                               direction="right"
-                              timeout={250}
+                              timeout={100}
                             >
                               <div className={classes.unitCount}>
                                 <Typography variant="title">
