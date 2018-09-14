@@ -108,8 +108,12 @@ class TopMenu extends React.Component {
     let heavies = 0;
     const maxPoints = list.mode === 'standard' ? 800 : 1600;
     let pointTotal = 0;
+    let hasPalp = false;
+    let hasGuards = false;
     list.units.forEach((unit) => {
       pointTotal += unit.totalCost;
+      if (unit.name === 'Emperor Palpatine') hasPalp = true;
+      if (unit.name === 'Imperial Royal Guards') hasGuards = true;
       if (unit.rank === 'commander') commanders += 1;
       if (unit.rank === 'operative') operatives += 1;
       if (unit.rank === 'corps') corps += 1;
@@ -117,6 +121,7 @@ class TopMenu extends React.Component {
       if (unit.rank === 'support') supports += 1;
       if (unit.rank === 'heavy') heavies += 1;
     });
+    if (hasPalp && hasGuards) specials -= 1;
     const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconBlack.svg' : '/faction/empireIconBlack.svg';
     return (
       <Slide
