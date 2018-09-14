@@ -28,6 +28,66 @@
   },
   "cards": [
     {
+        "cost": 6,
+        "isUnique": false,
+        "name": "Hunter",
+        "type": "training",
+        "requirements": [],
+        "products": [],
+        "faction": "",
+        "rank": "upgrade"
+    },
+    {
+        "cost": 75,
+        "isUnique": false,
+        "faction": "rebels",
+        "name": "Wookie Warriors",
+        "type": "trooper",
+        "rank": "special",
+        "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
+        "products": []
+    },
+    {
+        "cost": 60,
+        "isUnique": false,
+        "faction": "empire",
+        "name": "Scout Troopers",
+        "type": "trooper",
+        "rank": "special",
+        "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
+        "products": []
+    },
+    {
+        "cost": 75,
+        "isUnique": false,
+        "faction": "empire",
+        "name": "Imperial Royal Guards",
+        "type": "trooper",
+        "rank": "special",
+        "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
+        "products": []
+    },
+    {
+        "cost": 210,
+        "isUnique": true,
+        "faction": "empire",
+        "name": "Emperor Palpatine",
+        "type": "trooper",
+        "rank": "commander",
+        "upgradeBar": ["force", "force", "force", "command"],
+        "products": []
+    },
+    {
+        "cost": 80,
+        "isUnique": true,
+        "faction": "rebels",
+        "name": "Chewbacca",
+        "type": "trooper",
+        "rank": "operative",
+        "upgradeBar": ["training", "training", "gear"],
+        "products": []
+    },
+    {
       "cost": 26,
       "isUnique": false,
       "name": "Proton Charge Saboteur",
@@ -771,6 +831,20 @@
     {
       "pips": 1,
       "name": "Whipcord Launcher",
+      "commander": "Boba Fett",
+      "faction": "empire",
+      "products": []
+    },
+    {
+      "pips": 2,
+      "name": "ZX Flame Projector",
+      "commander": "Boba Fett",
+      "faction": "empire",
+      "products": []
+    },
+    {
+      "pips": 3,
+      "name": "Z-6 Jetpack Rocket",
       "commander": "Boba Fett",
       "faction": "empire",
       "products": []
