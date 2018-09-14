@@ -28,6 +28,16 @@
   },
   "cards": [
     {
+        "cost": 140,
+        "isUnique": true,
+        "faction": "empire",
+        "name": "Boba Fett",
+        "type": "trooper",
+        "rank": "operative",
+        "upgradeBar": ["training", "training", "gear", "gear"],
+        "products": []
+    },
+    {
         "cost": 6,
         "isUnique": false,
         "name": "Hunter",
