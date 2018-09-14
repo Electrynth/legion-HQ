@@ -767,9 +767,14 @@ class BuilderContainer extends React.Component {
         sideMenuItems.push(sideMenuItem);
       }
     });
+    let hasPalp = false;
+    let hasGuards = false;
     list.units.forEach((unit) => {
       rankCounts[unit.rank] += 1;
+      if (unit.name === 'Emperor Palpatine') hasPalp = true;
+      if (unit.name === 'Imperial Royal Guards') hasGuards = true;
     });
+    if (hasPalp && hasGuards) rankCounts.special -= 1;
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title faction={list.faction} />
