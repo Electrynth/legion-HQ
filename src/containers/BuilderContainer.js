@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -14,7 +15,8 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import SideMenuListItem from 'components/SideMenuListItem';
+import SideMenuListItem from 'components/SideMenuListItem2';
+import SideMenuListItemMobile from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
 import ListFooter from 'components/ListFooter';
@@ -785,14 +787,6 @@ class BuilderContainer extends React.Component {
           changePrimaryTheme={this.changePrimaryTheme}
           mobile={mobile}
         />
-        <ViewChangeButton
-          actions={actions}
-          isVisible={viewFilter.type === 'LIST'}
-          isClicked={isViewMenuOpen}
-          clickHandler={this.openViewChangeMenu}
-          changeView={this.changeViewFilter}
-          className={classes.viewButton}
-        />
         <ViewCloseButton
           isVisible={viewFilter.type !== 'LIST'}
           clickHandler={this.resetView}
@@ -819,24 +813,120 @@ class BuilderContainer extends React.Component {
               timeout={250}
             >
               <Paper elevation={3} className={classes.paper}>
+                <Grid
+                  container
+                  direction="row"
+                  spacing={8}
+                  justify="center"
+                  alignItems="flex-start"
+                >
+                  {Object.entries(rankCounts).map(([rank, rankCount]) => {
+                    let isValidCount = false;
+                    if (list.mode === 'standard') {
+                      switch (rank) {
+                        case 'commander':
+                          isValidCount = rankCount > 0 && rankCount < 3;
+                          break;
+                        case 'operative':
+                          isValidCount = rankCount < 3;
+                          break;
+                        case 'corps':
+                          isValidCount = rankCount > 2 && rankCount < 7;
+                          break;
+                        case 'special':
+                          isValidCount = rankCount < 4;
+                          break;
+                        case 'support':
+                          isValidCount = rankCount < 4;
+                          break;
+                        case 'heavy':
+                          isValidCount = rankCount < 2;
+                          break;
+                        default:
+                          isValidCount = true;
+                      }
+                    } else if (list.mode === 'grand army') {
+                      switch (rank) {
+                        case 'commander':
+                          isValidCount = rankCount > 0 && rankCount < 5;
+                          break;
+                        case 'operative':
+                          isValidCount = rankCount < 5;
+                          break;
+                        case 'corps':
+                          isValidCount = rankCount > 5 && rankCount < 11;
+                          break;
+                        case 'special':
+                          isValidCount = rankCount < 6;
+                          break;
+                        case 'support':
+                          isValidCount = rankCount < 6;
+                          break;
+                        case 'heavy':
+                          isValidCount = rankCount < 5;
+                          break;
+                        default:
+                          isValidCount = true;
+                      }
+                    }
+                    return (
+                      <Grid item key={rank}>
+                        <Chip
+                          variant="outlined"
+                          onClick={() => this.changeViewFilter({
+                            rank,
+                            type: 'UNIT'
+                          })}
+                          avatar={(
+                            <img
+                              alt={rank}
+                              src={`/rankIcons/${rank}.svg`}
+                              style={rankIconStyles[rank]}
+                            />
+                          )}
+                          label={(
+                            <Typography
+                              color={isValidCount ? 'default' : 'secondary'}
+                            >
+                              {rankCount}
+                            </Typography>
+                          )}
+                        />
+                      </Grid>
+                    );
+                  })}
+                </Grid>
+                <Divider style={{ marginBottom: '0.25rem ' }} />
                 <div>
                   <List dense>
                     {sideMenuItems.map(sideMenuItem => (
                       <div key={sideMenuItem.unitString}>
-                        <SideMenuListItem
-                          count={sideMenuItemCounts[sideMenuItem.unitString]}
-                          unit={sideMenuItem.unit}
-                          unitIndex={sideMenuItem.unitIndex}
-                          upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
-                          menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
-                          removeUpgrade={this.removeUpgrade}
-                          changeViewFilter={this.changeViewFilter}
-                          mobile={mobile}
-                        />
+                        {mobile ? (
+                          <SideMenuListItemMobile
+                            count={sideMenuItemCounts[sideMenuItem.unitString]}
+                            unit={sideMenuItem.unit}
+                            unitIndex={sideMenuItem.unitIndex}
+                            upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
+                            menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
+                            removeUpgrade={this.removeUpgrade}
+                            changeViewFilter={this.changeViewFilter}
+                            mobile={mobile}
+                          />
+                        ) : (
+                          <SideMenuListItem
+                            count={sideMenuItemCounts[sideMenuItem.unitString]}
+                            unit={sideMenuItem.unit}
+                            unitIndex={sideMenuItem.unitIndex}
+                            upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
+                            menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
+                            removeUpgrade={this.removeUpgrade}
+                            changeViewFilter={this.changeViewFilter}
+                            mobile={mobile}
+                          />
+                        )}
                       </div>
                     ))}
                   </List>
-                  <Divider style={{ marginBottom: '10px' }} />
                   <ListFooter
                     list={list}
                     changeListNotes={this.changeListNotes}
@@ -868,121 +958,21 @@ class BuilderContainer extends React.Component {
                   <Grid
                     item
                     container
-                    direction="row"
-                    spacing={8}
-                    justify="center"
-                    alignItems="flex-start"
-                  >
-                    {Object.entries(rankCounts).map(([rank, rankCount]) => {
-                      let isValidCount = false;
-                      if (list.mode === 'standard') {
-                        switch (rank) {
-                          case 'commander':
-                            isValidCount = rankCount > 0 && rankCount < 3;
-                            break;
-                          case 'operative':
-                            isValidCount = rankCount < 3;
-                            break;
-                          case 'corps':
-                            isValidCount = rankCount > 2 && rankCount < 7;
-                            break;
-                          case 'special':
-                            isValidCount = rankCount < 4;
-                            break;
-                          case 'support':
-                            isValidCount = rankCount < 4;
-                            break;
-                          case 'heavy':
-                            isValidCount = rankCount < 2;
-                            break;
-                          default:
-                            isValidCount = true;
-                        }
-                      } else if (list.mode === 'grand army') {
-                        switch (rank) {
-                          case 'commander':
-                            isValidCount = rankCount > 0 && rankCount < 5;
-                            break;
-                          case 'operative':
-                            isValidCount = rankCount < 5;
-                            break;
-                          case 'corps':
-                            isValidCount = rankCount > 5 && rankCount < 11;
-                            break;
-                          case 'special':
-                            isValidCount = rankCount < 6;
-                            break;
-                          case 'support':
-                            isValidCount = rankCount < 6;
-                            break;
-                          case 'heavy':
-                            isValidCount = rankCount < 5;
-                            break;
-                          default:
-                            isValidCount = true;
-                        }
-                      }
-                      return (
-                        <Grid item key={rank}>
-                          <Fade in>
-                            <Chip
-                              variant="outlined"
-                              avatar={(
-                                <img
-                                  alt={rank}
-                                  src={`/rankIcons/${rank}.svg`}
-                                  style={rankIconStyles[rank]}
-                                />
-                              )}
-                              label={(
-                                <Typography
-                                  color={isValidCount ? 'default' : 'secondary'}
-                                >
-                                  {rankCount}
-                                </Typography>
-                              )}
-                            />
-                          </Fade>
-                        </Grid>
-                      );
-                    })}
-                  </Grid>
-                  <Grid
-                    item
-                    container
                     spacing={8}
                     direction="row"
                     justify="flex-start"
                     alignItems="flex-start"
                   >
-                    {viewFilter.type === 'LIST' && sideMenuItems.map((sideMenuItem) => {
-                      const {
-                        unit,
-                        unitString,
-                        count
-                      } = sideMenuItem;
+                    {viewFilter.type === 'LIST' && list.units.map((unit, unitIndex) => {
                       return (
                         <Grid
                           item
                           container
                           spacing={8}
                           xs={12}
-                          key={unitString}
+                          key={`${unit.name}_${unitIndex}`}
                         >
                           <Grid item xs>
-                            <Slide
-                              in={sideMenuItemCounts[unitString] > 1}
-                              mountOnEnter
-                              unmountOnExit
-                              direction="right"
-                              timeout={100}
-                            >
-                              <div className={classes.unitCount}>
-                                <Typography variant="title">
-                                  {`${sideMenuItemCounts[unitString]}x`}
-                                </Typography>
-                              </div>
-                            </Slide>
                             <img
                               src={unit.imageLocation}
                               alt={unit.name}
