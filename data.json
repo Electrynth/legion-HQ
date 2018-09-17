@@ -38,6 +38,25 @@
         "products": []
     },
     {
+        "cost": 28,
+        "isUnique": false,
+        "name": "DLT-19x Sniper",
+        "type": "heavy weapon",
+        "requirements": ["Scout Troopers"],
+        "products": [],
+        "faction": "empire",
+        "rank": "upgrade"
+    },
+    {
+        "cost": 26,
+        "isUnique": false,
+        "name": "Sonic Charge Saboteur",
+        "type": "heavy weapon",
+        "requirements": ["Scout Troopers"],
+        "faction": "empire",
+        "rank": "upgrade" 
+    },
+    {
         "cost": 6,
         "isUnique": false,
         "name": "Hunter",
@@ -55,6 +74,16 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
+        "products": []
+    },
+    {
+        "cost": 16,
+        "isUnique": false,
+        "faction": "empire",
+        "name": "Scout Troopers Strike Team",
+        "type": "trooper",
+        "rank": "special",
+        "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
         "products": []
     },
     {
