@@ -7,7 +7,6 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -15,7 +14,6 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import red from '@material-ui/core/colors/red';
 import SideMenuListItem from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
@@ -207,7 +205,7 @@ class BuilderContainer extends React.Component {
     return requirementsMet === upgrade.requirements.length ? 'EQUIPPABLE' : 'DISABLED';
   }
 
-  getUnitEligibility = (unit, unitIndex) => {
+  getUnitEligibility = (unit) => {
     // viewFilter: { rank, type: 'UNIT' }
     const { list, viewFilter } = this.state;
     if (viewFilter.type === 'UNIT_VIEW') {
@@ -767,6 +765,8 @@ class BuilderContainer extends React.Component {
         sideMenuItems.push(sideMenuItem);
       }
     });
+
+    // TODO: make a function for this since it's a keyword
     let hasPalp = false;
     let hasGuards = false;
     list.units.forEach((unit) => {
