@@ -7,7 +7,6 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -20,7 +19,6 @@ import SideMenuListItemMobile from 'components/SideMenuListItem';
 import Title from 'components/Title';
 import TopMenu from 'components/TopMenu';
 import ListFooter from 'components/ListFooter';
-import ViewChangeButton from 'components/ViewChangeButton';
 import ViewCloseButton from 'components/ViewCloseButton';
 
 const styles = {
@@ -1085,7 +1083,7 @@ class BuilderContainer extends React.Component {
                           <Fade
                             unmountOnExit
                             key={command.id}
-                            in={eligibility !== 'HIDDEN'}
+                            in={eligibility === 'EQUIPPABLE'}
                             timeout={{
                               enter: this.getTransitionDuration(commandIndex),
                               exit: 0
