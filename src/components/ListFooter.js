@@ -64,7 +64,6 @@ class ListFooter extends React.Component {
       width: '600px',
       overflowY: 'scroll'
     };
-    console.log(list.commands);
     return (
       <Grid
         container

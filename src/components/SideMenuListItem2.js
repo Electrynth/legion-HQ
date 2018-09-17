@@ -126,48 +126,57 @@ class SideMenuListItem extends React.Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          <Grid item xs={1}>
-            <Badge
-              color="primary"
-              badgeContent={(
-                <img
-                  alt={unit.rank}
-                  className={classes[unit.rank]}
-                  src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
-                />
-              )}
-              classes={{
-                badge: classes.rankBadge
-              }}
+          <Grid item xs={3}>
+            <Grid
+              item
+              container
+              justify="flex-start"
+              alignItems="flex-start"
             >
-              <Badge
-                color="primary"
-                badgeContent={count}
-                classes={{
-                  badge: count > 1 ? classes.counterBadge : classes.noBadge
-                }}
-              >
-                <Avatar
-                  src={unit.iconLocation}
-                  className={classes.avatar}
-                  onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
-                />
-              </Badge>
-            </Badge>
-          </Grid>
-          <Grid item xs={2}>
-            <div>
-              <Typography>
-                {unit.name}
-              </Typography>
-              <Typography variant="caption">
-                {unit.cost === unit.totalCost ? (
-                  `${unit.cost}`
-                ) : (
-                  `${unit.cost} (${unit.totalCost})`
-                )}
-              </Typography>
-            </div>
+              <Grid item>
+                <Badge
+                  color="primary"
+                  badgeContent={(
+                    <img
+                      alt={unit.rank}
+                      className={classes[unit.rank]}
+                      src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
+                    />
+                  )}
+                  classes={{
+                    badge: classes.rankBadge
+                  }}
+                >
+                  <Badge
+                    color="primary"
+                    badgeContent={count}
+                    classes={{
+                      badge: count > 1 ? classes.counterBadge : classes.noBadge
+                    }}
+                  >
+                    <Avatar
+                      src={unit.iconLocation}
+                      className={classes.avatar}
+                      onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
+                    />
+                  </Badge>
+                </Badge>
+              </Grid>
+              <Grid item>
+                <div style={{ marginLeft: '1rem' }}>
+                  <Typography>
+                    {unit.name}
+                  </Typography>
+                  <Typography variant="caption">
+                    {unit.cost === unit.totalCost ? (
+                      `${unit.cost}`
+                    ) : (
+                      `${unit.cost} (${unit.totalCost})`
+                    )}
+                  </Typography>
+                </div>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={allUpgradesEquipped ? 8 : 7}>
             <div>
