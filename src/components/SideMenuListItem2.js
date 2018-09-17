@@ -126,7 +126,7 @@ class SideMenuListItem extends React.Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          <Grid item xs={3}>
+          <Grid item xs>
             <Grid
               item
               container
@@ -178,7 +178,7 @@ class SideMenuListItem extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={allUpgradesEquipped ? 8 : 7}>
+          <Grid item xs>
             <div>
               {unit.upgradesEquipped.map((upgrade, upgradeIndex) => {
                 if (upgrade) {
@@ -204,7 +204,7 @@ class SideMenuListItem extends React.Component {
             </div>
           </Grid>
           {!allUpgradesEquipped && (
-            <Grid item xs={1}>
+            <Grid item>
               <Grow
                 key="upgradeOptionButton"
                 in={true}
@@ -246,7 +246,7 @@ class SideMenuListItem extends React.Component {
               ) : undefined}
             </Grid>
           )}
-          <Grid item xs={1}>
+          <Grid item>
             <Grow
               key="menuOptionButton"
               in={true}
