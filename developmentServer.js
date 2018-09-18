@@ -73,7 +73,7 @@ app.get('/data', (req, res) => {
       let imageName = `${command.name.replace(spaceRegex, '%20')}`;
       imageName = imageName.replace(dotRegex, '%2E');
       const imageLocation = `/commands/${imageName}.png`;
-      const iconLocation = `/commandIcon/${imageName}.png`;
+      const iconLocation = `/commandIcons/${imageName}.png`;
       response.cards[id] = {
         id,
         imageLocation,

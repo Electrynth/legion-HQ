@@ -1,4 +1,5 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Chip from '@material-ui/core/Chip';
 import Slide from '@material-ui/core/Slide';
@@ -15,66 +17,67 @@ import Grow from '@material-ui/core/Grow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 
-const countStyles = {
-  position: 'absolute',
-  left: '-3px'
-};
-
-const listItemStyles = {
-  width: '100%',
-  marginBottom: '0.25rem'
-};
-const listItemDivStyles = {
-  borderRadius: '5px'
-};
-const upgradeDivStyles = {
-  marginLeft: '1rem'
-};
-const unitIconStyles = {
-};
-const commanderIconStyles = {
-  position: 'relative',
-  height: '20px',
-  width: '20px'
-};
-const operativeIconStyles = {
-  position: 'relative',
-  height: '15px',
-  width: '15px'
-};
-const corpsIconStyles = {
-  position: 'relative',
-  height: '14px',
-  width: '14px'
-};
-const specialIconStyles = {
-  position: 'relative',
-  height: '22px',
-  width: '22px',
-  top: '1px'
-};
-const supportIconStyles = {
-  position: 'relative',
-  height: '15px',
-  width: '15px',
-  right: '1px'
-};
-const heavyIconStyles = {
-  position: 'relative',
-  height: '20px',
-  width: '20px',
-};
-const rankIconStyles = {
-  commander: commanderIconStyles,
-  operative: operativeIconStyles,
-  corps: corpsIconStyles,
-  special: specialIconStyles,
-  support: supportIconStyles,
-  heavy: heavyIconStyles
-};
-
-const upgradeChipStyles = {
-  marginRight: '0.1rem'
+const styles = {
+  listItem: {
+    width: '100%',
+    marginBottom: '0.25rem'
+  },
+  listItemDiv: {
+    borderRadius: '5px'
+  },
+  upgradeDiv: {
+    marginLeft: '4rem'
+  },
+  upgradeChip: {
+    marginRight: '0.2rem'
+  },
+  unitIcon: {
+    width: '45px',
+    height: '45px'
+  },
+  commander: {
+    position: 'relative',
+    height: '20px',
+    width: '20px'
+  },
+  operative: {
+    position: 'relative',
+    height: '15px',
+    width: '15px'
+  },
+  corps: {
+    position: 'relative',
+    height: '14px',
+    width: '14px'
+  },
+  special: {
+    position: 'relative',
+    height: '22px',
+    width: '22px',
+    top: '1px'
+  },
+  support: {
+    position: 'relative',
+    height: '15px',
+    width: '15px',
+    right: '1px'
+  },
+  heavy: {
+    position: 'relative',
+    height: '20px',
+    width: '20px',
+  },
+  counterBadge: {
+    marginRight: '45px',
+    marginTop: '40px'
+  },
+  rankBadge: {
+    marginTop: '5px',
+    marginRight: '45px'
+  },
+  noBadge: {
+    display: 'none'
+  }
 };
 
 class SideMenuListItem extends React.Component {
@@ -106,11 +109,9 @@ class SideMenuListItem extends React.Component {
       removeUpgrade,
       changeViewFilter,
       mobile,
-      count
+      count,
+      classes
     } = this.props;
-    const unitButtonStyles = {
-      right: mobile ? '3.5rem' : '0.5rem'
-    };
     return (
       <Slide
         in
@@ -120,40 +121,40 @@ class SideMenuListItem extends React.Component {
         timeout={250}
       >
         <div
-          style={listItemDivStyles}
+          className={classes.listItemDiv}
           onMouseEnter={this.turnOnHovered}
           onMouseLeave={this.turnOffHovered}
         >
-          <ListItem style={listItemStyles}>
-            <Slide
-              in={count > 1}
-              mountOnEnter
-              unmountOnExit
-              direction="right"
-              timeout={250}
-            >
-              <div style={countStyles}>
-                <Typography variant="title">
-                  {`${count}x`}
-                </Typography>
-              </div>
-            </Slide>
-            <Badge
-              color="primary"
-              badgeContent={(
-                <img
-                  alt={unit.rank}
-                  style={rankIconStyles[unit.rank]}
-                  src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
-                />
-              )}
-            >
-              <Avatar
-                src={unit.iconLocation}
-                style={unitIconStyles}
-                onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
-              />
-            </Badge>
+          <ListItem className={classes.listItem}>
+            <div>
+              <Badge
+                color="primary"
+                badgeContent={(
+                  <img
+                    alt={unit.rank}
+                    className={classes[unit.rank]}
+                    src={`rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
+                  />
+                )}
+                classes={{
+                  badge: classes.rankBadge
+                }}
+              >
+                <Badge
+                  color="primary"
+                  badgeContent={count}
+                  classes={{
+                    badge: count > 1 ? classes.counterBadge : classes.noBadge
+                  }}
+                >
+                  <Avatar
+                    src={unit.iconLocation}
+                    className={classes.unitIcon}
+                    onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
+                  />
+                </Badge>
+              </Badge>
+            </div>
             <ListItemText
               primary={unit.name}
               secondary={unit.cost === unit.totalCost ? (
@@ -162,7 +163,7 @@ class SideMenuListItem extends React.Component {
                 `${unit.cost} (${unit.totalCost})`
               )}
             />
-            <ListItemSecondaryAction style={unitButtonStyles}>
+            <ListItemSecondaryAction>
               <Grow
                 key="upgradeOptionButton"
                 in={true}
@@ -241,7 +242,7 @@ class SideMenuListItem extends React.Component {
               ) : undefined}
             </ListItemSecondaryAction>
           </ListItem>
-          <div style={upgradeDivStyles}>
+          <div className={classes.upgradeDiv}>
             {unit.upgradesEquipped.map((upgrade, upgradeIndex) => {
               if (upgrade) {
                 return (
@@ -254,7 +255,7 @@ class SideMenuListItem extends React.Component {
                       color="primary"
                       avatar={<Avatar src={upgrade.iconLocation} />}
                       label={upgrade.name}
-                      style={upgradeChipStyles}
+                      className={classes.upgradeChip}
                       onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
                       onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}
                     />
@@ -264,10 +265,11 @@ class SideMenuListItem extends React.Component {
               return undefined;
             })}
           </div>
+          <Divider style={{ marginBottom: '0.25rem' }} />
         </div>
       </Slide>
     );
   }
 }
 
-export default SideMenuListItem;
+export default withStyles(styles)(SideMenuListItem);

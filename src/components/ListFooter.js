@@ -12,6 +12,7 @@ import LooksOneIcon from '@material-ui/icons/LooksOne';
 import LooksTwoIcon from '@material-ui/icons/LooksTwo';
 import LooksThreeIcon from '@material-ui/icons/Looks3';
 import LooksFourIcon from '@material-ui/icons/Looks4';
+import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import PrintIcon from '@material-ui/icons/Print';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -84,8 +85,24 @@ class ListFooter extends React.Component {
                 <Grid item key={command.name}>
                   <Chip
                     color="primary"
-                    avatar={<Avatar>{this.getPipIcon(command.pips)}</Avatar>}
-                    label={command.name}
+                    avatar={(
+                      <Avatar
+                        style={{
+                          width: '45px',
+                          height: '45px'
+                        }}
+                      >
+                        <img
+                          alt={command.name}
+                          src={command.iconLocation}
+                          style={{
+                            width: '45px',
+                            height: '45px'
+                          }}
+                        />
+                      </Avatar>
+                    )}
+                    label={`${command.name} (${command.pips})`}
                     onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
                     style={{ marginRight: '5px' }}
                   />
@@ -96,8 +113,24 @@ class ListFooter extends React.Component {
               <Grid item key={command.name}>
                 <Chip
                   color="primary"
-                  avatar={<Avatar>{this.getPipIcon(command.pips)}</Avatar>}
-                  label={command.name}
+                  avatar={(
+                    <Avatar
+                      style={{
+                        width: '45px',
+                        height: '45px'
+                      }}
+                    >
+                      <img
+                        alt={command.name}
+                        src={command.iconLocation}
+                        style={{
+                          width: '45px',
+                          height: '45px'
+                        }}
+                      />
+                    </Avatar>
+                  )}
+                  label={`${command.name} (${command.pips})`}
                   onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
                   onDelete={() => removeCommand(commandIndex)}
                   style={{ marginRight: '5px' }}
@@ -105,6 +138,16 @@ class ListFooter extends React.Component {
               </Grid>
             );
           })}
+          {sortedCommands.length < 7 && (
+            <Grid item key="addCommand">
+              <Chip
+                variant="outlined"
+                label="Add Command"
+                onClick={() => changeViewFilter({ type: 'COMMAND' })}
+                style={{ marginRight: '5px', marginBottom: '10px' }}
+              />
+            </Grid>
+          )}
         </Grid>
         <Grid item>
           <TextField
