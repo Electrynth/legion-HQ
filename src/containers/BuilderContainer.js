@@ -801,7 +801,7 @@ class BuilderContainer extends React.Component {
           <Grid
             item
             xs={12}
-            md={5}
+            md={6}
           >
             <Slide
               in={mobile ? viewFilter.type === 'LIST' : true}
@@ -938,7 +938,7 @@ class BuilderContainer extends React.Component {
           <Grid
             item
             xs={12}
-            md={7}
+            md={6}
           >
             <Slide
               in={mobile ? viewFilter.type !== 'LIST' : true}

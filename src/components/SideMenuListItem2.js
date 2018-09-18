@@ -126,7 +126,7 @@ class SideMenuListItem extends React.Component {
           justify="flex-start"
           alignItems="flex-start"
         >
-          <Grid item xs>
+          <Grid item xs={4}>
             <Grid
               item
               container
