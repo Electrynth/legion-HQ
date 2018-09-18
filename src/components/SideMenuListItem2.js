@@ -112,9 +112,13 @@ class SideMenuListItem extends React.Component {
     } = this.props;
     let allUpgradesEquipped = false;
     let numUpgradesEquipped = 0;
+    let totalCost = unit.cost;
     const maxNumUpgrades = unit.upgradesEquipped.length;
     unit.upgradesEquipped.forEach((upgrade) => {
-      if (upgrade) numUpgradesEquipped += 1;
+      if (upgrade) {
+        numUpgradesEquipped += 1;
+        totalCost += upgrade.cost;
+      }
     });
     if (numUpgradesEquipped === maxNumUpgrades) allUpgradesEquipped = true;
     return (
@@ -168,10 +172,10 @@ class SideMenuListItem extends React.Component {
                     {unit.name}
                   </Typography>
                   <Typography variant="caption">
-                    {unit.cost === unit.totalCost ? (
+                    {unit.cost === totalCost ? (
                       `${unit.cost}`
                     ) : (
-                      `${unit.cost} (${unit.totalCost})`
+                      `${unit.cost} (${totalCost})`
                     )}
                   </Typography>
                 </div>

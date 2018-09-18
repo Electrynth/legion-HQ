@@ -133,6 +133,7 @@ class BuilderContainer extends React.Component {
         uniques: {},
         notes: ''
       },
+      unitStrings: {},
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
@@ -448,17 +449,63 @@ class BuilderContainer extends React.Component {
     return allMenuOptions;
   }
 
+  getUnitString = (unit) => {
+    let unitString = unit.name;
+    unit.upgradesEquipped.forEach((upgrade) => {
+      if (upgrade) unitString = unitString.concat(upgrade.name);
+    });
+    return unitString;
+  }
+
+  getUnitStringIndex = (unitString) => {
+    const { list } = this.state;
+    let index = -1;
+    list.units.forEach((unit, unitIndex) => {
+      const targetUnitString = this.getUnitString(unit);
+      if (index === -1 && targetUnitString === unitString) index = unitIndex;
+    });
+    return index;
+  }
+
   addCard = (eligibility, type, cardId, cards) => {
     if (eligibility !== 'EQUIPPABLE') return;
     const { list, viewFilter } = this.state;
     const card = JSON.parse(JSON.stringify(cards[cardId]));
+    let unitString; let unitStringIndex;
+    let oldUnit; let newUnit;
+    let newUnitString; let newUnitStringIndex;
     switch (type) {
       case 'UNIT':
-        list.units.push(card);
+        unitString = this.getUnitString(card);
+        unitStringIndex = this.getUnitStringIndex(unitString);
+        if (unitStringIndex > -1) {
+          list.units[unitStringIndex].count += 1;
+        } else {
+          card.count = 1;
+          list.units.push(card);
+        }
         break;
       case 'UPGRADE':
-        list.units[viewFilter.unitIndex].upgradesEquipped[viewFilter.upgradeIndex] = card;
-        list.units[viewFilter.unitIndex].totalCost += card.cost;
+        oldUnit = list.units[viewFilter.unitIndex];
+        newUnit = JSON.parse(JSON.stringify(oldUnit));
+        newUnit.upgradesEquipped[viewFilter.upgradeIndex] = card;
+        newUnit.count = 1;
+        newUnitString = this.getUnitString(newUnit);
+        newUnitStringIndex = this.getUnitStringIndex(newUnitString);
+        if (newUnitStringIndex > -1) {
+          if (oldUnit.count === 1) {
+            list.units[newUnitStringIndex].count += 1;
+            list.units.splice(viewFilter.unitIndex, 1);
+          } else {
+            oldUnit.count -= 1;
+            list.units[newUnitStringIndex].count += 1;
+          }
+        } else if (oldUnit.count === 1) {
+          oldUnit.upgradesEquipped[viewFilter.upgradeIndex] = card;
+        } else {
+          oldUnit.count -= 1;
+          list.units.push(newUnit);
+        }
         break;
       case 'COMMAND':
         list.commands.push(card);
@@ -471,11 +518,37 @@ class BuilderContainer extends React.Component {
     this.setState({ list }, this.resetView());
   }
 
+  removeUpgrade = (unitIndex, upgradeIndex) => {
+    const { list } = this.state;
+    const oldUnit = list.units[unitIndex];
+    const newUnit = JSON.parse(JSON.stringify(oldUnit));
+    newUnit.upgradesEquipped[upgradeIndex] = null;
+    newUnit.count = 1;
+    const newUnitString = this.getUnitString(newUnit);
+    const newUnitStringIndex = this.getUnitStringIndex(newUnitString);
+    if (newUnitStringIndex > -1) {
+      if (oldUnit.count === 1) {
+        list.units[newUnitStringIndex].count += 1;
+        list.units.splice(unitIndex, 1);
+      } else {
+        oldUnit.count -= 1;
+        list.units[newUnitStringIndex].count += 1;
+      }
+    } else if (oldUnit.count === 1) {
+      if (oldUnit.upgradesEquipped[upgradeIndex].id in list.uniques) {
+        list.uniques[oldUnit.upgradesEquipped[upgradeIndex].id] = false;
+      }
+      oldUnit.upgradesEquipped[upgradeIndex] = null;
+    } else {
+      oldUnit.count -= 1;
+      list.units.push(newUnit);
+    }
+    this.setState({ list });
+  }
+
   copyUnit = (unitIndex) => {
     const { list } = this.state;
-    const unit = list.units[unitIndex];
-    const unitCopy = JSON.parse(JSON.stringify(unit));
-    list.units.push(unitCopy);
+    list.units[unitIndex].count += 1;
     this.setState({ list });
   }
 
@@ -489,7 +562,10 @@ class BuilderContainer extends React.Component {
       if (upgrade && upgrade.isUnique) list.uniques[upgrade.id] = false;
     });
     if (unit.isUnique) list.uniques[unit.id] = false;
-    list.units.splice(unitIndex, 1);
+    if (unit.count > 1) unit.count -= 1;
+    else {
+      list.units.splice(unitIndex, 1);
+    }
     this.setState({
       list,
       isViewMenuOpen: false,
@@ -497,16 +573,6 @@ class BuilderContainer extends React.Component {
         type: 'LIST'
       }
     });
-  }
-
-  removeUpgrade = (unitIndex, upgradeIndex) => {
-    const { list } = this.state;
-    const unit = list.units[unitIndex];
-    const upgrade = unit.upgradesEquipped[upgradeIndex];
-    unit.totalCost -= upgrade.cost;
-    if (upgrade.isUnique) list.uniques[upgrade.id] = false;
-    list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
-    this.setState({ list });
   }
 
   removeCommand = (commandIndex) => {
@@ -602,7 +668,8 @@ class BuilderContainer extends React.Component {
       viewFilter,
       isViewMenuOpen,
       classes,
-      defaultTheme
+      defaultTheme,
+      unitStrings
     } = this.state;
     const {
       cards,
@@ -614,99 +681,6 @@ class BuilderContainer extends React.Component {
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
     const mobile = width === 'sm' || width === 'xs';
-    const actions = [
-      {
-        name: 'Commander',
-        icon: (
-          <img
-            alt="Commander"
-            src="/rankIcons/commander.svg"
-            style={{ width: '30px', height: '30px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'commander'
-        }
-      },
-      {
-        name: 'Operative',
-        icon: (
-          <img
-            alt="Operative"
-            src="/rankIcons/operative.svg"
-            style={{ width: '25px', height: '25px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'operative'
-        }
-      },
-      {
-        name: 'Corps',
-        icon: (
-          <img
-            alt="Corps"
-            src="/rankIcons/corps.svg"
-            style={{ width: '20px', height: '20px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'corps'
-        }
-      },
-      {
-        name: 'Special Forces',
-        icon: (
-          <img
-            alt="Special Forces"
-            src="/rankIcons/special.svg"
-            style={{ width: '30px', height: '30px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'special'
-        }
-      },
-      {
-        name: 'Support',
-        icon: (
-          <img
-            alt="Support"
-            src="/rankIcons/support.svg"
-            style={{ width: '20px', height: '20px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'support'
-        }
-      },
-      {
-        name: 'Heavy',
-        icon: (
-          <img
-            alt="Heavy"
-            src="/rankIcons/heavy.svg"
-            style={{ width: '30px', height: '30px' }}
-          />
-        ),
-        viewFilter: {
-          type: 'UNIT',
-          rank: 'heavy'
-        }
-      },
-      {
-        name: 'Command',
-        icon: <GroupWorkIcon />,
-        viewFilter: {
-          type: 'COMMAND'
-        }
-      }
-    ];
     const rankCounts = {
       commander: 0,
       operative: 0,
@@ -747,30 +721,12 @@ class BuilderContainer extends React.Component {
         marginLeft: '5px'
       }
     };
-    const sideMenuItemCounts = {};
-    const sideMenuItems = [];
-    list.units.forEach((unit, unitIndex) => {
-      let unitString = unit.name;
-      unit.upgradesEquipped.forEach((upgrade) => {
-        if (upgrade) unitString = unitString.concat(upgrade.name);
-      });
-      if (unitString in sideMenuItemCounts) {
-        sideMenuItemCounts[unitString] += 1;
-      } else {
-        sideMenuItemCounts[unitString] = 1;
-        const sideMenuItem = {};
-        sideMenuItem.unit = unit;
-        sideMenuItem.unitIndex = unitIndex;
-        sideMenuItem.unitString = unitString;
-        sideMenuItems.push(sideMenuItem);
-      }
-    });
 
     // TODO: make a function for this since it's a keyword
     let hasPalp = false;
     let hasGuards = false;
     list.units.forEach((unit) => {
-      rankCounts[unit.rank] += 1;
+      rankCounts[unit.rank] += unit.count;
       if (unit.name === 'Emperor Palpatine') hasPalp = true;
       if (unit.name === 'Imperial Royal Guards') hasGuards = true;
     });
@@ -897,26 +853,26 @@ class BuilderContainer extends React.Component {
                 <Divider style={{ marginBottom: '0.25rem ' }} />
                 <div>
                   <List dense>
-                    {sideMenuItems.map(sideMenuItem => (
-                      <div key={sideMenuItem.unitString}>
+                    {list.units.map((unit, index) => (
+                      <div key={`${unit}_${index}`}>
                         {mobile ? (
                           <SideMenuListItemMobile
-                            count={sideMenuItemCounts[sideMenuItem.unitString]}
-                            unit={sideMenuItem.unit}
-                            unitIndex={sideMenuItem.unitIndex}
-                            upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
-                            menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
+                            count={unit.count}
+                            unit={unit}
+                            unitIndex={index}
+                            upgradeOptions={allUpgradeOptions[index]}
+                            menuOptions={allMenuOptions[index]}
                             removeUpgrade={this.removeUpgrade}
                             changeViewFilter={this.changeViewFilter}
                             mobile={mobile}
                           />
                         ) : (
                           <SideMenuListItem
-                            count={sideMenuItemCounts[sideMenuItem.unitString]}
-                            unit={sideMenuItem.unit}
-                            unitIndex={sideMenuItem.unitIndex}
-                            upgradeOptions={allUpgradeOptions[sideMenuItem.unitIndex]}
-                            menuOptions={allMenuOptions[sideMenuItem.unitIndex]}
+                            count={unit.count}
+                            unit={unit}
+                            unitIndex={index}
+                            upgradeOptions={allUpgradeOptions[index]}
+                            menuOptions={allMenuOptions[index]}
                             removeUpgrade={this.removeUpgrade}
                             changeViewFilter={this.changeViewFilter}
                             mobile={mobile}
