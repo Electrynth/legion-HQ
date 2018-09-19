@@ -60,6 +60,10 @@ const styles = {
   viewCard: {
     borderRadius: '5px'
   },
+  unitCardSmall: {
+    maxWidth: '245px',
+    maxHeight: '175px'
+  },
   unitCardMedium: {
     maxWidth: '280px',
     maxHeight: '200px'
@@ -67,6 +71,10 @@ const styles = {
   unitCardLarge: {
     maxWidth: '420px',
     maxHeight: '300px'
+  },
+  upgradeCardSmall: {
+    maxWidth: '110px',
+    maxHeight: '175px'
   },
   upgradeCardMedium: {
     maxWidth: '130px',
@@ -150,10 +158,14 @@ class BuilderContainer extends React.Component {
     const activeClasses = [];
     if (cardType === 'UNIT') {
       if (eligibility === 'VIEW_ONLY') activeClasses.push(classes.unitCardLarge);
-      else activeClasses.push(classes.unitCardMedium);
+      else if (eligibility === 'EQUIPPABLE') activeClasses.push(classes.unitCardMedium);
+      else if (eligibility === 'DISABLED') activeClasses.push(classes.unitCardMedium);
+      else activeClasses.push(classes.unitCardSmall);
     } else if (cardType === 'UPGRADE') {
       if (eligibility === 'VIEW_ONLY') activeClasses.push(classes.upgradeCardLarge);
-      else activeClasses.push(classes.upgradeCardMedium);
+      else if (eligibility === 'EQUIPPABLE') activeClasses.push(classes.upgradeCardMedium);
+      else if (eligibility === 'DISABLED') activeClasses.push(classes.upgradeCardMedium);
+      else activeClasses.push(classes.upgradeCardSmall);
     } else if (cardType === 'COMMAND') {
       if (eligibility === 'VIEW_ONLY') activeClasses.push(classes.commandCardLarge);
       else if (eligibility === 'LIST_VIEW') activeClasses.push(classes.commandCardSmall);
