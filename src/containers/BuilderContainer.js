@@ -721,6 +721,44 @@ class BuilderContainer extends React.Component {
         marginLeft: '5px'
       }
     };
+    const listViewItems = [];
+    list.units.forEach((unit) => {
+      for (let counter = 0; counter < unit.count; counter += 1) {
+        listViewItems.push(
+          <Grid
+            item
+            container
+            spacing={8}
+            xs={12}
+            key={`${unit.name}_${counter}`}
+          >
+            <Grid item xs>
+              <img
+                src={unit.imageLocation}
+                alt={unit.name}
+                className={this.getCardStyles('UNIT', 'LIST_VIEW', classes)}
+                style={{ marginRight: '0.5rem' }}
+              />
+              {unit.upgradesEquipped.map((upgrade) => {
+                if (upgrade) {
+                  return (
+                    <img
+                      key={upgrade.id}
+                      src={upgrade.imageLocation}
+                      alt={upgrade.name}
+                      className={this.getCardStyles('UPGRADE', 'LIST_VIEW', classes)}
+                      style={{ marginRight: '0.25rem' }}
+                    />
+                  );
+                }
+                return undefined;
+              })}
+              <Divider inset />
+            </Grid>
+          </Grid>
+        );
+      }
+    });
 
     // TODO: make a function for this since it's a keyword
     let hasPalp = false;
@@ -917,41 +955,7 @@ class BuilderContainer extends React.Component {
                     justify="flex-start"
                     alignItems="flex-start"
                   >
-                    {viewFilter.type === 'LIST' && list.units.map((unit, unitIndex) => {
-                      return (
-                        <Grid
-                          item
-                          container
-                          spacing={8}
-                          xs={12}
-                          key={`${unit.name}_${unitIndex}`}
-                        >
-                          <Grid item xs>
-                            <img
-                              src={unit.imageLocation}
-                              alt={unit.name}
-                              className={this.getCardStyles('UNIT', 'LIST_VIEW', classes)}
-                              style={{ marginRight: '0.5rem' }}
-                            />
-                            {unit.upgradesEquipped.map((upgrade) => {
-                              if (upgrade) {
-                                return (
-                                  <img
-                                    key={upgrade.id}
-                                    src={upgrade.imageLocation}
-                                    alt={upgrade.name}
-                                    className={this.getCardStyles('UPGRADE', 'LIST_VIEW', classes)}
-                                    style={{ marginRight: '0.25rem' }}
-                                  />
-                                );
-                              }
-                              return undefined;
-                            })}
-                            <Divider inset />
-                          </Grid>
-                        </Grid>
-                      );
-                    })}
+                    {viewFilter.type === 'LIST' && listViewItems}
                     {viewFilter.type === 'LIST' && list.commands.length > 1 && list.commands.map(command => (
                       <Grid item key={command.name}>
                         <img
