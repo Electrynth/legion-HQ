@@ -734,6 +734,7 @@ class BuilderContainer extends React.Component {
       }
     };
     const listViewItems = [];
+    console.log(viewFilter);
     list.units.forEach((unit) => {
       for (let counter = 0; counter < unit.count; counter += 1) {
         listViewItems.push(
@@ -1051,11 +1052,13 @@ class BuilderContainer extends React.Component {
                       commandsById.reduce((filtered, commandId, commandIndex) => {
                         const command = cards[commandId];
                         const eligibility = this.getCommandEligibility(command);
+                        console.log(command);
+                        console.log(eligibility);
                         filtered.push(
                           <Fade
                             unmountOnExit
                             key={command.id}
-                            in={eligibility === 'EQUIPPABLE'}
+                            in={eligibility === 'EQUIPPABLE' || eligibility === 'VIEW_ONLY'}
                             timeout={{
                               enter: this.getTransitionDuration(commandIndex),
                               exit: 0
