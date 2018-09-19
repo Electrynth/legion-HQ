@@ -61,16 +61,16 @@ const styles = {
     borderRadius: '5px'
   },
   unitCardMedium: {
-    maxWidth: '315px',
-    maxHeight: '225px'
+    maxWidth: '280px',
+    maxHeight: '200px'
   },
   unitCardLarge: {
     maxWidth: '420px',
     maxHeight: '300px'
   },
   upgradeCardMedium: {
-    maxWidth: '150px',
-    maxHeight: '205px'
+    maxWidth: '130px',
+    maxHeight: '200px'
   },
   upgradeCardLarge: {
     maxWidth: '200px',
