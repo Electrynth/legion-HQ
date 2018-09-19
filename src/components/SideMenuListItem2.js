@@ -71,7 +71,8 @@ const styles = {
   avatar: {
     width: '45px',
     height: '45px',
-    marginLeft: '10px'
+    marginLeft: '10px',
+    cursor: 'pointer'
   },
   noBadge: {
     display: 'none'

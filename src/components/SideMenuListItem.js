@@ -33,7 +33,8 @@ const styles = {
   },
   unitIcon: {
     width: '45px',
-    height: '45px'
+    height: '45px',
+    cursor: 'pointer'
   },
   commander: {
     position: 'relative',
