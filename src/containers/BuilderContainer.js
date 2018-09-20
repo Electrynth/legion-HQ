@@ -532,7 +532,6 @@ class BuilderContainer extends React.Component {
 
   removeUpgrade = (unitIndex, upgradeIndex) => {
     const { list } = this.state;
-    console.log('before:', list.units);
     const oldUnit = list.units[unitIndex];
     const newUnit = JSON.parse(JSON.stringify(oldUnit));
     newUnit.upgradesEquipped[upgradeIndex] = null;
@@ -556,7 +555,6 @@ class BuilderContainer extends React.Component {
       list.units[unitIndex].count -= 1;
       list.units.push(newUnit);
     }
-    console.log('after', list.units);
     this.setState({ list });
   }
 
