@@ -6,7 +6,7 @@ class ListText extends React.Component {
   unitToText = (unit, index) => {
     const unitText = [];
     let upgradeText = ` - ${unit.name} (${unit.cost}) `;
-    let totalCost = 0;
+    let totalCost = unit.cost;
     unit.upgradesEquipped.forEach((upgrade) => {
       if (upgrade) {
         totalCost += upgrade.cost;
