@@ -6,14 +6,16 @@ class ListText extends React.Component {
   unitToText = (unit, index) => {
     const unitText = [];
     let upgradeText = ` - ${unit.name} (${unit.cost}) `;
+    let totalCost = 0;
     unit.upgradesEquipped.forEach((upgrade) => {
       if (upgrade) {
+        totalCost += upgrade.cost;
         upgradeText = upgradeText.concat(` + ${upgrade.name} (${upgrade.cost})`);
       }
     });
     return (
       <div key={`${unit.name}_${index}`}>
-        {`${unitText} ${upgradeText} = ${unit.totalCost}`}
+        {`${unitText} ${upgradeText} = ${totalCost}`}
       </div>
     );
   }
