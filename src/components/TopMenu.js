@@ -103,6 +103,9 @@ class TopMenu extends React.Component {
     const maxPoints = list.mode === 'standard' ? 800 : 1600;
     let pointTotal = 0;
     list.units.forEach((unit) => {
+      unit.upgradesEquipped.forEach((upgrade) => {
+        if (upgrade) pointTotal += upgrade.cost * unit.count;
+      });
       pointTotal += unit.count * unit.totalCost;
     });
     const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconBlack.svg' : '/faction/empireIconBlack.svg';
