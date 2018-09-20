@@ -543,16 +543,16 @@ class BuilderContainer extends React.Component {
         list.units[newUnitStringIndex].count += 1;
         list.units.splice(unitIndex, 1);
       } else {
-        oldUnit.count -= 1;
+        list.units[unitIndex].count -= 1;
         list.units[newUnitStringIndex].count += 1;
       }
     } else if (oldUnit.count === 1) {
       if (oldUnit.upgradesEquipped[upgradeIndex].id in list.uniques) {
         list.uniques[oldUnit.upgradesEquipped[upgradeIndex].id] = false;
       }
-      oldUnit.upgradesEquipped[upgradeIndex] = null;
+      list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
     } else {
-      oldUnit.count -= 1;
+      list.units[unitIndex].count -= 1;
       list.units.push(newUnit);
     }
     this.setState({ list });
@@ -734,8 +734,7 @@ class BuilderContainer extends React.Component {
       }
     };
     const listViewItems = [];
-    console.log(viewFilter);
-    list.units.forEach((unit) => {
+    list.units.forEach((unit, index) => {
       for (let counter = 0; counter < unit.count; counter += 1) {
         listViewItems.push(
           <Grid
@@ -743,7 +742,7 @@ class BuilderContainer extends React.Component {
             container
             spacing={8}
             xs={12}
-            key={`${unit.name}_${counter}`}
+            key={`${unit.name}_${index}_${counter}`}
           >
             <Grid item xs>
               <img
@@ -905,7 +904,7 @@ class BuilderContainer extends React.Component {
                 <div>
                   <List dense>
                     {list.units.map((unit, index) => (
-                      <div key={`${unit}_${index}`}>
+                      <div key={`${unit.name}_${index}`}>
                         {mobile ? (
                           <SideMenuListItemMobile
                             count={unit.count}
@@ -1052,8 +1051,6 @@ class BuilderContainer extends React.Component {
                       commandsById.reduce((filtered, commandId, commandIndex) => {
                         const command = cards[commandId];
                         const eligibility = this.getCommandEligibility(command);
-                        console.log(command);
-                        console.log(eligibility);
                         filtered.push(
                           <Fade
                             unmountOnExit
