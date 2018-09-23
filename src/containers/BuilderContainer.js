@@ -568,9 +568,11 @@ class BuilderContainer extends React.Component {
   removeUnit = (unitIndex) => {
     const { list } = this.state;
     const unit = list.units[unitIndex];
+    const commandsToRemove = [];
     list.commands.forEach((command, commandIndex) => {
-      if (command.commander === unit.name) this.removeCommand(commandIndex);
+      if (command.commander === unit.name) commandsToRemove.push(commandIndex);
     });
+    commandsToRemove.forEach(commandIndex => this.removeCommand(commandIndex));
     unit.upgradesEquipped.forEach((upgrade) => {
       if (upgrade && upgrade.isUnique) list.uniques[upgrade.id] = false;
     });
