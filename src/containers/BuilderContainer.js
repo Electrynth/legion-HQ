@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -147,6 +148,22 @@ class BuilderContainer extends React.Component {
         type: 'LIST'
       }
     };
+  }
+
+  getUrlString = (list) => {
+    let urlString = ' ';
+    list.units.forEach((unit) => {
+      urlString = urlString.concat(unit.id);
+      unit.upgradesEquipped.forEach((upgrade) => {
+        if (upgrade) urlString = urlString.concat(upgrade.id);
+      });
+      if (unit.count > 1) urlString.concat(unit.count);
+    });
+    list.commands.forEach((command) => {
+      if (command.id) urlString = urlString.concat(command.id);
+    });
+    console.log(urlString);
+    return urlString;
   }
 
   getTransitionDuration = (index) => {
@@ -674,6 +691,15 @@ class BuilderContainer extends React.Component {
     });
   }
 
+  renderTestButton = () => (
+    <Button
+      variant="contained"
+      onClick={() => console.log(this.state)}
+    >
+      Log State
+    </Button>
+  );
+
   render() {
     const {
       list,
@@ -690,6 +716,7 @@ class BuilderContainer extends React.Component {
       commandsById,
       width
     } = this.props;
+    this.getUrlString(list);
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
     const mobile = width === 'sm' || width === 'xs';
@@ -790,6 +817,7 @@ class BuilderContainer extends React.Component {
           changeListMode={this.changeListMode}
           changePrimaryTheme={this.changePrimaryTheme}
           mobile={mobile}
+          renderTestButton={this.renderTestButton}
         />
         <ViewCloseButton
           isVisible={viewFilter.type !== 'LIST'}
