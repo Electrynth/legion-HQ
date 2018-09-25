@@ -572,7 +572,6 @@ class BuilderContainer extends React.Component {
       list.units[unitIndex].count -= 1;
       list.units.push(newUnit);
     }
-    console.log('after', list.units);
     this.setState({ list });
   }
 
