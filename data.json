@@ -28,6 +28,36 @@
   },
   "cards": [
     {
+        "cost": 4,
+        "isUnique": false,
+        "name": "Tenacity",
+        "type": "training",
+        "requirements": [],
+        "products": [],
+        "faction": "",
+        "rank": "upgrade"
+    },
+    {
+        "cost": 35,
+        "isUnique": false,
+        "name": "Bowcaster Wookie",
+        "type": "heavy weapon",
+        "requirements": ["Wookie Warriors"],
+        "products": [],
+        "faction": "rebels",
+        "rank": "upgrade"
+    },
+    {
+        "cost": 5,
+        "isUnique": false,
+        "name": "Anger",
+        "type": "force",
+        "requirements": ["dark side"],
+        "products": [],
+        "faction": "",
+        "rank": "upgrade"
+    },
+    {
         "cost": 19,
         "isUnique": false,
         "name": "Rebel Officer",
@@ -41,7 +71,7 @@
         "cost": 50,
         "isUnique": false,
         "faction": "rebels",
-        "name": "Rebel Officer Commander",
+        "name": "Rebel Commander",
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["command", "gear"],
@@ -71,7 +101,7 @@
         "cost": 50,
         "isUnique": false,
         "faction": "empire",
-        "name": "Imperial Officer Commander",
+        "name": "Imperial Commander",
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["command", "gear"],
@@ -167,7 +197,7 @@
         "products": []
     },
     {
-        "cost": 80,
+        "cost": 110,
         "isUnique": true,
         "faction": "rebels",
         "name": "Chewbacca",
@@ -971,6 +1001,13 @@
       "name": "Sabotaged Communications",
       "commander": "",
       "faction": "rebels",
+      "products": []
+    },
+    {
+      "pips": 1,
+      "name": "And Now You Will Die",
+      "commander": "Emperor Palpatine",
+      "faction": "empire",
       "products": []
     }
   ]

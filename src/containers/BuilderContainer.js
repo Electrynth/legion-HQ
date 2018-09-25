@@ -62,24 +62,24 @@ const styles = {
     borderRadius: '5px'
   },
   unitCardSmall: {
-    maxWidth: '245px',
-    maxHeight: '175px'
-  },
-  unitCardMedium: {
     maxWidth: '280px',
     maxHeight: '200px'
+  },
+  unitCardMedium: {
+    maxWidth: '350px',
+    maxHeight: '250px'
   },
   unitCardLarge: {
     maxWidth: '420px',
     maxHeight: '300px'
   },
   upgradeCardSmall: {
-    maxWidth: '110px',
-    maxHeight: '175px'
-  },
-  upgradeCardMedium: {
     maxWidth: '130px',
     maxHeight: '200px'
+  },
+  upgradeCardMedium: {
+    maxWidth: '160px',
+    maxHeight: '250px'
   },
   upgradeCardLarge: {
     maxWidth: '200px',
@@ -572,6 +572,7 @@ class BuilderContainer extends React.Component {
       list.units[unitIndex].count -= 1;
       list.units.push(newUnit);
     }
+    console.log('after', list.units);
     this.setState({ list });
   }
 
@@ -584,9 +585,12 @@ class BuilderContainer extends React.Component {
   removeUnit = (unitIndex) => {
     const { list } = this.state;
     const unit = list.units[unitIndex];
-    list.commands.forEach((command, commandIndex) => {
-      if (command.commander === unit.name) this.removeCommand(commandIndex);
+    const newCommands = [];
+    list.commands.forEach((command) => {
+      if (command.commander === unit.name) list.uniques[command.id] = false;
+      else newCommands.push(command);
     });
+    list.commands = newCommands;
     unit.upgradesEquipped.forEach((upgrade) => {
       if (upgrade && upgrade.isUnique) list.uniques[upgrade.id] = false;
     });
