@@ -5,11 +5,18 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const bodyParser = require('body-parser');
-const uuidv1 = require('uuid');
 const config = require('./webpack.development.config.js');
 
 const compiler = webpack(config);
 const app = express();
+
+const getCardId = (index) => {
+  const mod = Math.floor(index / 26);
+  const remainder = index % 26;
+  const firstLetter = (mod + 10).toString(36);
+  const secondLetter = (remainder + 10).toString(36);
+  return `${firstLetter}${secondLetter}`;
+};
 
 // app.use(favicon(path.join(__dirname,'assets','public','favicon.ico')));
 app.use(bodyParser.json());
@@ -37,8 +44,10 @@ app.get('/data', (req, res) => {
     const dotRegex = /\./gi;
     const data = JSON.parse(input);
     const { cards, commands } = data;
+    let currentCardIdIndex = 0;
     cards.forEach((card) => {
-      const id = uuidv1();
+      const id = getCardId(currentCardIdIndex);
+      currentCardIdIndex += 1;
       let imageName = `${card.name.replace(spaceRegex, '%20')}`;
       imageName = imageName.replace(dotRegex, '%2E');
       if (card.isUnique) response.uniques[id] = false;
@@ -67,7 +76,8 @@ app.get('/data', (req, res) => {
       }
     });
     commands.forEach((command) => {
-      const id = uuidv1();
+      const id = getCardId(currentCardIdIndex);
+      currentCardIdIndex += 1;
       response.commandsById.push(id);
       response.uniques[id] = false;
       let imageName = `${command.name.replace(spaceRegex, '%20')}`;
