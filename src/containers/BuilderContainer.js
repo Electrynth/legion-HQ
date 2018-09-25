@@ -150,22 +150,6 @@ class BuilderContainer extends React.Component {
     };
   }
 
-  getUrlString = (list) => {
-    let urlString = ' ';
-    list.units.forEach((unit) => {
-      urlString = urlString.concat(unit.id);
-      unit.upgradesEquipped.forEach((upgrade) => {
-        if (upgrade) urlString = urlString.concat(upgrade.id);
-      });
-      if (unit.count > 1) urlString.concat(unit.count);
-    });
-    list.commands.forEach((command) => {
-      if (command.id) urlString = urlString.concat(command.id);
-    });
-    console.log(urlString);
-    return urlString;
-  }
-
   getTransitionDuration = (index) => {
     if (index < 10) return 250 + index * 50;
     return 500;
@@ -719,7 +703,6 @@ class BuilderContainer extends React.Component {
       commandsById,
       width
     } = this.props;
-    this.getUrlString(list);
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
     const mobile = width === 'sm' || width === 'xs';

@@ -6,9 +6,16 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const bodyParser = require('body-parser');
 const config = require('./webpack.development.config.js');
+// const mongoClient = require('mongodb').MongoClient;
 
 const compiler = webpack(config);
 const app = express();
+
+// const connectionString = 'mongodb://18.218.77.64:27017/development';
+// mongoClient.connect(connectionString, (err, db) => {
+//   if (err) console.log(err);
+//   else console.log('success', db);
+// });
 
 const getCardId = (index) => {
   const mod = Math.floor(index / 26);

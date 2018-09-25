@@ -18,6 +18,7 @@
     "babel-eslint": "^8.2.6",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.18.3",
+    "mongodb": "^3.1.6",
     "nodemon": "^1.18.4",
     "npm": "^6.4.1",
     "react": "^16.4.2",
