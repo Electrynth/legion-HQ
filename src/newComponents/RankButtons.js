@@ -136,7 +136,7 @@ class RankButtons extends React.Component {
         alignItems="flex-start"
       >
         {rankButtons.map((rankButton, index) => (
-          <Grid item key={Object.keys(rankCounts[index])}>
+          <Grid item key={}>
             {rankButton}
           </Grid>
         ))}

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
-import RankButtons from 'newComponents/RankButtons';
+import Grid from '@material-ui/core/Grid';
+import RankButton from 'newComponents/RankButton';
 import UnitList from 'newComponents/UnitList';
 import CommandChips from 'newComponents/CommandChips';
 import NotesTextField from 'newComponents/NotesTextField';
@@ -24,6 +25,14 @@ class LeftPaneContainer extends React.Component {
       removeCommand,
       changeListNotes
     } = this.props;
+    const rankButtons = [
+      'commander',
+      'operative',
+      'corps',
+      'special',
+      'support',
+      'heavy'
+    ];
     return (
       <Paper
         elevation={3}
@@ -34,10 +43,22 @@ class LeftPaneContainer extends React.Component {
         }}
       >
         <div>
-          <RankButtons
-            list={list}
-            changeViewFilter={changeViewFilter}
-          />
+          <Grid
+            item
+            container
+            spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+          >
+            {rankButtons.map((rank) => {
+              return (
+                <Grid item key={rank}>
+                  <RankButton />
+                </Grid>
+              );
+            })}
+          </Grid>
           <UnitList
             list={list}
             isMobile={isMobile}

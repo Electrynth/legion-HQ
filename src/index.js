@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
-import BuilderContainer from 'containers/BuilderContainer';
-import ExportedListContainer from 'containers/ExportedListContainer';
-
-/*
-<div style={{ position: 'absolute', left: '50%', top: '50%' }}>
-  <div style={{ position: 'relative', left: '-50%' }}>
-    <Grow
-      in={status !== 'success'}
-    >
-      <CircularProgress
-        size={50}
-        color={status === 'error' ? 'secondary' : 'primary'}
-      />
-    </Grow>
-  </div>
-</div>
-*/
+import BuilderContainer from 'newContainers/BuilderContainer';
 
 class App extends Component {
   state = {
@@ -58,10 +41,6 @@ class App extends Component {
             <Route
               path="/empire"
               render={props => <BuilderContainer faction="empire" {...this.state} {...props} />}
-            />
-            <Route
-              path="/export"
-              render={props => <ExportedListContainer {...props} />}
             />
             <Redirect from="/" to="/home" />
           </Switch>

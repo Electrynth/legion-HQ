@@ -6,44 +6,17 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import ListText from 'components/ListText';
-import Grow from '@material-ui/core/Grow';
 import Modal from '@material-ui/core/Modal';
-import LooksOneIcon from '@material-ui/icons/LooksOne';
-import LooksTwoIcon from '@material-ui/icons/LooksTwo';
-import LooksThreeIcon from '@material-ui/icons/Looks3';
-import LooksFourIcon from '@material-ui/icons/Looks4';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import PrintIcon from '@material-ui/icons/Print';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
-import AssignmentIcon from '@material-ui/icons/Assignment';
 import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 
 class ListFooter extends React.Component {
   state = { openModal: false };
-
-  getPipIcon = (pips) => {
-    const styles = {
-      width: '45px',
-      height: '45px'
-    };
-    switch (pips) {
-      case 1:
-        return <LooksOneIcon style={styles} />;
-      case 2:
-        return <LooksTwoIcon style={styles} />;
-      case 3:
-        return <LooksThreeIcon style={styles} />;
-      case 4:
-        return <LooksFourIcon style={styles} />;
-      default:
-        return <RemoveIcon style={styles} />;
-    }
-  }
 
   render() {
     const {

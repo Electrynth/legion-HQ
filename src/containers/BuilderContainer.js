@@ -142,7 +142,6 @@ class BuilderContainer extends React.Component {
         uniques: {},
         notes: ''
       },
-      unitStrings: {},
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
@@ -693,8 +692,7 @@ class BuilderContainer extends React.Component {
       viewFilter,
       isViewMenuOpen,
       classes,
-      defaultTheme,
-      unitStrings
+      defaultTheme
     } = this.state;
     const {
       cards,

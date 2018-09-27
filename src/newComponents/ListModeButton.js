@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 const ListModeButton = ({
   pointTotal,
   currentMode,
-  changeListMode
+  toggleListMode
 }) => (
   <Button
-    size="small"
+    mini
     variant="contained"
     color="inherit"
-    onClick={changeListMode}
+    onClick={toggleListMode}
     style={{
       marginLeft: '0.5rem'
     }}
@@ -26,7 +26,7 @@ const ListModeButton = ({
 ListModeButton.propTypes = {
   pointTotal: PropTypes.number.isRequired,
   currentMode: PropTypes.string.isRequired,
-  changeListMode: PropTypes.func.isRequired
+  toggleListMode: PropTypes.func.isRequired
 };
 
 export default ListModeButton;
