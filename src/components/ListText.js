@@ -22,6 +22,14 @@ class ListText extends React.Component {
     );
   }
 
+  unitsToPlainText = (type, units) => {
+    console.log(units);
+    return `
+    ${type}:
+    \n
+    `;
+  }
+
   render() {
     const { list } = this.props;
     if (!list) {
@@ -92,8 +100,27 @@ class ListText extends React.Component {
         default:
       }
     });
+    const listString = `
+      Title: ${list.title}\n
+      Faction: ${list.faction}\n
+      Mode: ${list.mode}${'\n'}
+
+      ${this.unitsToPlainText('Commanders', commanders)}
+      ${this.unitsToPlainText('Operatives', operatives)}
+      ${this.unitsToPlainText('Corps', corps)}
+      ${this.unitsToPlainText('Special Forces', special)}
+      ${this.unitsToPlainText('Support', support)}
+      ${this.unitsToPlainText('Heavy', heavy)}
+      Total: ${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}
+      Commands:
+      ${list.commands.forEach((command) => {
+        return `${command.name} (${command.pips})`;
+      })}
+      Notes:
+      ${list.notes}
+    `;
     return (
-      <div id="listText">
+      <div>
         <h3>Legion HQ</h3>
         Title: {list.title}
         <br />
@@ -158,6 +185,7 @@ class ListText extends React.Component {
         <br />
         Notes:
         {` ${list.notes}`}
+        <textarea id="listText" value={listString} style={{ display: 'none' }} />
       </div>
     );
   }

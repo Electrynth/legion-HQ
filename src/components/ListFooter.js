@@ -201,7 +201,7 @@ class ListFooter extends React.Component {
                     <Grid item>
                       <IconButton
                         variant="contained"
-                        onClick={() => this.copyToClip(document.getElementById('listText').innerHTML)}
+                        onClick={() => this.copyToClip(document.getElementById('listText').textContent)}
                       >
                         <FileCopyIcon />
                       </IconButton>
