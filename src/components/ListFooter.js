@@ -47,7 +47,7 @@ class ListFooter extends React.Component {
       position: 'relative',
       padding: '10px',
       top: '10%',
-      left: 'calc(50% - 300px)',
+      left: 'calc(50% - 25vw)',
       width: '50vw',
       overflowY: 'scroll'
     };
