@@ -68,7 +68,7 @@ class ListText extends React.Component {
       }
     });
     return (
-      <div>
+      <div id="listText">
         <h3>Legion HQ</h3>
         Title: {list.title}
         <br />

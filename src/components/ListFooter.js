@@ -7,16 +7,30 @@ import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import ListText from 'components/ListText';
 import Modal from '@material-ui/core/Modal';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 import PrintIcon from '@material-ui/icons/Print';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 
 class ListFooter extends React.Component {
   state = { openModal: false };
+
+  copyToClip = (str) => {
+    const listener = (e) => {
+      e.clipboardData.setData('text/html', str);
+      e.clipboardData.setData('text/plain', str);
+      e.preventDefault();
+    };
+    document.addEventListener('copy', listener);
+    document.execCommand('copy');
+    document.removeEventListener('copy', listener);
+  }
 
   render() {
     const {
@@ -34,7 +48,7 @@ class ListFooter extends React.Component {
       padding: '10px',
       top: '10%',
       left: 'calc(50% - 300px)',
-      width: '600px',
+      width: '50vw',
       overflowY: 'scroll'
     };
     return (
@@ -179,6 +193,17 @@ class ListFooter extends React.Component {
                   >
                     <Grid item>
                       <ListText list={list} />
+                    </Grid>
+                    <Grid item>
+                      <Divider />
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        variant="contained"
+                        onClick={() => this.copyToClip(document.getElementById('listText').innerHTML)}
+                      >
+                        <FileCopyIcon />
+                      </IconButton>
                     </Grid>
                   </Grid>
                 </Paper>
