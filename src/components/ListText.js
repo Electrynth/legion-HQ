@@ -39,29 +39,54 @@ class ListText extends React.Component {
     const heavy = [];
     let pointTotal = 0;
     list.units.forEach((unit) => {
+      let unitTotal = 0;
       switch (unit.rank) {
         case 'commander':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           commanders.push(unit);
           break;
         case 'operative':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           operatives.push(unit);
           break;
         case 'corps':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           corps.push(unit);
           break;
         case 'special':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           special.push(unit);
           break;
         case 'support':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           support.push(unit);
           break;
         case 'heavy':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           heavy.push(unit);
           break;
         default:
