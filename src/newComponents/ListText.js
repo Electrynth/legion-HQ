@@ -64,7 +64,7 @@ class ListText extends React.Component {
       }
     });
     return (
-      <div style={{ overflowY: 'scroll' }}>
+      <div style={{ overflowY: 'scroll', maxHeight: '100vw' }}>
         <h3>Legion HQ</h3>
         Title: {list.title}
         <br />
