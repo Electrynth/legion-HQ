@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
-import BuilderContainer from 'newContainers/BuilderContainer';
+import BuilderContainer from 'containers/BuilderContainer';
 
 class App extends Component {
   state = {

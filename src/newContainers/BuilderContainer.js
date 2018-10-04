@@ -324,6 +324,37 @@ function RankChips(props) {
   );
 }
 
+function CommandChips(props) {
+  const {
+    classes,
+    commands,
+    onClick
+  } = props;
+  const commandChips = [];
+  commands.forEach((command) => {
+    commandChips.push(
+      <Grid item key={command.name}>
+        <CommandChip
+          classes={classes}
+          command={command}
+          onClick={onClick}
+        />
+      </Grid>
+    );
+  });
+  return (
+    <Grid
+      item
+      container
+      direction="row"
+      justify="center"
+      alignItems="center"
+    >
+      {commandChips}
+    </Grid>
+  );
+}
+
 function CommandChip(props) {
   const {
     classes,
@@ -699,6 +730,12 @@ RankChip.propTypes = {
 CommandChip.propTypes = {
   classes: PropTypes.object.isRequired,
   command: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
+};
+
+CommandChips.propTypes = {
+  classes: PropTypes.object.isRequired,
+  commands: PropTypes.array.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
