@@ -50,7 +50,7 @@ class ListFooter extends React.Component {
       left: 'calc(50% - 25vw)',
       width: '50vw',
       overflowY: 'scroll',
-      maxHeight: '90vh'
+      maxHeight: '75vh'
     };
     return (
       <Grid

@@ -145,9 +145,9 @@ class TopMenu extends React.Component {
                   </Typography>
                 </Button>
               </Grid>
-              <Grid item>
-                {renderTestButton()}
-              </Grid>
+  
+    
+   
             </Grid>
           </Toolbar>
         </AppBar>
