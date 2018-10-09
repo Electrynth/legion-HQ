@@ -28,6 +28,16 @@
   },
   "cards": [
     {
+        "cost": 9,
+        "isUnique": false,
+        "name": "Rebel Comms Technician",
+        "type": "personnel",
+        "requirements": ["rebels"],
+        "products": [],
+        "faction": "rebels",
+	"rank": "upgrade"
+    },
+    {
         "cost": 4,
         "isUnique": false,
         "name": "Tenacity",
