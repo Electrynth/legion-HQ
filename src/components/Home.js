@@ -22,6 +22,7 @@ import PaletteIcon from '@material-ui/icons/Palette';
 import BuildIcon from '@material-ui/icons/Build';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import EmailIcon from '@material-ui/icons/Email';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 const listStyles = {
   height: '22vh',
@@ -48,6 +49,14 @@ const rebelsIconStyles = {
 
 const empireIconStyles = {
   ...factionIconStyles
+};
+
+const logout = (response) => {
+  console.log(response);
+}
+
+const responseGoogle = (response) => {
+  console.log(response.googleId);
 };
 
 const Home = ({ history }) => (
@@ -96,61 +105,6 @@ const Home = ({ history }) => (
       </Grid>
       <Grid item>
         <Paper style={paperStyles}>
-          <Typography variant="headline">
-            <BuildIcon style={{ marginRight: '10px' }} />
-            Under development
-            <BuildIcon style={{ marginLeft: '10px' }} />
-          </Typography>
-          <Typography variant="caption">
-            Features to come!
-          </Typography>
-          <List
-            dense
-            style={listStyles}
-          >
-            <ListItem>
-              <ListItemIcon>
-                <PrintIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="Printing lists" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <ListAltIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="List text export" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <ShareIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="List URL sharing" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <HttpsIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="HTTPS" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AccountCircleIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="User accounts" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <SaveIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="Saving lists" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Brightness4Icon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="Night mode" />
-            </ListItem>
-          </List>
           <Grid
             container
             spacing={8}
@@ -177,6 +131,26 @@ const Home = ({ history }) => (
                 <EmailIcon style={{ marginRight: '10px' }} />
                 Email
               </Button>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <GoogleLogin
+                clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
+                buttonText="Sign in with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                className="g-signin2"
+                style={{
+                  padding: '0px'
+                }}
+              />
             </Grid>
           </Grid>
         </Paper>
