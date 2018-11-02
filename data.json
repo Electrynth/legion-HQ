@@ -1019,6 +1019,13 @@
       "commander": "Emperor Palpatine",
       "faction": "empire",
       "products": []
+    },
+    {
+      "pips": 2,
+      "name": "Give In To Your Anger",
+      "commander": "Emperor Palpatine",
+      "faction": "empire",
+      "products": []
     }
   ]
 }
