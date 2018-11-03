@@ -26,6 +26,368 @@
     "faction": "",
     "products": []
   },
+  "products": {
+    "swl01": {
+      "name": "Star Wars Legion Core Set",
+      "units": [
+        "Darth Vader",
+        "74-Z Speeder Bikes",
+        "Stormtroopers",
+        "Stormtroopers",
+        "Luke Skywalker",
+        "AT-RT",
+        "Rebel Troopers",
+        "Rebel Troopers"
+      ],
+      "upgrades": [
+        "Long-Range Comlink",
+        "Long-Range Comlink",
+        "Battle Meditation",
+        "Battle Meditation",
+        "Force Choke",
+        "Force Push",
+        "Force Push",
+        "Force Reflexes",
+        "Force Reflexes",
+        "Jedi Mind Trick",
+        "Saber Throw",
+        "Saber Throw",
+        "AT-RT Flamethrower",
+        "AT-RT Laser Cannon",
+        "AT-RT Rotary Blaster",
+        "DLT-19 Stormtrooper",
+        "DLT-19 Stormtrooper",
+        "HH-12 Stormtrooper",
+        "HH-12 Stormtrooper",
+        "MPL-57 Ion Trooper",
+        "MPL-57 Ion Trooper",
+        "Z-6 Trooper",
+        "Z-6 Trooper",
+        "Targeting Scopes",
+        "Targeting Scopes",
+        "Targeting Scopes",
+        "Targeting Scopes",
+        "Concussion Grenades",
+        "Concussion Grenades",
+        "Concussion Grenades",
+        "Concussion Grenades",
+        "Rebel Trooper",
+        "Rebel Trooper",
+        "Stormtrooper",
+        "Stormtrooper"
+      ],
+      "commands": [
+        "Ambush",
+        "Push",
+        "Assault",
+        "Standing Orders",
+        "Son of Skywalker",
+        "My Ally is the Force",
+        "Return of the Jedi",
+        "Implacable",
+        "New Ways to Motivate Them",
+        "Master of Evil"
+      ],
+      "released": "2018 March 22"
+    },
+    "swl04": {
+      "name": "AT-RT Unit Expansion",
+      "units": [
+        "AT-RT"
+      ],
+      "upgrades": [
+        "Comms Jammer",
+        "Long-Range Comlink",
+        "AT-RT Flamethrower",
+        "AT-RT Laser Cannon",
+        "AT-RT Rotary Blaster"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl05": {
+      "name": "Rebel Troopers Unit Expansion",
+      "units": [
+        "Rebel Troopers"
+      ],
+      "upgrades": [
+        "Grappling Hooks",
+        "Impact Grenades",
+        "MPL-57 Ion Trooper",
+        "Z-6 Trooper",
+        "Rebel Trooper"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl06": {
+      "name": "74-Z Speeder Bikes Unit Expansion",
+      "units": [
+        "74-Z Speeder Bikes"
+      ],
+      "upgrades": [
+        "Comms Jammer",
+        "Long-Range Comlink"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl07": {
+      "name": "Stormtroopers Unit Expansion",
+      "units": [
+        "Stormtroopers"
+      ],
+      "upgrades": [
+        "Grappling Hooks",
+        "Impact Grenades",
+        "DLT-19 Stormtrooper",
+        "HH-12 Stormtrooper",
+        "Stormtrooper"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl08": {
+      "name": "AT-ST Unit Expansion",
+      "units": [
+        "AT-ST"
+      ],
+      "upgrades": [
+        "Comms Jammer",
+        "Long-Range Comlink",
+        "88 Twin Light Blaster Cannon",
+        "AT-ST Mortar Launcher",
+        "DW-3 Concussion Grenade Launcher",
+        "General Weiss"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl09": {
+      "name": "T-47 Airspeeder Unit Expansion",
+      "units": [
+        "T-47 Airspeeder"
+      ],
+      "upgrades": [
+        "Comms Jammer",
+        "Long-Range Comlink",
+        "Ax-108 Ground Buzzer",
+        "MoDk Power Harpoon",
+        "Wedge Antilles"
+      ],
+      "commands": [],
+      "released": "2018 March 22"
+    },
+    "swl10": {
+      "name": "General Veers Commander Expansion",
+      "units": [
+        "General Veers"
+      ],
+      "upgrades": [
+        "Esteemed Leader",
+        "Commanding Presence",
+        "Environmental Gear"
+      ],
+      "commands": [
+        "Maximum Firepower",
+        "Evasive Maneuvers",
+        "Imperial Discipline"
+      ],
+      "released": "2018 May 5"
+    },
+    "swl11": {
+      "name": "Snowtroopers Unit Expansion",
+      "units": [
+        "Snowtroopers"
+      ],
+      "upgrades": [
+        "Grappling Hooks",
+        "Impact Grenades",
+        "Flametrooper",
+        "T-7 Ion Snowtrooper",
+        "Snowtrooper"
+      ],
+      "commands": [],
+      "released": "2018 May 10"
+    },
+    "swl12": {
+      "name": "Leia Organa Commander Expansion",
+      "units": [
+        "Leia Organa"
+      ],
+      "upgrades": [
+        "Esteemed Leader",
+        "Commanding Presence",
+        "Environmental Gear"
+      ],
+      "commands": [
+        "Coordinated Bombardment",
+        "No Time for Sorrows",
+        "Somebody Has to Save Our Skins"
+      ],
+      "released": "2018 May 24"
+    },
+    "swl13": {
+      "name": "Fleet Troopers Unit Expansion",
+      "units": [
+        "Fleet Troopers"
+      ],
+      "upgrades": [
+        "Grappling Hooks",
+        "Impact Grenades",
+        "MPL-57 Barrage Trooper",
+        "Scatter Gun Trooper",
+        "Fleet Trooper"
+      ],
+      "commands": [],
+      "released": "2018 May 24"
+    },
+    "swl14": {
+      "name": "1.4 FD Laser Cannon Team Unit Expansion",
+      "units": [
+        "1.4 FD Laser Cannon Team"
+      ],
+      "upgrades": [
+        "HQ Uplink",
+        "Barrage Generator",
+        "Overcharged Generator"
+      ],
+      "commands": [],
+      "released": ""
+    },
+    "swl15": {
+      "name": "E-Web Heavy Blaster Team Unit Expansion",
+      "units": [
+        "E-Web Heavy Blaster Team"
+      ],
+      "upgrades": [
+        "HQ Uplink",
+        "Barrage Generator",
+        "Overcharged Generator"
+      ],
+      "commands": [],
+      "released": ""
+    },
+    "swl18": {
+      "name": "Boba Fett Operative Expansion",
+      "units": [
+        "Boba Fett"
+      ],
+      "upgrades": [
+        "Hunter",
+        "Duck and Cover",
+        "Emergency Stims"
+      ],
+      "commands": [
+        "Whipcord Launcher",
+        "ZX Flame Projector",
+        "Z-6 Jetpack Rocket"
+      ],
+      "released": ""
+    },
+    "swl19": {
+      "name": "Scout Troopers Unit Expansion",
+      "units": [
+        "Scout Troopers",
+        "Scout Troopers Strike Team"
+      ],
+      "upgrades": [
+        "HQ Uplink",
+        "Duck and Cover",
+        "Emergency Stims",
+        "Sonic Charge Saboteur",
+        "DLT-19x Sniper"
+      ],
+      "commands": [],
+      "released": ""
+    },
+    "swl20": {
+      "name": "Han Solo Commander Expansion",
+      "units": [
+        "Han Solo"
+      ],
+      "upgrades": [
+        "Improvised Orders",
+        "Duck and Cover",
+        "Emergency Stims"
+      ],
+      "commands": [
+        "Sorry About the Mess",
+        "Reckless Diversion",
+        "Change of Plans"
+      ],
+      "released": "2018 August 23"
+    },
+    "swl21": {
+      "name": "Rebel Commandos Unit Expansion",
+      "units": [
+        "Rebel Commandos",
+        "Rebel Commandos Strike Team"
+      ],
+      "upgrades": [
+        "HQ Uplink",
+        "Duck and Cover",
+        "Emergency Stims",
+        "Proton Charge Saboteur",
+        "DH-447 Sniper"
+      ],
+      "commands": [],
+      "released": "2018 August 23"
+    },
+    "swl22": {
+      "name": "Imperial Royal Guards Unit Expansion",
+      "units": [
+        "Imperial Royal Guards"
+      ],
+      "upgrades": [
+        "Tenacity",
+        "Electrostaff Guard"
+      ],
+      "commands": [],
+      "released": ""
+    },
+    "swl23": {
+      "name": "Emperor Palpatine Commander Expansion",
+      "units": [
+        "Emperor Palpatine"
+      ],
+      "upgrades": [
+        "Anger",
+        "Force Choke"
+      ],
+      "commands": [
+        "And Now You Will Die",
+        "An Entire Legion"
+      ],
+      "released": ""
+    },
+    "swl24": {
+      "name": "Chewbacca Operative Expansion",
+      "units": [
+        "Chewbacca"
+      ],
+      "upgrades": [
+        "Tenacity",
+        "Hunter"
+      ],
+      "commands": [
+        "Notorious Scoundrels"
+      ],
+      "released": ""
+    },
+    "swl25": {
+      "name": "Wookie Warriors Unit Expansion",
+      "units": [
+        "Wookie Warriors"
+      ],
+      "upgrades": [
+        "Tenacity",
+        "Bowcaster Wookie"
+      ],
+      "commands": [],
+      "released": ""
+    }
+  },
   "cards": [
     {
         "cost": 4,
@@ -33,7 +395,7 @@
         "name": "Tenacity",
         "type": "training",
         "requirements": [],
-        "products": [],
+        "products": ["swl22", "swl24", "swl25"],
         "faction": "",
         "rank": "upgrade"
     },
@@ -43,7 +405,7 @@
         "name": "Bowcaster Wookie",
         "type": "heavy weapon",
         "requirements": ["Wookie Warriors"],
-        "products": [],
+        "products": ["swl25"],
         "faction": "rebels",
         "rank": "upgrade"
     },
@@ -53,7 +415,7 @@
         "name": "Anger",
         "type": "force",
         "requirements": ["dark side"],
-        "products": [],
+        "products": ["swl23"],
         "faction": "",
         "rank": "upgrade"
     },
@@ -75,7 +437,7 @@
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["command", "gear"],
-        "products": []
+        "products": ["swl21"]
     },
     {
         "cost": 25,
@@ -83,7 +445,7 @@
         "name": "Electrostaff Guard",
         "type": "heavy weapon",
         "requirements": ["Imperial Royal Guards"],
-        "products": [],
+        "products": ["swl22"],
         "faction": "empire",
         "rank": "upgrade"
     },
@@ -115,7 +477,7 @@
         "type": "trooper",
         "rank": "operative",
         "upgradeBar": ["training", "training", "gear", "gear"],
-        "products": []
+        "products": ["swl18"]
     },
     {
         "cost": 28,
@@ -123,7 +485,7 @@
         "name": "DLT-19x Sniper",
         "type": "heavy weapon",
         "requirements": ["Scout Troopers"],
-        "products": [],
+        "products": ["swl19"],
         "faction": "empire",
         "rank": "upgrade"
     },
@@ -133,6 +495,7 @@
         "name": "Sonic Charge Saboteur",
         "type": "heavy weapon",
         "requirements": ["Scout Troopers"],
+        "products": ["swl19"],
         "faction": "empire",
         "rank": "upgrade"
     },
@@ -142,7 +505,7 @@
         "name": "Hunter",
         "type": "training",
         "requirements": [],
-        "products": [],
+        "products": ["swl18", "swl24"],
         "faction": "",
         "rank": "upgrade"
     },
@@ -154,7 +517,7 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
-        "products": []
+        "products": ["swl25"]
     },
     {
         "cost": 16,
@@ -164,7 +527,7 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-        "products": []
+        "products": ["swl19"]
     },
     {
         "cost": 60,
@@ -174,7 +537,7 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-        "products": []
+        "products": ["swl19"]
     },
     {
         "cost": 75,
@@ -184,7 +547,7 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
-        "products": []
+        "products": ["swl22"]
     },
     {
         "cost": 210,
@@ -194,7 +557,7 @@
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["force", "force", "force", "command"],
-        "products": []
+        "products": ["swl23"]
     },
     {
         "cost": 110,
@@ -204,7 +567,7 @@
         "type": "trooper",
         "rank": "operative",
         "upgradeBar": ["training", "training", "gear"],
-        "products": []
+        "products": ["swl24"]
     },
     {
       "cost": 26,
@@ -212,7 +575,7 @@
       "name": "Proton Charge Saboteur",
       "type": "heavy weapon",
       "requirements": ["Rebel Commandos"],
-      "products": [],
+      "products": ["swl21"],
       "faction": "rebels",
       "rank": "upgrade"
     },
@@ -222,7 +585,7 @@
       "name": "Overcharged Generator",
       "type": "generator",
       "requirements": [],
-      "products": [],
+      "products": ["swl14", "swl15"],
       "faction": "",
       "rank": "upgrade"
     },
@@ -232,7 +595,7 @@
       "name": "Improvised Orders",
       "type": "command",
       "requirements": [],
-      "products": [],
+      "products": ["swl20"],
       "faction": "",
       "rank": "upgrade"
     },
@@ -242,7 +605,7 @@
       "name": "HQ Uplink",
       "type": "comms",
       "requirements": [],
-      "products": [],
+      "products": ["swl14", "swl15","swl19", "swl21"],
       "faction": "",
       "rank": "upgrade"
     },
@@ -252,7 +615,7 @@
       "name": "Emergency Stims",
       "type": "gear",
       "requirements": [],
-      "products": [],
+      "products": ["swl18", "swl19", "swl20", "swl21"],
       "faction": "",
       "rank": "upgrade"
     },
@@ -261,7 +624,7 @@
       "isUnique": false,
       "name": "Duck and Cover",
       "type": "training",
-      "requirements": [],
+      "requirements": ["swl19", "swl20", "swl21"],
       "products": [],
       "faction": "",
       "rank": "upgrade"
