@@ -18,12 +18,14 @@ const calculatePointTotal = (list) => {
 const MenuBar = ({
   list,
   changeListTitle,
-  changeListMode
+  toggleListMode
 }) => (
   <AppBar position="fixed" color="primary">
     <Toolbar variant="dense">
       <Grid container spacing={8} alignItems="flex-end">
-        <FactionIcon faction={list.faction} />
+        <Grid item>
+          <FactionIcon faction={list.faction} />
+        </Grid>
         <Grid item>
           <TitleTextField
             title={list.title}
@@ -34,7 +36,7 @@ const MenuBar = ({
           <ListModeButton
             pointTotal={calculatePointTotal(list)}
             currentMode={list.mode}
-            changeListMode={changeListMode}
+            toggleListMode={toggleListMode}
           />
         </Grid>
       </Grid>
@@ -52,7 +54,7 @@ MenuBar.propTypes = {
     notes: PropTypes.string,
     uniques: PropTypes.object
   }).isRequired,
-  changeListMode: PropTypes.func.isRequired,
+  toggleListMode: PropTypes.func.isRequired,
   changeListTitle: PropTypes.func.isRequired
 };
 

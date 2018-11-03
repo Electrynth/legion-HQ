@@ -7,17 +7,27 @@ class ListText extends React.Component {
     const unitText = [];
     let upgradeText = ` - ${unit.name} (${unit.cost}) `;
     let totalCost = unit.cost;
+    if (unit.count > 1) upgradeText = `- ${unit.count}x ${unit.name} (${unit.cost})`;
     unit.upgradesEquipped.forEach((upgrade) => {
       if (upgrade) {
         totalCost += upgrade.cost;
         upgradeText = upgradeText.concat(` + ${upgrade.name} (${upgrade.cost})`);
       }
     });
+    if (unit.count > 1) totalCost *= unit.count;
     return (
       <div key={`${unit.name}_${index}`}>
         {`${unitText} ${upgradeText} = ${totalCost}`}
       </div>
     );
+  }
+
+  unitsToPlainText = (type, units) => {
+    console.log(units);
+    return `
+    ${type}:
+    \n
+    `;
   }
 
   render() {
@@ -37,34 +47,78 @@ class ListText extends React.Component {
     const heavy = [];
     let pointTotal = 0;
     list.units.forEach((unit) => {
+      let unitTotal = 0;
       switch (unit.rank) {
         case 'commander':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           commanders.push(unit);
           break;
         case 'operative':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           operatives.push(unit);
           break;
         case 'corps':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           corps.push(unit);
           break;
         case 'special':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           special.push(unit);
           break;
         case 'support':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           support.push(unit);
           break;
         case 'heavy':
-          pointTotal += unit.totalCost;
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
           heavy.push(unit);
           break;
         default:
       }
     });
+    const listString = `
+      Title: ${list.title}\n
+      Faction: ${list.faction}\n
+      Mode: ${list.mode}${'\n'}
+
+      ${this.unitsToPlainText('Commanders', commanders)}
+      ${this.unitsToPlainText('Operatives', operatives)}
+      ${this.unitsToPlainText('Corps', corps)}
+      ${this.unitsToPlainText('Special Forces', special)}
+      ${this.unitsToPlainText('Support', support)}
+      ${this.unitsToPlainText('Heavy', heavy)}
+      Total: ${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}
+      Commands:
+      ${list.commands.forEach((command) => {
+        return `${command.name} (${command.pips})`;
+      })}
+      Notes:
+      ${list.notes}
+    `;
     return (
       <div>
         <h3>Legion HQ</h3>
@@ -131,6 +185,7 @@ class ListText extends React.Component {
         <br />
         Notes:
         {` ${list.notes}`}
+        <textarea id="listText" value={listString} style={{ display: 'none' }} />
       </div>
     );
   }

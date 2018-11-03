@@ -7,6 +7,7 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -141,7 +142,6 @@ class BuilderContainer extends React.Component {
         uniques: {},
         notes: ''
       },
-      unitStrings: {},
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
@@ -555,7 +555,6 @@ class BuilderContainer extends React.Component {
       list.units[unitIndex].count -= 1;
       list.units.push(newUnit);
     }
-    console.log('after', list.units);
     this.setState({ list });
   }
 
@@ -678,14 +677,22 @@ class BuilderContainer extends React.Component {
     });
   }
 
+  renderTestButton = () => (
+    <Button
+      variant="contained"
+      onClick={() => console.log(this.state)}
+    >
+      Log State
+    </Button>
+  );
+
   render() {
     const {
       list,
       viewFilter,
       isViewMenuOpen,
       classes,
-      defaultTheme,
-      unitStrings
+      defaultTheme
     } = this.state;
     const {
       cards,
@@ -738,6 +745,57 @@ class BuilderContainer extends React.Component {
       }
     };
     const listViewItems = [];
+    const eligibleUpgradeCards = [];
+    const otherUpgradeCards = upgradesById.reduce((filtered, upgradeId, upgradeIndex) => {
+      const upgrade = cards[upgradeId];
+      const eligibility = this.getUpgradeEligibility(upgrade);
+      if (eligibility === 'EQUIPPABLE') {
+        eligibleUpgradeCards.push(
+          <Fade
+            unmountOnExit
+            key={upgrade.id}
+            in={eligibility !== 'HIDDEN'}
+            timeout={{
+              enter: this.getTransitionDuration(upgradeIndex),
+              exit: 0
+            }}
+            className={classes.fadeTransition}
+            onClick={() => this.addCard(eligibility, 'UPGRADE', upgradeId, cards)}
+          >
+            <Grid item>
+              <img
+                src={upgrade.imageLocation}
+                alt={upgrade.name}
+                className={this.getCardStyles('UPGRADE', eligibility, classes)}
+              />
+            </Grid>
+          </Fade>
+        );
+      } else {
+        filtered.push(
+          <Fade
+            unmountOnExit
+            key={upgrade.id}
+            in={eligibility !== 'HIDDEN'}
+            timeout={{
+              enter: this.getTransitionDuration(upgradeIndex),
+              exit: 0
+            }}
+            className={classes.fadeTransition}
+            onClick={() => this.addCard(eligibility, 'UPGRADE', upgradeId, cards)}
+          >
+            <Grid item>
+              <img
+                src={upgrade.imageLocation}
+                alt={upgrade.name}
+                className={this.getCardStyles('UPGRADE', eligibility, classes)}
+              />
+            </Grid>
+          </Fade>
+        );
+      }
+      return filtered;
+    }, []);
     list.units.forEach((unit, index) => {
       for (let counter = 0; counter < unit.count; counter += 1) {
         listViewItems.push(
@@ -794,6 +852,7 @@ class BuilderContainer extends React.Component {
           changeListMode={this.changeListMode}
           changePrimaryTheme={this.changePrimaryTheme}
           mobile={mobile}
+          renderTestButton={this.renderTestButton}
         />
         <ViewCloseButton
           isVisible={viewFilter.type !== 'LIST'}
@@ -1007,32 +1066,7 @@ class BuilderContainer extends React.Component {
                       );
                       return filtered;
                     }, [])}
-                    {upgradesById.reduce((filtered, upgradeId, upgradeIndex) => {
-                      const upgrade = cards[upgradeId];
-                      const eligibility = this.getUpgradeEligibility(upgrade);
-                      filtered.push(
-                        <Fade
-                          unmountOnExit
-                          key={upgrade.id}
-                          in={eligibility !== 'HIDDEN'}
-                          timeout={{
-                            enter: this.getTransitionDuration(upgradeIndex),
-                            exit: 0
-                          }}
-                          className={classes.fadeTransition}
-                          onClick={() => this.addCard(eligibility, 'UPGRADE', upgradeId, cards)}
-                        >
-                          <Grid item>
-                            <img
-                              src={upgrade.imageLocation}
-                              alt={upgrade.name}
-                              className={this.getCardStyles('UPGRADE', eligibility, classes)}
-                            />
-                          </Grid>
-                        </Fade>
-                      );
-                      return filtered;
-                    }, [])}
+                    {[...eligibleUpgradeCards, ...otherUpgradeCards]}
                     {viewFilter.command && viewFilter.command.name === 'Standing Orders' ? (
                       <Fade
                         unmountOnExit

@@ -49,7 +49,8 @@ class TopMenu extends React.Component {
       list,
       changeListMode,
       changeListTitle,
-      mobile
+      mobile,
+      renderTestButton
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -144,6 +145,9 @@ class TopMenu extends React.Component {
                   </Typography>
                 </Button>
               </Grid>
+  
+    
+   
             </Grid>
           </Toolbar>
         </AppBar>
