@@ -640,8 +640,10 @@ class BuilderContainer extends React.Component {
 
   changeListTitle = (event) => {
     const { list } = this.state;
-    list.title = event.target.value;
-    this.setState({ list });
+    if (event.target.value.length < 19) {
+      list.title = event.target.value;
+      this.setState({ list });
+    }
   }
 
   changeListNotes = (event) => {

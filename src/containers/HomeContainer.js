@@ -15,7 +15,7 @@ export default class HomeContainer extends React.Component {
       empireLists,
     } = this.props;
     return (
-      <div>
+      <div style={{ overflowY: 'scroll', height: '100vh' }}>
         <Helmet>
           <title>
             Legion HQ

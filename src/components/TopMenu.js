@@ -136,6 +136,7 @@ class TopMenu extends React.Component {
               <Grid item>
                 <TextField
                   placeholder={list.title === '' ? 'Untitled' : list.title}
+                  value={list.title}
                   onChange={changeListTitle}
                 />
               </Grid>
