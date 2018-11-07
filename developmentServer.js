@@ -14,7 +14,7 @@ const credentials = require('./credentials.json');
 const compiler = webpack(config);
 const app = express();
 
-const connectionString = `mongodb://legion-hq:Order927972450@18.218.77.64:27017/production`;
+const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/production`;
 mongoose.connect(connectionString);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
