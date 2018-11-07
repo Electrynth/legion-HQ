@@ -13,11 +13,37 @@ class App extends Component {
     commandsById: [],
     uniques: {},
     status: '',
-    message: ''
+    message: '',
+    loggedIn: false,
+    user: {}
   };
 
   componentDidMount() {
     Axios.get('/data').then(response => this.setState({ ...response.data }));
+  }
+
+  handleGoogleLogin = (response) => {
+    if ('googleId' in response) {
+      Axios.post('/fetch', { googleId: response.googleId }).then((responseToFetch) => {
+        const responseData = responseToFetch.data;
+        if (responseData.error) {
+          alert(responseData.msg);
+        } else {
+          this.setState({
+            loggedIn: true,
+            user: { ...responseData }
+          });
+        }
+      });
+    }
+  }
+
+  handleGoogleLogout = () => {
+    alert('Successfully logged out.');
+    this.setState({
+      loggedIn: false,
+      user: {}
+    });
   }
 
   render() {
@@ -32,7 +58,14 @@ class App extends Component {
           <Switch>
             <Route
               path="/home"
-              render={props => <HomeContainer {...this.state} {...props} />}
+              render={props => (
+                <HomeContainer
+                  {...props}
+                  {...this.state}
+                  handleGoogleLogin={this.handleGoogleLogin}
+                  handleGoogleLogout={this.handleGoogleLogout}
+                />
+              )}
             />
             <Route
               path="/rebels"

@@ -23,7 +23,6 @@ class ListText extends React.Component {
   }
 
   unitsToPlainText = (type, units) => {
-    console.log(units);
     return `
     ${type}:
     \n

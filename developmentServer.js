@@ -5,17 +5,26 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const md5 = require('md5');
 const config = require('./webpack.development.config.js');
-// const mongoClient = require('mongodb').MongoClient;
+
+const credentials = require('./credentials.json');
 
 const compiler = webpack(config);
 const app = express();
 
-// const connectionString = 'mongodb://18.218.77.64:27017/development';
-// mongoClient.connect(connectionString, (err, db) => {
-//   if (err) console.log(err);
-//   else console.log('success', db);
-// });
+const connectionString = `mongodb://legion-hq:Order927972450@18.218.77.64:27017/production`;
+mongoose.connect(connectionString);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection err'));
+const { Schema } = mongoose;
+const UserSchema = new Schema({
+  userId: String,
+  lists: Array
+});
+const UserModel = mongoose.model('users', UserSchema);
 
 const getCardId = (index) => {
   const mod = Math.floor(index / 26);
@@ -33,6 +42,64 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
+});
+
+app.post('/list', (req, res) => {
+  if ('_id' in req.body && 'listIndex' in req.body) {
+    UserModel.find({ _id: req.body._id }, (findErr, findResults) => {
+      if (findResults.length === 0) {
+        // user entry no longer exists
+        res.json({ msg: 'no results found', error: true });
+      } else {
+        if (!('lists' in findResults[0])) {
+          // 'lists' is not in user entry... someone is tampering with API...
+          res.json({ msg: 'lists object not found', error: true });
+        }
+        const { lists } = findResults[0];
+        if (typeof lists[req.body.listIndex] === 'undefined') {
+          // list at listIndex no longer exists
+          res.json({ msg: 'list index not found', error: true });
+        } else {
+          res.json({ list: lists[req.body.listIndex], error: false });
+        }
+      }
+    });
+  } else {
+    // missing _id or listIndex
+    res.json({ msg: 'incomplete list search', error: true });
+  }
+});
+
+app.post('/fetch', (req, res) => {
+  const userId = md5(req.body.googleId);
+  UserModel.find({ userId }, (findErr, findResults) => {
+    if (findErr) res.json({ msg: findErr, error: true });
+    else if (findResults.length === 0) {
+      const newEntry = new UserModel({ userId, lists: [] });
+      newEntry.save((createErr, createResults) => {
+        if (createErr) res.json({ msg: findErr, error: true });
+        else res.json({ user: createResults, error: false });
+      });
+    } else {
+      res.json({ user: findResults[0], error: false });
+    }
+  });
+});
+
+app.post('/save', (req, res) => {
+  if ('_id' in req.body && 'lists' in req.body) {
+    UserModel.findOneAndUpdate(
+      { _id: req.body._id },
+      { lists: req.body.lists },
+      { new: true },
+      (err, result) => {
+        if (err) res.json({ msg: err, error: true });
+        else res.json({ user: result, error: false });
+      }
+    );
+  } else {
+    res.json({ msg: 'incomplete save', error: true });
+  }
 });
 
 app.get('/data', (req, res) => {

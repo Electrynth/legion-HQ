@@ -38,7 +38,7 @@ const paperStyles = {
 };
 
 const factionIconStyles = {
-  width: '10rem',
+  width: '7.5rem',
   height: 'auto',
   cursor: 'pointer'
 };
@@ -51,15 +51,7 @@ const empireIconStyles = {
   ...factionIconStyles
 };
 
-const logout = (response) => {
-  console.log(response);
-}
-
-const responseGoogle = (response) => {
-  console.log(response.googleId);
-};
-
-const Home = ({ history }) => (
+const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout }) => (
   <Grow in>
     <Grid
       container
@@ -112,6 +104,32 @@ const Home = ({ history }) => (
             justify="center"
             alignItems="center"
           >
+            {loggedIn ? (
+              <Grid item>
+                <GoogleLogout
+                  buttonText="Sign out"
+                  onLogoutSuccess={handleGoogleLogout}
+                />
+              </Grid>
+            ) : (
+              <Grid item>
+                <GoogleLogin
+                  clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
+                  buttonText="Sign in with Google"
+                  onSuccess={handleGoogleLogin}
+                  onFailure={handleGoogleLogin}
+                  isSignedIn
+                />
+              </Grid>
+            )}
+          </Grid>
+          <Grid
+            container
+            spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
             <Grid item>
               <Button
                 href="https://github.com/NicholasCBrown/legion-HQ"
@@ -131,26 +149,6 @@ const Home = ({ history }) => (
                 <EmailIcon style={{ marginRight: '10px' }} />
                 Email
               </Button>
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={8}
-            direction="row"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <GoogleLogin
-                clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
-                buttonText="Sign in with Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                className="g-signin2"
-                style={{
-                  padding: '0px'
-                }}
-              />
             </Grid>
           </Grid>
         </Paper>

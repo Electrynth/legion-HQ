@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
@@ -50,12 +51,14 @@ class TopMenu extends React.Component {
       changeListMode,
       changeListTitle,
       mobile,
-      renderTestButton
+      renderTestButton,
+      history
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
       width: 30,
-      height: 30
+      height: 30,
+      cursor: 'pointer'
     };
     const textInputStyles = {
       width: '10vw'
@@ -123,7 +126,11 @@ class TopMenu extends React.Component {
             <Grid container spacing={8} alignItems="flex-end">
               {!mobile && (
                 <Grid item>
-                  <Avatar style={avatarStyles} src={factionIconLocation} />
+                  <Avatar
+                    style={avatarStyles}
+                    src={factionIconLocation}
+                    onClick={() => history.push('/home')}
+                  />
                 </Grid>
               )}
               <Grid item>
@@ -145,9 +152,6 @@ class TopMenu extends React.Component {
                   </Typography>
                 </Button>
               </Grid>
-  
-    
-   
             </Grid>
           </Toolbar>
         </AppBar>
@@ -156,4 +160,4 @@ class TopMenu extends React.Component {
   }
 }
 
-export default TopMenu;
+export default withRouter(TopMenu);

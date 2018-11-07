@@ -1,5 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -1124,4 +1125,4 @@ class BuilderContainer extends React.Component {
   }
 }
 
-export default withWidth()(withStyles(styles)(BuilderContainer));
+export default withWidth()(withStyles(styles)(withRouter(BuilderContainer)));

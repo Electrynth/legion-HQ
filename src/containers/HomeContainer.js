@@ -6,14 +6,25 @@ export default class HomeContainer extends React.Component {
   state = {};
 
   render() {
+    const {
+      loggedIn,
+      user,
+      handleGoogleLogin,
+      handleGoogleLogout
+    } = this.props;
     return (
       <div>
         <Helmet>
           <title>
-            Home | LEGION HQ
+            Legion HQ
           </title>
         </Helmet>
-        <Home />
+        <Home
+          loggedIn={loggedIn}
+          user={user}
+          handleGoogleLogin={handleGoogleLogin}
+          handleGoogleLogout={handleGoogleLogout}
+        />
       </div>
     );
   }

@@ -212,17 +212,17 @@ class ListFooter extends React.Component {
             </div>
           </Grid>
           <Grid item>
-            <IconButton disabled color="inherit">
+            <IconButton color="inherit">
               <SaveIcon />
             </IconButton>
           </Grid>
           <Grid item>
-            <IconButton disabled color="inherit">
+            <IconButton color="inherit">
               <LinkIcon />
             </IconButton>
           </Grid>
           <Grid item>
-            <IconButton disabled color="inherit">
+            <IconButton color="inherit">
               <DeleteIcon />
             </IconButton>
           </Grid>
