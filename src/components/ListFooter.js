@@ -40,7 +40,10 @@ class ListFooter extends React.Component {
       list,
       changeViewFilter,
       removeCommand,
-      changeListNotes
+      changeListNotes,
+      user,
+      isLoggedIn,
+      handleSaveList
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -52,6 +55,57 @@ class ListFooter extends React.Component {
       overflowY: 'scroll',
       maxHeight: '75vh'
     };
+    let pointTotal = 0;
+    list.units.forEach((unit) => {
+      let unitTotal = 0;
+      switch (unit.rank) {
+        case 'commander':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        case 'operative':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        case 'corps':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        case 'special':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        case 'support':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        case 'heavy':
+          unitTotal += unit.totalCost;
+          unit.upgradesEquipped.forEach((upgrade) => {
+            if (upgrade) unitTotal += upgrade.cost;
+          });
+          pointTotal += unit.count * unitTotal;
+          break;
+        default:
+      }
+      list.pointTotal = pointTotal;
+      if (list.title === '') list.title = 'Untitled';
+    });
     return (
       <Grid
         container
@@ -213,17 +267,20 @@ class ListFooter extends React.Component {
           </Grid>
           <Grid item>
             <IconButton color="inherit">
-              <SaveIcon />
+              <SaveIcon
+                disabled={isLoggedIn}
+                onClick={() => handleSaveList(list)}
+              />
             </IconButton>
           </Grid>
           <Grid item>
             <IconButton color="inherit">
-              <LinkIcon />
+              <LinkIcon disabled={isLoggedIn} />
             </IconButton>
           </Grid>
           <Grid item>
             <IconButton color="inherit">
-              <DeleteIcon />
+              <DeleteIcon disabled={isLoggedIn} />
             </IconButton>
           </Grid>
         </Grid>

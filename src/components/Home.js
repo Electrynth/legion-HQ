@@ -51,7 +51,7 @@ const empireIconStyles = {
   ...factionIconStyles
 };
 
-const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout }) => (
+const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout, rebelLists, empireLists }) => (
   <Grow in>
     <Grid
       container
@@ -83,6 +83,11 @@ const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout }
             onClick={() => history.push('/rebels')}
           />
           <List dense>
+            {rebelLists.map((list, index) => (
+              <ListItem button key={`${list.title}_${index}`}>
+                <ListItemText primary={list.title} secondary={list.pointTotal} />
+              </ListItem>
+            ))}
           </List>
         </Grid>
         <Grid item>
@@ -92,6 +97,11 @@ const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout }
             onClick={() => history.push('/empire')}
           />
           <List dense>
+            {empireLists.map((list, index) => (
+              <ListItem button key={`${list.title}_${index}`}>
+                <ListItemText primary={list.title} secondary={list.pointTotal} />
+              </ListItem>
+            ))}
           </List>
         </Grid>
       </Grid>

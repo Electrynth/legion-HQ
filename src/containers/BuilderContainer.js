@@ -141,7 +141,8 @@ class BuilderContainer extends React.Component {
           }
         ],
         uniques: {},
-        notes: ''
+        notes: '',
+        pointTotal: 0
       },
       isViewMenuOpen: false,
       viewFilter: {
@@ -700,7 +701,10 @@ class BuilderContainer extends React.Component {
       unitsById,
       upgradesById,
       commandsById,
-      width
+      width,
+      isLoggedIn,
+      user,
+      handleSaveList
     } = this.props;
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
@@ -1000,6 +1004,9 @@ class BuilderContainer extends React.Component {
                     changeListNotes={this.changeListNotes}
                     changeViewFilter={this.changeViewFilter}
                     removeCommand={this.removeCommand}
+                    user={user}
+                    isLoggedIn={isLoggedIn}
+                    handleSaveList={handleSaveList}
                   />
                 </div>
               </Paper>

@@ -10,7 +10,9 @@ export default class HomeContainer extends React.Component {
       loggedIn,
       user,
       handleGoogleLogin,
-      handleGoogleLogout
+      handleGoogleLogout,
+      rebelLists,
+      empireLists,
     } = this.props;
     return (
       <div>
@@ -24,6 +26,8 @@ export default class HomeContainer extends React.Component {
           user={user}
           handleGoogleLogin={handleGoogleLogin}
           handleGoogleLogout={handleGoogleLogout}
+          rebelLists={rebelLists}
+          empireLists={empireLists}
         />
       </div>
     );
