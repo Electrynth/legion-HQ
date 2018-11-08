@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
 import BuilderContainer from 'containers/BuilderContainer';
+import PreloadedContainer from 'containers/PreloadedContainer';
 
 class App extends Component {
   state = {
@@ -25,7 +26,7 @@ class App extends Component {
     Axios.get('/data').then(response => this.setState({ ...response.data }));
   }
 
-  handleDeleteList = (list, listIndex) => {
+  handleDeleteList = (listIndex) => {
     const { user } = this.state;
     if (typeof user.lists[listIndex] !== 'undefined') {
       user.lists[listIndex] = {};
@@ -37,17 +38,21 @@ class App extends Component {
     }));
   }
 
-  handleSaveList = (list) => {
+  handleSaveList = (list, listIndex) => {
     const { user } = this.state;
-    let foundEmptySlot = false;
-    user.lists.forEach((list, index) => {
-      if (!('faction' in list)) {
-        foundEmptySlot = true;
-        user.lists[index] = list;
+    if (listIndex > -1) {
+      user.lists[listIndex] = list;
+    } else {
+      let foundEmptySlot = false;
+      user.lists.forEach((list, index) => {
+        if (!('faction' in list)) {
+          foundEmptySlot = true;
+          user.lists[index] = list;
+        }
+      })
+      if (!foundEmptySlot) {
+        user.lists.push(list);
       }
-    })
-    if (!foundEmptySlot) {
-      user.lists.push(list);
     }
     Axios.post('/save', { _id: user._id, lists: user.lists }, ((response) => {
       if (response.error === false) {
@@ -60,7 +65,6 @@ class App extends Component {
     if ('googleId' in response) {
       Axios.post('/fetch', { googleId: response.googleId }).then((responseToFetch) => {
         const responseData = responseToFetch.data.user;
-        console.log(responseData);
         if (responseData.error) {
           alert(responseData.msg);
         } else {
@@ -91,10 +95,10 @@ class App extends Component {
     } = this.state;
     const rebelLists = [];
     const empireLists = [];
-    user.lists.forEach((list) => {
-      if ('faction' in list && list.faction === 'rebels') rebelLists.push(list);
-      else if ('faction' in list && list.faction === 'empire') empireLists.push(list);
-    })
+    user.lists.forEach((list, index) => {
+      if ('faction' in list && list.faction === 'rebels') rebelLists.push({ ...list, listIndex: index });
+      else if ('faction' in list && list.faction === 'empire') empireLists.push({ ...list, listIndex: index });
+    });
     return (
       <div>
         <Grow
@@ -118,10 +122,12 @@ class App extends Component {
               path="/rebels"
               render={props => (
                 <BuilderContainer
+                  preloadedList={false}
                   faction="rebels"
                   {...this.state}
                   {...props}
                   handleSaveList={this.handleSaveList}
+                  handleDeleteList={this.handleDeleteList}
                 />
               )}
             />
@@ -129,10 +135,23 @@ class App extends Component {
               path="/empire"
               render={props => (
                 <BuilderContainer
+                  preloadedList={false}
                   faction="empire"
                   {...this.state}
                   {...props}
                   handleSaveList={this.handleSaveList}
+                  handleDeleteList={this.handleDeleteList}
+                />
+              )}
+            />
+            <Route
+              path="/list/:uid/:lid"
+              render={props => (
+                <PreloadedContainer
+                  {...this.state}
+                  {...props}
+                  handleSaveList={this.handleSaveList}
+                  handleDeleteList={this.handleDeleteList}
                 />
               )}
             />

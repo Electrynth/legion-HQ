@@ -3,6 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import ListText from 'components/ListText';
@@ -19,7 +22,10 @@ import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 
 class ListFooter extends React.Component {
-  state = { openModal: false };
+  state = {
+    openModal: false,
+    deleteDialog: false
+  };
 
   copyToClip = (str) => {
     const listener = (e) => {
@@ -32,9 +38,22 @@ class ListFooter extends React.Component {
     document.removeEventListener('copy', listener);
   }
 
+  handleOpenDeleteDialog = () => {
+    this.setState({
+      deleteDialog: true
+    });
+  }
+
+  handleCloseDeleteDialog = () => {
+    this.setState({
+      deleteDialog: false
+    });
+  }
+
   render() {
     const {
-      openModal
+      openModal,
+      deleteDialog
     } = this.state;
     const {
       list,
@@ -43,7 +62,8 @@ class ListFooter extends React.Component {
       changeListNotes,
       user,
       isLoggedIn,
-      handleSaveList
+      handleSaveList,
+      handleDeleteList
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -56,6 +76,8 @@ class ListFooter extends React.Component {
       maxHeight: '75vh'
     };
     let pointTotal = 0;
+    let listIndex = -1;
+    if ('listIndex' in list) listIndex = list.listIndex;
     list.units.forEach((unit) => {
       let unitTotal = 0;
       switch (unit.rank) {
@@ -107,22 +129,70 @@ class ListFooter extends React.Component {
       if (list.title === '') list.title = 'Untitled';
     });
     return (
-      <Grid
-        container
-        spacing={8}
-        direction="column"
-        justify="center"
-        alignItems="stretch"
-      >
-        <Grid
-          item
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
+      <div>
+        <Dialog
+          open={deleteDialog}
+          onClose={this.handleCloseDeleteDialog}
         >
-          {sortedCommands.map((command, commandIndex) => {
-            if (command.name === 'Standing Orders') {
+          <DialogTitle>Delete this list?</DialogTitle>
+          <DialogActions>
+            <Button onClick={this.handleCloseDeleteDialog}>
+              No
+            </Button>
+            <Button
+              onClick={() => {
+                handleDeleteList(listIndex);
+                this.handleCloseDeleteDialog();
+              }}
+            >
+              Yes
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Grid
+          container
+          spacing={8}
+          direction="column"
+          justify="center"
+          alignItems="stretch"
+        >
+          <Grid
+            item
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            {sortedCommands.map((command, commandIndex) => {
+              if (command.name === 'Standing Orders') {
+                return (
+                  <Grid item key={command.name}>
+                    <Chip
+                      color="primary"
+                      avatar={(
+                        <Avatar
+                          style={{
+                            width: '45px',
+                            height: '45px'
+                          }}
+                        >
+                          <img
+                            alt={command.name}
+                            src={command.iconLocation}
+                            style={{
+                              width: '45px',
+                              height: '45px'
+                            }}
+                          />
+                        </Avatar>
+                      )}
+                      label={`${command.name} (${command.pips})`}
+                      onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
+                      style={{ marginRight: '5px' }}
+                    />
+                  </Grid>
+                );
+              }
               return (
                 <Grid item key={command.name}>
                   <Chip
@@ -146,145 +216,122 @@ class ListFooter extends React.Component {
                     )}
                     label={`${command.name} (${command.pips})`}
                     onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
+                    onDelete={() => removeCommand(commandIndex)}
                     style={{ marginRight: '5px' }}
                   />
                 </Grid>
               );
-            }
-            return (
-              <Grid item key={command.name}>
+            })}
+            {sortedCommands.length < 7 && (
+              <Grid item key="addCommand">
                 <Chip
-                  color="primary"
-                  avatar={(
-                    <Avatar
-                      style={{
-                        width: '45px',
-                        height: '45px'
-                      }}
-                    >
-                      <img
-                        alt={command.name}
-                        src={command.iconLocation}
-                        style={{
-                          width: '45px',
-                          height: '45px'
-                        }}
-                      />
-                    </Avatar>
-                  )}
-                  label={`${command.name} (${command.pips})`}
-                  onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
-                  onDelete={() => removeCommand(commandIndex)}
-                  style={{ marginRight: '5px' }}
+                  variant="outlined"
+                  label="Add Command"
+                  onClick={() => changeViewFilter({ type: 'COMMAND' })}
+                  style={{ marginRight: '5px', marginBottom: '10px' }}
                 />
               </Grid>
-            );
-          })}
-          {sortedCommands.length < 7 && (
-            <Grid item key="addCommand">
-              <Chip
-                variant="outlined"
-                label="Add Command"
-                onClick={() => changeViewFilter({ type: 'COMMAND' })}
-                style={{ marginRight: '5px', marginBottom: '10px' }}
-              />
-            </Grid>
-          )}
-        </Grid>
-        <Grid item>
-          <TextField
-            id="multiline-static"
-            label="Notes"
-            margin="normal"
-            multiline
-            fullWidth
-            style={{ marginTop: '0px' }}
-            onChange={changeListNotes}
-          />
-        </Grid>
-        <Grid
-          item
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-            <div>
-              <ReactToPrint
-                trigger={() => (
-                  <IconButton color="inherit">
-                    <PrintIcon />
-                  </IconButton>
-                )}
-                content={() => this.componentRef}
-              />
-              <div style={{ display: 'none' }}>
-                <ListText ref={el => (this.componentRef = el)} list={list} />
-              </div>
-            </div>
+            )}
           </Grid>
           <Grid item>
-            <div>
+            <TextField
+              id="multiline-static"
+              label="Notes"
+              margin="normal"
+              multiline
+              fullWidth
+              style={{ marginTop: '0px' }}
+              onChange={changeListNotes}
+            />
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <div>
+                <ReactToPrint
+                  trigger={() => (
+                    <IconButton color="inherit">
+                      <PrintIcon />
+                    </IconButton>
+                  )}
+                  content={() => this.componentRef}
+                />
+                <div style={{ display: 'none' }}>
+                  <ListText ref={el => (this.componentRef = el)} list={list} />
+                </div>
+              </div>
+            </Grid>
+            <Grid item>
+              <div>
+                <IconButton
+                  color="inherit"
+                  onClick={() => this.setState({ openModal: true })}
+                >
+                  <ListAltIcon />
+                </IconButton>
+                <Modal
+                  aria-labelledby="text-export-modal"
+                  aria-describedby="text-export-modal"
+                  open={openModal}
+                  onClose={() => this.setState({ openModal: false })}
+                  style={{ zIndex: '99999' }}
+                >
+                  <Paper style={modalStyles}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Grid item>
+                        <ListText list={list} />
+                      </Grid>
+                      <Grid item>
+                        <Divider />
+                      </Grid>
+                      <Grid item>
+                        <IconButton
+                          variant="contained"
+                          onClick={() => this.copyToClip(document.getElementById('listText').textContent)}
+                        >
+                          <FileCopyIcon />
+                        </IconButton>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Modal>
+              </div>
+            </Grid>
+            <Grid item>
+              <IconButton color="inherit">
+                <SaveIcon
+                  disabled={isLoggedIn}
+                  onClick={() => handleSaveList(list, listIndex)}
+                />
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton color="inherit">
+                <LinkIcon disabled={isLoggedIn} />
+              </IconButton>
+            </Grid>
+            <Grid item>
               <IconButton
                 color="inherit"
-                onClick={() => this.setState({ openModal: true })}
+                disabled={listIndex === -1}
+                onClick={this.handleOpenDeleteDialog}
               >
-                <ListAltIcon />
+                <DeleteIcon />
               </IconButton>
-              <Modal
-                aria-labelledby="text-export-modal"
-                aria-describedby="text-export-modal"
-                open={openModal}
-                onClose={() => this.setState({ openModal: false })}
-                style={{ zIndex: '99999' }}
-              >
-                <Paper style={modalStyles}>
-                  <Grid
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                  >
-                    <Grid item>
-                      <ListText list={list} />
-                    </Grid>
-                    <Grid item>
-                      <Divider />
-                    </Grid>
-                    <Grid item>
-                      <IconButton
-                        variant="contained"
-                        onClick={() => this.copyToClip(document.getElementById('listText').textContent)}
-                      >
-                        <FileCopyIcon />
-                      </IconButton>
-                    </Grid>
-                  </Grid>
-                </Paper>
-              </Modal>
-            </div>
-          </Grid>
-          <Grid item>
-            <IconButton color="inherit">
-              <SaveIcon
-                disabled={isLoggedIn}
-                onClick={() => handleSaveList(list)}
-              />
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton color="inherit">
-              <LinkIcon disabled={isLoggedIn} />
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton color="inherit">
-              <DeleteIcon disabled={isLoggedIn} />
-            </IconButton>
+            </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </div>
     );
   }
 }

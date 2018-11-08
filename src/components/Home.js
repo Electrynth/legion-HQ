@@ -84,7 +84,11 @@ const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout, 
           />
           <List dense>
             {rebelLists.map((list, index) => (
-              <ListItem button key={`${list.title}_${index}`}>
+              <ListItem
+                button
+                key={`${list.title}_${index}`}
+                onClick={() => history.push(`/list/${user._id}/${list.listIndex}`)}
+              >
                 <ListItemText primary={list.title} secondary={list.pointTotal} />
               </ListItem>
             ))}
@@ -98,7 +102,11 @@ const Home = ({ history, loggedIn, user, handleGoogleLogin, handleGoogleLogout, 
           />
           <List dense>
             {empireLists.map((list, index) => (
-              <ListItem button key={`${list.title}_${index}`}>
+              <ListItem
+                button
+                key={`${list.title}_${index}`}
+                onClick={() => history.push(`/${user._id}/${list.listIndex}`)}
+              >
                 <ListItemText primary={list.title} secondary={list.pointTotal} />
               </ListItem>
             ))}

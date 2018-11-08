@@ -110,7 +110,30 @@ const styles = {
 class BuilderContainer extends React.Component {
   constructor(props) {
     super(props);
-    const { faction, classes } = this.props;
+    const { faction, classes, preloadedList } = this.props;
+    let list = {
+      faction,
+      mode: 'standard',
+      title: '',
+      units: [],
+      commands: [
+        {
+          pips: 4,
+          name: 'Standing Orders',
+          commander: '',
+          faction: '',
+          product: ['swl01'],
+          imageLocation: '/commands/Standing%20Orders.png',
+          iconLocation: '/commandIcons/Standing%20Orders.png'
+        }
+      ],
+      uniques: {},
+      notes: '',
+      pointTotal: 0
+    };
+    if (preloadedList) {
+      list = preloadedList;
+    }
     const defaultTheme = createMuiTheme({
       palette: {
         primary: {
@@ -124,26 +147,7 @@ class BuilderContainer extends React.Component {
     this.state = {
       classes,
       defaultTheme,
-      list: {
-        faction,
-        mode: 'standard',
-        title: '',
-        units: [],
-        commands: [
-          {
-            pips: 4,
-            name: 'Standing Orders',
-            commander: '',
-            faction: '',
-            product: ['swl01'],
-            imageLocation: '/commands/Standing%20Orders.png',
-            iconLocation: '/commandIcons/Standing%20Orders.png'
-          }
-        ],
-        uniques: {},
-        notes: '',
-        pointTotal: 0
-      },
+      list,
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
@@ -681,14 +685,6 @@ class BuilderContainer extends React.Component {
     });
   }
 
-  renderTestButton = () => (
-    <Button
-      variant="contained"
-      onClick={() => console.log(this.state)}
-    >
-      Log State
-    </Button>
-  );
 
   render() {
     const {
@@ -706,7 +702,8 @@ class BuilderContainer extends React.Component {
       width,
       isLoggedIn,
       user,
-      handleSaveList
+      handleSaveList,
+      handleDeleteList
     } = this.props;
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
@@ -1009,6 +1006,7 @@ class BuilderContainer extends React.Component {
                     user={user}
                     isLoggedIn={isLoggedIn}
                     handleSaveList={handleSaveList}
+                    handleDeleteList={handleDeleteList}
                   />
                 </div>
               </Paper>
