@@ -126,6 +126,8 @@ class ListFooter extends React.Component {
       list.pointTotal = pointTotal;
       if (list.title === '') list.title = 'Untitled';
     });
+    console.log(userId);
+    console.log(list);
     return (
       <div>
         <Snackbar

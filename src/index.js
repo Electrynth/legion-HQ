@@ -65,7 +65,7 @@ class App extends Component {
   }
 
   updateList = (list) => {
-    Axios.put(`/list?listId=${list._id}`, { ...list, title: list.title ? list.title : 'Untitled' }).then((response) => {
+    Axios.put(`/list?listId=${list._id}`, { list: { ...list, title: list.title ? list.title : 'Untitled' } }).then((response) => {
       const { data } = response;
       if (data.error) {
         console.log(data.msg);
@@ -86,7 +86,8 @@ class App extends Component {
   }
 
   createList = (userId, list) => {
-    Axios.post(`/list?userId=${userId}`, { ...list, title: list.title ? list.title : 'Untitled' }).then((response) => {
+    console.log('creating', userId, list);
+    Axios.post(`/list?userId=${userId}`, { list: { ...list, title: list.title ? list.title : 'Untitled' } }).then((response) => {
       const { data } = response;
       if (data.error) {
         console.log(data.msg);
