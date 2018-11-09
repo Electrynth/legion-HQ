@@ -49,6 +49,11 @@ const styles = {
     height: 'calc(100vh - 5rem)',
     overflowY: 'scroll'
   },
+  mobilePaper: {
+    padding: '0.5rem',
+    height: 'calc(100vh - 7rem)',
+    overflowY: 'scroll'
+  },
   disabledCard: {
     borderRadius: '5px',
     opacity: 0.5,
@@ -872,7 +877,7 @@ class BuilderContainer extends React.Component {
               direction="right"
               timeout={250}
             >
-              <Paper elevation={3} className={classes.paper}>
+              <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
                 <Grid
                   container
                   direction="row"
@@ -1013,7 +1018,7 @@ class BuilderContainer extends React.Component {
               direction="left"
               timeout={250}
             >
-              <Paper elevation={3} className={classes.paper}>
+              <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
                 <Grid
                   container
                   spacing={8}
