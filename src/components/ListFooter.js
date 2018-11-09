@@ -331,7 +331,7 @@ class ListFooter extends React.Component {
                 color="inherit"
                 disabled={!listId}
                 onClick={() => {
-                  this.copyToClip(`http://legion-hq/list/${listId}`);
+                  this.copyToClip(`http://legion-hq.com/list/${listId}`);
                   this.openSnackbar('Link copied to clipboard.');
                 }}
               >
