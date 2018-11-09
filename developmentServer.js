@@ -6,7 +6,6 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const md5 = require('md5');
 const config = require('./webpack.development.config.js');
 
 const credentials = require('./credentials.json');
