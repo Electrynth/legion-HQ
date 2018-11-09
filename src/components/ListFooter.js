@@ -53,8 +53,7 @@ class ListFooter extends React.Component {
 
   render() {
     const {
-      openModal,
-      deleteDialog
+      openModal
     } = this.state;
     const {
       list,
@@ -63,7 +62,8 @@ class ListFooter extends React.Component {
       removeCommand,
       userId,
       createList,
-      updateList
+      updateList,
+      listId
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -238,6 +238,7 @@ class ListFooter extends React.Component {
               margin="normal"
               multiline
               fullWidth
+              value={list.notes}
               style={{ marginTop: '0px' }}
               onChange={changeListNotes}
             />
@@ -313,11 +314,11 @@ class ListFooter extends React.Component {
                 color="inherit"
                 disabled={!userId}
                 onClick={() => {
-                  if (list._id) {
-                    updateList(list);
+                  if (listId) {
+                    updateList({ ...list, _id: listId });
                     this.openSnackbar('List updated.');
                   } else {
-                    createList(userId, list);
+                    createList(userId, { ...list, _id: listId });
                     this.openSnackbar('List created.');
                   }
                 }}
@@ -328,9 +329,9 @@ class ListFooter extends React.Component {
             <Grid item>
               <IconButton
                 color="inherit"
-                disabled={!list._id}
+                disabled={!listId}
                 onClick={() => {
-                  this.copyToClip(`http://legion-hq/list/${list._id}`);
+                  this.copyToClip(`http://legion-hq/list/${listId}`);
                   this.openSnackbar('Link copied to clipboard.');
                 }}
               >

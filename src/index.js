@@ -99,6 +99,7 @@ class App extends Component {
           } else {
             this.setState({
               list: data.results,
+              listId: data.results._id,
               userLists: refreshData.results
             });
           }
@@ -181,7 +182,8 @@ class App extends Component {
       cards,
       unitsById,
       upgradesById,
-      commandsById
+      commandsById,
+      listId
     } = this.state;
     const defaultList = {
       faction: '',
@@ -229,10 +231,11 @@ class App extends Component {
                 <BuilderContainer
                   {...props}
                   list={{
-                    ...defaultList,
+                    ...list,
                     userId,
                     faction: 'rebels',
                   }}
+                  listId={listId}
                   userId={userId}
                   userLists={userLists}
                   cards={cards}
@@ -252,10 +255,11 @@ class App extends Component {
                 <BuilderContainer
                   {...props}
                   list={{
-                    ...defaultList,
+                    ...list,
                     userId,
                     faction: 'empire',
                   }}
+                  listId={listId}
                   userId={userId}
                   userLists={userLists}
                   cards={cards}

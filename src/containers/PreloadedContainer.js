@@ -78,6 +78,7 @@ class PreloadedContainer extends React.Component {
           <BuilderContainer
             list={list}
             userId={userId}
+            listId={list._id}
             userLists={userLists}
             cards={cards}
             unitsById={unitsById}

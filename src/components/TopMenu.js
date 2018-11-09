@@ -161,9 +161,7 @@ class TopMenu extends React.Component {
                   <GoogleLogout
                     buttonText="Sign out"
                     onLogoutSuccess={handleGoogleLogout}
-                    style={{
-                      width: '80px'
-                    }}
+                    className="loginButton"
                   />
                 </Grid>
               ) : (
@@ -174,9 +172,7 @@ class TopMenu extends React.Component {
                     buttonText="Sign in with Google"
                     onSuccess={handleGoogleLogin}
                     onFailure={handleGoogleLogin}
-                    style={{
-                      width: '80px'
-                    }}
+                    className="loginButton"
                   />
                 </Grid>
               )}

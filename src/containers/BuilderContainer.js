@@ -682,7 +682,8 @@ class BuilderContainer extends React.Component {
       userId,
       handleGoogleLogin,
       handleGoogleLogout,
-      history
+      history,
+      listId
     } = this.props;
     if (!list.faction) {
       history.push('/home');
@@ -985,6 +986,7 @@ class BuilderContainer extends React.Component {
                   </List>
                   <ListFooter
                     list={list}
+                    listId={listId}
                     changeListNotes={this.changeListNotes}
                     changeViewFilter={this.changeViewFilter}
                     removeCommand={this.removeCommand}
