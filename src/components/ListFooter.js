@@ -126,8 +126,6 @@ class ListFooter extends React.Component {
       list.pointTotal = pointTotal;
       if (list.title === '') list.title = 'Untitled';
     });
-    console.log(userId);
-    console.log(list);
     return (
       <div>
         <Snackbar
@@ -316,7 +314,7 @@ class ListFooter extends React.Component {
                 color="inherit"
                 disabled={!userId}
                 onClick={() => {
-                  if (listId) {
+                  if (listId && userId === list.userId) {
                     updateList({ ...list, _id: listId });
                     this.openSnackbar('List updated.');
                   } else {
