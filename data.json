@@ -390,6 +390,26 @@
   },
   "cards": [
     {
+        "cost": 5,
+        "isUnique": false,
+        "name": "Fragmentation Grenades",
+        "type": "grenades",
+        "requirements": [],
+        "products": [],
+        "faction": "",
+        "rank": "upgrade"
+    },
+    {
+        "cost": 2,
+        "isUnique": false,
+        "name": "Recon Intel",
+        "type": "gear",
+        "requirements": [],
+        "products": [],
+        "faction": "",
+        "rank": "upgrade"
+    },
+    {
         "cost": 9,
         "isUnique": false,
         "name": "Rebel Comms Technician",
