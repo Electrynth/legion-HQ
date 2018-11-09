@@ -127,15 +127,13 @@ class TopMenu extends React.Component {
         <AppBar position="fixed" color="primary">
           <Toolbar variant="dense">
             <Grid container spacing={8} alignItems="flex-end">
-              {!mobile && (
-                <Grid item>
-                  <Avatar
-                    style={avatarStyles}
-                    src={factionIconLocation}
-                    onClick={() => history.push('/home')}
-                  />
-                </Grid>
-              )}
+              <Grid item>
+                <Avatar
+                  style={avatarStyles}
+                  src={factionIconLocation}
+                  onClick={() => history.push('/home')}
+                />
+              </Grid>
               <Grid item>
                 <TextField
                   placeholder={list.title === '' ? 'Untitled' : list.title}
