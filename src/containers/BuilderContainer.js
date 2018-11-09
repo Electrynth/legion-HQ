@@ -1,5 +1,6 @@
 import React from 'react';
 import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -14,7 +15,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import ClearIcon from '@material-ui/icons/Clear';
-import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import SideMenuListItem from 'components/SideMenuListItem2';
 import SideMenuListItemMobile from 'components/SideMenuListItem';
 import Title from 'components/Title';
@@ -109,7 +109,7 @@ const styles = {
 class BuilderContainer extends React.Component {
   constructor(props) {
     super(props);
-    const { faction, classes } = this.props;
+    const { classes, list } = this.props;
     const defaultTheme = createMuiTheme({
       palette: {
         primary: {
@@ -123,25 +123,7 @@ class BuilderContainer extends React.Component {
     this.state = {
       classes,
       defaultTheme,
-      list: {
-        faction,
-        mode: 'standard',
-        title: '',
-        units: [],
-        commands: [
-          {
-            pips: 4,
-            name: 'Standing Orders',
-            commander: '',
-            faction: '',
-            product: ['swl01'],
-            imageLocation: '/commands/Standing%20Orders.png',
-            iconLocation: '/commandIcons/Standing%20Orders.png'
-          }
-        ],
-        uniques: {},
-        notes: ''
-      },
+      list,
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
@@ -638,8 +620,10 @@ class BuilderContainer extends React.Component {
 
   changeListTitle = (event) => {
     const { list } = this.state;
-    list.title = event.target.value;
-    this.setState({ list });
+    if (event.target.value.length < 19) {
+      list.title = event.target.value;
+      this.setState({ list });
+    }
   }
 
   changeListNotes = (event) => {
@@ -677,14 +661,6 @@ class BuilderContainer extends React.Component {
     });
   }
 
-  renderTestButton = () => (
-    <Button
-      variant="contained"
-      onClick={() => console.log(this.state)}
-    >
-      Log State
-    </Button>
-  );
 
   render() {
     const {
@@ -692,15 +668,26 @@ class BuilderContainer extends React.Component {
       viewFilter,
       isViewMenuOpen,
       classes,
-      defaultTheme
+      defaultTheme,
+      userLists
     } = this.state;
     const {
       cards,
       unitsById,
       upgradesById,
       commandsById,
-      width
+      width,
+      createList,
+      updateList,
+      userId,
+      handleGoogleLogin,
+      handleGoogleLogout,
+      history,
+      listId
     } = this.props;
+    if (!list.faction) {
+      history.push('/home');
+    }
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
     const mobile = width === 'sm' || width === 'xs';
@@ -848,11 +835,14 @@ class BuilderContainer extends React.Component {
         <Title faction={list.faction} />
         <TopMenu
           list={list}
+          userId={userId}
           changeListTitle={this.changeListTitle}
           changeListMode={this.changeListMode}
           changePrimaryTheme={this.changePrimaryTheme}
           mobile={mobile}
           renderTestButton={this.renderTestButton}
+          handleGoogleLogin={handleGoogleLogin}
+          handleGoogleLogout={handleGoogleLogout}
         />
         <ViewCloseButton
           isVisible={viewFilter.type !== 'LIST'}
@@ -996,9 +986,13 @@ class BuilderContainer extends React.Component {
                   </List>
                   <ListFooter
                     list={list}
+                    listId={listId}
                     changeListNotes={this.changeListNotes}
                     changeViewFilter={this.changeViewFilter}
                     removeCommand={this.removeCommand}
+                    userId={userId}
+                    createList={createList}
+                    updateList={updateList}
                   />
                 </div>
               </Paper>
@@ -1124,4 +1118,4 @@ class BuilderContainer extends React.Component {
   }
 }
 
-export default withWidth()(withStyles(styles)(BuilderContainer));
+export default withWidth()(withStyles(styles)(withRouter(BuilderContainer)));

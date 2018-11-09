@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
 import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
@@ -16,7 +17,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 /*
 <IconButton color="inherit">
@@ -50,12 +51,17 @@ class TopMenu extends React.Component {
       changeListMode,
       changeListTitle,
       mobile,
-      renderTestButton
+      renderTestButton,
+      history,
+      userId,
+      handleGoogleLogin,
+      handleGoogleLogout
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
       width: 30,
-      height: 30
+      height: 30,
+      cursor: 'pointer'
     };
     const textInputStyles = {
       width: '10vw'
@@ -123,12 +129,17 @@ class TopMenu extends React.Component {
             <Grid container spacing={8} alignItems="flex-end">
               {!mobile && (
                 <Grid item>
-                  <Avatar style={avatarStyles} src={factionIconLocation} />
+                  <Avatar
+                    style={avatarStyles}
+                    src={factionIconLocation}
+                    onClick={() => history.push('/home')}
+                  />
                 </Grid>
               )}
               <Grid item>
                 <TextField
                   placeholder={list.title === '' ? 'Untitled' : list.title}
+                  value={list.title}
                   onChange={changeListTitle}
                 />
               </Grid>
@@ -145,9 +156,26 @@ class TopMenu extends React.Component {
                   </Typography>
                 </Button>
               </Grid>
-  
-    
-   
+              {userId ? (
+                <Grid item>
+                  <GoogleLogout
+                    buttonText="Sign out"
+                    onLogoutSuccess={handleGoogleLogout}
+                    className="loginButton"
+                  />
+                </Grid>
+              ) : (
+                <Grid item>
+                  <GoogleLogin
+                    isSignedIn
+                    clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
+                    buttonText="Sign in with Google"
+                    onSuccess={handleGoogleLogin}
+                    onFailure={handleGoogleLogin}
+                    className="loginButton"
+                  />
+                </Grid>
+              )}
             </Grid>
           </Toolbar>
         </AppBar>
@@ -156,4 +184,4 @@ class TopMenu extends React.Component {
   }
 }
 
-export default TopMenu;
+export default withRouter(TopMenu);

@@ -10,18 +10,13 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import IconButton from '@material-ui/core/IconButton';
 import Grow from '@material-ui/core/Grow';
-import PrintIcon from '@material-ui/icons/Print';
-import SaveIcon from '@material-ui/icons/Save';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ShareIcon from '@material-ui/icons/Share';
-import HttpsIcon from '@material-ui/icons/Https';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import PaletteIcon from '@material-ui/icons/Palette';
-import BuildIcon from '@material-ui/icons/Build';
+import ClearIcon from '@material-ui/icons/Clear';
+import SendIcon from '@material-ui/icons/Send';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import EmailIcon from '@material-ui/icons/Email';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 const listStyles = {
   height: '22vh',
@@ -37,7 +32,7 @@ const paperStyles = {
 };
 
 const factionIconStyles = {
-  width: '10rem',
+  width: '7.5rem',
   height: 'auto',
   cursor: 'pointer'
 };
@@ -50,7 +45,7 @@ const empireIconStyles = {
   ...factionIconStyles
 };
 
-const Home = ({ history }) => (
+const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLists, empireLists, deleteList }) => (
   <Grow in>
     <Grid
       container
@@ -79,78 +74,89 @@ const Home = ({ history }) => (
           <Avatar
             src="/faction/rebelsIconBlack.svg"
             style={rebelsIconStyles}
-            onClick={() => history.push('/rebels')}
+            onClick={() => history.push('/list/rebels')}
           />
           <List dense>
+            {rebelLists.map(list => (
+              <ListItem
+                key={`${list._id}`}
+              >
+                <IconButton
+                  color="inherit"
+                  onClick={() => history.push(`/list/${list._id}`)}
+                >
+                  <SendIcon />
+                </IconButton>
+                <ListItemText primary={list.title} secondary={list.pointTotal} />
+                <IconButton
+                  color="inherit"
+                  onClick={() => deleteList(list._id)}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </ListItem>
+            ))}
           </List>
         </Grid>
         <Grid item>
           <Avatar
             src="/faction/empireIconBlack.svg"
             style={empireIconStyles}
-            onClick={() => history.push('/empire')}
+            onClick={() => history.push('/list/empire')}
           />
           <List dense>
+            {empireLists.map(list => (
+              <ListItem
+                key={`${list._id}`}
+              >
+                <IconButton
+                  color="inherit"
+                  onClick={() => history.push(`/list/${list._id}`)}
+                >
+                  <SendIcon />
+                </IconButton>
+                <ListItemText primary={list.title} secondary={list.pointTotal} />
+                <IconButton
+                  color="inherit"
+                  onClick={() => deleteList(list._id)}
+                >
+                  <ClearIcon />
+                </IconButton>
+              </ListItem>
+            ))}
           </List>
         </Grid>
       </Grid>
       <Grid item>
         <Paper style={paperStyles}>
-          <Typography variant="headline">
-            <BuildIcon style={{ marginRight: '10px' }} />
-            Under development
-            <BuildIcon style={{ marginLeft: '10px' }} />
-          </Typography>
-          <Typography variant="caption">
-            Features to come!
-          </Typography>
-          <List
-            dense
-            style={listStyles}
+          <Grid
+            container
+            spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="center"
           >
-            <ListItem>
-              <ListItemIcon>
-                <PrintIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="Printing lists" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <ListAltIcon color="primary" />
-              </ListItemIcon>
-              <ListItemText primary="List text export" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <ShareIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="List URL sharing" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <HttpsIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="HTTPS" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AccountCircleIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="User accounts" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <SaveIcon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="Saving lists" />
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <Brightness4Icon color="secondary" />
-              </ListItemIcon>
-              <ListItemText primary="Night mode" />
-            </ListItem>
-          </List>
+            {userId ? (
+              <Grid item>
+                <GoogleLogout
+                  buttonText="Sign out"
+                  onLogoutSuccess={handleGoogleLogout}
+                  className="loginButton"
+                />
+              </Grid>
+            ) : (
+              <Grid item>
+                <GoogleLogin
+                  isSignedIn
+                  buttonText="Sign in with Google"
+                  clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
+                  onSuccess={handleGoogleLogin}
+                  onFailure={handleGoogleLogin}
+                  className="loginButton"
+                />
+              </Grid>
+            )}
+          </Grid>
           <Grid
             container
             spacing={8}
