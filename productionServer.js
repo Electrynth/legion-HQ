@@ -98,6 +98,7 @@ app.get('/lists', (req, res) => {
 app.post('/list', (req, res) => {
   if ('userId' in req.query && 'list' in req.body) {
     const newListEntry = new ListModel({ ...req.body.list, userId: req.query.userId });
+    if ('_id' in req.body.list) delete req.body.list._id;
     newListEntry.save((errListSave, resultsListSave) => {
       if (errListSave) res.json({ msg: errListSave, error: true });
       else res.json({ results: resultsListSave, error: false });
