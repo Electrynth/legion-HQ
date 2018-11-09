@@ -141,22 +141,18 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
                 <GoogleLogout
                   buttonText="Sign out"
                   onLogoutSuccess={handleGoogleLogout}
-                  style={{
-                    width: '80px'
-                  }}
+                  className="loginButton"
                 />
               </Grid>
             ) : (
               <Grid item>
                 <GoogleLogin
                   isSignedIn
-                  clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
                   buttonText="Sign in with Google"
+                  clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
                   onSuccess={handleGoogleLogin}
                   onFailure={handleGoogleLogin}
-                  style={{
-                    width: '80px'
-                  }}
+                  className="loginButton"
                 />
               </Grid>
             )}

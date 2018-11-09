@@ -32,5 +32,61 @@ body {
 ::-webkit-scrollbar {
 	display: none;
 }
+.loginButton {
+  height: 40px;
+  width: 140px;
+  position: relative;
+  display: block;
+  margin: 6px auto;
+  padding: 0;
+  overflow: hidden;
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+  background-color: #e0e0e0;
+  color: #000;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 0.8125rem;
+  line-height: 1.4em;
+  text-transform: uppercase;
+  transition: background-color .3s;
+}
+.loginButton:hover, .loginButton:focus {
+  background-color: #d0d0d0;
+  cursor: pointer;
+}
+
+.loginButton > * {
+  position: relative;
+}
+.loginButton:before {
+  content: "";
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 0;
+  padding-top: 0;
+
+  border-radius: 100%;
+
+  background-color: rgba(236, 240, 241, .3);
+
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.loginButton:active:before {
+  width: 120%;
+  padding-top: 120%;
+
+  transition: width .2s ease-out, padding-top .2s ease-out;
+}
 </style>
 </html>
