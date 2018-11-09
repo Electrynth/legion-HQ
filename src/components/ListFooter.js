@@ -318,7 +318,9 @@ class ListFooter extends React.Component {
                     updateList({ ...list, _id: listId });
                     this.openSnackbar('List updated.');
                   } else {
-                    createList(userId, { ...list, _id: listId });
+                    const newList = { ...list };
+                    if ('_id' in newList) delete newList._id;
+                    createList(userId, { ...newList, _id: listId });
                     this.openSnackbar('List created.');
                   }
                 }}
