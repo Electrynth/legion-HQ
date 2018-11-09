@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 import Helmet from 'react-helmet';
 import Home from 'components/Home';
 
@@ -7,13 +8,18 @@ export default class HomeContainer extends React.Component {
 
   render() {
     const {
-      loggedIn,
-      user,
+      userId,
       handleGoogleLogin,
       handleGoogleLogout,
-      rebelLists,
-      empireLists,
+      deleteList,
+      userLists
     } = this.props;
+    const rebelLists = [];
+    const empireLists = [];
+    userLists.forEach((userList) => {
+      if (userList.faction === 'rebels') rebelLists.push(userList);
+      else if (userList.faction === 'empire') empireLists.push(userList);
+    });
     return (
       <div style={{ overflowY: 'scroll', height: '100vh' }}>
         <Helmet>
@@ -22,12 +28,12 @@ export default class HomeContainer extends React.Component {
           </title>
         </Helmet>
         <Home
-          loggedIn={loggedIn}
-          user={user}
+          userId={userId}
           handleGoogleLogin={handleGoogleLogin}
           handleGoogleLogout={handleGoogleLogout}
           rebelLists={rebelLists}
           empireLists={empireLists}
+          deleteList={deleteList}
         />
       </div>
     );

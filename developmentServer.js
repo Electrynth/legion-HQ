@@ -14,26 +14,6 @@ const credentials = require('./credentials.json');
 const compiler = webpack(config);
 const app = express();
 
-const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/production`;
-mongoose.connect(connectionString);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection err'));
-const { Schema } = mongoose;
-const UserSchema = new Schema({
-  userId: String,
-  lists: Array
-});
-const UserModel = mongoose.model('users', UserSchema);
-
-const getCardId = (index) => {
-  const mod = Math.floor(index / 26);
-  const remainder = index % 26;
-  const firstLetter = (mod + 10).toString(36);
-  const secondLetter = (remainder + 10).toString(36);
-  return `${firstLetter}${secondLetter}`;
-};
-
 // app.use(favicon(path.join(__dirname,'assets','public','favicon.ico')));
 app.use(bodyParser.json());
 app.use(webpackDevMiddleware(compiler, { publicPath: '/dist/' }));
@@ -44,62 +24,115 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post('/list', (req, res) => {
-  if ('_id' in req.body && 'listIndex' in req.body) {
-    UserModel.find({ _id: req.body._id }, (findErr, findResults) => {
-      if (findResults.length === 0) {
-        // user entry no longer exists
-        res.json({ msg: 'no results found', error: true });
-      } else {
-        if (!('lists' in findResults[0])) {
-          // 'lists' is not in user entry... someone is tampering with API...
-          res.json({ msg: 'lists object not found', error: true });
-        }
-        const { lists } = findResults[0];
-        if (typeof lists[req.body.listIndex] === 'undefined') {
-          // list at listIndex no longer exists
-          res.json({ msg: 'list index not found', error: true });
-        } else {
-          res.json({ list: lists[req.body.listIndex], error: false });
-        }
-      }
+const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/production`;
+mongoose.connect(connectionString);
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection err'));
+const { Schema } = mongoose;
+
+const UserSchema = new Schema({
+  _id: String
+});
+const ListSchema = new Schema({
+  userId: String,
+  faction: String,
+  mode: String,
+  title: String,
+  units: Array,
+  commands: Array,
+  uniques: Schema.Types.Mixed,
+  notes: String,
+  pointTotal: Number
+}, { minimize: false });
+const UserModel = mongoose.model('users', UserSchema);
+const ListModel = mongoose.model('lists', ListSchema);
+
+const getCardId = (index) => {
+  const mod = Math.floor(index / 26);
+  const remainder = index % 26;
+  const firstLetter = (mod + 10).toString(36);
+  const secondLetter = (remainder + 10).toString(36);
+  return `${firstLetter}${secondLetter}`;
+};
+
+app.get('/user', (req, res) => {
+  if ('userId' in req.query) {
+    UserModel.find({ _id: req.query.userId }, (errFind, resultsFind) => {
+      if (errFind) res.json({ msg: errFind, error: true });
+      else res.json({ results: resultsFind, error: false });
     });
-  } else {
-    // missing _id or listIndex
-    res.json({ msg: 'incomplete list search', error: true });
-  }
+  } else res.json({ msg: 'missing googleId', error: true });
 });
 
-app.post('/fetch', (req, res) => {
-  const userId = md5(req.body.googleId);
-  UserModel.find({ userId }, (findErr, findResults) => {
-    if (findErr) res.json({ msg: findErr, error: true });
-    else if (findResults.length === 0) {
-      const newEntry = new UserModel({ userId, lists: [] });
-      newEntry.save((createErr, createResults) => {
-        if (createErr) res.json({ msg: findErr, error: true });
-        else res.json({ user: createResults, error: false });
-      });
-    } else {
-      res.json({ user: findResults[0], error: false });
-    }
-  });
+app.post('/user', (req, res) => {
+  if ('userId' in req.query) {
+    const newEntry = new UserModel({ _id: req.query.userId, lists: [] });
+    newEntry.save((errSave, resultsSave) => {
+      if (errSave) res.json({ msg: errSave, error: true });
+      else res.json({ user: resultsSave, error: false });
+    });
+  } else res.json({ msg: 'missing googleId', error: true });
 });
 
-app.post('/save', (req, res) => {
-  if ('_id' in req.body && 'lists' in req.body) {
+app.put('/user', (req, res) => {
+  if ('userId' in req.query && 'lists' in req.body) {
     UserModel.findOneAndUpdate(
-      { _id: req.body._id },
+      { _id: req.query.userId },
       { lists: req.body.lists },
       { new: true },
-      (err, result) => {
-        if (err) res.json({ msg: err, error: true });
-        else res.json({ user: result, error: false });
+      (errUpdate, resultUpdate) => {
+        if (errUpdate) res.json({ msg: errUpdate, error: true });
+        else res.json({ user: resultUpdate, error: false });
       }
     );
-  } else {
-    res.json({ msg: 'incomplete save', error: true });
-  }
+  } else res.json({ msg: 'missing googleId or lists', error: true });
+});
+
+app.get('/lists', (req, res) => {
+  if ('listId' in req.query) {
+    ListModel.find({ _id: req.query.listId }, (errFind, resultsFind) => {
+      if (errFind) res.json({ msg: errFind, error: true });
+      else res.json({ results: resultsFind, error: false });
+    });
+  } else if ('userId' in req.query) {
+    ListModel.find({ userId: req.query.userId }, (errFind, resultsFind) => {
+      if (errFind) res.json({ msg: errFind, error: true });
+      else res.json({ results: resultsFind, error: false });
+    });
+  } else res.json({ msg: 'missing listId', error: true });
+});
+
+app.post('/list', (req, res) => {
+  if ('userId' in req.query && 'list' in req.body) {
+    const newListEntry = new ListModel({ ...req.body.list, userId: req.query.userId });
+    newListEntry.save((errListSave, resultsListSave) => {
+      if (errListSave) res.json({ msg: errListSave, error: true });
+      else res.json({ results: resultsListSave, error: false });
+    });
+  } else res.json({ msg: 'missing userId or list', error: true });
+});
+
+app.put('/list', (req, res) => {
+  if ('listId' in req.query && 'list' in req.body) {
+    ListModel.findOneAndUpdate(
+      { _id: req.query.listId },
+      { ...req.body.list },
+      (errListUpdate, resultsListUpdate) => {
+        if (errListUpdate) res.json({ msg: errListUpdate, error: true });
+        else res.json({ list: resultsListUpdate, error: false });
+      }
+    );
+  } else res.json({ msg: 'missing listId or list', error: true });
+});
+
+app.delete('/list', (req, res) => {
+  if ('listId' in req.query) {
+    ListModel.remove({ _id: req.query.listId }, (errDelete, resultsDelete) => {
+      if (errDelete) res.json({ msg: errDelete, error: true });
+      else res.json({ ...resultsDelete });
+    });
+  } else res.json({ msg: 'missing listId', error: true });
 });
 
 app.get('/data', (req, res) => {

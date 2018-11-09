@@ -17,7 +17,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 /*
 <IconButton color="inherit">
@@ -52,7 +52,10 @@ class TopMenu extends React.Component {
       changeListTitle,
       mobile,
       renderTestButton,
-      history
+      history,
+      userId,
+      handleGoogleLogin,
+      handleGoogleLogout
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -153,6 +156,30 @@ class TopMenu extends React.Component {
                   </Typography>
                 </Button>
               </Grid>
+              {userId ? (
+                <Grid item>
+                  <GoogleLogout
+                    buttonText="Sign out"
+                    onLogoutSuccess={handleGoogleLogout}
+                    style={{
+                      width: '80px'
+                    }}
+                  />
+                </Grid>
+              ) : (
+                <Grid item>
+                  <GoogleLogin
+                    isSignedIn
+                    clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
+                    buttonText="Sign in with Google"
+                    onSuccess={handleGoogleLogin}
+                    onFailure={handleGoogleLogin}
+                    style={{
+                      width: '80px'
+                    }}
+                  />
+                </Grid>
+              )}
             </Grid>
           </Toolbar>
         </AppBar>

@@ -1,55 +1,92 @@
 import React from 'react';
 import Axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import BuilderContainer from './BuilderContainer'
 
 class PreloadedContainer extends React.Component {
   state = {
+    loading: true,
     list: {
-      faction: 'unknown'
+      faction: '',
+      userId: '',
+      mode: 'standard',
+      title: '',
+      notes: '',
+      pointTotal: 0,
+      uniques: {},
+      units: [],
+      commands: [
+        {
+          pips: 4,
+          name: 'Standing Orders',
+          commander: '',
+          faction: '',
+          product: ['swl01'],
+          imageLocation: '/commands/Standing%20Orders.png',
+          iconLocation: '/commandIcons/Standing%20Orders.png'
+        }
+      ]
     }
   };
 
   componentDidMount() {
-    Axios.post('/list', { _id: this.props.match.params.uid, listIndex: this.props.match.params.lid }).then((response) => {
-      let listIndex = Number.parseInt(this.props.match.params.lid, 10);
-      if (Number.isNaN(listIndex)) {
-        listIndex = -1;
-      }
-      this.setState({ list: { ...response.data.list, listIndex } });
-    });
+    const { list, match, history } = this.props;
+    const id = match.params.id;
+    if (id === 'rebels' || id === 'empire') {
+      this.setState({
+        list: { faction: id, ...list },
+        loading: false
+      });
+    } else {
+      Axios.get(`/lists?listId=${id}`).then((response) => {
+        const { data } = response;
+        if ('results' in data && data.results.length > 0) {
+          this.setState({
+            list: data.results[0],
+            loading: false
+          });
+        } else {
+          alert("List does not exist.")
+          history.push('/home');
+        }
+      });
+    }
   }
 
   render() {
     const {
+      loading,
       list
     } = this.state;
-    let { faction } = list;
     const {
+      userId,
+      userLists,
       cards,
       unitsById,
       upgradesById,
       commandsById,
-      isLoggedIn,
-      user,
-      handleSaveList,
-      handleDeleteList
+      createList,
+      updateList,
+      handleGoogleLogin,
+      handleGoogleLogout
     } = this.props;
     return (
       <div>
-        {faction === 'unknown' ? (
+        {loading ? (
           <div />
         ) : (
           <BuilderContainer
-            preloadedList={list}
-            faction={faction}
+            list={list}
+            userId={userId}
+            userLists={userLists}
             cards={cards}
             unitsById={unitsById}
             upgradesById={upgradesById}
             commandsById={commandsById}
-            isLoggedIn={isLoggedIn}
-            user={user}
-            handleSaveList={handleSaveList}
-            handleDeleteList={handleDeleteList}
+            createList={createList}
+            updateList={updateList}
+            handleGoogleLogin={handleGoogleLogin}
+            handleGoogleLogout={handleGoogleLogout}
           />
         )}
       </div>
@@ -57,4 +94,4 @@ class PreloadedContainer extends React.Component {
   }
 }
 
-export default PreloadedContainer;
+export default withRouter(PreloadedContainer);

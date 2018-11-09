@@ -3,29 +3,42 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import ListText from 'components/ListText';
 import Modal from '@material-ui/core/Modal';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import PrintIcon from '@material-ui/icons/Print';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
 import LinkIcon from '@material-ui/icons/Link';
+import CloseIcon from '@material-ui/icons/Close';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
+import Snackbar from '@material-ui/core/Snackbar';
 
 class ListFooter extends React.Component {
   state = {
     openModal: false,
-    deleteDialog: false
+    deleteDialog: false,
+    openSnackbar: false,
+    snackbarContent: ''
   };
+
+  openSnackbar = (message) => {
+    this.setState({
+      openSnackbar: true,
+      snackbarContent: message
+    });
+  }
+
+  closeSnackbar = () => {
+    this.setState({
+      openSnackbar: false,
+      snackbarContent: ''
+    });
+  }
 
   copyToClip = (str) => {
     const listener = (e) => {
@@ -38,18 +51,6 @@ class ListFooter extends React.Component {
     document.removeEventListener('copy', listener);
   }
 
-  handleOpenDeleteDialog = () => {
-    this.setState({
-      deleteDialog: true
-    });
-  }
-
-  handleCloseDeleteDialog = () => {
-    this.setState({
-      deleteDialog: false
-    });
-  }
-
   render() {
     const {
       openModal,
@@ -57,13 +58,12 @@ class ListFooter extends React.Component {
     } = this.state;
     const {
       list,
+      changeListNotes,
       changeViewFilter,
       removeCommand,
-      changeListNotes,
-      user,
-      isLoggedIn,
-      handleSaveList,
-      handleDeleteList
+      userId,
+      createList,
+      updateList
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -76,8 +76,6 @@ class ListFooter extends React.Component {
       maxHeight: '75vh'
     };
     let pointTotal = 0;
-    let listIndex = -1;
-    if ('listIndex' in list) listIndex = list.listIndex;
     list.units.forEach((unit) => {
       let unitTotal = 0;
       switch (unit.rank) {
@@ -130,25 +128,25 @@ class ListFooter extends React.Component {
     });
     return (
       <div>
-        <Dialog
-          open={deleteDialog}
-          onClose={this.handleCloseDeleteDialog}
-        >
-          <DialogTitle>Delete this list?</DialogTitle>
-          <DialogActions>
-            <Button onClick={this.handleCloseDeleteDialog}>
-              No
-            </Button>
-            <Button
-              onClick={() => {
-                handleDeleteList(listIndex);
-                this.handleCloseDeleteDialog();
-              }}
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          open={this.state.openSnackbar}
+          autoHideDuration={3000}
+          onClose={this.closeSnackbar}
+          message={this.state.snackbarContent}
+          action={(
+            <IconButton
+              key="close"
+              color="inherit"
+              onClick={this.closeSnackbar}
             >
-              Yes
-            </Button>
-          </DialogActions>
-        </Dialog>
+              <CloseIcon />
+            </IconButton>
+          )}
+        />
         <Grid
           container
           spacing={8}
@@ -297,7 +295,10 @@ class ListFooter extends React.Component {
                       <Grid item>
                         <IconButton
                           variant="contained"
-                          onClick={() => this.copyToClip(document.getElementById('listText').textContent)}
+                          onClick={() => {
+                            this.copyToClip(document.getElementById('listText').textContent);
+                            this.openSnackbar('Text copied to clipboard.');
+                          }}
                         >
                           <FileCopyIcon />
                         </IconButton>
@@ -308,25 +309,32 @@ class ListFooter extends React.Component {
               </div>
             </Grid>
             <Grid item>
-              <IconButton color="inherit">
-                <SaveIcon
-                  disabled={isLoggedIn}
-                  onClick={() => handleSaveList(list, listIndex)}
-                />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton color="inherit">
-                <LinkIcon disabled={isLoggedIn} />
+              <IconButton
+                color="inherit"
+                disabled={!userId}
+                onClick={() => {
+                  if (list._id) {
+                    updateList(list);
+                    this.openSnackbar('List updated.');
+                  } else {
+                    createList(userId, list);
+                    this.openSnackbar('List created.');
+                  }
+                }}
+              >
+                <SaveIcon />
               </IconButton>
             </Grid>
             <Grid item>
               <IconButton
                 color="inherit"
-                disabled={listIndex === -1}
-                onClick={this.handleOpenDeleteDialog}
+                disabled={!list._id}
+                onClick={() => {
+                  this.copyToClip(`http://legion-hq/list/${list._id}`);
+                  this.openSnackbar('Link copied to clipboard.');
+                }}
               >
-                <DeleteIcon />
+                <LinkIcon />
               </IconButton>
             </Grid>
           </Grid>

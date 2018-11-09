@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import md5 from 'md5';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
@@ -12,13 +13,29 @@ class App extends Component {
     unitsById: [],
     upgradesById: [],
     commandsById: [],
-    uniques: {},
     status: '',
-    message: '',
-    loggedIn: false,
-    user: {
-      _id: -1,
-      lists: []
+    userId: '',
+    userLists: [],
+    list: {
+      faction: '',
+      userId: '',
+      mode: 'standard',
+      title: '',
+      notes: '',
+      pointTotal: 0,
+      uniques: {},
+      units: [],
+      commands: [
+        {
+          pips: 4,
+          name: 'Standing Orders',
+          commander: '',
+          faction: '',
+          product: ['swl01'],
+          imageLocation: '/commands/Standing%20Orders.png',
+          iconLocation: '/commandIcons/Standing%20Orders.png'
+        }
+      ]
     }
   };
 
@@ -26,51 +43,121 @@ class App extends Component {
     Axios.get('/data').then(response => this.setState({ ...response.data }));
   }
 
-  handleDeleteList = (listIndex) => {
-    const { user } = this.state;
-    if (typeof user.lists[listIndex] !== 'undefined') {
-      user.lists[listIndex] = {};
-    }
-    Axios.post('/save', { _id: user._id, lists: user.lists }, ((response) => {
-      if (response.error === false) {
-        this.setState({ user: response.data.user });
+  deleteList = (listId) => {
+    Axios.delete(`/list?listId=${listId}`).then((deleteResponse) => {
+      const deleteData = deleteResponse.data;
+      if (deleteData.error) {
+        console.log(deleteData.msg);
+      } else {
+        const { userId } = this.state;
+        Axios.get(`/lists?userId=${userId}`).then((refreshResponse) => {
+          const refreshData = refreshResponse.data;
+          if (refreshResponse.error) {
+            console.log(refreshResponse.msg);
+          } else {
+            this.setState({
+              userLists: refreshData.results
+            });
+          }
+        });
       }
-    }));
+    });
   }
 
-  handleSaveList = (list, listIndex) => {
-    const { user } = this.state;
-    if (listIndex > -1) {
-      user.lists[listIndex] = list;
-    } else {
-      let foundEmptySlot = false;
-      user.lists.forEach((list, index) => {
-        if (!('faction' in list)) {
-          foundEmptySlot = true;
-          user.lists[index] = list;
-        }
-      })
-      if (!foundEmptySlot) {
-        user.lists.push(list);
+  updateList = (list) => {
+    Axios.put(`/list?listId=${list._id}`, { list }).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+      } else {
+        const { userId } = this.state;
+        Axios.get(`/lists?userId=${userId}`).then((refreshResponse) => {
+          const refreshData = refreshResponse.data;
+          if (refreshResponse.error) {
+            console.log(refreshResponse.msg);
+          } else {
+            this.setState({
+              userLists: refreshData.results
+            });
+          }
+        });
       }
-    }
-    Axios.post('/save', { _id: user._id, lists: user.lists }, ((response) => {
-      if (response.error === false) {
-        this.setState({ user: response.data.user });
-      }
-    }));
+    });
   }
 
-  handleGoogleLogin = (response) => {
-    if ('googleId' in response) {
-      Axios.post('/fetch', { googleId: response.googleId }).then((responseToFetch) => {
-        const responseData = responseToFetch.data.user;
-        if (responseData.error) {
-          alert(responseData.msg);
+  createList = (userId, list) => {
+    Axios.post(`/list?userId=${userId}`, { list }).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+      } else {
+        const { userId } = this.state;
+        Axios.get(`/lists?userId=${userId}`).then((refreshResponse) => {
+          const refreshData = refreshResponse.data;
+          if (refreshResponse.error) {
+            console.log(refreshResponse.msg);
+          } else {
+            this.setState({
+              list: data.results,
+              userLists: refreshData.results
+            });
+          }
+        });
+      }
+    });
+  }
+
+  getListsByUserId = (userId) => {
+    Axios.get(`/lists?userId=${userId}`).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+        return [];
+      }
+      return data.results;
+    });
+  }
+
+  getListsById = (listId) => {
+    Axios.get(`/lists?listId=${listId}`).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+        return [];
+      }
+      return data.results;
+    });
+  }
+
+  handleGoogleLogin = (googleResponse) => {
+    if ('googleId' in googleResponse) {
+      const userId = md5(googleResponse.googleId);
+      Axios.get(`/user?userId=${userId}`).then((userResponse) => {
+        const userData = userResponse.data;
+        if (userData.error) {
+          console.log('handleGoogleLogin Error 1', userData.msg);
+        } else if (userData.results.length === 0) {
+          Axios.post(`/user?userId=${userId}`).then((creationResponse) => {
+            const creationData = creationResponse.data;
+            if (creationData.error) console.log(creationData.msg);
+            else {
+              this.setState({
+                userId,
+                userLists: []
+              });
+            }
+          });
         } else {
-          this.setState({
-            loggedIn: true,
-            user: { ...responseData }
+          Axios.get(`/lists?userId=${userId}`).then((response) => {
+            const { data } = response;
+            if (data.error) {
+              console.log('handleGoogleLogin Error 2', data.msg);
+            } else {
+              this.setState({
+                userId,
+                userLists: data.results
+              });
+            }
           });
         }
       });
@@ -80,25 +167,43 @@ class App extends Component {
   handleGoogleLogout = () => {
     alert('Successfully logged out.');
     this.setState({
-      loggedIn: false,
-      user: {
-        _id: -1,
-        lists: []
-      }
+      userId: '',
+      userLists: []
     });
   }
 
   render() {
     const {
+      list,
       status,
-      user
+      userId,
+      userLists,
+      cards,
+      unitsById,
+      upgradesById,
+      commandsById
     } = this.state;
-    const rebelLists = [];
-    const empireLists = [];
-    user.lists.forEach((list, index) => {
-      if ('faction' in list && list.faction === 'rebels') rebelLists.push({ ...list, listIndex: index });
-      else if ('faction' in list && list.faction === 'empire') empireLists.push({ ...list, listIndex: index });
-    });
+    const defaultList = {
+      faction: '',
+      userId: '',
+      mode: 'standard',
+      title: '',
+      notes: '',
+      pointTotal: 0,
+      uniques: {},
+      units: [],
+      commands: [
+        {
+          pips: 4,
+          name: 'Standing Orders',
+          commander: '',
+          faction: '',
+          product: ['swl01'],
+          imageLocation: '/commands/Standing%20Orders.png',
+          iconLocation: '/commandIcons/Standing%20Orders.png'
+        }
+      ]
+    }
     return (
       <div>
         <Grow
@@ -110,48 +215,76 @@ class App extends Component {
               render={props => (
                 <HomeContainer
                   {...props}
-                  {...this.state}
-                  rebelLists={rebelLists}
-                  empireLists={empireLists}
+                  userId={userId}
+                  userLists={userLists}
+                  handleGoogleLogin={this.handleGoogleLogin}
+                  handleGoogleLogout={this.handleGoogleLogout}
+                  deleteList={this.deleteList}
+                />
+              )}
+            />
+            <Route
+              path="/list/rebels"
+              render={props => (
+                <BuilderContainer
+                  {...props}
+                  list={{
+                    ...defaultList,
+                    userId,
+                    faction: 'rebels',
+                  }}
+                  userId={userId}
+                  userLists={userLists}
+                  cards={cards}
+                  unitsById={unitsById}
+                  upgradesById={upgradesById}
+                  commandsById={commandsById}
+                  createList={this.createList}
+                  updateList={this.updateList}
                   handleGoogleLogin={this.handleGoogleLogin}
                   handleGoogleLogout={this.handleGoogleLogout}
                 />
               )}
             />
             <Route
-              path="/rebels"
+              path="/list/empire"
               render={props => (
                 <BuilderContainer
-                  preloadedList={false}
-                  faction="rebels"
-                  {...this.state}
                   {...props}
-                  handleSaveList={this.handleSaveList}
-                  handleDeleteList={this.handleDeleteList}
+                  list={{
+                    ...defaultList,
+                    userId,
+                    faction: 'empire',
+                  }}
+                  userId={userId}
+                  userLists={userLists}
+                  cards={cards}
+                  unitsById={unitsById}
+                  upgradesById={upgradesById}
+                  commandsById={commandsById}
+                  createList={this.createList}
+                  updateList={this.updateList}
+                  handleGoogleLogin={this.handleGoogleLogin}
+                  handleGoogleLogout={this.handleGoogleLogout}
                 />
               )}
             />
             <Route
-              path="/empire"
-              render={props => (
-                <BuilderContainer
-                  preloadedList={false}
-                  faction="empire"
-                  {...this.state}
-                  {...props}
-                  handleSaveList={this.handleSaveList}
-                  handleDeleteList={this.handleDeleteList}
-                />
-              )}
-            />
-            <Route
-              path="/list/:uid/:lid"
+              path="/list/:id"
               render={props => (
                 <PreloadedContainer
-                  {...this.state}
                   {...props}
-                  handleSaveList={this.handleSaveList}
-                  handleDeleteList={this.handleDeleteList}
+                  list={list}
+                  userId={userId}
+                  userLists={userLists}
+                  cards={cards}
+                  unitsById={unitsById}
+                  upgradesById={upgradesById}
+                  commandsById={commandsById}
+                  createList={this.createList}
+                  updateList={this.updateList}
+                  handleGoogleLogin={this.handleGoogleLogin}
+                  handleGoogleLogout={this.handleGoogleLogout}
                 />
               )}
             />
