@@ -101,7 +101,7 @@ app.post('/list', (req, res) => {
     if ('_id' in newList) delete newList._id;
     const newListEntry = new ListModel({ ...newList, userId: req.query.userId });
     newListEntry.save((errListSave, resultsListSave) => {
-      if (errListSave) res.json({ msg: errListSave, debug: newList, error: true });
+      if (errListSave) res.json({ msg: errListSave, error: true });
       else res.json({ results: resultsListSave, error: false });
     });
   } else res.json({ msg: 'missing userId or list', error: true });
