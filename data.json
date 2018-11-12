@@ -654,8 +654,8 @@
       "isUnique": false,
       "name": "Duck and Cover",
       "type": "training",
-      "requirements": ["swl19", "swl20", "swl21"],
-      "products": [],
+      "products": ["swl19", "swl20", "swl21"],
+      "requirements": [],
       "faction": "",
       "rank": "upgrade"
     },
