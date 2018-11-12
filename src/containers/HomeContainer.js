@@ -6,13 +6,18 @@ import Home from 'components/Home';
 export default class HomeContainer extends React.Component {
   state = {};
 
+  componentDidMount() {
+    const { refreshUserLists } = this.props;
+    refreshUserLists();
+  }
+
   render() {
     const {
       userId,
+      userLists,
       handleGoogleLogin,
       handleGoogleLogout,
-      deleteList,
-      userLists
+      deleteList
     } = this.props;
     const rebelLists = [];
     const empireLists = [];

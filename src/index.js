@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import md5 from 'md5';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import Grow from '@material-ui/core/Grow';
 import HomeContainer from 'containers/HomeContainer';
 import BuilderContainer from 'containers/BuilderContainer';
-import PreloadedContainer from 'containers/PreloadedContainer';
 
 class App extends Component {
   state = {
@@ -15,28 +14,7 @@ class App extends Component {
     commandsById: [],
     status: '',
     userId: '',
-    userLists: [],
-    list: {
-      faction: '',
-      userId: '',
-      mode: 'standard',
-      title: '',
-      notes: '',
-      pointTotal: 0,
-      uniques: {},
-      units: [],
-      commands: [
-        {
-          pips: 4,
-          name: 'Standing Orders',
-          commander: '',
-          faction: '',
-          product: ['swl01'],
-          imageLocation: '/commands/Standing%20Orders.png',
-          iconLocation: '/commandIcons/Standing%20Orders.png'
-        }
-      ]
-    }
+    userLists: []
   };
 
   componentDidMount() {
@@ -98,8 +76,7 @@ class App extends Component {
             console.log(refreshResponse.msg);
           } else {
             this.setState({
-              list: data.results,
-              listId: data.results._id,
+              currentList: data.results,
               userLists: refreshData.results
             });
           }
@@ -140,11 +117,13 @@ class App extends Component {
         } else if (userData.results.length === 0) {
           Axios.post(`/user?userId=${userId}`).then((creationResponse) => {
             const creationData = creationResponse.data;
-            if (creationData.error) console.log(creationData.msg);
-            else {
+            if (creationData.error) {
+              this.setState({ googleResponse: true });
+            } else {
               this.setState({
                 userId,
-                userLists: []
+                userLists: [],
+                googleResponse: true
               });
             }
           });
@@ -152,11 +131,12 @@ class App extends Component {
           Axios.get(`/lists?userId=${userId}`).then((response) => {
             const { data } = response;
             if (data.error) {
-              console.log('handleGoogleLogin Error 2', data.msg);
+              this.setState({ googleResponse: true });
             } else {
               this.setState({
                 userId,
-                userLists: data.results
+                userLists: data.results,
+                googleResponse: true
               });
             }
           });
@@ -166,50 +146,44 @@ class App extends Component {
   }
 
   handleGoogleLogout = () => {
-    alert('Successfully logged out.');
+    alert('Successfully signed out.');
     this.setState({
       userId: '',
       userLists: []
     });
   }
 
+  refreshUserLists = () => {
+    const { userId } = this.state;
+    if (userId) {
+      Axios.get(`/lists?userId=${userId}`).then((response) => {
+        const { data } = response;
+        if (data.error) {
+          console.log(data.msg);
+        } else {
+          this.setState({
+            userLists: data.results
+          });
+        }
+      });
+    }
+  }
+
   render() {
     const {
-      list,
       status,
+      googleResponse,
       userId,
       userLists,
       cards,
       unitsById,
       upgradesById,
-      commandsById,
-      listId
+      commandsById
     } = this.state;
-    const defaultList = {
-      faction: '',
-      userId: '',
-      mode: 'standard',
-      title: '',
-      notes: '',
-      pointTotal: 0,
-      uniques: {},
-      units: [],
-      commands: [
-        {
-          pips: 4,
-          name: 'Standing Orders',
-          commander: '',
-          faction: '',
-          product: ['swl01'],
-          imageLocation: '/commands/Standing%20Orders.png',
-          iconLocation: '/commandIcons/Standing%20Orders.png'
-        }
-      ]
-    }
     return (
       <div>
         <Grow
-          in={status === 'success'}
+          in={status === 'success' && googleResponse}
         >
           <Switch>
             <Route
@@ -222,71 +196,20 @@ class App extends Component {
                   handleGoogleLogin={this.handleGoogleLogin}
                   handleGoogleLogout={this.handleGoogleLogout}
                   deleteList={this.deleteList}
-                />
-              )}
-            />
-            <Route
-              path="/list/rebels"
-              render={props => (
-                <BuilderContainer
-                  {...props}
-                  list={{
-                    ...list,
-                    userId,
-                    faction: 'rebels',
-                  }}
-                  listId={listId}
-                  userId={userId}
-                  userLists={userLists}
-                  cards={cards}
-                  unitsById={unitsById}
-                  upgradesById={upgradesById}
-                  commandsById={commandsById}
-                  createList={this.createList}
-                  updateList={this.updateList}
-                  handleGoogleLogin={this.handleGoogleLogin}
-                  handleGoogleLogout={this.handleGoogleLogout}
-                />
-              )}
-            />
-            <Route
-              path="/list/empire"
-              render={props => (
-                <BuilderContainer
-                  {...props}
-                  list={{
-                    ...list,
-                    userId,
-                    faction: 'empire',
-                  }}
-                  listId={listId}
-                  userId={userId}
-                  userLists={userLists}
-                  cards={cards}
-                  unitsById={unitsById}
-                  upgradesById={upgradesById}
-                  commandsById={commandsById}
-                  createList={this.createList}
-                  updateList={this.updateList}
-                  handleGoogleLogin={this.handleGoogleLogin}
-                  handleGoogleLogout={this.handleGoogleLogout}
+                  refreshUserLists={this.refreshUserLists}
                 />
               )}
             />
             <Route
               path="/list/:id"
               render={props => (
-                <PreloadedContainer
+                <BuilderContainer
                   {...props}
-                  list={list}
                   userId={userId}
-                  userLists={userLists}
                   cards={cards}
                   unitsById={unitsById}
                   upgradesById={upgradesById}
                   commandsById={commandsById}
-                  createList={this.createList}
-                  updateList={this.updateList}
                   handleGoogleLogin={this.handleGoogleLogin}
                   handleGoogleLogout={this.handleGoogleLogout}
                 />
@@ -300,4 +223,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

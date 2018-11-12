@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
@@ -117,7 +118,7 @@ const styles = {
 class BuilderContainer extends React.Component {
   constructor(props) {
     super(props);
-    const { classes, list } = this.props;
+    const { classes } = this.props;
     const defaultTheme = createMuiTheme({
       palette: {
         primary: {
@@ -131,12 +132,87 @@ class BuilderContainer extends React.Component {
     this.state = {
       classes,
       defaultTheme,
-      list,
       isViewMenuOpen: false,
       viewFilter: {
         type: 'LIST'
+      },
+      list: {
+        faction: '',
+        mode: 'standard',
+        title: '',
+        notes: '',
+        pointTotal: 0,
+        uniques: {},
+        units: [],
+        commands: [
+          {
+            pips: 4,
+            name: 'Standing Orders',
+            commander: '',
+            faction: '',
+            product: ['swl01'],
+            imageLocation: '/commands/Standing%20Orders.png',
+            iconLocation: '/commandIcons/Standing%20Orders.png'
+          }
+        ]
       }
     };
+  }
+
+  componentDidMount() {
+    const { list } = this.state;
+    const {
+      match,
+      history,
+      userId
+    } = this.props;
+    const path = match.params.id;
+    if (path === 'rebels' || path === 'empire') {
+      this.setState({
+        list: { ...list, faction: path }
+      });
+    } else {
+      Axios.get(`/lists?listId=${path}`).then((response) => {
+        const { data } = response;
+        if ('results' in data && data.results.length > 0) {
+          const loadedList = data.results[0];
+          this.setState({
+            list: data.results[0]
+          });
+        } else {
+          alert('List does not exist.');
+          history.push('/home');
+        }
+      });
+    }
+  }
+
+  updateList = () => {
+    const { list } = this.state;
+    Axios.put(`/list?listId=${list._id}`, { list }).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+      }
+    });
+  }
+
+  createList = () => {
+    const { list } = this.state;
+    const { userId } = this.props;
+    if ('userId' in list && userId !== list.userId) {
+      delete list._id;
+    }
+    Axios.post(`/list?userId=${userId}`, { list }).then((response) => {
+      const { data } = response;
+      if (data.error) {
+        console.log(data.msg);
+      } else {
+        this.setState({
+          list: data.results
+        });
+      }
+    });
   }
 
   getTransitionDuration = (index) => {
@@ -674,28 +750,20 @@ class BuilderContainer extends React.Component {
     const {
       list,
       viewFilter,
-      isViewMenuOpen,
       classes,
-      defaultTheme,
-      userLists
+      defaultTheme
     } = this.state;
     const {
+      userId,
       cards,
       unitsById,
       upgradesById,
       commandsById,
       width,
-      createList,
-      updateList,
-      userId,
       handleGoogleLogin,
       handleGoogleLogout,
-      history,
-      listId
+      history
     } = this.props;
-    if (!list.faction) {
-      history.push('/home');
-    }
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
     const mobile = width === 'sm' || width === 'xs';
@@ -994,13 +1062,12 @@ class BuilderContainer extends React.Component {
                   </List>
                   <ListFooter
                     list={list}
-                    listId={listId}
+                    userId={userId}
                     changeListNotes={this.changeListNotes}
                     changeViewFilter={this.changeViewFilter}
                     removeCommand={this.removeCommand}
-                    userId={userId}
-                    createList={createList}
-                    updateList={updateList}
+                    createList={this.createList}
+                    updateList={this.updateList}
                   />
                 </div>
               </Paper>

@@ -62,8 +62,7 @@ class ListFooter extends React.Component {
       removeCommand,
       userId,
       createList,
-      updateList,
-      listId
+      updateList
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -314,11 +313,11 @@ class ListFooter extends React.Component {
                 color="inherit"
                 disabled={!userId}
                 onClick={() => {
-                  if (listId && userId === list.userId) {
-                    updateList({ ...list, _id: listId });
+                  if (userId && userId === list.userId) {
+                    updateList();
                     this.openSnackbar('List updated.');
                   } else {
-                    createList(userId, { ...list, _id: listId });
+                    createList();
                     this.openSnackbar('List created.');
                   }
                 }}
@@ -329,9 +328,9 @@ class ListFooter extends React.Component {
             <Grid item>
               <IconButton
                 color="inherit"
-                disabled={!listId}
+                disabled={!list._id}
                 onClick={() => {
-                  this.copyToClip(`http://legion-hq.com/list/${listId}`);
+                  this.copyToClip(`http://legion-hq.com/list/${list._id}`);
                   this.openSnackbar('Link copied to clipboard.');
                 }}
               >
