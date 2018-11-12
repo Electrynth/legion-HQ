@@ -5,7 +5,7 @@ class ListText extends React.Component {
 
   unitToText = (unit, index) => {
     const unitText = [];
-    let upgradeText = ` - ${unit.name} (${unit.cost}) `;
+    let upgradeText = ` - ${unit.name} (${unit.cost})`;
     let totalCost = unit.cost;
     if (unit.count > 1) upgradeText = `- ${unit.count}x ${unit.name} (${unit.cost})`;
     unit.upgradesEquipped.forEach((upgrade) => {
@@ -17,7 +17,7 @@ class ListText extends React.Component {
     if (unit.count > 1) totalCost *= unit.count;
     return (
       <div key={`${unit.name}_${index}`}>
-        {`${unitText} ${upgradeText} = ${totalCost}`}
+        {`${unitText} ${upgradeText} = ${totalCost}\n`}
       </div>
     );
   }
@@ -121,75 +121,82 @@ class ListText extends React.Component {
     return (
       <div>
         <div id="listText">
-          <h3>Legion HQ</h3>
-          Title: {list.title}
+          <h3>Legion HQ{'\n'}</h3>
+          Title: {list.title+'\n'}
           <br />
-          Faction: {list.faction}
+          Faction: {list.faction+'\n'}
           <br />
-          Mode: {list.mode}
+          Mode: {list.mode+'\n'}
           <br />
           <br />
           {commanders.length > 0 && (
             <div>
-              Commanders:
+              Commanders:{'\n'}
               <br />
             </div>
           )}
           {commanders.map((unit, index) => this.unitToText(unit, index))}
           {operatives.length > 0 && (
             <div>
-              Operatives:
+              Operatives:{'\n'}
               <br />
             </div>
           )}
           {operatives.map((unit, index) => this.unitToText(unit, index))}
           {corps.length > 0 && (
             <div>
-              Corps:
+              Corps:{'\n'}
               <br />
             </div>
           )}
           {corps.map((unit, index) => this.unitToText(unit, index))}
           {special.length > 0 && (
             <div>
-              Special Forces:
+              Special Forces:{'\n'}
               <br />
             </div>
           )}
           {special.map((unit, index) => this.unitToText(unit, index))}
           {support.length > 0 && (
             <div>
-              Support:
+              Support:{'\n'}
               <br />
             </div>
           )}
           {support.map((unit, index) => this.unitToText(unit, index))}
           {heavy.length > 0 && (
             <div>
-              Heavy:
+              Heavy:{'\n'}
               <br />
             </div>
           )}
           {heavy.map((unit, index) => this.unitToText(unit, index))}
           <br />
-          Total: {`${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}`}
+          Total: {`${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}\n`}
           <br />
           <br />
-          Commands:
+          Commands:{'\n'}
           {list.commands.map(command => (
             <div key={command.name}>
-              {` - ${command.name} (${command.pips})`}
+              {` - ${command.name} (${command.pips})\n`}
               <br />
             </div>
           ))}
           <br />
-          Notes:
-          {` ${list.notes}`}
+          {list.notes ? (
+            <div>
+              Notes:{'\n'}
+              {` ${list.notes}`}
+            </div>
+          ) : (
+            <div />
+          )}
         </div>
-        <textarea value={listString} style={{ display: 'none' }} />
       </div>
     );
   }
 }
+
+// <textarea value={listString} style={{ display: 'none' }} />
 
 export default ListText;
