@@ -120,71 +120,73 @@ class ListText extends React.Component {
     `;
     return (
       <div>
-        <h3>Legion HQ</h3>
-        Title: {list.title}
-        <br />
-        Faction: {list.faction}
-        <br />
-        Mode: {list.mode}
-        <br />
-        <br />
-        {commanders.length > 0 && (
-          <div>
-            Commanders:
-            <br />
-          </div>
-        )}
-        {commanders.map((unit, index) => this.unitToText(unit, index))}
-        {operatives.length > 0 && (
-          <div>
-            Operatives:
-            <br />
-          </div>
-        )}
-        {operatives.map((unit, index) => this.unitToText(unit, index))}
-        {corps.length > 0 && (
-          <div>
-            Corps:
-            <br />
-          </div>
-        )}
-        {corps.map((unit, index) => this.unitToText(unit, index))}
-        {special.length > 0 && (
-          <div>
-            Special Forces:
-            <br />
-          </div>
-        )}
-        {special.map((unit, index) => this.unitToText(unit, index))}
-        {support.length > 0 && (
-          <div>
-            Support:
-            <br />
-          </div>
-        )}
-        {support.map((unit, index) => this.unitToText(unit, index))}
-        {heavy.length > 0 && (
-          <div>
-            Heavy:
-            <br />
-          </div>
-        )}
-        {heavy.map((unit, index) => this.unitToText(unit, index))}
-        <br />
-        Total: {`${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}`}
-        <br />
-        <br />
-        Commands:
-        {list.commands.map(command => (
-          <div key={command.name}>
-            {` - ${command.name} (${command.pips})`}
-            <br />
-          </div>
-        ))}
-        <br />
-        Notes:
-        {` ${list.notes}`}
-        <textarea id="listText" value={listString} style={{ display: 'none' }} />
+        <div id="listText">
+          <h3>Legion HQ</h3>
+          Title: {list.title}
+          <br />
+          Faction: {list.faction}
+          <br />
+          Mode: {list.mode}
+          <br />
+          <br />
+          {commanders.length > 0 && (
+            <div>
+              Commanders:
+              <br />
+            </div>
+          )}
+          {commanders.map((unit, index) => this.unitToText(unit, index))}
+          {operatives.length > 0 && (
+            <div>
+              Operatives:
+              <br />
+            </div>
+          )}
+          {operatives.map((unit, index) => this.unitToText(unit, index))}
+          {corps.length > 0 && (
+            <div>
+              Corps:
+              <br />
+            </div>
+          )}
+          {corps.map((unit, index) => this.unitToText(unit, index))}
+          {special.length > 0 && (
+            <div>
+              Special Forces:
+              <br />
+            </div>
+          )}
+          {special.map((unit, index) => this.unitToText(unit, index))}
+          {support.length > 0 && (
+            <div>
+              Support:
+              <br />
+            </div>
+          )}
+          {support.map((unit, index) => this.unitToText(unit, index))}
+          {heavy.length > 0 && (
+            <div>
+              Heavy:
+              <br />
+            </div>
+          )}
+          {heavy.map((unit, index) => this.unitToText(unit, index))}
+          <br />
+          Total: {`${pointTotal}/${(list.mode === 'standard' ? 800 : 1600)}`}
+          <br />
+          <br />
+          Commands:
+          {list.commands.map(command => (
+            <div key={command.name}>
+              {` - ${command.name} (${command.pips})`}
+              <br />
+            </div>
+          ))}
+          <br />
+          Notes:
+          {` ${list.notes}`}
+        </div>
+        <textarea value={listString} style={{ display: 'none' }} />
       </div>
     );
   }

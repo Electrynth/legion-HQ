@@ -21,7 +21,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 class ListFooter extends React.Component {
   state = {
     openModal: false,
-    deleteDialog: false,
     openSnackbar: false,
     snackbarContent: ''
   };
