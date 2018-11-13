@@ -170,7 +170,7 @@ class SideMenuListItem extends React.Component {
               <Grid item>
                 <div style={{ marginLeft: '1rem' }}>
                   <Typography>
-                    {unit.name}
+                    {unit.displayName ? unit.displayName : unit.name}
                   </Typography>
                   <Typography variant="caption">
                     {unit.cost === totalCost ? (

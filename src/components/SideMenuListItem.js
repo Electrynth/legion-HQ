@@ -157,7 +157,7 @@ class SideMenuListItem extends React.Component {
               </Badge>
             </div>
             <ListItemText
-              primary={unit.name}
+              primary={unit.displayName ? unit.displayName : unit.name}
               secondary={unit.cost === unit.totalCost ? (
                 `${unit.cost}`
               ) : (
