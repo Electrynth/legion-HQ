@@ -76,7 +76,6 @@ class App extends Component {
             console.log(refreshResponse.msg);
           } else {
             this.setState({
-              currentList: data.results,
               userLists: refreshData.results
             });
           }
