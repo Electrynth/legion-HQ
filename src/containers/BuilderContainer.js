@@ -923,12 +923,17 @@ class BuilderContainer extends React.Component {
     // TODO: make a function for this since it's a keyword
     let hasPalp = false;
     let hasGuards = false;
+    let hasKrennic = false;
+    let hasDeaths = false;
     list.units.forEach((unit) => {
       rankCounts[unit.rank] += unit.count;
       if (unit.name === 'Emperor Palpatine') hasPalp = true;
       if (unit.name === 'Imperial Royal Guards') hasGuards = true;
+      if (unit.name === 'Director Krennic') hasKrennic = true;
+      if (unit.name === 'Death Troopers') hasDeaths = true;
     });
     if (hasPalp && hasGuards) rankCounts.special -= 1;
+    if (hasKrennic && hasDeaths) rankCounts.special -= 1;
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title faction={list.faction} />
