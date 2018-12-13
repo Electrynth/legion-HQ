@@ -1327,7 +1327,7 @@
       "name": "Death Troopers",
       "type": "trooper",
       "rank": "special",
-      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades", "blaster"],
+      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "blaster", "grenades"],
       "products": [],
       "id": "eh"
     },
@@ -1341,6 +1341,50 @@
       "products": [],
       "rank": "upgrade",
       "id": "ei"
+    },
+    {
+      "cost": 130,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Jyn Erso",
+      "type": "trooper",
+      "rank": "commander",
+      "upgradeBar": ["command", "training", "gear", "blaster"],
+      "products": [],
+      "id": "ej"
+    },
+    {
+      "cost": 60,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Rebel Pathfinders",
+      "type": "trooper",
+      "rank": "special",
+      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "blaster", "grenades"],
+      "products": [],
+      "id": "ek"
+    },
+    {
+      "cost": 0,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "A-180 Pistol Config",
+      "type": "blaster",
+      "requirements": ["Jyn Erso"],
+      "products": [],
+      "rank": "upgrade",
+      "id": "el"
+    },
+    {
+      "cost": 6,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "A-300 Short Range Config",
+      "type": "blaster",
+      "requirements": ["Rebel Pathfinders"],
+      "products": [],
+      "rank": "upgrade",
+      "id": "em"
     }
   ],
   "commands": [
@@ -1559,6 +1603,14 @@
       "faction": "empire",
       "products": [],
       "id": "ef"
+    },
+    {
+      "pips": 1,
+      "name": "Rebellious",
+      "commander": "Jyn Erso",
+      "faction": "rebels",
+      "products": [],
+      "id": "en"
     }
   ]
 }
