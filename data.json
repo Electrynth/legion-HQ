@@ -397,7 +397,8 @@
         "requirements": [],
         "products": [],
         "faction": "",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "aa"
     },
     {
         "cost": 2,
@@ -407,7 +408,8 @@
         "requirements": [],
         "products": [],
         "faction": "",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ab"
     },
     {
         "cost": 9,
@@ -417,7 +419,8 @@
         "requirements": ["rebels"],
         "products": [],
         "faction": "rebels",
-	      "rank": "upgrade"
+	"rank": "upgrade",
+        "id": "ac"
     },
     {
         "cost": 4,
@@ -427,7 +430,8 @@
         "requirements": [],
         "products": ["swl22", "swl24", "swl25"],
         "faction": "",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ad"
     },
     {
         "cost": 35,
@@ -437,7 +441,8 @@
         "requirements": ["Wookie Warriors"],
         "products": ["swl25"],
         "faction": "rebels",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ae"
     },
     {
         "cost": 5,
@@ -447,7 +452,8 @@
         "requirements": ["dark side"],
         "products": ["swl23"],
         "faction": "",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "af"
     },
     {
         "cost": 19,
@@ -457,7 +463,8 @@
         "requirements": ["rebels"],
         "products": [],
         "faction": "rebels",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ag"
     },
     {
         "cost": 50,
@@ -468,7 +475,8 @@
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["command", "gear"],
-        "products": ["swl21"]
+        "products": ["swl21"],
+        "id": "ah"
     },
     {
         "cost": 25,
@@ -478,7 +486,8 @@
         "requirements": ["Imperial Royal Guards"],
         "products": ["swl22"],
         "faction": "empire",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ai"
     },
     {
         "cost": 20,
@@ -488,7 +497,8 @@
         "requirements": ["empire"],
         "products": [],
         "faction": "empire",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "aj"
     },
     {
         "cost": 50,
@@ -499,7 +509,8 @@
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["command", "gear"],
-        "products": []
+        "products": [],
+        "id": "ak"
     },
     {
         "cost": 140,
@@ -509,7 +520,8 @@
         "type": "trooper",
         "rank": "operative",
         "upgradeBar": ["training", "training", "gear", "gear"],
-        "products": ["swl18"]
+        "products": ["swl18"],
+        "id": "al"
     },
     {
         "cost": 28,
@@ -519,7 +531,8 @@
         "requirements": ["Scout Troopers"],
         "products": ["swl19"],
         "faction": "empire",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "am"
     },
     {
         "cost": 26,
@@ -529,7 +542,8 @@
         "requirements": ["Scout Troopers"],
         "products": ["swl19"],
         "faction": "empire",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "an"
     },
     {
         "cost": 6,
@@ -539,7 +553,8 @@
         "requirements": [],
         "products": ["swl18", "swl24"],
         "faction": "",
-        "rank": "upgrade"
+        "rank": "upgrade",
+        "id": "ao"
     },
     {
         "cost": 75,
@@ -549,7 +564,8 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
-        "products": ["swl25"]
+        "products": ["swl25"],
+        "id": "ap"
     },
     {
         "cost": 16,
@@ -560,7 +576,8 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-        "products": ["swl19"]
+        "products": ["swl19"],
+        "id": "aq"
     },
     {
         "cost": 60,
@@ -570,7 +587,8 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-        "products": ["swl19"]
+        "products": ["swl19"],
+        "id": "ar"
     },
     {
         "cost": 75,
@@ -581,7 +599,8 @@
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
-        "products": ["swl22"]
+        "products": ["swl22"],
+        "id": "as"
     },
     {
         "cost": 210,
@@ -591,7 +610,8 @@
         "type": "trooper",
         "rank": "commander",
         "upgradeBar": ["force", "force", "force", "command"],
-        "products": ["swl23"]
+        "products": ["swl23"],
+        "id": "at"
     },
     {
         "cost": 110,
@@ -601,7 +621,8 @@
         "type": "trooper",
         "rank": "operative",
         "upgradeBar": ["training", "training", "gear"],
-        "products": ["swl24"]
+        "products": ["swl24"],
+        "id": "au"
     },
     {
       "cost": 26,
@@ -611,7 +632,8 @@
       "requirements": ["Rebel Commandos"],
       "products": ["swl21"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "av"
     },
     {
       "cost": 10,
@@ -621,7 +643,8 @@
       "requirements": [],
       "products": ["swl14", "swl15"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "aw"
     },
     {
       "cost": 10,
@@ -631,7 +654,8 @@
       "requirements": [],
       "products": ["swl20"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ax"
     },
     {
       "cost": 10,
@@ -641,7 +665,8 @@
       "requirements": [],
       "products": ["swl14", "swl15","swl19", "swl21"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ay"
     },
     {
       "cost": 8,
@@ -651,7 +676,8 @@
       "requirements": [],
       "products": ["swl18", "swl19", "swl20", "swl21"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "az"
     },
     {
       "cost": 8,
@@ -661,7 +687,8 @@
       "products": ["swl19", "swl20", "swl21"],
       "requirements": [],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ba"
     },
     {
       "cost": 28,
@@ -671,7 +698,8 @@
       "requirements": ["Rebel Commandos"],
       "products": [],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bb"
     },
     {
       "cost": 10,
@@ -681,7 +709,8 @@
       "requirements": [],
       "products": [],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bc"
     },
     {
       "cost": 60,
@@ -691,7 +720,8 @@
       "type": "trooper",
       "rank": "special",
       "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-      "products": []
+      "products": [],
+      "id": "bd"
     },
     {
       "cost": 16,
@@ -702,8 +732,9 @@
       "type": "trooper",
       "rank": "special",
       "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
-      "products": []
-      },
+      "products": [],
+      "id": "be"
+    },
     {
       "cost": 90,
       "isUnique": true,
@@ -712,7 +743,8 @@
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["command", "command", "gear"],
-      "products": []
+      "products": [],
+      "id": "bf"
     },
     {
       "cost": 120,
@@ -722,7 +754,8 @@
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["command", "training", "gear"],
-      "products": []
+      "products": [],
+      "id": "bg"
     },
     {
       "cost": 55,
@@ -733,7 +766,8 @@
       "type": "emplacement trooper",
       "rank": "support",
       "upgradeBar": ["comms", "generator"],
-      "products": []
+      "products": [],
+      "id": "bh"
     },
     {
       "cost": 70,
@@ -744,7 +778,8 @@
       "type": "emplacement trooper",
       "rank": "support",
       "upgradeBar": ["comms", "generator"],
-      "products": []
+      "products": [],
+      "id": "bi"
     },
     {
       "cost": 160,
@@ -754,7 +789,8 @@
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["force", "force", "gear"],
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "bj"
     },
     {
       "cost": 40,
@@ -764,7 +800,8 @@
       "type": "trooper",
       "rank": "corps",
       "upgradeBar": ["heavy weapon", "personnel", "gear", "grenades"],
-      "products": ["swl01", "swl05"]
+      "products": ["swl01", "swl05"],
+      "id": "bk"
     },
     {
       "cost": 44,
@@ -774,7 +811,8 @@
       "type": "trooper",
       "rank": "corps",
       "upgradeBar": ["heavy weapon", "personnel", "gear", "grenades"],
-      "products": []
+      "products": [],
+      "id": "bl"
     },
     {
       "cost": 55,
@@ -784,7 +822,8 @@
       "type": "ground vehicle",
       "rank": "support",
       "upgradeBar": ["hardpoint", "comms"],
-      "products": ["swl01", "swl04"]
+      "products": ["swl01", "swl04"],
+      "id": "bm"
     },
     {
       "cost": 175,
@@ -794,7 +833,8 @@
       "type": "repulsor vehicle",
       "rank": "heavy",
       "upgradeBar": ["pilot", "hardpoint", "comms"],
-      "products": ["swl09"]
+      "products": ["swl09"],
+      "id": "bn"
     },
     {
       "cost": 200,
@@ -804,7 +844,8 @@
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["force", "force", "force"],
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "bo"
     },
     {
       "cost": 80,
@@ -814,7 +855,8 @@
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["command", "command", "gear"],
-      "products": []
+      "products": [],
+      "id": "bp"
     },
     {
       "cost": 44,
@@ -824,7 +866,8 @@
       "type": "trooper",
       "rank": "corps",
       "upgradeBar": ["heavy weapon", "personnel", "gear", "grenades"],
-      "products": ["swl01", "swl07"]
+      "products": ["swl01", "swl07"],
+      "id": "bq"
     },
     {
       "cost": 48,
@@ -834,7 +877,8 @@
       "type": "trooper",
       "rank": "corps",
       "upgradeBar": ["heavy weapon", "personnel", "gear", "grenades"],
-      "products": []
+      "products": [],
+      "id": "br"
     },
     {
       "cost": 90,
@@ -844,7 +888,8 @@
       "type": "repulsor vehicle",
       "rank": "support",
       "upgradeBar": ["comms"],
-      "products": ["swl01", "swl06"]
+      "products": ["swl01", "swl06"],
+      "id": "bs"
     },
     {
       "cost": 195,
@@ -854,7 +899,8 @@
       "type": "ground vehicle",
       "rank": "heavy",
       "upgradeBar": ["pilot", "hardpoint", "hardpoint", "hardpoint", "comms"],
-      "products": ["swl08"]
+      "products": ["swl08"],
+      "id": "bt"
     },
     {
       "cost": 10,
@@ -864,7 +910,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bu"
     },
     {
       "cost": 10,
@@ -874,7 +921,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bv"
     },
     {
       "cost": 15,
@@ -884,7 +932,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bw"
     },
     {
       "cost": 10,
@@ -894,7 +943,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bx"
     },
     {
       "cost": 5,
@@ -904,7 +954,8 @@
       "requirements": ["dark side"],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "by"
     },
     {
       "cost": 5,
@@ -914,7 +965,8 @@
       "requirements": ["light side"],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "bz"
     },
     {
       "cost": 6,
@@ -924,7 +976,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ca"
     },
     {
       "cost": 3,
@@ -934,7 +987,8 @@
       "requirements": [],
       "products": ["swl07"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cb"
     },
     {
       "cost": 3,
@@ -944,7 +998,8 @@
       "requirements": [],
       "products": [],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cc"
     },
     {
       "cost": 32,
@@ -954,7 +1009,8 @@
       "requirements": ["Rebel Troopers"],
       "products": ["swl01", "swl05"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cd"
     },
     {
       "cost": 22,
@@ -964,7 +1020,8 @@
       "requirements": ["Rebel Troopers"],
       "products": ["swl01", "swl05"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ce"
     },
     {
       "cost": 10,
@@ -974,7 +1031,8 @@
       "requirements": ["Rebel Troopers"],
       "products": ["swl01", "swl05"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cf"
     },
     {
       "cost": 24,
@@ -984,7 +1042,8 @@
       "requirements": ["Stormtroopers"],
       "products": ["swl01", "swl07"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cg"
     },
     {
       "cost": 34,
@@ -994,7 +1053,8 @@
       "requirements": ["Stormtroopers"],
       "products": ["swl01", "swl07"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ch"
     },
     {
       "cost": 11,
@@ -1004,7 +1064,8 @@
       "requirements": ["Stormtroopers"],
       "products": ["swl01", "swl07"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ci"
     },
     {
       "cost": 5,
@@ -1014,7 +1075,8 @@
       "requirements": [],
       "products": ["swl05", "swl07"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cj"
     },
     {
       "cost": 5,
@@ -1024,7 +1086,8 @@
       "requirements": [],
       "products": ["swl01"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ck"
     },
     {
       "cost": 15,
@@ -1034,7 +1097,8 @@
       "requirements": [],
       "products": ["swl04", "swl06", "swl08"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cl"
     },
     {
       "cost": 10,
@@ -1044,7 +1108,8 @@
       "requirements": [],
       "products": ["swl01", "swl04", "swl06", "swl08"],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cm"
     },
     {
       "cost": 30,
@@ -1054,7 +1119,8 @@
       "requirements": ["AT-RT"],
       "products": ["swl01", "swl04"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cn"
     },
     {
       "cost": 25,
@@ -1064,7 +1130,8 @@
       "requirements": ["AT-RT"],
       "products": ["swl01", "swl04"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "co"
     },
     {
       "cost": 35,
@@ -1074,7 +1141,8 @@
       "requirements": ["AT-RT"],
       "products": ["swl01", "swl04"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cp"
     },
     {
       "cost": 5,
@@ -1084,7 +1152,8 @@
       "requirements": ["repulsor vehicle", "rebels"],
       "products": ["swl09"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cq"
     },
     {
       "cost": 20,
@@ -1094,7 +1163,8 @@
       "requirements": ["T-47 Airspeeder"],
       "products": ["swl09"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cr"
     },
     {
       "cost": 8,
@@ -1104,7 +1174,8 @@
       "requirements": ["T-47 Airspeeder"],
       "products": ["swl09"],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cs"
     },
     {
       "cost": 10,
@@ -1114,7 +1185,8 @@
       "requirements": ["ground vehicle", "empire"],
       "products": ["swl08"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "ct"
     },
     {
       "cost": 20,
@@ -1124,7 +1196,8 @@
       "requirements": ["AT-ST"],
       "products": ["swl08"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cu"
     },
     {
       "cost": 10,
@@ -1134,7 +1207,8 @@
       "requirements": ["AT-ST"],
       "products": ["swl08"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cv"
     },
     {
       "cost": 15,
@@ -1144,7 +1218,8 @@
       "requirements": ["AT-ST"],
       "products": ["swl08"],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cw"
     },
     {
       "cost": 10,
@@ -1154,7 +1229,8 @@
       "requirements": [],
       "products": [],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cx"
     },
     {
       "cost": 5,
@@ -1164,7 +1240,8 @@
       "requirements": [],
       "products": [],
       "faction": "",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cy"
     },
     {
       "cost": 11,
@@ -1174,7 +1251,8 @@
       "requirements": ["Fleet Troopers"],
       "products": [],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "cz"
     },
     {
       "cost": 23,
@@ -1184,7 +1262,8 @@
       "requirements": ["Fleet Troopers"],
       "products": [],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "da"
     },
     {
       "cost": 33,
@@ -1194,7 +1273,8 @@
       "requirements": ["Fleet Troopers"],
       "products": [],
       "faction": "rebels",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "db"
     },
     {
       "cost": 12,
@@ -1204,7 +1284,8 @@
       "requirements": ["Snowtroopers"],
       "products": [],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "dc"
     },
     {
       "cost": 34,
@@ -1214,7 +1295,8 @@
       "requirements": ["Snowtroopers"],
       "products": [],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "dd"
     },
     {
       "cost": 20,
@@ -1224,7 +1306,41 @@
       "requirements": ["Snowtroopers"],
       "products": [],
       "faction": "empire",
-      "rank": "upgrade"
+      "rank": "upgrade",
+      "id": "de"
+    },
+    {
+      "cost": 90,
+      "isUnique": true,
+      "faction": "empire",
+      "name": "Director Krennic",
+      "type": "trooper",
+      "rank": "commander",
+      "upgradeBar": ["command", "command", "gear"],
+      "products": [],
+      "id": "eg"
+    },
+    {
+      "cost": 76,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Death Troopers",
+      "type": "trooper",
+      "rank": "special",
+      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
+      "products": [],
+      "id": "eh"
+    },
+    {
+      "cost": 5,
+      "isUnique": false,
+      "faction": "",
+      "name": "Strict Orders",
+      "type": "command",
+      "requirements": [],
+      "products": [],
+      "rank": "upgrade",
+      "id": "ei"
     }
   ],
   "commands": [
@@ -1233,189 +1349,216 @@
       "name": "Assault",
       "commander": "",
       "faction": "",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "df"
     },
     {
       "pips": 2,
       "name": "Push",
       "commander": "",
       "faction": "",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "dg"
     },
     {
       "pips": 1,
       "name": "Ambush",
       "commander": "",
       "faction": "",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "dh"
     },
     {
       "pips": 3,
       "name": "Master of Evil",
       "commander": "Darth Vader",
       "faction": "empire",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "di"
     },
     {
       "pips": 3,
       "name": "Imperial Discipline",
       "commander": "General Veers",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dj"
     },
     {
       "pips": 2,
       "name": "New Ways to Motivate Them",
       "commander": "Darth Vader",
       "faction": "empire",
-      "products": ["Darth Vader"]
+      "products": ["Darth Vader"],
+      "id": "dk"
     },
     {
       "pips": 2,
       "name": "Evasive Maneuvers",
       "commander": "General Veers",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dl"
     },
     {
       "pips": 1,
       "name": "Maximum Firepower",
       "commander": "General Veers",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dm"
     },
     {
       "pips": 1,
       "name": "Implacable",
       "commander": "Darth Vader",
       "faction": "empire",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "dh"
     },
     {
       "pips": 3,
       "name": "Return of the Jedi",
       "commander": "Luke Skywalker",
       "faction": "rebels",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "do"
     },
     {
       "pips": 3,
       "name": "Somebody Has to Save Our Skins",
       "commander": "Leia Organa",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "dp"
     },
     {
       "pips": 2,
       "name": "My Ally is the Force",
       "commander": "Luke Skywalker",
       "faction": "rebels",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "dq"
     },
     {
       "pips": 2,
       "name": "No Time for Sorrows",
       "commander": "Leia Organa",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "dr"
     },
     {
       "pips": 1,
       "name": "Son of Skywalker",
       "commander": "Luke Skywalker",
       "faction": "rebels",
-      "products": ["swl01"]
+      "products": ["swl01"],
+      "id": "ds"
     },
     {
       "pips": 1,
       "name": "Coordinated Bombardment",
       "commander": "Leia Organa",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "dt"
     },
     {
       "pips": 3,
       "name": "Change of Plans",
       "commander": "Han Solo",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "du"
     },
     {
       "pips": 1,
       "name": "Sorry About the Mess",
       "commander": "Han Solo",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "dv"
     },
     {
       "pips": 1,
       "name": "Whipcord Launcher",
       "commander": "Boba Fett",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dw"
     },
     {
       "pips": 2,
       "name": "ZX Flame Projector",
       "commander": "Boba Fett",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dx"
     },
     {
       "pips": 3,
       "name": "Z-6 Jetpack Rocket",
       "commander": "Boba Fett",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "dy"
     },
     {
       "pips": 3,
       "name": "Notorious Scoundrels",
       "commander": "Chewbacca",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "dz"
     },
     {
       "pips": 3,
       "name": "An Entire Legion",
       "commander": "Emperor Palpatine",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "ea"
     },
     {
       "pips": 2,
       "name": "Reckless Diversion",
       "commander": "Han Solo",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "eb"
     },
     {
       "pips": 1,
       "name": "Covert Observation",
       "commander": "",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "ec"
     },
     {
       "pips": 1,
       "name": "Sabotaged Communications",
       "commander": "",
       "faction": "rebels",
-      "products": []
+      "products": [],
+      "id": "ed"
     },
     {
       "pips": 1,
       "name": "And Now You Will Die",
       "commander": "Emperor Palpatine",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "ee"
     },
     {
       "pips": 2,
       "name": "Give In To Your Anger",
       "commander": "Emperor Palpatine",
       "faction": "empire",
-      "products": []
+      "products": [],
+      "id": "ef"
     }
   ]
 }

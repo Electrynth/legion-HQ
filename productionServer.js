@@ -147,7 +147,8 @@ app.get('/data', (req, res) => {
     const { cards, commands } = data;
     let currentCardIdIndex = 0;
     cards.forEach((card) => {
-      const id = getCardId(currentCardIdIndex);
+      // const id = getCardId(currentCardIdIndex);
+      const id = card.id;
       currentCardIdIndex += 1;
       let imageName = `${card.name.replace(spaceRegex, '%20')}`;
       imageName = imageName.replace(dotRegex, '%2E');
@@ -177,7 +178,8 @@ app.get('/data', (req, res) => {
       }
     });
     commands.forEach((command) => {
-      const id = getCardId(currentCardIdIndex);
+      // const id = getCardId(currentCardIdIndex);
+      const id = command.id;
       currentCardIdIndex += 1;
       response.commandsById.push(id);
       response.uniques[id] = false;
