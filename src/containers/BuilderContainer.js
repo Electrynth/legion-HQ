@@ -474,6 +474,20 @@ class BuilderContainer extends React.Component {
             style={{ width: '30px', height: '30px' }}
           />
         )
+      },
+      blaster: {
+        name: 'Blaster',
+        viewFilter: {
+          type: 'UPGRADE',
+          upgradeType: 'blaster'
+        },
+        icon: (
+          <img
+            alt="Blaster"
+            src="/upgradeTypeIcons/hardpoint.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       }
     };
     const allUpgradeOptions = [];
