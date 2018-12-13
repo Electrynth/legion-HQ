@@ -1327,7 +1327,7 @@
       "name": "Death Troopers",
       "type": "trooper",
       "rank": "special",
-      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
+      "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades", "blaster"],
       "products": [],
       "id": "eh"
     },
@@ -1414,7 +1414,7 @@
       "commander": "Darth Vader",
       "faction": "empire",
       "products": ["swl01"],
-      "id": "dh"
+      "id": "dn"
     },
     {
       "pips": 3,
