@@ -417,7 +417,7 @@
         "requirements": ["rebels"],
         "products": [],
         "faction": "rebels",
-	"rank": "upgrade"
+	      "rank": "upgrade"
     },
     {
         "cost": 4,
