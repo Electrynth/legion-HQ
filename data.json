@@ -1430,6 +1430,18 @@
       "upgradeBar": ["pilot", "hardpoint", "comms"],
       "products": [],
       "id": "ev"
+    },
+    {
+      "cost": 18,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "2-1B Medical Droid",
+      "displayName": "Medical Droid",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "ew"
     }
   ],
   "commands": [
