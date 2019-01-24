@@ -1385,6 +1385,51 @@
       "products": [],
       "rank": "upgrade",
       "id": "em"
+    },
+    {
+      "cost": 5,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Comms Relay",
+      "type": "comms",
+      "requirements": [],
+      "products": [],
+      "rank": "upgrade",
+      "id": "es"
+    },
+    {
+      "cost": 8,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "R5 Astromech Droid",
+      "displayName": "R5 Astromech",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "et"
+    },
+    {
+      "cost": 155,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Assault Tank",
+      "type": "ground vehicle",
+      "rank": "heavy",
+      "upgradeBar": ["pilot", "hardpoint", "comms"],
+      "products": [],
+      "id": "eu"
+    },
+    {
+      "cost": 75,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Landspeeder",
+      "type": "repulsor vehicle",
+      "rank": "heavy",
+      "upgradeBar": ["pilot", "hardpoint", "comms"],
+      "products": [],
+      "id": "ev"
     }
   ],
   "commands": [
@@ -1611,6 +1656,38 @@
       "faction": "rebels",
       "products": [],
       "id": "en"
+    },
+    {
+      "pips": 2,
+      "name": "Brains and Brawn",
+      "commander": "Chewbacca",
+      "faction": "rebels",
+      "products": [],
+      "id": "eo"
+    },
+    {
+      "pips": 1,
+      "name": "Common Cause",
+      "commander": "Chewbacca",
+      "faction": "rebels",
+      "products": [],
+      "id": "ep"
+    },
+    {
+      "pips": 2,
+      "name": "Turning the Tide",
+      "commander": "",
+      "faction": "rebels",
+      "products": [],
+      "id": "eq"
+    },
+    {
+      "pips": 3,
+      "name": "Covering Fire",
+      "commander": "",
+      "faction": "rebels",
+      "products": [],
+      "id": "er"
     }
   ]
 }
