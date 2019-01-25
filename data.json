@@ -1451,7 +1451,7 @@
       "type": "personnel",
       "rank": "upgrade",
       "products": [],
-      "requirements": [],
+      "requirements": ["empire"],
       "id": "ex"
     },
     {
