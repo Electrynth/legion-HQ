@@ -594,13 +594,13 @@ class BuilderContainer extends React.Component {
           }
         } else if (oldUnit.count === 1) { // if theres only 1, just mutate that one
           oldUnit.upgradesEquipped[viewFilter.upgradeIndex] = card;
-          if (card.name === 'Rebel Comms Technician') {
+          if (card.name === 'Rebel Comms Technician' || card.name === 'Imperial Comms Technician') {
             oldUnit.upgradeBar.push('comms');
             oldUnit.upgradesEquipped.push(null);
           }
         } else { // upgraded a card on a stack
           oldUnit.count -= 1; // decrease stack by 1
-          if (card.name === 'Rebel Comms Technician') {
+          if (card.name === 'Rebel Comms Technician' || card.name === 'Imperial Comms Technician') {
             newUnit.upgradeBar.push('comms');
             newUnit.upgradesEquipped.push(null);
           }
@@ -622,7 +622,7 @@ class BuilderContainer extends React.Component {
     const { list } = this.state;
     const oldUnit = list.units[unitIndex];
     const newUnit = JSON.parse(JSON.stringify(oldUnit));
-    if (newUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Comms Technician') {
+    if (newUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Comms Technician' || newUnit.upgradesEquipped[upgradeIndex].name === 'Imperial Comms Technician') {
       const commsIndex = newUnit.upgradeBar.indexOf('comms');
       newUnit.upgradesEquipped[upgradeIndex] = null;
       newUnit.upgradeBar.splice(commsIndex, 1);
@@ -646,7 +646,7 @@ class BuilderContainer extends React.Component {
       if (oldUnit.upgradesEquipped[upgradeIndex].id in list.uniques) {
         list.uniques[oldUnit.upgradesEquipped[upgradeIndex].id] = false;
       }
-      if (oldUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Comms Technician') {
+      if (oldUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Comms Technician' || oldUnit.upgradesEquipped[upgradeIndex].name === 'Imperial Comms Technician') {
         const commsIndex = list.units[unitIndex].upgradeBar.indexOf('comms');
         list.units[unitIndex].upgradeBar.splice(commsIndex, 1);
         list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;

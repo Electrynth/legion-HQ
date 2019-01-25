@@ -1442,6 +1442,39 @@
       "products": [],
       "requirements": [],
       "id": "ew"
+    },
+    {
+      "cost": 10,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Imperial Comms Technician",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "ex"
+    },
+    {
+      "cost": 19,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "FX-9 Medical Droid",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "ey"
+    },
+    {
+      "cost": 9,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "R4 Astromech Droid",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "ez"
     }
   ],
   "commands": [
@@ -1700,6 +1733,22 @@
       "faction": "rebels",
       "products": [],
       "id": "er"
+    },
+    {
+      "pips": 3,
+      "name": "Coordinated Fire",
+      "commander": "",
+      "faction": "empire",
+      "products": [],
+      "id": "fa"
+    },
+    {
+      "pips": 2,
+      "name": "Pinned Down",
+      "commander": "",
+      "faction": "empire",
+      "products": [],
+      "id": "fb"
     }
   ]
 }
