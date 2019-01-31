@@ -113,6 +113,17 @@ class SideMenuListItem extends React.Component {
       count,
       classes
     } = this.props;
+    let allUpgradesEquipped = false;
+    let numUpgradesEquipped = 0;
+    let totalCost = unit.cost;
+    const maxNumUpgrades = unit.upgradesEquipped.length;
+    unit.upgradesEquipped.forEach((upgrade) => {
+      if (upgrade) {
+        numUpgradesEquipped += 1;
+        totalCost += upgrade.cost;
+      }
+    });
+    if (numUpgradesEquipped === maxNumUpgrades) allUpgradesEquipped = true;
     return (
       <Slide
         in
@@ -158,16 +169,16 @@ class SideMenuListItem extends React.Component {
             </div>
             <ListItemText
               primary={unit.displayName ? unit.displayName : unit.name}
-              secondary={unit.cost === unit.totalCost ? (
+              secondary={unit.cost === totalCost ? (
                 `${unit.cost}`
               ) : (
-                `${unit.cost} (${unit.totalCost})`
+                `${unit.cost} (${totalCost})`
               )}
             />
             <ListItemSecondaryAction>
               <Grow
                 key="upgradeOptionButton"
-                in={true}
+                in={!allUpgradesEquipped}
                 timeout={250}
               >
                 <IconButton
