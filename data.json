@@ -1313,7 +1313,8 @@
       "cost": 90,
       "isUnique": true,
       "faction": "empire",
-      "name": "Director Krennic",
+      "name": "Director Orson Krennic",
+      "displayName": "Director Krennic",
       "type": "trooper",
       "rank": "commander",
       "upgradeBar": ["command", "command", "gear"],
@@ -1324,7 +1325,8 @@
       "cost": 76,
       "isUnique": false,
       "faction": "empire",
-      "name": "Death Troopers",
+      "name": "Imperial Death Troopers",
+      "displayName": "Death Troopers",
       "type": "trooper",
       "rank": "special",
       "upgradeBar": ["heavy weapon", "training", "comms", "gear", "blaster", "grenades"],
@@ -1486,6 +1488,61 @@
       "products": [],
       "requirements": ["Jyn Erso"],
       "id": "fe"
+    },
+    {
+      "cost": 0,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "E-11D Grenade Launcher Config",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Imperial Death Troopers"],
+      "id": "ff"
+    },
+    {
+      "cost": 6,
+      "isUnique": false,
+      "faction": "",
+      "name": "Endurance",
+      "type": "training",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "fg"
+    },
+    {
+      "cost": 25,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "The Darksaber",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Sabine Wren"],
+      "id": "fh"
+    },
+    {
+      "cost": 85,
+      "isUnique": true,
+      "faction": "empire",
+      "name": "Bossk",
+      "type": "trooper",
+      "rank": "operative",
+      "upgradeBar": ["training", "training", "gear"],
+      "products": [],
+      "id": "fi"
+    },
+    {
+      "cost": 125,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Sabine Wren",
+      "type": "trooper",
+      "rank": "operative",
+      "upgradeBar": ["training", "gear", "gear", "blaster"],
+      "products": [],
+      "id": "fj"
     }
   ],
   "commands": [
@@ -1776,6 +1833,30 @@
       "faction": "rebels",
       "products": [],
       "id": "fd"
+    },
+    {
+      "pips": 3,
+      "name": "Legacy of Mandalore",
+      "commander": "Sabine Wren",
+      "faction": "rebels",
+      "products": [],
+      "id": "fk"
+    },
+    {
+      "pips": 3,
+      "name": "Lying in Wait",
+      "commander": "Bossk",
+      "faction": "empire",
+      "products": [],
+      "id": "fl"
+    },
+    {
+      "pips": 1,
+      "name": "Voracious Ambition",
+      "commander": "Director Orson Krennic",
+      "faction": "empire",
+      "products": [],
+      "id": "fm"
     }
   ]
 }
