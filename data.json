@@ -572,7 +572,7 @@
         "isUnique": false,
         "faction": "empire",
         "name": "Scout Troopers Strike Team",
-        "displayName": "Scout Trooper Strike Team",
+        "displayName": "Scout Strike Team",
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "comms", "gear", "grenades"],
@@ -1389,7 +1389,7 @@
     {
       "cost": 5,
       "isUnique": false,
-      "faction": "rebels",
+      "faction": "",
       "name": "Comms Relay",
       "type": "comms",
       "requirements": [],
@@ -1475,6 +1475,17 @@
       "products": [],
       "requirements": [],
       "id": "ez"
+    },
+    {
+      "cost": 0,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "A-180 Rifle Config",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Jyn Erso"],
+      "id": "fe"
     }
   ],
   "commands": [
@@ -1749,6 +1760,22 @@
       "faction": "empire",
       "products": [],
       "id": "fb"
+    },
+    {
+      "pips": 2,
+      "name": "Trust Goes Both Ways",
+      "commander": "Jyn Erso",
+      "faction": "rebels",
+      "products": [],
+      "id": "fc"
+    },
+    {
+      "pips": 3,
+      "name": "Complete the Mission",
+      "commander": "Jyn Erso",
+      "faction": "rebels",
+      "products": [],
+      "id": "fd"
     }
   ]
 }
