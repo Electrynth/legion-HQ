@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import { MuiThemeProvider, withStyles, createMuiTheme } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
@@ -115,6 +116,26 @@ const styles = {
   }
 };
 
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+  return result;
+};
+
+const getItemStyle = (isDragging, draggableStyle) => ({
+  userSelect: 'none',
+  background: isDragging ? 'lightgrey' : 'white',
+  ...draggableStyle,
+  marginBottom: '.8rem',
+  top: isDragging ? '0px' : '0px',
+  position: isDragging ? 'relative' : ''
+});
+
+const getListStyle = isDraggingOver => ({
+  background: 'white'
+});
+
 class BuilderContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -175,7 +196,6 @@ class BuilderContainer extends React.Component {
       Axios.get(`/lists?listId=${path}`).then((response) => {
         const { data } = response;
         if ('results' in data && data.results.length > 0) {
-          const loadedList = data.results[0];
           this.setState({
             list: data.results[0]
           });
@@ -733,6 +753,21 @@ class BuilderContainer extends React.Component {
     this.setState({ list, viewFilter: { type: 'LIST' } });
   }
 
+
+  onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+    const { list } = this.state;
+    const units = reorder(
+      list.units,
+      result.source.index,
+      result.destination.index
+    );
+    list.units = units;
+    this.setState({ list });
+  }
+
   changeListMode = () => {
     const { list } = this.state;
     list.mode = list.mode === 'standard' ? 'grand army' : 'standard';
@@ -781,7 +816,6 @@ class BuilderContainer extends React.Component {
       isSpeedDialClicked: !isSpeedDialClicked
     });
   }
-
 
   render() {
     const {
@@ -1074,33 +1108,59 @@ class BuilderContainer extends React.Component {
                 <Divider style={{ marginBottom: '0.25rem ' }} />
                 <div>
                   <List dense>
-                    {list.units.map((unit, index) => (
-                      <div key={`${unit.name}_${index}`}>
-                        {mobile ? (
-                          <SideMenuListItemMobile
-                            count={unit.count}
-                            unit={unit}
-                            unitIndex={index}
-                            upgradeOptions={allUpgradeOptions[index]}
-                            menuOptions={allMenuOptions[index]}
-                            removeUpgrade={this.removeUpgrade}
-                            changeViewFilter={this.changeViewFilter}
-                            mobile={mobile}
-                          />
-                        ) : (
-                          <SideMenuListItem
-                            count={unit.count}
-                            unit={unit}
-                            unitIndex={index}
-                            upgradeOptions={allUpgradeOptions[index]}
-                            menuOptions={allMenuOptions[index]}
-                            removeUpgrade={this.removeUpgrade}
-                            changeViewFilter={this.changeViewFilter}
-                            mobile={mobile}
-                          />
+                    <DragDropContext onDragEnd={this.onDragEnd}>
+                      <Droppable droppableId="droppable">
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            style={getListStyle(snapshot.isDraggingOver)}
+                          >
+                            {list.units.map((unit, index) => (
+                              <div key={`${unit.name}_${index}`}>
+                                {mobile ? (
+                                  <SideMenuListItemMobile
+                                    count={unit.count}
+                                    unit={unit}
+                                    unitIndex={index}
+                                    upgradeOptions={allUpgradeOptions[index]}
+                                    menuOptions={allMenuOptions[index]}
+                                    removeUpgrade={this.removeUpgrade}
+                                    changeViewFilter={this.changeViewFilter}
+                                    mobile={mobile}
+                                  />
+                                ) : (
+                                  <Draggable key={`${unit.name}_${index}`} draggableId={`${unit.name}_${index}`} index={index}>
+                                    {(provided, snapshot) => (
+                                      <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        style={getItemStyle(
+                                          snapshot.isDragging,
+                                          provided.draggableProps.style
+                                        )}
+                                      >
+                                        <SideMenuListItem
+                                          count={unit.count}
+                                          unit={unit}
+                                          unitIndex={index}
+                                          upgradeOptions={allUpgradeOptions[index]}
+                                          menuOptions={allMenuOptions[index]}
+                                          removeUpgrade={this.removeUpgrade}
+                                          changeViewFilter={this.changeViewFilter}
+                                          mobile={mobile}
+                                        />
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                )}
+                              </div>
+                            ))}
+                            {provided.placeholder}
+                          </div>
                         )}
-                      </div>
-                    ))}
+                      </Droppable>
+                    </DragDropContext>
                   </List>
                   <ListFooter
                     list={list}

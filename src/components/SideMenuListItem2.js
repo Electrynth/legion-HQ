@@ -122,6 +122,7 @@ class SideMenuListItem extends React.Component {
       }
     });
     if (numUpgradesEquipped === maxNumUpgrades) allUpgradesEquipped = true;
+    const desktopMenuOptions = menuOptions.filter(option => !option.name.includes('Move'))
     return (
       <div>
         <Grid
@@ -212,7 +213,7 @@ class SideMenuListItem extends React.Component {
             <Grid item>
               <Grow
                 key="upgradeOptionButton"
-                in={true}
+                in
                 timeout={250}
               >
                 <IconButton
@@ -266,14 +267,14 @@ class SideMenuListItem extends React.Component {
                 <MoreVertIcon />
               </IconButton>
             </Grow>
-            {menuOptions ? (
+            {desktopMenuOptions ? (
               <Menu
                 id="optionMenu"
                 anchorEl={optionMenuAnchor}
                 open={Boolean(optionMenuAnchor)}
                 onClose={() => this.setState({ optionMenuAnchor: null })}
               >
-                {menuOptions.map((option, index) => (
+                {desktopMenuOptions.map((option, index) => (
                   <MenuItem
                     key={`${option.name}_${index}`}
                     onClick={() => {
@@ -291,7 +292,7 @@ class SideMenuListItem extends React.Component {
             ) : undefined}
           </Grid>
         </Grid>
-        <hr style={{ opacity: 0.5 }} />
+        <div style={{ borderBottom: '1px solid lightgrey', marginTop: '0.5rem' }} />
       </div>
     );
   }
