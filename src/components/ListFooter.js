@@ -21,6 +21,7 @@ import ReactToPrint from 'react-to-print';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import ListImage from 'components/ListImage';
+import Typography from '@material-ui/core/Typography';
 
 class ListFooter extends React.Component {
   state = {
@@ -364,15 +365,9 @@ class ListFooter extends React.Component {
                       )}
                       {dataUrl && (
                         <Grid item>
-                          <Button
-                            variant="contained"
-                            onClick={() => {
-                              this.copyToClip(dataUrl);
-                              this.openSnackbar('Image URL copied to clipboard.');
-                            }}
-                          >
-                            Copy image data URL to clipboard
-                          </Button>
+                          <Typography>
+                            Image is below
+                          </Typography>
                         </Grid>
                       )}
                       <Grid item>
