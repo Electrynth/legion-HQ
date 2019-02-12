@@ -168,6 +168,7 @@ class ListImage extends React.Component {
                       if (upgrade) {
                         filtered.push(
                           <Chip
+                            key={upgrade.name}
                             color="primary"
                             avatar={<Avatar src={upgrade.iconLocation} />}
                             label={upgrade.name}
