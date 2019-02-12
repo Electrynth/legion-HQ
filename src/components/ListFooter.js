@@ -1,4 +1,5 @@
 import React from 'react';
+import domtoimage from 'dom-to-image';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
@@ -14,15 +15,19 @@ import SaveIcon from '@material-ui/icons/Save';
 import LinkIcon from '@material-ui/icons/Link';
 import CloseIcon from '@material-ui/icons/Close';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import { withRouter } from 'react-router-dom';
 import ReactToPrint from 'react-to-print';
+import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import ListImage from 'components/ListImage';
 
 class ListFooter extends React.Component {
   state = {
     openModal: false,
     openSnackbar: false,
-    snackbarContent: ''
+    snackbarContent: '',
+    openImageModal: false
   };
 
   openSnackbar = (message) => {
@@ -50,9 +55,23 @@ class ListFooter extends React.Component {
     document.removeEventListener('copy', listener);
   }
 
+  addImageToNode = () => {
+    const node = document.getElementById('listToImage');
+    const image = new Image();
+    domtoimage.toPng(node).then((dataUrl) => {
+      image.src = dataUrl;
+      this.setState({ dataUrl });
+      document.getElementById('listImage').appendChild(image);
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
   render() {
     const {
-      openModal
+      openModal,
+      openImageModal,
+      dataUrl
     } = this.state;
     const {
       list,
@@ -301,6 +320,63 @@ class ListFooter extends React.Component {
                         >
                           <FileCopyIcon />
                         </IconButton>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Modal>
+              </div>
+            </Grid>
+            <Grid item>
+              <div>
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    this.setState({ openImageModal: true });
+                  }}
+                >
+                  <PhotoCameraIcon />
+                </IconButton>
+                <Modal
+                  aria-labelledby="image-export-modal"
+                  aria-describedby="image-export-modal"
+                  open={openImageModal}
+                  onClose={() => this.setState({ dataUrl: undefined, openImageModal: false })}
+                  style={{ zIndex: '99999' }}
+                >
+                  <Paper style={modalStyles}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                    >
+                      <Grid item>
+                        <ListImage list={list} />
+                      </Grid>
+                      {!dataUrl && (
+                        <Grid item>
+                          <Button
+                            variant="contained"
+                            onClick={() => this.addImageToNode()}
+                          >
+                            Generate image below
+                          </Button>
+                        </Grid>
+                      )}
+                      {dataUrl && (
+                        <Grid item>
+                          <Button
+                            variant="contained"
+                            onClick={() => {
+                              this.copyToClip(dataUrl);
+                              this.openSnackbar('Image URL copied to clipboard.');
+                            }}
+                          >
+                            Copy image data URL to clipboard
+                          </Button>
+                        </Grid>
+                      )}
+                      <Grid item>
+                        <div id="listImage" />
                       </Grid>
                     </Grid>
                   </Paper>

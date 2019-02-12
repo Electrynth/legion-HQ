@@ -10,7 +10,6 @@ import Fade from '@material-ui/core/Fade';
 import Slide from '@material-ui/core/Slide';
 import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -753,7 +752,6 @@ class BuilderContainer extends React.Component {
     this.setState({ list, viewFilter: { type: 'LIST' } });
   }
 
-
   onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -832,8 +830,7 @@ class BuilderContainer extends React.Component {
       commandsById,
       width,
       handleGoogleLogin,
-      handleGoogleLogout,
-      history
+      handleGoogleLogout
     } = this.props;
     const allUpgradeOptions = this.getUpgradeOptions(list);
     const allMenuOptions = this.getMenuOptions(list);
