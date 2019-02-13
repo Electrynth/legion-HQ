@@ -815,6 +815,27 @@ class BuilderContainer extends React.Component {
     });
   }
 
+  getEntourageSpecialRankReductionAmount = (units) => {
+    const entourageCapableUnits = [
+      [
+        'Emperor Palpatine',
+        'Imperial Royal Guards'
+      ],
+      [
+        'Director Krennic',
+        'Death Troopers'
+      ]
+    ];
+
+    let rankReduceCount = 0;
+    entourageCapableUnits.forEach((entourageCouplet) => {
+      if (units.filter(unit => entourageCouplet.indexOf(unit.name) > -1).length === 2) {
+        rankReduceCount -= 1;
+      }
+    });
+    return rankReduceCount;
+  }
+
   render() {
     const {
       list,
@@ -965,20 +986,8 @@ class BuilderContainer extends React.Component {
       }
     });
 
-    // TODO: make a function for this since it's a keyword
-    let hasPalp = false;
-    let hasGuards = false;
-    let hasKrennic = false;
-    let hasDeaths = false;
-    list.units.forEach((unit) => {
-      rankCounts[unit.rank] += unit.count;
-      if (unit.name === 'Emperor Palpatine') hasPalp = true;
-      if (unit.name === 'Imperial Royal Guards') hasGuards = true;
-      if (unit.name === 'Director Krennic') hasKrennic = true;
-      if (unit.name === 'Death Troopers') hasDeaths = true;
-    });
-    if (hasPalp && hasGuards) rankCounts.special -= 1;
-    if (hasKrennic && hasDeaths) rankCounts.special -= 1;
+    rankCounts.special -= this.getEntourageSpecialRankReductionAmount(list.units);
+
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title faction={list.faction} />
