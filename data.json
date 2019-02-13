@@ -1357,7 +1357,7 @@
     },
     {
       "cost": 60,
-      "isUnique": true,
+      "isUnique": false,
       "faction": "rebels",
       "name": "Rebel Pathfinders",
       "type": "trooper",
