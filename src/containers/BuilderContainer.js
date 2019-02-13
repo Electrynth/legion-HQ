@@ -828,6 +828,7 @@ class BuilderContainer extends React.Component {
     ];
 
     let rankReduceCount = 0;
+    // Check to see if both units in the couplet are included
     entourageCapableUnits.forEach((entourageCouplet) => {
       if (units.filter(unit => entourageCouplet.indexOf(unit.name) > -1).length === 2) {
         rankReduceCount -= 1;
