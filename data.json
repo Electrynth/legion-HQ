@@ -376,13 +376,13 @@
       "released": ""
     },
     "swl25": {
-      "name": "Wookie Warriors Unit Expansion",
+      "name": "Wookiee Warriors Unit Expansion",
       "units": [
-        "Wookie Warriors"
+        "Wookiee Warriors"
       ],
       "upgrades": [
         "Tenacity",
-        "Bowcaster Wookie"
+        "Bowcaster Wookiee"
       ],
       "commands": [],
       "released": ""
@@ -436,9 +436,9 @@
     {
         "cost": 35,
         "isUnique": false,
-        "name": "Bowcaster Wookie",
+        "name": "Bowcaster Wookiee",
         "type": "heavy weapon",
-        "requirements": ["Wookie Warriors"],
+        "requirements": ["Wookiee Warriors"],
         "products": ["swl25"],
         "faction": "rebels",
         "rank": "upgrade",
@@ -560,7 +560,7 @@
         "cost": 75,
         "isUnique": false,
         "faction": "rebels",
-        "name": "Wookie Warriors",
+        "name": "Wookiee Warriors",
         "type": "trooper",
         "rank": "special",
         "upgradeBar": ["heavy weapon", "training", "training", "gear", "grenades"],
@@ -1356,7 +1356,7 @@
       "id": "ej"
     },
     {
-      "cost": 60,
+      "cost": 68,
       "isUnique": false,
       "faction": "rebels",
       "name": "Rebel Pathfinders",
