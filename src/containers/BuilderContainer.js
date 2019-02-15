@@ -1317,7 +1317,7 @@ class BuilderContainer extends React.Component {
                       objectiveCards.reduce((filtered, card, i) => {
                         const equippable = !(list.objectiveCards.includes(card));
                         const spaceRegex = / /gi;
-                        const imageUrl = `/objectives/${card.replace(spaceRegex, '%20')}`;
+                        const imageUrl = `/objectives/${card.replace(spaceRegex, '%20')}.png`;
                         if (list.objectiveCards.length < 4 && equippable && viewFilter.type === 'OBJECTIVE') {
                           filtered.push(
                             <Fade
@@ -1385,7 +1385,7 @@ class BuilderContainer extends React.Component {
                       deploymentCards.reduce((filtered, card, i) => {
                         const equippable = !(list.deploymentCards.includes(card));
                         const spaceRegex = / /gi;
-                        const imageUrl = `/deployments/${card.replace(spaceRegex, '%20')}`;
+                        const imageUrl = `/deployments/${card.replace(spaceRegex, '%20')}.png`;
                         if (list.deploymentCards.length < 4 && equippable && viewFilter.type === 'DEPLOYMENT') {
                           filtered.push(
                             <Fade
@@ -1453,7 +1453,7 @@ class BuilderContainer extends React.Component {
                       conditionCards.reduce((filtered, card, i) => {
                         const equippable = !(list.conditionCards.includes(card));
                         const spaceRegex = / /gi;
-                        const imageUrl = `/conditions/${card.replace(spaceRegex, '%20')}`;
+                        const imageUrl = `/conditions/${card.replace(spaceRegex, '%20')}.png`;
                         if (list.conditionCards.length < 4 && equippable && viewFilter.type === 'CONDITION') {
                           filtered.push(
                             <Fade
