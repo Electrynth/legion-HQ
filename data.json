@@ -1545,6 +1545,29 @@
       "id": "fj"
     }
   ],
+  "objectiveCards": [
+    "Breakthrough",
+    "Intercept Transmissions",
+    "Key Positions",
+    "Recover Supplies",
+    "Sabotage Moisture Vaporators",
+    "Secure the Intel (Act 1)"
+  ],
+  "deploymentCards": [
+    "Advanced Positions",
+    "Battle Lines",
+    "Disarray",
+    "The Long March",
+    "Major Offensive",
+    "Forces Converge (Act 1)"
+  ],
+  "conditionCards": [
+    "Clear Conditions",
+    "Hostile Environment",
+    "Limited Visibility",
+    "Minefield",
+    "Rapid Reinforcements"
+  ],
   "commands": [
     {
       "pips": 3,

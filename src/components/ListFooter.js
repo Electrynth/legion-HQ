@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import ListImage from 'components/ListImage';
 import Typography from '@material-ui/core/Typography';
+import Brightness1Icon from '@material-ui/icons/Brightness1';
 
 class ListFooter extends React.Component {
   state = {
@@ -81,7 +82,8 @@ class ListFooter extends React.Component {
       removeCommand,
       userId,
       createList,
-      updateList
+      updateList,
+      removeBattleCard
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -204,7 +206,7 @@ class ListFooter extends React.Component {
                       )}
                       label={`${command.name} (${command.pips})`}
                       onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
-                      style={{ marginRight: '5px' }}
+                      style={{ marginRight: '5px', marginBottom: '5px' }}
                     />
                   </Grid>
                 );
@@ -233,7 +235,7 @@ class ListFooter extends React.Component {
                     label={`${command.name} (${command.pips})`}
                     onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
                     onDelete={() => removeCommand(commandIndex)}
-                    style={{ marginRight: '5px' }}
+                    style={{ marginRight: '5px', marginBottom: '5px' }}
                   />
                 </Grid>
               );
@@ -245,6 +247,108 @@ class ListFooter extends React.Component {
                   label="Add Command"
                   onClick={() => changeViewFilter({ type: 'COMMAND' })}
                   style={{ marginRight: '5px', marginBottom: '10px' }}
+                />
+              </Grid>
+            )}
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            {list.objectiveCards.map((objective, index) => (
+              <Grid item key={objective}>
+                <Chip
+                  avatar={(
+                    <Avatar>
+                      <Brightness1Icon style={{ color: '#244C80' }} />
+                    </Avatar>
+                  )}
+                  color="primary"
+                  label={objective}
+                  onClick={() => changeViewFilter({ objective, type: 'OBJECTIVE_VIEW' })}
+                  onDelete={() => removeBattleCard('objective', index)}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                />
+              </Grid>
+            ))}
+            {list.objectiveCards.length < 4 && (
+              <Grid item key="addObjective">
+                <Chip
+                  variant="outlined"
+                  label="Add Objective"
+                  onClick={() => changeViewFilter({ type: 'OBJECTIVE' })}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                />
+              </Grid>
+            )}
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            {list.deploymentCards.map((deployment, index) => (
+              <Grid item key={deployment}>
+                <Chip
+                  avatar={(
+                    <Avatar>
+                      <Brightness1Icon style={{ color: '#812F31' }} />
+                    </Avatar>
+                  )}
+                  color="primary"
+                  label={deployment}
+                  onClick={() => changeViewFilter({ deployment, type: 'DEPLOYMENT_VIEW' })}
+                  onDelete={() => removeBattleCard('deployment', index)}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                />
+              </Grid>
+            ))}
+            {list.deploymentCards.length < 4 && (
+              <Grid item key="addDeployment">
+                <Chip
+                  variant="outlined"
+                  label="Add Deployment"
+                  onClick={() => changeViewFilter({ type: 'DEPLOYMENT' })}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                />
+              </Grid>
+            )}
+          </Grid>
+          <Grid
+            item
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            {list.conditionCards.map((condition, index) => (
+              <Grid item key={condition}>
+                <Chip
+                  avatar={(
+                    <Avatar>
+                      <Brightness1Icon style={{ color: '#35653A' }} />
+                    </Avatar>
+                  )}
+                  color="primary"
+                  label={condition}
+                  onClick={() => changeViewFilter({ condition, type: 'CONDITION_VIEW' })}
+                  onDelete={() => removeBattleCard('condition', index)}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                />
+              </Grid>
+            ))}
+            {list.conditionCards.length < 4 && (
+              <Grid item key="addCondition">
+                <Chip
+                  variant="outlined"
+                  label="Add Condition"
+                  onClick={() => changeViewFilter({ type: 'CONDITION' })}
+                  style={{ marginRight: '5px', marginBottom: '5px' }}
                 />
               </Grid>
             )}

@@ -42,7 +42,10 @@ const ListSchema = new Schema({
   commands: Array,
   uniques: Schema.Types.Mixed,
   notes: String,
-  pointTotal: Number
+  pointTotal: Number,
+  objectiveCards: Array,
+  deploymentCards: Array,
+  conditionCards: Array
 }, { minimize: false });
 const UserModel = mongoose.model('users', UserSchema);
 const ListModel = mongoose.model('lists', ListSchema);
@@ -144,14 +147,26 @@ app.get('/data', (req, res) => {
     commandsById: [],
     uniques: {},
     status: 'error',
-    message: 'Failed to read data file on server.'
+    message: 'Failed to read data file on server.',
+    objectiveCards: [],
+    deploymentCards: [],
+    conditionCards: []
   };
   fs.readFile('data.json', 'utf8', (err, input) => {
     if (err) res.send(response);
     const spaceRegex = / /gi;
     const dotRegex = /\./gi;
     const data = JSON.parse(input);
-    const { cards, commands } = data;
+    const {
+      cards,
+      commands,
+      objectiveCards,
+      deploymentCards,
+      conditionCards
+    } = data;
+    response.objectiveCards = objectiveCards;
+    response.deploymentCards = deploymentCards;
+    response.conditionCards = conditionCards;
     let currentCardIdIndex = 0;
     cards.forEach((card) => {
       // const id = getCardId(currentCardIdIndex);
