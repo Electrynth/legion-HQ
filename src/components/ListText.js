@@ -191,6 +191,25 @@ class ListText extends React.Component {
           ) : (
             <div />
           )}
+          <br />
+          Objectives:{'\n'}
+          {list.objectiveCards.map(card => (
+            <div key={card}>
+              {` - ${card}`}
+            </div>
+          ))}
+          Deployments:{'\n'}
+          {list.deploymentCards.map(card => (
+            <div key={card}>
+              {` - ${card}`}
+            </div>
+          ))}
+          Conditions:{'\n'}
+          {list.conditionCards.map(card => (
+            <div key={card}>
+              {` - ${card}`}
+            </div>
+          ))}
         </div>
       </div>
     );

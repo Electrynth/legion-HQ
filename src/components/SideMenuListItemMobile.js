@@ -12,15 +12,29 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
 import Slide from '@material-ui/core/Slide';
 import Grow from '@material-ui/core/Grow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 
 const styles = {
+  listItem: {
+    width: '100%',
+    marginBottom: '0.25rem'
+  },
+  listItemDiv: {
+    borderRadius: '5px'
+  },
+  upgradeDiv: {
+    marginLeft: '4rem'
+  },
   upgradeChip: {
     marginRight: '0.2rem'
+  },
+  unitIcon: {
+    width: '45px',
+    height: '45px',
+    cursor: 'pointer'
   },
   commander: {
     position: 'relative',
@@ -52,13 +66,7 @@ const styles = {
   heavy: {
     position: 'relative',
     height: '20px',
-    width: '20px'
-  },
-  unitButton: {
-    right: '0.5rem'
-  },
-  unitButtonMobile: {
-    right: '3.5rem'
+    width: '20px',
   },
   counterBadge: {
     marginRight: '45px',
@@ -67,12 +75,6 @@ const styles = {
   rankBadge: {
     marginTop: '5px',
     marginRight: '45px'
-  },
-  avatar: {
-    width: '45px',
-    height: '45px',
-    marginLeft: '10px',
-    cursor: 'pointer'
   },
   noBadge: {
     display: 'none'
@@ -122,98 +124,61 @@ class SideMenuListItem extends React.Component {
       }
     });
     if (numUpgradesEquipped === maxNumUpgrades) allUpgradesEquipped = true;
-    const desktopMenuOptions = menuOptions.filter(option => !option.name.includes('Move'))
     return (
-      <div>
-        <Grid
-          container
-          spacing={0}
-          direction="row"
-          justify="flex-start"
-          alignItems="flex-start"
+      <Slide
+        in
+        mountOnEnter
+        unmountOnExit
+        direction="right"
+        timeout={250}
+      >
+        <div
+          className={classes.listItemDiv}
+          onMouseEnter={this.turnOnHovered}
+          onMouseLeave={this.turnOffHovered}
         >
-          <Grid item xs={4}>
-            <Grid
-              item
-              container
-              justify="flex-start"
-              alignItems="flex-start"
-            >
-              <Grid item>
+          <ListItem className={classes.listItem}>
+            <div>
+              <Badge
+                color="primary"
+                badgeContent={(
+                  <img
+                    alt={unit.rank}
+                    className={classes[unit.rank]}
+                    src={`/rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
+                  />
+                )}
+                classes={{
+                  badge: classes.rankBadge
+                }}
+              >
                 <Badge
                   color="primary"
-                  badgeContent={(
-                    <img
-                      alt={unit.rank}
-                      className={classes[unit.rank]}
-                      src={`/rankIcons/${unit.rank.replace(' ', '%20')}.svg`}
-                    />
-                  )}
+                  badgeContent={count}
                   classes={{
-                    badge: classes.rankBadge
+                    badge: count > 1 ? classes.counterBadge : classes.noBadge
                   }}
                 >
-                  <Badge
-                    color="primary"
-                    badgeContent={count}
-                    classes={{
-                      badge: count > 1 ? classes.counterBadge : classes.noBadge
-                    }}
-                  >
-                    <Avatar
-                      src={unit.iconLocation}
-                      className={classes.avatar}
-                      onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
-                    />
-                  </Badge>
+                  <Avatar
+                    src={unit.iconLocation}
+                    className={classes.unitIcon}
+                    onClick={() => changeViewFilter({ unitIndex, type: 'UNIT_VIEW' })}
+                  />
                 </Badge>
-              </Grid>
-              <Grid item>
-                <div style={{ marginLeft: '1rem' }}>
-                  <Typography>
-                    {unit.displayName ? unit.displayName : unit.name}
-                  </Typography>
-                  <Typography variant="caption">
-                    {unit.cost === totalCost ? (
-                      `${unit.cost}`
-                    ) : (
-                      `${unit.cost} (${totalCost})`
-                    )}
-                  </Typography>
-                </div>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item xs>
-            <div>
-              {unit.upgradesEquipped.map((upgrade, upgradeIndex) => {
-                if (upgrade) {
-                  return (
-                    <Grow
-                      in
-                      timeout={250}
-                      key={upgrade.id}
-                    >
-                      <Chip
-                        color="primary"
-                        avatar={<Avatar src={upgrade.iconLocation} />}
-                        label={upgrade.name}
-                        className={classes.upgradeChip}
-                        onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
-                        onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}
-                      />
-                    </Grow>
-                  );
-                }
-                return undefined;
-              })}
+              </Badge>
             </div>
-          </Grid>
-          {!allUpgradesEquipped && (
-            <Grid item>
+            <ListItemText
+              primary={unit.displayName ? unit.displayName : unit.name}
+              secondary={unit.cost === totalCost ? (
+                `${unit.cost}`
+              ) : (
+                `${unit.cost} (${totalCost})`
+              )}
+            />
+            <ListItemSecondaryAction>
               <Grow
                 key="upgradeOptionButton"
-                in
+                in={!allUpgradesEquipped}
                 timeout={250}
               >
                 <IconButton
@@ -250,50 +215,71 @@ class SideMenuListItem extends React.Component {
                   ))}
                 </Menu>
               ) : undefined}
-            </Grid>
-          )}
-          <Grid item>
-            <Grow
-              key="menuOptionButton"
-              in={true}
-              timeout={250}
-            >
-              <IconButton
-                aria-haspopup="true"
-                size="small"
-                aria-owns={optionMenuAnchor ? 'optionMenu' : null}
-                onClick={this.toggleOptionMenu}
+              <Grow
+                key="menuOptionButton"
+                in={true}
+                timeout={250}
               >
-                <MoreVertIcon />
-              </IconButton>
-            </Grow>
-            {desktopMenuOptions ? (
-              <Menu
-                id="optionMenu"
-                anchorEl={optionMenuAnchor}
-                open={Boolean(optionMenuAnchor)}
-                onClose={() => this.setState({ optionMenuAnchor: null })}
-              >
-                {desktopMenuOptions.map((option, index) => (
-                  <MenuItem
-                    key={`${option.name}_${index}`}
-                    onClick={() => {
-                      this.setState({ optionMenuAnchor: null });
-                      option.action(unitIndex);
-                    }}
+                <IconButton
+                  aria-haspopup="true"
+                  size="small"
+                  aria-owns={optionMenuAnchor ? 'optionMenu' : null}
+                  onClick={this.toggleOptionMenu}
+                >
+                  <MoreVertIcon />
+                </IconButton>
+              </Grow>
+              {menuOptions ? (
+                <Menu
+                  id="optionMenu"
+                  anchorEl={optionMenuAnchor}
+                  open={Boolean(optionMenuAnchor)}
+                  onClose={() => this.setState({ optionMenuAnchor: null })}
+                >
+                  {menuOptions.map((option, index) => (
+                    <MenuItem
+                      key={`${option.name}_${index}`}
+                      onClick={() => {
+                        this.setState({ optionMenuAnchor: null });
+                        option.action(unitIndex);
+                      }}
+                    >
+                      <ListItemIcon>
+                        {option.icon}
+                      </ListItemIcon>
+                      {option.name}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              ) : undefined}
+            </ListItemSecondaryAction>
+          </ListItem>
+          <div className={classes.upgradeDiv}>
+            {unit.upgradesEquipped.map((upgrade, upgradeIndex) => {
+              if (upgrade) {
+                return (
+                  <Grow
+                    in
+                    timeout={250}
+                    key={upgrade.id}
                   >
-                    <ListItemIcon>
-                      {option.icon}
-                    </ListItemIcon>
-                    {option.name}
-                  </MenuItem>
-                ))}
-              </Menu>
-            ) : undefined}
-          </Grid>
-        </Grid>
-        <div style={{ borderBottom: '1px solid lightgrey', marginTop: '0.5rem' }} />
-      </div>
+                    <Chip
+                      color="primary"
+                      avatar={<Avatar src={upgrade.iconLocation} />}
+                      label={upgrade.name}
+                      className={classes.upgradeChip}
+                      onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
+                      onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}
+                    />
+                  </Grow>
+                );
+              }
+              return undefined;
+            })}
+          </div>
+          <Divider style={{ marginBottom: '0.25rem' }} />
+        </div>
+      </Slide>
     );
   }
 }

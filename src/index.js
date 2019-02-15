@@ -14,7 +14,10 @@ class App extends Component {
     commandsById: [],
     status: '',
     userId: '',
-    userLists: []
+    userLists: [],
+    objectiveCards: [],
+    deploymentCards: [],
+    conditionCards: []
   };
 
   componentDidMount() {
@@ -177,7 +180,10 @@ class App extends Component {
       cards,
       unitsById,
       upgradesById,
-      commandsById
+      commandsById,
+      objectiveCards,
+      deploymentCards,
+      conditionCards
     } = this.state;
     return (
       <div>
@@ -206,6 +212,9 @@ class App extends Component {
                   {...props}
                   userId={userId}
                   cards={cards}
+                  objectiveCards={objectiveCards}
+                  deploymentCards={deploymentCards}
+                  conditionCards={conditionCards}
                   unitsById={unitsById}
                   upgradesById={upgradesById}
                   commandsById={commandsById}
