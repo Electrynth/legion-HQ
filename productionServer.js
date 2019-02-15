@@ -35,7 +35,10 @@ const ListSchema = new Schema({
   commands: Array,
   uniques: Schema.Types.Mixed,
   notes: String,
-  pointTotal: Number
+  pointTotal: Number,
+  objectiveCards: Array,
+  deploymentCards: Array,
+  conditionCards: Array
 }, { minimize: false });
 const UserModel = mongoose.model('users', UserSchema);
 const ListModel = mongoose.model('lists', ListSchema);
