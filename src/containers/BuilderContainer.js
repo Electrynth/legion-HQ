@@ -1008,7 +1008,11 @@ class BuilderContainer extends React.Component {
         );
       }
     });
-
+    console.log(rankCounts);
+    list.units.forEach((unit) => {
+      rankCounts[unit.rank] += unit.count;
+    });
+    console.log(rankCounts);
     rankCounts.special -= this.getEntourageSpecialRankReductionAmount(list.units);
     return (
       <MuiThemeProvider theme={defaultTheme}>
