@@ -790,7 +790,7 @@ class BuilderContainer extends React.Component {
 
   changeListTitle = (event) => {
     const { list } = this.state;
-    if (event.target.value.length < 22) {
+    if (event.target.value.length < 26) {
       list.title = event.target.value;
       this.setState({ list });
     }
@@ -1008,11 +1008,9 @@ class BuilderContainer extends React.Component {
         );
       }
     });
-    console.log(rankCounts);
     list.units.forEach((unit) => {
       rankCounts[unit.rank] += unit.count;
     });
-    console.log(rankCounts);
     rankCounts.special -= this.getEntourageSpecialRankReductionAmount(list.units);
     return (
       <MuiThemeProvider theme={defaultTheme}>
