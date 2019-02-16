@@ -1011,7 +1011,7 @@ class BuilderContainer extends React.Component {
     list.units.forEach((unit) => {
       rankCounts[unit.rank] += unit.count;
     });
-    rankCounts.special -= this.getEntourageSpecialRankReductionAmount(list.units);
+    rankCounts.special += this.getEntourageSpecialRankReductionAmount(list.units);
     return (
       <MuiThemeProvider theme={defaultTheme}>
         <Title faction={list.faction} />
