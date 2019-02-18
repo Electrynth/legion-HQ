@@ -87,7 +87,9 @@ const styles = {
     maxHeight: '200px'
   },
   upgradeCardMedium: {
-    maxWidth: '160px',
+    minWidth: '160px',
+    maxWidth: '320px',
+    minHeight: '250px',
     maxHeight: '250px'
   },
   upgradeCardLarge: {
