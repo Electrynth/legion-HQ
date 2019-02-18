@@ -1,13 +1,15 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const uuidv1 = require('uuid');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const compression = require('compression');
+
 const app = express();
 
 const credentials = require('./credentials.json');
 
+app.use(compression());
 app.use('/dist', express.static(path.join(__dirname, '/dist')));
 app.use(bodyParser.json());
 app.use((req, res, next) => {

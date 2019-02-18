@@ -6,6 +6,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const compression = require('compression');
 const config = require('./webpack.development.config.js');
 
 const credentials = require('./credentials.json');
@@ -13,6 +14,8 @@ const credentials = require('./credentials.json');
 const compiler = webpack(config);
 const app = express();
 
+
+app.use(compression());
 // app.use(favicon(path.join(__dirname,'assets','public','favicon.ico')));
 app.use(bodyParser.json());
 app.use(webpackDevMiddleware(compiler, { publicPath: '/dist/' }));
