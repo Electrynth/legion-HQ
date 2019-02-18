@@ -1543,6 +1543,39 @@
       "upgradeBar": ["training", "gear", "gear", "blaster"],
       "products": [],
       "id": "fj"
+    },
+    {
+      "cost": 4,
+      "isUnique": false,
+      "faction": "",
+      "name": "Overwatch",
+      "type": "training",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": [],
+      "id": "fn"
+    },
+    {
+      "cost": 32,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Bistan",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Pathfinders"],
+      "id": "fo"
+    },
+    {
+      "cost": 22,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Pao",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Pathfinders"],
+      "id": "fp"
     }
   ],
   "objectiveCards": [
