@@ -1,0 +1,133 @@
+{
+  "gameModes": {
+    "Standard": {
+      "maxPoints": 800,
+      "minUnits": {
+        "commander": 1,
+        "operative": 0,
+        "corps": 3,
+        "special": 0,
+        "support": 0,
+        "heavy": 0
+      },
+      "maxUnits": {
+        "commander": 2,
+        "operative": 2,
+        "corps": 6,
+        "special": 3,
+        "support": 3,
+        "heavy": 1
+      }
+    },
+    "Grand Army": {
+      "maxPoints": 1600,
+      "minUnits": {
+        "commander": 1,
+        "operative": 0,
+        "corps": 6,
+        "special": 0,
+        "support": 0,
+        "heavy": 0
+      },
+      "maxUnits": {
+        "commander": 4,
+        "operative": 4,
+        "corps": 10,
+        "special": 5,
+        "support": 5,
+        "heavy": 4
+      }
+    }
+  },
+  "armyFactions": {
+    "rebels": "Rebels",
+    "empire": "Empire"
+  },
+  "forceFactions": {
+    "light side": ["rebels"],
+    "dark side": ["empire"]
+  },
+  "entourageCouples": {
+    "Director Orson Krennic": ["Imperial Death Troopers"],
+    "Emperor Palpatine": ["Imperial Royal Guards"]
+  },
+  "keywords": {
+    "Precise": "When you spend an aim token, reroll up to X additional dice.",
+    "Impact": "While attacking a unit that has ARMOR, change up to X hit results to crit results.",
+    "Cumbersome": "You cannot use this weapon and move during the same activation.",
+    "Immune": "X cannot be used against you.",
+    "High Velocity": "While attacking, if each weapon in your attack pool has HIGH VELOCITY, the defender cannot spend dodge tokens.",
+    "Pierce": "While attacking, cancel up to X block results.",
+    "Blast": "Ignore cover.",
+    "Spray": "Add this weapon's dice to the attack pool one time for each mini in the defending unit to which line of sight is not blocked.",
+    "Ion": "A vehicle wounded by an attack that includes this weapon gains X ion tokens.",
+    "Sidearm": "While performing an X attack, this mini can only use the weapon on this card.",
+    "Inspire": "After your Rally step, remove up to X suppression tokens from another friendly unit at range 1-2.",
+    "Scout": "After you deploy, you may perform a speed-X move.",
+    "Unhindered": "You ignore the effects of difficult terrain.",
+    "Expert Climber": "While clambering, you do not roll defense dice or suffer wounds.",
+    "Arsenal": "While attacking, each of your minis can use up to X of its weapons.",
+    "Fixed": "The defender must be inside your X arc.",
+    "Suppressive": "After you perform an attack, the defender that this weapon was used against gains 1 suppression token.",
+    "Guardian": "While a friendly unit at range 1 is defending against a ranged attack, you may cancel up to X hit results. For each result canceled, roll 1 of your defense dice. Convert surges, then suffer 1 wound for each blank result.",
+    "Compel": "After another friendly unit at range 1-2 rallies, if it is suppressed but not panicked, it may gain 1 suppression token to perform a free move action.",
+    "Cunning": "When your commander-specific command cards are played, if there would be a tie for priority, treat your command card as though it had 1 fewer pip.",
+    "Sharpshooter": "While performing a ranged attack, reduce the defenders cover by X.",
+    "Spotter": "Choose up to X friendly units at range 1. Each chosen unit gains an aim token.",
+    "Deflect": "While defending, if you spend a dodge token, you gain surge to block; if it's a ranged attack, the attacker suffers 1 wound for each defensive surge rolled.",
+    "Master of the Force": "During the End Phase, you may ready X of your Force upgrade cards.",
+    "Relentless": "After you perform a move action, you may perform a free attack action.",
+    "Pulling the Strings": "Choose a friendly trooper unit at range 1-2. That unit may perform a free attack action or free move action.",
+    "Entourage": "While building an army, ignore the rank of 1 X unit. During the command phase, you may issue an order to a friendly X unit at range 1-2.",
+    "Heavy Weapon Team": "You must equip a Heavy Weapon upgrade card. The mini added by that card is your unit leader.",
+    "Low Profile": "While defending, if you have light cover, improve your cover by 1.",
+    "Charge": "After you perform a move action, you may perform a free melee attack action.",
+    "Disciplined": "When you are issued an order, you may remove up to X suppression tokens.",
+    "Ready": "After you perform a standby action, gain X aim tokens.",
+    "Full Pivot": "When you pivot, you can pivot up to 360 degrees.",
+    "Plodding": "During your activation, you can perform only 1 standard move.",
+    "Reposition": "Either before or after you peroform a standard move, you may perform a free pivot action.",
+    "Sentinel": "Your standby range 1-3.",
+    "Speeder": "While moving, ignore terrain that is height X or lower. When you activate, perform a compulsory move.",
+    "Take Cover": "Choose up to X friendly trooper units at range 1. Each chosen gains a dodge token.",
+    "Gunslinger": "After you perform a ranged attack action, you may perform an additional ranged attack against a different unit.",
+    "Uncanny Luck": "While defending, you may reroll up to X defense dice.",
+    "Jump": "Perform a move during which you ignore terrain that is height X or lower. This is treated as a move action.",
+    "Quick Thinking": "Gain 1 aim token and 1 dodge token.",
+    "Danger Sense": "You may choose not to remove your suppression tokens. While defending against a ranged attack, roll 1 extra defense die for each suppression token you have, adding up to X extra dice.",
+    "Infiltrate": "You may deploy anywhere beyond range 3 of all enemy units.",
+    "Teamwork": "While you are at range 1-2 of X, when you or X gains an aim or dodge token, the other unit gains a token of the same type.",
+    "Enrage": "While you have X or more wound tokens, treat your courage as \"-\" and gain CHARGE.",
+    "Impervious": "While defending, if the attack pool has PIERCE X, roll X additional defense dice.",
+    "Nimble": "After defending, if you spent 1 or more dodge tokens, gain 1 dodge token.",
+    "Indomintable": "During your Rally step, roll red defense dice instead of white.",
+    "Dauntless": "After you rally, if you are suppressed but not panicked, you may gain 1 supression token to perform a free move action.",
+    "Climbing Vehicle": "You are treated as a trooper for the purposes of vertical movement.",
+    "Armor": "While defending, cancel all hit results.",
+    "Cover": "While defending against a ranged attack, improve your cover by X.",
+    "Tow Cable": "After a vehicle is wounded by an attack that includes this weapon, perform a pivot with that vehicle.",
+    "Arm": "",
+    "Detonate": "",
+    "Leader": "This mini is your unit leader.",
+    "Repair": "",
+    "Treat": "",
+    "Noncombatant": "",
+    "Bounty": "After setup, place a victory token on an enemy commander or operative. If you defeat a unit with a victory token, move that token to you. At the end of the game, if you have a victory token, gain that token.",
+    "Regenerate": "At the end of your activation, roll 1 white defense die for each wound token you have, up to X. For each defensive surge or block result, remove 1 wound token.",
+    "Weak Point": "While defending, if the attacker's unit leader is inside your X arc, the attack pool gains IMPACT 1.",
+    "Claim": "Claim an objective token that is in base contact with your unit leader.",
+    "Sabotage/Repair": "If you are in base contact with an objective token, either remove 1 wound token from it or place 1 wound token on it.",
+    "Extract": "Place an objective token in base contact with your unit leader and claim that token.",
+    "Stationary": "You cannot perform moves, except pivots."
+  },
+  "products": {
+    "swl01": {
+      "productName": "Star Wars: Legion",
+      "displayName": "Star Wars Legion Core"
+    },
+    "swl06": {
+      "productName": "",
+      "displayName": ""
+    }
+  }
+}
