@@ -117,7 +117,7 @@ class ListImage extends React.Component {
                   justify="flex-start"
                   alignItems="flex-start"
                 >
-                  <Grid item xs={5}>
+                  <Grid item xs={4}>
                     <Grid item container>
                       <Grid item>
                         <Badge
@@ -152,13 +152,6 @@ class ListImage extends React.Component {
                           <Typography>
                             {unit.displayName ? unit.displayName : unit.name}
                           </Typography>
-                          <Typography variant="caption">
-                            {unit.cost === totalCost ? (
-                              `${unit.cost}`
-                            ) : (
-                              `${unit.cost} (${totalCost})`
-                            )}
-                          </Typography>
                         </div>
                       </Grid>
                     </Grid>
@@ -178,6 +171,15 @@ class ListImage extends React.Component {
                       }
                       return filtered;
                     }, [])}
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Typography>
+                      {unit.cost === totalCost ? (
+                        `${unit.cost}`
+                      ) : (
+                        `${unit.cost} (${totalCost})`
+                      )}
+                    </Typography>
                   </Grid>
                 </Grid>
                 <div style={{ borderBottom: '1px solid lightgrey', marginTop: '0.5rem', marginBottom: '0.5rem' }} />
