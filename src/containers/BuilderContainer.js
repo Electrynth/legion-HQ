@@ -91,8 +91,7 @@ const styles = {
     minHeight: '250px',
     maxHeight: '250px'
   },
-  upgradeCardLarge: {
-    maxWidth: '200px',
+  upgradeCardLarge: { 
     maxHeight: '310px'
   },
   commandCardSmall: {
