@@ -197,7 +197,7 @@ class SideMenuListItem extends React.Component {
                       <Chip
                         color="primary"
                         avatar={<Avatar src={upgrade.iconLocation} />}
-                        label={upgrade.name}
+                        label={upgrade.displayName ? upgrade.displayName : upgrade.name}
                         className={classes.upgradeChip}
                         onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
                         onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}

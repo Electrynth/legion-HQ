@@ -9,7 +9,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 const styles = {
   upgradeChip: {
-    marginRight: '0.2rem'
+    marginRight: '0.1rem'
   },
   commander: {
     position: 'relative',
@@ -35,8 +35,7 @@ const styles = {
   support: {
     position: 'relative',
     height: '15px',
-    width: '15px',
-    right: '1px'
+    width: '15px'
   },
   heavy: {
     position: 'relative',
@@ -50,12 +49,12 @@ const styles = {
     right: '3.5rem'
   },
   counterBadge: {
-    marginRight: '45px',
-    marginTop: '40px'
+    marginRight: '40px',
+    marginTop: '37px'
   },
   rankBadge: {
-    marginTop: '5px',
-    marginRight: '45px'
+    marginTop: '8px',
+    marginRight: '40px'
   },
   avatar: {
     width: '45px',
@@ -91,6 +90,7 @@ class ListImage extends React.Component {
       >
         <Grid
           container
+          spacing={0}
           direction="column"
           justify="center"
           alignItems="center"
@@ -148,15 +148,13 @@ class ListImage extends React.Component {
                         </Badge>
                       </Grid>
                       <Grid item>
-                        <div style={{ marginLeft: '1rem' }}>
+                        <div style={{ marginLeft: '0.5rem' }}>
                           <Typography>
                             {unit.displayName ? unit.displayName : unit.name}
-                          </Typography>
-                          <Typography variant="caption">
                             {unit.cost === totalCost ? (
-                              `${unit.cost}`
+                              ` - ${unit.cost}`
                             ) : (
-                              `${unit.cost} (${totalCost})`
+                              ` - ${unit.cost} (${totalCost})`
                             )}
                           </Typography>
                         </div>
@@ -171,7 +169,7 @@ class ListImage extends React.Component {
                             key={upgrade.name}
                             color="primary"
                             avatar={<Avatar src={upgrade.iconLocation} />}
-                            label={upgrade.name}
+                            label={upgrade.displayName ? upgrade.displayName : upgrade.name}
                             className={classes.upgradeChip}
                           />
                         );
@@ -180,14 +178,14 @@ class ListImage extends React.Component {
                     }, [])}
                   </Grid>
                 </Grid>
-                <div style={{ borderBottom: '1px solid lightgrey', margin: '0.5rem' }} />
+                <div style={{ borderBottom: '1px solid lightgrey', marginTop: '0.5rem', marginBottom: '0.5rem' }} />
               </div>
             );
           })}
         </List>
         <Grid
           container
-          spacing={8}
+          spacing={0}
           direction="column"
           justify="center"
           alignItems="stretch"
