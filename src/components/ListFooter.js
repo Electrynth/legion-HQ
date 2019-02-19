@@ -446,9 +446,20 @@ class ListFooter extends React.Component {
                   aria-describedby="image-export-modal"
                   open={openImageModal}
                   onClose={() => this.setState({ dataUrl: undefined, openImageModal: false })}
-                  style={{ zIndex: '99999' }}
+                  style={{
+                    zIndex: '99999'
+                  }}
                 >
-                  <Paper style={modalStyles}>
+                  <Paper
+                    style={{
+                      position: 'absolute',
+                      top: '10%',
+                      left: 'calc(50% - 384px)',
+                      width: '600px',
+                      overflowY: 'scroll',
+                      maxHeight: '75vh'
+                    }}
+                  >
                     <Grid
                       container
                       direction="column"
@@ -458,13 +469,20 @@ class ListFooter extends React.Component {
                         <ListImage list={list} />
                       </Grid>
                       {!dataUrl && (
-                        <Grid item>
-                          <Button
-                            variant="contained"
-                            onClick={() => this.addImageToNode()}
-                          >
-                            Generate image below
-                          </Button>
+                        <Grid
+                          item
+                          container
+                          justify="center"
+                          alignItems="center"
+                        >
+                          <Grid item>
+                            <Button
+                              variant="contained"
+                              onClick={() => this.addImageToNode()}
+                            >
+                              Generate image below
+                            </Button>
+                          </Grid>
                         </Grid>
                       )}
                       {dataUrl && (
