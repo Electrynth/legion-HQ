@@ -154,9 +154,9 @@ class ListImage extends React.Component {
                           </Typography>
                           <Typography variant="caption">
                             {unit.cost === totalCost ? (
-                              ` - ${unit.cost}`
+                              `${unit.cost}`
                             ) : (
-                              ` - ${unit.cost} (${totalCost})`
+                              `${unit.cost} (${totalCost})`
                             )}
                           </Typography>
                         </div>
