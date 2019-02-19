@@ -454,8 +454,8 @@ class ListFooter extends React.Component {
                     style={{
                       position: 'absolute',
                       top: '10%',
-                      left: 'calc(50% - 384px)',
-                      width: '600px',
+                      left: 'calc(50% - 300px)',
+                      minWidth: '600px',
                       overflowY: 'scroll',
                       maxHeight: '75vh'
                     }}
