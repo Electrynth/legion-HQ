@@ -453,11 +453,11 @@ class ListFooter extends React.Component {
                   <Paper
                     style={{
                       position: 'absolute',
-                      top: '10%',
-                      left: 'calc(50% - 300px)',
-                      minWidth: '600px',
+                      top: '5%',
+                      left: 'calc(50% - 384px)',
+                      minWidth: '768px',
                       overflowY: 'scroll',
-                      maxHeight: '75vh'
+                      maxHeight: '90vh'
                     }}
                   >
                     <Grid
