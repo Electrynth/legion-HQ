@@ -96,7 +96,7 @@ class ListImage extends React.Component {
           alignItems="center"
         >
           <Grid item>
-            <Typography>
+            <Typography style={{ marginBottom: '1rem' }}>
               {`${list.title} - ${pointTotal}/${maxPoints}`}
             </Typography>
           </Grid>
