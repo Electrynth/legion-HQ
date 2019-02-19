@@ -117,7 +117,7 @@ class ListImage extends React.Component {
                   justify="flex-start"
                   alignItems="flex-start"
                 >
-                  <Grid item xs={4}>
+                  <Grid item xs={5}>
                     <Grid item container>
                       <Grid item>
                         <Badge
