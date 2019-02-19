@@ -151,6 +151,8 @@ class ListImage extends React.Component {
                         <div style={{ marginLeft: '0.5rem' }}>
                           <Typography>
                             {unit.displayName ? unit.displayName : unit.name}
+                          </Typography>
+                          <Typography variant="caption">
                             {unit.cost === totalCost ? (
                               ` - ${unit.cost}`
                             ) : (
