@@ -805,20 +805,28 @@ class BuilderContainer extends React.Component {
 
   shiftLeftRightSizes = (shift) => {
     const { leftRightSizes } = this.state;
-    if (shift > 0) {
-      if (leftRightSizes[1] > 4) {
+    if (shift > 0) { // positive shift is left panel growing towards right
+      if (leftRightSizes[0] === 0) {
+        leftRightSizes[0] = 4;
+        leftRightSizes[1] = 8
+      } else if (leftRightSizes[1] > 4) {
         leftRightSizes[0] += 1;
         leftRightSizes[1] -= 1;
-      } else {
+      } else if (leftRightSizes[1] === 4) {
         leftRightSizes[0] = 12;
         leftRightSizes[1] = 0;
       }
-    } else if (leftRightSizes[0] > 4) {
-      leftRightSizes[1] += 1;
-      leftRightSizes[0] -= 1;
-    } else {
-      leftRightSizes[1] = 12;
-      leftRightSizes[0] = 0;
+    } else { // negative shift is right panel growing towards left
+      if (leftRightSizes[1] === 0) { // if right panel size 0
+        leftRightSizes[0] = 8; // make left panel size 8
+        leftRightSizes[1] = 4; // make right panel size 4
+      } else if (leftRightSizes[0] > 4) {
+        leftRightSizes[0] -= 1;
+        leftRightSizes[1] += 1;
+      } else if (leftRightSizes[0] === 4) {
+        leftRightSizes[0] = 0;
+        leftRightSizes[1] = 12;
+      }
     }
     this.setState({ leftRightSizes });
   }
@@ -1061,491 +1069,495 @@ class BuilderContainer extends React.Component {
           alignItems="stretch"
           className={mobile ? classes.mobileGrid : classes.grid}
         >
-          <Grid
-            item
-            xs={12}
-            md={leftRightSizes[0] === 0 ? false : leftRightSizes[0]}
-          >
-            <Slide
-              in={mobile ? viewFilter.type === 'LIST' : true}
-              mountOnEnter
-              unmountOnExit
-              direction="right"
-              timeout={250}
+          {leftRightSizes[0] > 0 && (
+            <Grid
+              item
+              xs={12}
+              md={leftRightSizes[0]}
             >
-              <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
-                <Grid
-                  container
-                  direction="row"
-                  spacing={8}
-                  justify="center"
-                  alignItems="flex-start"
-                >
-                  {Object.entries(rankCounts).map(([rank, rankCount]) => {
-                    let isValidCount = false;
-                    if (list.mode === 'standard') {
-                      switch (rank) {
-                        case 'commander':
-                          isValidCount = rankCount > 0 && rankCount < 3;
-                          break;
-                        case 'operative':
-                          isValidCount = rankCount < 3;
-                          break;
-                        case 'corps':
-                          isValidCount = rankCount > 2 && rankCount < 7;
-                          break;
-                        case 'special':
-                          isValidCount = rankCount < 4;
-                          break;
-                        case 'support':
-                          isValidCount = rankCount < 4;
-                          break;
-                        case 'heavy':
-                          isValidCount = rankCount < 2;
-                          break;
-                        default:
-                          isValidCount = true;
-                      }
-                    } else if (list.mode === 'grand army') {
-                      switch (rank) {
-                        case 'commander':
-                          isValidCount = rankCount > 0 && rankCount < 5;
-                          break;
-                        case 'operative':
-                          isValidCount = rankCount < 5;
-                          break;
-                        case 'corps':
-                          isValidCount = rankCount > 5 && rankCount < 11;
-                          break;
-                        case 'special':
-                          isValidCount = rankCount < 6;
-                          break;
-                        case 'support':
-                          isValidCount = rankCount < 6;
-                          break;
-                        case 'heavy':
-                          isValidCount = rankCount < 5;
-                          break;
-                        default:
-                          isValidCount = true;
-                      }
-                    }
-                    return (
-                      <Grid item key={rank}>
-                        <Chip
-                          variant="outlined"
-                          onClick={() => this.changeViewFilter({
-                            rank,
-                            type: 'UNIT'
-                          })}
-                          avatar={(
-                            <img
-                              alt={rank}
-                              src={`/rankIcons/${rank}.svg`}
-                              style={rankIconStyles[rank]}
-                            />
-                          )}
-                          label={(
-                            <Typography
-                              color={isValidCount ? 'default' : 'secondary'}
-                            >
-                              {rankCount}
-                            </Typography>
-                          )}
-                        />
-                      </Grid>
-                    );
-                  })}
-                </Grid>
-                <Divider style={{ marginBottom: '0.25rem ' }} />
-                <div>
-                  <List dense>
-                    <DragDropContext onDragEnd={this.onDragEnd}>
-                      <Droppable droppableId="droppable">
-                        {(provided, snapshot) => (
-                          <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                          >
-                            {list.units.map((unit, index) => (
-                              <div key={`${unit.name}_${index}`}>
-                                {mobile ? (
-                                  <SideMenuListItemMobile
-                                    count={unit.count}
-                                    unit={unit}
-                                    unitIndex={index}
-                                    upgradeOptions={allUpgradeOptions[index]}
-                                    menuOptions={allMenuOptions[index]}
-                                    removeUpgrade={this.removeUpgrade}
-                                    changeViewFilter={this.changeViewFilter}
-                                    mobile={mobile}
-                                  />
-                                ) : (
-                                  <Draggable key={`${unit.name}_${index}`} draggableId={`${unit.name}_${index}`} index={index}>
-                                    {(provided, snapshot) => (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        style={getItemStyle(
-                                          snapshot.isDragging,
-                                          provided.draggableProps.style
-                                        )}
-                                      >
-                                        <SideMenuListItem
-                                          count={unit.count}
-                                          unit={unit}
-                                          unitIndex={index}
-                                          upgradeOptions={allUpgradeOptions[index]}
-                                          menuOptions={allMenuOptions[index]}
-                                          removeUpgrade={this.removeUpgrade}
-                                          changeViewFilter={this.changeViewFilter}
-                                          mobile={mobile}
-                                        />
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                )}
-                              </div>
-                            ))}
-                            {provided.placeholder}
-                          </div>
-                        )}
-                      </Droppable>
-                    </DragDropContext>
-                  </List>
-                  <ListFooter
-                    list={list}
-                    userId={userId}
-                    removeBattleCard={this.removeBattleCard}
-                    changeListNotes={this.changeListNotes}
-                    changeViewFilter={this.changeViewFilter}
-                    removeCommand={this.removeCommand}
-                    createList={this.createList}
-                    updateList={this.updateList}
-                  />
-                </div>
-              </Paper>
-            </Slide>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            md={leftRightSizes[1] === 0 ? false : leftRightSizes[1]}
-          >
-            <Slide
-              in={mobile ? viewFilter.type !== 'LIST' : true}
-              mountOnEnter
-              unmountOnExit
-              direction="left"
-              timeout={250}
-            >
-              <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
-                <Grid
-                  container
-                  spacing={8}
-                  direction="column"
-                >
+              <Slide
+                in={mobile ? viewFilter.type === 'LIST' : true}
+                mountOnEnter
+                unmountOnExit
+                direction="right"
+                timeout={250}
+              >
+                <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
                   <Grid
-                    item
                     container
-                    spacing={8}
                     direction="row"
-                    justify="flex-start"
+                    spacing={8}
+                    justify="center"
                     alignItems="flex-start"
                   >
-                    {viewFilter.type === 'LIST' && listViewItems}
-                    {viewFilter.type === 'LIST' && list.commands.length > 1 && list.commands.map(command => (
-                      <Grid item key={command.name}>
-                        <img
-                          src={command.imageLocation}
-                          alt={command.name}
-                          className={this.getCardStyles('COMMAND', 'LIST_VIEW', classes)}
-                        />
-                      </Grid>
-                    ))}
-                    {unitsById.reduce((filtered, unitId, unitIndex) => {
-                      const unit = cards[unitId];
-                      const eligibility = this.getUnitEligibility(unit, unitIndex);
-                      filtered.push(
-                        <Fade
-                          unmountOnExit
-                          key={unit.id}
-                          in={eligibility !== 'HIDDEN'}
-                          timeout={{
-                            enter: this.getTransitionDuration(unitIndex),
-                            exit: 0
-                          }}
-                          className={classes.fadeTransition}
-                          onClick={() => this.addCard(eligibility, 'UNIT', unitId, cards)}
-                        >
-                          <Grid item>
-                            <img
-                              src={unit.imageLocation}
-                              alt={unit.name}
-                              className={this.getCardStyles('UNIT', eligibility, classes)}
-                            />
-                          </Grid>
-                        </Fade>
-                      );
-                      return filtered;
-                    }, [])}
-                    {[...eligibleUpgradeCards, ...otherUpgradeCards]}
-                    {viewFilter.command && viewFilter.command.name === 'Standing Orders' ? (
-                      <Fade
-                        unmountOnExit
-                        in
-                        timeout={{
-                          enter: this.getTransitionDuration(1),
-                          exit: 0
-                        }}
-                        className={classes.fadeTransition}
-                      >
-                        <Grid item>
-                          <img
-                            src="/commands/Standing%20Orders.png"
-                            alt="Standing Orders"
-                            className={this.getCardStyles('COMMAND', 'VIEW_ONLY', classes)}
+                    {Object.entries(rankCounts).map(([rank, rankCount]) => {
+                      let isValidCount = false;
+                      if (list.mode === 'standard') {
+                        switch (rank) {
+                          case 'commander':
+                            isValidCount = rankCount > 0 && rankCount < 3;
+                            break;
+                          case 'operative':
+                            isValidCount = rankCount < 3;
+                            break;
+                          case 'corps':
+                            isValidCount = rankCount > 2 && rankCount < 7;
+                            break;
+                          case 'special':
+                            isValidCount = rankCount < 4;
+                            break;
+                          case 'support':
+                            isValidCount = rankCount < 4;
+                            break;
+                          case 'heavy':
+                            isValidCount = rankCount < 2;
+                            break;
+                          default:
+                            isValidCount = true;
+                        }
+                      } else if (list.mode === 'grand army') {
+                        switch (rank) {
+                          case 'commander':
+                            isValidCount = rankCount > 0 && rankCount < 5;
+                            break;
+                          case 'operative':
+                            isValidCount = rankCount < 5;
+                            break;
+                          case 'corps':
+                            isValidCount = rankCount > 5 && rankCount < 11;
+                            break;
+                          case 'special':
+                            isValidCount = rankCount < 6;
+                            break;
+                          case 'support':
+                            isValidCount = rankCount < 6;
+                            break;
+                          case 'heavy':
+                            isValidCount = rankCount < 5;
+                            break;
+                          default:
+                            isValidCount = true;
+                        }
+                      }
+                      return (
+                        <Grid item key={rank}>
+                          <Chip
+                            variant="outlined"
+                            onClick={() => this.changeViewFilter({
+                              rank,
+                              type: 'UNIT'
+                            })}
+                            avatar={(
+                              <img
+                                alt={rank}
+                                src={`/rankIcons/${rank}.svg`}
+                                style={rankIconStyles[rank]}
+                              />
+                            )}
+                            label={(
+                              <Typography
+                                color={isValidCount ? 'default' : 'secondary'}
+                              >
+                                {rankCount}
+                              </Typography>
+                            )}
                           />
                         </Grid>
-                      </Fade>
-                    ) : (
-                      commandsById.reduce((filtered, commandId, commandIndex) => {
-                        const command = cards[commandId];
-                        const eligibility = this.getCommandEligibility(command);
+                      );
+                    })}
+                  </Grid>
+                  <Divider style={{ marginBottom: '0.25rem ' }} />
+                  <div>
+                    <List dense>
+                      <DragDropContext onDragEnd={this.onDragEnd}>
+                        <Droppable droppableId="droppable">
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              style={getListStyle(snapshot.isDraggingOver)}
+                            >
+                              {list.units.map((unit, index) => (
+                                <div key={`${unit.name}_${index}`}>
+                                  {mobile ? (
+                                    <SideMenuListItemMobile
+                                      count={unit.count}
+                                      unit={unit}
+                                      unitIndex={index}
+                                      upgradeOptions={allUpgradeOptions[index]}
+                                      menuOptions={allMenuOptions[index]}
+                                      removeUpgrade={this.removeUpgrade}
+                                      changeViewFilter={this.changeViewFilter}
+                                      mobile={mobile}
+                                    />
+                                  ) : (
+                                    <Draggable key={`${unit.name}_${index}`} draggableId={`${unit.name}_${index}`} index={index}>
+                                      {(provided, snapshot) => (
+                                        <div
+                                          ref={provided.innerRef}
+                                          {...provided.draggableProps}
+                                          {...provided.dragHandleProps}
+                                          style={getItemStyle(
+                                            snapshot.isDragging,
+                                            provided.draggableProps.style
+                                          )}
+                                        >
+                                          <SideMenuListItem
+                                            count={unit.count}
+                                            unit={unit}
+                                            unitIndex={index}
+                                            upgradeOptions={allUpgradeOptions[index]}
+                                            menuOptions={allMenuOptions[index]}
+                                            removeUpgrade={this.removeUpgrade}
+                                            changeViewFilter={this.changeViewFilter}
+                                            mobile={mobile}
+                                          />
+                                        </div>
+                                      )}
+                                    </Draggable>
+                                  )}
+                                </div>
+                              ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </DragDropContext>
+                    </List>
+                    <ListFooter
+                      list={list}
+                      userId={userId}
+                      removeBattleCard={this.removeBattleCard}
+                      changeListNotes={this.changeListNotes}
+                      changeViewFilter={this.changeViewFilter}
+                      removeCommand={this.removeCommand}
+                      createList={this.createList}
+                      updateList={this.updateList}
+                    />
+                  </div>
+                </Paper>
+              </Slide>
+            </Grid>
+          )}
+          {leftRightSizes[1] > 0 && (
+            <Grid
+              item
+              xs={12}
+              md={leftRightSizes[1]}
+            >
+              <Slide
+                in={mobile ? viewFilter.type !== 'LIST' : true}
+                mountOnEnter
+                unmountOnExit
+                direction="left"
+                timeout={250}
+              >
+                <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
+                  <Grid
+                    container
+                    spacing={8}
+                    direction="column"
+                  >
+                    <Grid
+                      item
+                      container
+                      spacing={8}
+                      direction="row"
+                      justify="flex-start"
+                      alignItems="flex-start"
+                    >
+                      {viewFilter.type === 'LIST' && listViewItems}
+                      {viewFilter.type === 'LIST' && list.commands.length > 1 && list.commands.map(command => (
+                        <Grid item key={command.name}>
+                          <img
+                            src={command.imageLocation}
+                            alt={command.name}
+                            className={this.getCardStyles('COMMAND', 'LIST_VIEW', classes)}
+                          />
+                        </Grid>
+                      ))}
+                      {unitsById.reduce((filtered, unitId, unitIndex) => {
+                        const unit = cards[unitId];
+                        const eligibility = this.getUnitEligibility(unit, unitIndex);
                         filtered.push(
                           <Fade
                             unmountOnExit
-                            key={command.id}
-                            in={eligibility === 'EQUIPPABLE' || eligibility === 'VIEW_ONLY'}
+                            key={unit.id}
+                            in={eligibility !== 'HIDDEN'}
                             timeout={{
-                              enter: this.getTransitionDuration(commandIndex),
+                              enter: this.getTransitionDuration(unitIndex),
                               exit: 0
                             }}
                             className={classes.fadeTransition}
-                            onClick={() => this.addCard(eligibility, 'COMMAND', commandId, cards)}
+                            onClick={() => this.addCard(eligibility, 'UNIT', unitId, cards)}
                           >
                             <Grid item>
                               <img
-                                src={command.imageLocation}
-                                alt={command.name}
-                                className={this.getCardStyles('COMMAND', eligibility, classes)}
+                                src={unit.imageLocation}
+                                alt={unit.name}
+                                className={this.getCardStyles('UNIT', eligibility, classes)}
                               />
                             </Grid>
                           </Fade>
                         );
                         return filtered;
-                      }, [])
-                    )}
-                    {(viewFilter.type === 'OBJECTIVE' || viewFilter.type === 'OBJECTIVE_VIEW') && (
-                      objectiveCards.reduce((filtered, card, i) => {
-                        const equippable = !(list.objectiveCards.includes(card));
-                        const spaceRegex = / /gi;
-                        const imageUrl = `/objectives/${card.replace(spaceRegex, '%20')}.png`;
-                        if (list.objectiveCards.length < 4 && equippable && viewFilter.type === 'OBJECTIVE') {
+                      }, [])}
+                      {[...eligibleUpgradeCards, ...otherUpgradeCards]}
+                      {viewFilter.command && viewFilter.command.name === 'Standing Orders' ? (
+                        <Fade
+                          unmountOnExit
+                          in
+                          timeout={{
+                            enter: this.getTransitionDuration(1),
+                            exit: 0
+                          }}
+                          className={classes.fadeTransition}
+                        >
+                          <Grid item>
+                            <img
+                              src="/commands/Standing%20Orders.png"
+                              alt="Standing Orders"
+                              className={this.getCardStyles('COMMAND', 'VIEW_ONLY', classes)}
+                            />
+                          </Grid>
+                        </Fade>
+                      ) : (
+                        commandsById.reduce((filtered, commandId, commandIndex) => {
+                          const command = cards[commandId];
+                          const eligibility = this.getCommandEligibility(command);
                           filtered.push(
                             <Fade
-                              in
                               unmountOnExit
-                              key={card}
+                              key={command.id}
+                              in={eligibility === 'EQUIPPABLE' || eligibility === 'VIEW_ONLY'}
                               timeout={{
-                                enter: this.getTransitionDuration(i),
+                                enter: this.getTransitionDuration(commandIndex),
                                 exit: 0
                               }}
                               className={classes.fadeTransition}
-                              onClick={() => this.addBattleCard('objective', card)}
+                              onClick={() => this.addCard(eligibility, 'COMMAND', commandId, cards)}
                             >
                               <Grid item>
                                 <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
+                                  src={command.imageLocation}
+                                  alt={command.name}
+                                  className={this.getCardStyles('COMMAND', eligibility, classes)}
                                 />
                               </Grid>
                             </Fade>
                           );
-                        } else if (viewFilter.type === 'OBJECTIVE_VIEW' && card === viewFilter.objective) {
-                          filtered.push(
-                            <Fade
-                              unmountOnExit
-                              in
-                              key={card}
-                              timeout={{
-                                enter: this.getTransitionDuration(1),
-                                exit: 0
-                              }}
-                              className={classes.fadeTransition}
-                            >
-                              <Grid item>
-                                <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
-                                />
-                              </Grid>
-                            </Fade>
-                          );
-                        }
-                        return filtered;
-                      }, [])
-                    )}
-                    {(viewFilter.type === 'DEPLOYMENT' || viewFilter.type === 'DEPLOYMENT_VIEW') && (
-                      deploymentCards.reduce((filtered, card, i) => {
-                        const equippable = !(list.deploymentCards.includes(card));
-                        const spaceRegex = / /gi;
-                        const imageUrl = `/deployments/${card.replace(spaceRegex, '%20')}.png`;
-                        if (list.deploymentCards.length < 4 && equippable && viewFilter.type === 'DEPLOYMENT') {
-                          filtered.push(
-                            <Fade
-                              in
-                              unmountOnExit
-                              key={card}
-                              timeout={{
-                                enter: this.getTransitionDuration(i),
-                                exit: 0
-                              }}
-                              className={classes.fadeTransition}
-                              onClick={() => this.addBattleCard('deployment', card)}
-                            >
-                              <Grid item>
-                                <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
-                                />
-                              </Grid>
-                            </Fade>
-                          );
-                        } else if (viewFilter.type === 'DEPLOYMENT_VIEW' && viewFilter.deployment === card) {
-                          filtered.push(
-                            <Fade
-                              key={card}
-                              unmountOnExit
-                              in
-                              timeout={{
-                                enter: this.getTransitionDuration(1),
-                                exit: 0
-                              }}
-                              className={classes.fadeTransition}
-                            >
-                              <Grid item>
-                                <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
-                                />
-                              </Grid>
-                            </Fade>
-                          );
-                        }
-                        return filtered;
-                      }, [])
-                    )}
-                    {(viewFilter.type === 'CONDITION' || viewFilter.type === 'CONDITION_VIEW') && (
-                      conditionCards.reduce((filtered, card, i) => {
-                        const equippable = !(list.conditionCards.includes(card));
-                        const spaceRegex = / /gi;
-                        const imageUrl = `/conditions/${card.replace(spaceRegex, '%20')}.png`;
-                        if (list.conditionCards.length < 4 && equippable && viewFilter.type === 'CONDITION') {
-                          filtered.push(
-                            <Fade
-                              in
-                              unmountOnExit
-                              key={card}
-                              timeout={{
-                                enter: this.getTransitionDuration(i),
-                                exit: 0
-                              }}
-                              className={classes.fadeTransition}
-                              onClick={() => this.addBattleCard('condition', card)}
-                            >
-                              <Grid item>
-                                <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
-                                />
-                              </Grid>
-                            </Fade>
-                          );
-                        } else if (viewFilter.type === 'CONDITION_VIEW' && viewFilter.condition === card) {
-                          filtered.push(
-                            <Fade
-                              key={card}
-                              unmountOnExit
-                              in
-                              timeout={{
-                                enter: this.getTransitionDuration(1),
-                                exit: 0
-                              }}
-                              className={classes.fadeTransition}
-                            >
-                              <Grid item>
-                                <img
-                                  src={imageUrl}
-                                  alt={card}
-                                  style={{
-                                    borderRadius: '5px',
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      boxShadow: '0 0 10px 0 #D1E3F9'
-                                    },
-                                    maxHeight: '300px',
-                                    maxWidth: '420px'
-                                  }}
-                                />
-                              </Grid>
-                            </Fade>
-                          );
-                        }
-                        return filtered;
-                      }, [])
-                    )}
+                          return filtered;
+                        }, [])
+                      )}
+                      {(viewFilter.type === 'OBJECTIVE' || viewFilter.type === 'OBJECTIVE_VIEW') && (
+                        objectiveCards.reduce((filtered, card, i) => {
+                          const equippable = !(list.objectiveCards.includes(card));
+                          const spaceRegex = / /gi;
+                          const imageUrl = `/objectives/${card.replace(spaceRegex, '%20')}.png`;
+                          if (list.objectiveCards.length < 4 && equippable && viewFilter.type === 'OBJECTIVE') {
+                            filtered.push(
+                              <Fade
+                                in
+                                unmountOnExit
+                                key={card}
+                                timeout={{
+                                  enter: this.getTransitionDuration(i),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                                onClick={() => this.addBattleCard('objective', card)}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          } else if (viewFilter.type === 'OBJECTIVE_VIEW' && card === viewFilter.objective) {
+                            filtered.push(
+                              <Fade
+                                unmountOnExit
+                                in
+                                key={card}
+                                timeout={{
+                                  enter: this.getTransitionDuration(1),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          }
+                          return filtered;
+                        }, [])
+                      )}
+                      {(viewFilter.type === 'DEPLOYMENT' || viewFilter.type === 'DEPLOYMENT_VIEW') && (
+                        deploymentCards.reduce((filtered, card, i) => {
+                          const equippable = !(list.deploymentCards.includes(card));
+                          const spaceRegex = / /gi;
+                          const imageUrl = `/deployments/${card.replace(spaceRegex, '%20')}.png`;
+                          if (list.deploymentCards.length < 4 && equippable && viewFilter.type === 'DEPLOYMENT') {
+                            filtered.push(
+                              <Fade
+                                in
+                                unmountOnExit
+                                key={card}
+                                timeout={{
+                                  enter: this.getTransitionDuration(i),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                                onClick={() => this.addBattleCard('deployment', card)}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          } else if (viewFilter.type === 'DEPLOYMENT_VIEW' && viewFilter.deployment === card) {
+                            filtered.push(
+                              <Fade
+                                key={card}
+                                unmountOnExit
+                                in
+                                timeout={{
+                                  enter: this.getTransitionDuration(1),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          }
+                          return filtered;
+                        }, [])
+                      )}
+                      {(viewFilter.type === 'CONDITION' || viewFilter.type === 'CONDITION_VIEW') && (
+                        conditionCards.reduce((filtered, card, i) => {
+                          const equippable = !(list.conditionCards.includes(card));
+                          const spaceRegex = / /gi;
+                          const imageUrl = `/conditions/${card.replace(spaceRegex, '%20')}.png`;
+                          if (list.conditionCards.length < 4 && equippable && viewFilter.type === 'CONDITION') {
+                            filtered.push(
+                              <Fade
+                                in
+                                unmountOnExit
+                                key={card}
+                                timeout={{
+                                  enter: this.getTransitionDuration(i),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                                onClick={() => this.addBattleCard('condition', card)}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          } else if (viewFilter.type === 'CONDITION_VIEW' && viewFilter.condition === card) {
+                            filtered.push(
+                              <Fade
+                                key={card}
+                                unmountOnExit
+                                in
+                                timeout={{
+                                  enter: this.getTransitionDuration(1),
+                                  exit: 0
+                                }}
+                                className={classes.fadeTransition}
+                              >
+                                <Grid item>
+                                  <img
+                                    src={imageUrl}
+                                    alt={card}
+                                    style={{
+                                      borderRadius: '5px',
+                                      cursor: 'pointer',
+                                      '&:hover': {
+                                        boxShadow: '0 0 10px 0 #D1E3F9'
+                                      },
+                                      maxHeight: '300px',
+                                      maxWidth: '420px'
+                                    }}
+                                  />
+                                </Grid>
+                              </Fade>
+                            );
+                          }
+                          return filtered;
+                        }, [])
+                      )}
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
-            </Slide>
-          </Grid>
+                </Paper>
+              </Slide>
+            </Grid>
+          )}
         </Grid>
       </MuiThemeProvider>
     );
