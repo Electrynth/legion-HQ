@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import ReactToPrint from 'react-to-print';
 import TextField from '@material-ui/core/TextField';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
@@ -8,16 +7,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Popover from '@material-ui/core/Popover';
 import Slide from '@material-ui/core/Slide';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import Avatar from '@material-ui/core/Avatar';
-import PrintIcon from '@material-ui/icons/Print';
-import SaveIcon from '@material-ui/icons/Save';
-import DeleteIcon from '@material-ui/icons/Delete';
-import LinkIcon from '@material-ui/icons/Link';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
 
 /*
 <IconButton color="inherit">
@@ -55,7 +49,9 @@ class TopMenu extends React.Component {
       history,
       userId,
       handleGoogleLogin,
-      handleGoogleLogout
+      handleGoogleLogout,
+      shiftLeftRightSizes,
+      leftRightSizes
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -172,6 +168,30 @@ class TopMenu extends React.Component {
                     onFailure={handleGoogleLogin}
                     className="loginButton"
                   />
+                </Grid>
+              )}
+              {!mobile && (
+                <Grid item>
+                  <Button
+                    size="small"
+                    styles={buttonStyles}
+                    disabled={leftRightSizes[0] === 0}
+                    onClick={() => shiftLeftRightSizes(-1)}
+                  >
+                    <FirstPageIcon />
+                  </Button>
+                </Grid>
+              )}
+              {!mobile && (
+                <Grid item>
+                  <Button
+                    size="small"
+                    styles={buttonStyles}
+                    disabled={leftRightSizes[1] === 0}
+                    onClick={() => shiftLeftRightSizes(1)}
+                  >
+                    <LastPageIcon />
+                  </Button>
                 </Grid>
               )}
             </Grid>

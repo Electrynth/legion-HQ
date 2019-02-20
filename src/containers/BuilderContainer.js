@@ -91,7 +91,7 @@ const styles = {
     minHeight: '250px',
     maxHeight: '250px'
   },
-  upgradeCardLarge: { 
+  upgradeCardLarge: {
     maxHeight: '310px'
   },
   commandCardSmall: {
@@ -153,6 +153,7 @@ class BuilderContainer extends React.Component {
       classes,
       defaultTheme,
       isViewMenuOpen: false,
+      leftRightSizes: [6, 6],
       viewFilter: {
         type: 'LIST'
       },
@@ -802,6 +803,26 @@ class BuilderContainer extends React.Component {
     this.setState({ list });
   }
 
+  shiftLeftRightSizes = (shift) => {
+    const { leftRightSizes } = this.state;
+    if (shift > 0) {
+      if (leftRightSizes[1] > 4) {
+        leftRightSizes[0] += 1;
+        leftRightSizes[1] -= 1;
+      } else {
+        leftRightSizes[0] = 12;
+        leftRightSizes[1] = 0;
+      }
+    } else if (leftRightSizes[0] > 4) {
+      leftRightSizes[1] += 1;
+      leftRightSizes[0] -= 1;
+    } else {
+      leftRightSizes[1] = 12;
+      leftRightSizes[0] = 0;
+    }
+    this.setState({ leftRightSizes });
+  }
+
   changePrimaryTheme = (primaryColor) => {
     const { defaultTheme } = this.state;
     defaultTheme.palette.primary.main = primaryColor;
@@ -858,7 +879,8 @@ class BuilderContainer extends React.Component {
       list,
       viewFilter,
       classes,
-      defaultTheme
+      defaultTheme,
+      leftRightSizes
     } = this.state;
     const {
       userId,
@@ -972,6 +994,7 @@ class BuilderContainer extends React.Component {
       return filtered;
     }, []);
     list.units.forEach((unit, index) => {
+      rankCounts[unit.rank] += unit.count;
       for (let counter = 0; counter < unit.count; counter += 1) {
         listViewItems.push(
           <Grid
@@ -1008,9 +1031,6 @@ class BuilderContainer extends React.Component {
         );
       }
     });
-    list.units.forEach((unit) => {
-      rankCounts[unit.rank] += unit.count;
-    });
     rankCounts.special += this.getEntourageSpecialRankReductionAmount(list.units);
     return (
       <MuiThemeProvider theme={defaultTheme}>
@@ -1018,10 +1038,12 @@ class BuilderContainer extends React.Component {
         <TopMenu
           list={list}
           userId={userId}
+          leftRightSizes={leftRightSizes}
           changeListTitle={this.changeListTitle}
           changeListMode={this.changeListMode}
           changePrimaryTheme={this.changePrimaryTheme}
           mobile={mobile}
+          shiftLeftRightSizes={this.shiftLeftRightSizes}
           renderTestButton={this.renderTestButton}
           handleGoogleLogin={handleGoogleLogin}
           handleGoogleLogout={handleGoogleLogout}
@@ -1042,7 +1064,7 @@ class BuilderContainer extends React.Component {
           <Grid
             item
             xs={12}
-            md={6}
+            md={leftRightSizes[0] === 0 ? false : leftRightSizes[0]}
           >
             <Slide
               in={mobile ? viewFilter.type === 'LIST' : true}
@@ -1209,7 +1231,7 @@ class BuilderContainer extends React.Component {
           <Grid
             item
             xs={12}
-            md={6}
+            md={leftRightSizes[1] === 0 ? false : leftRightSizes[1]}
           >
             <Slide
               in={mobile ? viewFilter.type !== 'LIST' : true}
