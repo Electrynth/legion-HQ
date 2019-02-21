@@ -15,6 +15,7 @@ import withWidth from '@material-ui/core/withWidth';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import ClearIcon from '@material-ui/icons/Clear';
 import SideMenuListItem from 'components/SideMenuListItem';
 import SideMenuListItemMobile from 'components/SideMenuListItemMobile';
@@ -552,6 +553,11 @@ class BuilderContainer extends React.Component {
         name: 'Delete',
         action: this.removeUnit,
         icon: <ClearIcon />
+      },
+      {
+        name: 'Delete All',
+        action: this.removeAllUnits,
+        icon: <DeleteSweepIcon />
       }
     ];
     const allMenuOptions = [];
@@ -561,6 +567,7 @@ class BuilderContainer extends React.Component {
       if (index < list.units.length - 1) menuOptions.push(availableOptions[1]);
       if (this.unitHasNoUniques(unit)) menuOptions.push(availableOptions[2]);
       menuOptions.push(availableOptions[3]);
+      if (unit.count > 1) menuOptions.push(availableOptions[4]);
       allMenuOptions.push(menuOptions);
     });
     return allMenuOptions;
@@ -706,6 +713,18 @@ class BuilderContainer extends React.Component {
     const { list } = this.state;
     list.units[unitIndex].count += 1;
     this.setState({ list });
+  }
+
+  removeAllUnits = (unitIndex) => {
+    const { list } = this.state;
+    list.units.splice(unitIndex, 1);
+    this.setState({
+      list,
+      isViewMenuOpen: false,
+      viewFilter: {
+        type: 'LIST'
+      }
+    });
   }
 
   removeUnit = (unitIndex) => {
