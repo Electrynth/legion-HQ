@@ -185,6 +185,11 @@ class App extends Component {
       deploymentCards,
       conditionCards
     } = this.state;
+    commandsById.sort((a, b) => {
+      if (cards[a].pips > cards[b].pips) return -1;
+      if (cards[a].pips < cards[b].pips) return 1;
+      return 0;
+    });
     return (
       <div>
         <Grow

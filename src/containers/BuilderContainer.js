@@ -327,15 +327,20 @@ class BuilderContainer extends React.Component {
     }
     if (viewFilter.type !== 'COMMAND') return 'HIDDEN';
     if (!this.isValidFaction(command, list)) return 'HIDDEN';
-    if (list.commands.length === 7) return 'DISABLED';
-    if (this.isUniqueAlreadyExist(command, list)) return 'DISABLED';
+    if (list.commands.length === 7) return 'HIDDEN';
+    if (this.isUniqueAlreadyExist(command, list)) return 'HIDDEN';
     if (command.commander !== '') {
       let isCommanderPresent = false;
       list.units.forEach((unit) => {
         if (command.commander === unit.name) isCommanderPresent = true;
       });
-      if (!isCommanderPresent) return 'DISABLED';
+      if (!isCommanderPresent) return 'HIDDEN';
     }
+    let pipCount = 0;
+    list.commands.forEach((tempCommand) => {
+      if (tempCommand.pips === command.pips) pipCount += 1;
+    });
+    if (pipCount > 1) return 'DISABLED';
     return 'EQUIPPABLE';
   }
 
@@ -1328,7 +1333,7 @@ class BuilderContainer extends React.Component {
                             <Fade
                               unmountOnExit
                               key={command.id}
-                              in={eligibility === 'EQUIPPABLE' || eligibility === 'VIEW_ONLY'}
+                              in={eligibility === 'EQUIPPABLE' || eligibility === 'VIEW_ONLY' || eligibility === 'DISABLED'}
                               timeout={{
                                 enter: this.getTransitionDuration(commandIndex),
                                 exit: 0
