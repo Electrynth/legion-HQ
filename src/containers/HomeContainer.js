@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 import Helmet from 'react-helmet';
 import Home from 'components/Home';
 
@@ -17,7 +16,9 @@ export default class HomeContainer extends React.Component {
       userLists,
       handleGoogleLogin,
       handleGoogleLogout,
-      deleteList
+      deleteList,
+      toggleDarkMode,
+      darkMode
     } = this.props;
     const rebelLists = [];
     const empireLists = [];
@@ -26,7 +27,13 @@ export default class HomeContainer extends React.Component {
       else if (userList.faction === 'empire') empireLists.push(userList);
     });
     return (
-      <div style={{ overflowY: 'scroll', height: '100vh' }}>
+      <div
+        style={{
+          overflowY: 'scroll',
+          height: '100vh',
+          backgroundColor: darkMode ? '#303030' : 'white'
+        }}
+      >
         <Helmet>
           <title>
             Legion HQ
@@ -39,6 +46,8 @@ export default class HomeContainer extends React.Component {
           rebelLists={rebelLists}
           empireLists={empireLists}
           deleteList={deleteList}
+          toggleDarkMode={toggleDarkMode}
+          darkMode={darkMode}
         />
       </div>
     );
