@@ -68,13 +68,25 @@ const styles = {
     height: '20px',
     width: '20px',
   },
-  counterBadge: {
+  counterBadgeDark: {
     marginRight: '45px',
-    marginTop: '40px'
+    marginTop: '40px',
+    backgroundColor: '#848484'
   },
-  rankBadge: {
+  counterBadgeLight: {
+    marginRight: '45px',
+    marginTop: '40px',
+    backgroundColor: '#BDBDBD'
+  },
+  rankBadgeDark: {
     marginTop: '5px',
-    marginRight: '45px'
+    marginRight: '45px',
+    backgroundColor: '#848484'
+  },
+  rankBadgeLight: {
+    marginTop: '5px',
+    marginRight: '45px',
+    backgroundColor: '#BDBDBD'
   },
   noBadge: {
     display: 'none'
@@ -111,7 +123,8 @@ class SideMenuListItem extends React.Component {
       changeViewFilter,
       mobile,
       count,
-      classes
+      classes,
+      darkMode
     } = this.props;
     let allUpgradesEquipped = false;
     let numUpgradesEquipped = 0;
@@ -140,7 +153,6 @@ class SideMenuListItem extends React.Component {
           <ListItem className={classes.listItem}>
             <div>
               <Badge
-                color="primary"
                 badgeContent={(
                   <img
                     alt={unit.rank}
@@ -149,14 +161,13 @@ class SideMenuListItem extends React.Component {
                   />
                 )}
                 classes={{
-                  badge: classes.rankBadge
+                  badge: darkMode ? classes.rankBadgeDark : classes.rankBadgeLight
                 }}
               >
                 <Badge
-                  color="primary"
                   badgeContent={count}
                   classes={{
-                    badge: count > 1 ? classes.counterBadge : classes.noBadge
+                    badge: count > 1 ? (darkMode ? classes.counterBadgeDark : classes.counterBadgeLight ) : classes.noBadge
                   }}
                 >
                   <Avatar
@@ -264,12 +275,14 @@ class SideMenuListItem extends React.Component {
                     key={upgrade.id}
                   >
                     <Chip
-                      color="primary"
                       avatar={<Avatar src={upgrade.iconLocation} />}
                       label={upgrade.displayName ? upgrade.displayName : upgrade.name}
                       className={classes.upgradeChip}
                       onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
                       onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}
+                      style={{
+                        backgroundColor: darkMode ? '#848484' : undefined
+                      }}
                     />
                   </Grow>
                 );

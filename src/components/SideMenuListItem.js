@@ -201,12 +201,14 @@ class SideMenuListItem extends React.Component {
                       key={upgrade.id}
                     >
                       <Chip
-                        color="primary"
                         avatar={<Avatar src={upgrade.iconLocation} />}
                         label={upgrade.displayName ? upgrade.displayName : upgrade.name}
                         className={classes.upgradeChip}
                         onClick={() => changeViewFilter({ upgrade, type: 'UPGRADE_VIEW' })}
                         onDelete={() => removeUpgrade(unitIndex, upgradeIndex)}
+                        style={{
+                          backgroundColor: darkMode ? '#848484' : undefined
+                        }}
                       />
                     </Grow>
                   );

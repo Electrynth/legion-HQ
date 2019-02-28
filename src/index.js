@@ -18,7 +18,7 @@ class App extends Component {
     objectiveCards: [],
     deploymentCards: [],
     conditionCards: [],
-    darkMode: true
+    darkMode: false
   };
 
   componentDidMount() {
