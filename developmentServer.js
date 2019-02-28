@@ -165,16 +165,16 @@ app.get('/data', (req, res) => {
       commands,
       objectiveCards,
       deploymentCards,
-      conditionCards
+      conditionCards,
+      keywords
     } = data;
+    response.keywords = keywords;
     response.objectiveCards = objectiveCards;
     response.deploymentCards = deploymentCards;
     response.conditionCards = conditionCards;
-    let currentCardIdIndex = 0;
     cards.forEach((card) => {
       // const id = getCardId(currentCardIdIndex);
       const id = card.id;
-      currentCardIdIndex += 1;
       let imageName = `${card.name.replace(spaceRegex, '%20')}`;
       imageName = imageName.replace(dotRegex, '%2E');
       if (card.isUnique) response.uniques[id] = false;
@@ -205,7 +205,6 @@ app.get('/data', (req, res) => {
     commands.forEach((command) => {
       // const id = getCardId(currentCardIdIndex);
       const id = command.id;
-      currentCardIdIndex += 1;
       response.commandsById.push(id);
       response.uniques[id] = false;
       let imageName = `${command.name.replace(spaceRegex, '%20')}`;
