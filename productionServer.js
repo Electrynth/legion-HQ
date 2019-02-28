@@ -45,14 +45,6 @@ const ListSchema = new Schema({
 const UserModel = mongoose.model('users', UserSchema);
 const ListModel = mongoose.model('lists', ListSchema);
 
-const getCardId = (index) => {
-  const mod = Math.floor(index / 26);
-  const remainder = index % 26;
-  const firstLetter = (mod + 10).toString(36);
-  const secondLetter = (remainder + 10).toString(36);
-  return `${firstLetter}${secondLetter}`;
-};
-
 app.get('/user', (req, res) => {
   if ('userId' in req.query) {
     UserModel.find({ _id: req.query.userId }, (errFind, resultsFind) => {
@@ -102,7 +94,7 @@ app.get('/lists', (req, res) => {
 
 app.post('/list', (req, res) => {
   if ('userId' in req.query && 'list' in req.body) {
-    let newList = req.body.list;
+    const newList = req.body.list;
     if ('_id' in newList) delete newList._id;
     const newListEntry = new ListModel({ ...newList, userId: req.query.userId });
     newListEntry.save((errListSave, resultsListSave) => {
@@ -157,16 +149,16 @@ app.get('/data', (req, res) => {
       commands,
       objectiveCards,
       deploymentCards,
-      conditionCards
+      conditionCards,
+      keywords
     } = data;
+    response.keywords = keywords;
     response.objectiveCards = objectiveCards;
     response.deploymentCards = deploymentCards;
     response.conditionCards = conditionCards;
-    let currentCardIdIndex = 0;
     cards.forEach((card) => {
       // const id = getCardId(currentCardIdIndex);
       const id = card.id;
-      currentCardIdIndex += 1;
       let imageName = `${card.name.replace(spaceRegex, '%20')}`;
       imageName = imageName.replace(dotRegex, '%2E');
       if (card.isUnique) response.uniques[id] = false;
@@ -197,7 +189,6 @@ app.get('/data', (req, res) => {
     commands.forEach((command) => {
       // const id = getCardId(currentCardIdIndex);
       const id = command.id;
-      currentCardIdIndex += 1;
       response.commandsById.push(id);
       response.uniques[id] = false;
       let imageName = `${command.name.replace(spaceRegex, '%20')}`;

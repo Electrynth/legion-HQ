@@ -16,6 +16,8 @@ import ClearIcon from '@material-ui/icons/Clear';
 import SendIcon from '@material-ui/icons/Send';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import EmailIcon from '@material-ui/icons/Email';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
+import Brightness5Icon from '@material-ui/icons/Brightness5';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 const listStyles = {
@@ -45,7 +47,7 @@ const empireIconStyles = {
   ...factionIconStyles
 };
 
-const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLists, empireLists, deleteList }) => (
+const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLists, empireLists, deleteList, toggleDarkMode, darkMode }) => (
   <Grow in>
     <Grid
       container
@@ -58,6 +60,9 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
         <Typography
           color="inherit"
           variant="display3"
+          style={{
+            color: darkMode ? 'white' : 'black'
+          }}
         >
           Legion HQ
         </Typography>
@@ -72,63 +77,84 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
       >
         <Grid item>
           <Avatar
-            src="/faction/rebelsIconBlack.svg"
+            src={darkMode ? '/faction/rebelsIconWhite.svg' : '/faction/rebelsIconBlack.svg'}
             style={rebelsIconStyles}
             onClick={() => history.push('/list/rebels')}
           />
-          <List dense>
-            {rebelLists.map(list => (
-              <ListItem
-                key={`${list._id}`}
-              >
-                <IconButton
-                  color="inherit"
-                  onClick={() => history.push(`/list/${list._id}`)}
+          <div
+            style={{
+              backgroundColor: darkMode ? '#848484' : undefined,
+              borderRadius: '3px',
+              margin: '5px'
+            }}
+          >
+            <List dense>
+              {rebelLists.map(list => (
+                <ListItem
+                  key={`${list._id}`}
                 >
-                  <SendIcon />
-                </IconButton>
-                <ListItemText primary={list.title} secondary={list.pointTotal} />
-                <IconButton
-                  color="inherit"
-                  onClick={() => deleteList(list._id)}
-                >
-                  <ClearIcon />
-                </IconButton>
-              </ListItem>
-            ))}
-          </List>
+                  <IconButton
+                    color="inherit"
+                    onClick={() => history.push(`/list/${list._id}`)}
+                  >
+                    <SendIcon />
+                  </IconButton>
+                  <ListItemText primary={list.title} secondary={list.pointTotal} />
+                  <IconButton
+                    color="inherit"
+                    onClick={() => deleteList(list._id)}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </Grid>
         <Grid item>
           <Avatar
-            src="/faction/empireIconBlack.svg"
+            src={darkMode ? '/faction/empireIconWhite.svg' : '/faction/empireIconBlack.svg'}
             style={empireIconStyles}
             onClick={() => history.push('/list/empire')}
           />
-          <List dense>
-            {empireLists.map(list => (
-              <ListItem
-                key={`${list._id}`}
-              >
-                <IconButton
-                  color="inherit"
-                  onClick={() => history.push(`/list/${list._id}`)}
+          <div
+            style={{
+              backgroundColor: darkMode ? '#848484' : undefined,
+              borderRadius: '3px',
+              margin: '5px'
+            }}
+          >
+            <List dense>
+              {empireLists.map(list => (
+                <ListItem
+                  key={`${list._id}`}
                 >
-                  <SendIcon />
-                </IconButton>
-                <ListItemText primary={list.title} secondary={list.pointTotal} />
-                <IconButton
-                  color="inherit"
-                  onClick={() => deleteList(list._id)}
-                >
-                  <ClearIcon />
-                </IconButton>
-              </ListItem>
-            ))}
-          </List>
+                  <IconButton
+                    color="inherit"
+                    onClick={() => history.push(`/list/${list._id}`)}
+                  >
+                    <SendIcon />
+                  </IconButton>
+                  <ListItemText primary={list.title} secondary={list.pointTotal} />
+                  <IconButton
+                    color="inherit"
+                    onClick={() => deleteList(list._id)}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </Grid>
       </Grid>
       <Grid item>
-        <Paper style={paperStyles}>
+        <Paper
+          style={{
+            ...paperStyles,
+            backgroundColor: darkMode ? '#848484' : 'white'
+          }}
+        >
           <Grid
             container
             spacing={8}
@@ -166,8 +192,30 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
           >
             <Grid item>
               <Button
+                variant={darkMode ? 'outlined' : 'contained'}
+                size="small"
+                onClick={() => toggleDarkMode()}
+              >
+                {darkMode ? (
+                  <Brightness5Icon style={{ marginRight: '10px' }} />
+                ) : (
+                  <Brightness2Icon style={{ marginRight: '10px' }} />
+                )}
+                {darkMode ? 'Light Side' : 'Dark Side'}
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Button
+                variant={darkMode ? 'outlined' : 'contained'}
                 href="https://github.com/NicholasCBrown/legion-HQ"
-                variant="contained"
                 size="small"
               >
                 <BugReportIcon style={{ marginRight: '10px' }} />
@@ -176,7 +224,7 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
             </Grid>
             <Grid item>
               <Button
-                variant="contained"
+                variant={darkMode ? 'outlined' : 'contained'}
                 size="small"
                 onClick={() => alert('contact@legion-hq.com')}
               >

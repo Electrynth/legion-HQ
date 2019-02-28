@@ -1,19 +1,14 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import Slide from '@material-ui/core/Slide';
 import Grow from '@material-ui/core/Grow';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
@@ -60,13 +55,25 @@ const styles = {
   unitButtonMobile: {
     right: '3.5rem'
   },
-  counterBadge: {
+  counterBadgeDark: {
     marginRight: '45px',
-    marginTop: '40px'
+    marginTop: '40px',
+    backgroundColor: '#848484'
   },
-  rankBadge: {
+  counterBadgeLight: {
+    marginRight: '45px',
+    marginTop: '40px',
+    backgroundColor: '#BDBDBD'
+  },
+  rankBadgeDark: {
     marginTop: '5px',
-    marginRight: '45px'
+    marginRight: '45px',
+    backgroundColor: '#848484'
+  },
+  rankBadgeLight: {
+    marginTop: '5px',
+    marginRight: '45px',
+    backgroundColor: '#BDBDBD'
   },
   avatar: {
     width: '45px',
@@ -109,7 +116,8 @@ class SideMenuListItem extends React.Component {
       changeViewFilter,
       mobile,
       count,
-      classes
+      classes,
+      darkMode
     } = this.props;
     let allUpgradesEquipped = false;
     let numUpgradesEquipped = 0;
@@ -124,7 +132,7 @@ class SideMenuListItem extends React.Component {
     if (numUpgradesEquipped === maxNumUpgrades) allUpgradesEquipped = true;
     const desktopMenuOptions = menuOptions.filter(option => !option.name.includes('Move'))
     return (
-      <div>
+      <div style={{ backgroundColor: darkMode ? '#424242' : undefined }}>
         <Grid
           container
           spacing={0}
@@ -141,7 +149,6 @@ class SideMenuListItem extends React.Component {
             >
               <Grid item>
                 <Badge
-                  color="primary"
                   badgeContent={(
                     <img
                       alt={unit.rank}
@@ -150,14 +157,13 @@ class SideMenuListItem extends React.Component {
                     />
                   )}
                   classes={{
-                    badge: classes.rankBadge
+                    badge: darkMode ? classes.rankBadgeDark : classes.rankBadgeLight
                   }}
                 >
                   <Badge
-                    color="primary"
                     badgeContent={count}
                     classes={{
-                      badge: count > 1 ? classes.counterBadge : classes.noBadge
+                      badge: count > 1 ? (darkMode ? classes.counterBadgeDark : classes.counterBadgeLight ) : classes.noBadge
                     }}
                   >
                     <Avatar
@@ -292,7 +298,7 @@ class SideMenuListItem extends React.Component {
             ) : undefined}
           </Grid>
         </Grid>
-        <div style={{ borderBottom: '1px solid lightgrey', marginTop: '0.5rem' }} />
+        <div style={{ borderBottom: `1px solid ${darkMode ? '#212121' : 'lightgrey'}`, marginTop: '0.5rem' }} />
       </div>
     );
   }

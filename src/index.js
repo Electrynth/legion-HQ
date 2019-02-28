@@ -17,7 +17,8 @@ class App extends Component {
     userLists: [],
     objectiveCards: [],
     deploymentCards: [],
-    conditionCards: []
+    conditionCards: [],
+    darkMode: true
   };
 
   componentDidMount() {
@@ -171,6 +172,8 @@ class App extends Component {
     }
   }
 
+  toggleDarkMode = () => this.setState({ darkMode: !this.state.darkMode });
+
   render() {
     const {
       status,
@@ -183,7 +186,8 @@ class App extends Component {
       commandsById,
       objectiveCards,
       deploymentCards,
-      conditionCards
+      conditionCards,
+      darkMode
     } = this.state;
     commandsById.sort((a, b) => {
       if (cards[a].pips > cards[b].pips) return 1;
@@ -191,7 +195,7 @@ class App extends Component {
       return 0;
     });
     return (
-      <div>
+      <div style={{ backgroundColor: darkMode ? '#303030' : 'white' }}>
         <Grow
           in={status === 'success' && googleResponse}
         >
@@ -207,6 +211,8 @@ class App extends Component {
                   handleGoogleLogout={this.handleGoogleLogout}
                   deleteList={this.deleteList}
                   refreshUserLists={this.refreshUserLists}
+                  darkMode={darkMode}
+                  toggleDarkMode={this.toggleDarkMode}
                 />
               )}
             />
@@ -225,6 +231,7 @@ class App extends Component {
                   commandsById={commandsById}
                   handleGoogleLogin={this.handleGoogleLogin}
                   handleGoogleLogout={this.handleGoogleLogout}
+                  darkMode={darkMode}
                 />
               )}
             />

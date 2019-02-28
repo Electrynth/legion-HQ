@@ -26,6 +26,11 @@
     "faction": "",
     "products": []
   },
+  "keywords": {
+    "Inspire": "Inspire desc",
+    "Pierce": "Pierce desc",
+    "Impact": "Impact desc"
+  },
   "products": {
     "swl01": {
       "name": "Star Wars Legion Core Set",

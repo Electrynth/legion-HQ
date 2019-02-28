@@ -83,7 +83,8 @@ class ListFooter extends React.Component {
       userId,
       createList,
       updateList,
-      removeBattleCard
+      removeBattleCard,
+      darkMode
     } = this.props;
     const sortedCommands = list.commands;
     const modalStyles = {
@@ -186,7 +187,6 @@ class ListFooter extends React.Component {
                 return (
                   <Grid item key={command.name}>
                     <Chip
-                      color="primary"
                       avatar={(
                         <Avatar
                           style={{
@@ -206,7 +206,11 @@ class ListFooter extends React.Component {
                       )}
                       label={`${command.name} (${command.pips})`}
                       onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
-                      style={{ marginRight: '5px', marginBottom: '5px' }}
+                      style={{
+                        marginRight: '5px',
+                        marginBottom: '5px',
+                        backgroundColor: darkMode ? '#848484' : undefined
+                      }}
                     />
                   </Grid>
                 );
@@ -214,7 +218,6 @@ class ListFooter extends React.Component {
               return (
                 <Grid item key={command.name}>
                   <Chip
-                    color="primary"
                     avatar={(
                       <Avatar
                         style={{
@@ -235,7 +238,11 @@ class ListFooter extends React.Component {
                     label={`${command.name} (${command.pips})`}
                     onClick={() => changeViewFilter({ command, type: 'COMMAND_VIEW' })}
                     onDelete={() => removeCommand(commandIndex)}
-                    style={{ marginRight: '5px', marginBottom: '5px' }}
+                    style={{
+                      marginRight: '5px',
+                      marginBottom: '5px',
+                      backgroundColor: darkMode ? '#848484' : undefined
+                    }}
                   />
                 </Grid>
               );
@@ -246,7 +253,11 @@ class ListFooter extends React.Component {
                   variant="outlined"
                   label="Add Command"
                   onClick={() => changeViewFilter({ type: 'COMMAND' })}
-                  style={{ marginRight: '5px', marginBottom: '10px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '10px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             )}
@@ -262,15 +273,18 @@ class ListFooter extends React.Component {
               <Grid item key={objective}>
                 <Chip
                   avatar={(
-                    <Avatar>
+                    <Avatar style={{ backgroundColor: darkMode ? '#848484' : undefined }}>
                       <Brightness1Icon style={{ color: '#244C80' }} />
                     </Avatar>
                   )}
-                  color="primary"
                   label={objective}
                   onClick={() => changeViewFilter({ objective, type: 'OBJECTIVE_VIEW' })}
                   onDelete={() => removeBattleCard('objective', index)}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             ))}
@@ -280,7 +294,11 @@ class ListFooter extends React.Component {
                   variant="outlined"
                   label="Add Objective"
                   onClick={() => changeViewFilter({ type: 'OBJECTIVE' })}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             )}
@@ -296,15 +314,18 @@ class ListFooter extends React.Component {
               <Grid item key={deployment}>
                 <Chip
                   avatar={(
-                    <Avatar>
+                    <Avatar style={{ backgroundColor: darkMode ? '#848484' : undefined }}>
                       <Brightness1Icon style={{ color: '#812F31' }} />
                     </Avatar>
                   )}
-                  color="primary"
                   label={deployment}
                   onClick={() => changeViewFilter({ deployment, type: 'DEPLOYMENT_VIEW' })}
                   onDelete={() => removeBattleCard('deployment', index)}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             ))}
@@ -314,7 +335,11 @@ class ListFooter extends React.Component {
                   variant="outlined"
                   label="Add Deployment"
                   onClick={() => changeViewFilter({ type: 'DEPLOYMENT' })}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             )}
@@ -330,15 +355,18 @@ class ListFooter extends React.Component {
               <Grid item key={condition}>
                 <Chip
                   avatar={(
-                    <Avatar>
+                    <Avatar style={{ backgroundColor: darkMode ? '#848484' : undefined }}>
                       <Brightness1Icon style={{ color: '#35653A' }} />
                     </Avatar>
                   )}
-                  color="primary"
                   label={condition}
                   onClick={() => changeViewFilter({ condition, type: 'CONDITION_VIEW' })}
                   onDelete={() => removeBattleCard('condition', index)}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             ))}
@@ -348,7 +376,11 @@ class ListFooter extends React.Component {
                   variant="outlined"
                   label="Add Condition"
                   onClick={() => changeViewFilter({ type: 'CONDITION' })}
-                  style={{ marginRight: '5px', marginBottom: '5px' }}
+                  style={{
+                    marginRight: '5px',
+                    marginBottom: '5px',
+                    backgroundColor: darkMode ? '#848484' : undefined
+                  }}
                 />
               </Grid>
             )}
@@ -376,7 +408,12 @@ class ListFooter extends React.Component {
               <div>
                 <ReactToPrint
                   trigger={() => (
-                    <IconButton color="inherit">
+                    <IconButton
+                      color="inherit"
+                      style={{
+                        color: darkMode ? '#e0e0e0' : undefined
+                      }}
+                    >
                       <PrintIcon />
                     </IconButton>
                   )}
@@ -392,6 +429,9 @@ class ListFooter extends React.Component {
                 <IconButton
                   color="inherit"
                   onClick={() => this.setState({ openModal: true })}
+                  style={{
+                    color: darkMode ? '#e0e0e0' : undefined
+                  }}
                 >
                   <ListAltIcon />
                 </IconButton>
@@ -422,6 +462,9 @@ class ListFooter extends React.Component {
                             this.copyToClip(document.getElementById('listText').textContent);
                             this.openSnackbar('Text copied to clipboard.');
                           }}
+                          style={{
+                            color: darkMode ? '#e0e0e0' : undefined
+                          }}
                         >
                           <FileCopyIcon />
                         </IconButton>
@@ -437,6 +480,9 @@ class ListFooter extends React.Component {
                   color="inherit"
                   onClick={() => {
                     this.setState({ openImageModal: true });
+                  }}
+                  style={{
+                    color: darkMode ? '#e0e0e0' : undefined
                   }}
                 >
                   <PhotoCameraIcon />
@@ -514,6 +560,9 @@ class ListFooter extends React.Component {
                     this.openSnackbar('List created.');
                   }
                 }}
+                style={{
+                  color: darkMode ? (!userId ? '#636363' : '#e0e0e0') : undefined
+                }}
               >
                 <SaveIcon />
               </IconButton>
@@ -525,6 +574,9 @@ class ListFooter extends React.Component {
                 onClick={() => {
                   this.copyToClip(`http://legion-hq.com/list/${list._id}`);
                   this.openSnackbar('Link copied to clipboard.');
+                }}
+                style={{
+                  color: darkMode ? (!list._id ? '#636363' : '#e0e0e0') : undefined
                 }}
               >
                 <LinkIcon />

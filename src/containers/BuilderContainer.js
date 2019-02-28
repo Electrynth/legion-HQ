@@ -40,12 +40,8 @@ const styles = {
     top: '4.75rem',
     right: '1rem'
   },
-  grid: {
-    paddingTop: '3rem'
-  },
-  mobileGrid: {
-    paddingTop: '5rem'
-  },
+  grid: {},
+  mobileGrid: {},
   paper: {
     padding: '0.5rem',
     height: 'calc(100vh - 5rem)',
@@ -132,8 +128,8 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   position: isDragging ? 'relative' : ''
 });
 
-const getListStyle = isDraggingOver => ({
-  background: 'white'
+const getListStyle = (isDraggingOver, darkMode) => ({
+  background: darkMode ? (isDraggingOver ? '#212121' : '#424242') : 'white'
 });
 
 class BuilderContainer extends React.Component {
@@ -925,7 +921,8 @@ class BuilderContainer extends React.Component {
       handleGoogleLogout,
       objectiveCards,
       deploymentCards,
-      conditionCards
+      conditionCards,
+      darkMode
     } = this.props;
     if (!('objectiveCards' in list)) list.objectiveCards = [];
     if (!('deploymentCards' in list)) list.deploymentCards = [];
@@ -1065,7 +1062,15 @@ class BuilderContainer extends React.Component {
     });
     rankCounts.special += this.getEntourageSpecialRankReductionAmount(list.units);
     return (
-      <MuiThemeProvider theme={defaultTheme}>
+      <div
+        style={{
+          height: '100vh',
+          paddingTop: '1rem',
+          paddingLeft: '0.25rem',
+          paddingRight: '0.25rem',
+          marginTop: mobile ? '4rem' : '2.5rem'
+        }}
+      >
         <Title faction={list.faction} />
         <TopMenu
           list={list}
@@ -1079,6 +1084,7 @@ class BuilderContainer extends React.Component {
           renderTestButton={this.renderTestButton}
           handleGoogleLogin={handleGoogleLogin}
           handleGoogleLogout={handleGoogleLogout}
+          darkMode={darkMode}
         />
         <ViewCloseButton
           isVisible={viewFilter.type !== 'LIST'}
@@ -1091,7 +1097,6 @@ class BuilderContainer extends React.Component {
           direction="row"
           justify="flex-start"
           alignItems="stretch"
-          className={mobile ? classes.mobileGrid : classes.grid}
         >
           {leftRightSizes[0] > 0 && (
             <Grid
@@ -1106,7 +1111,11 @@ class BuilderContainer extends React.Component {
                 direction="right"
                 timeout={250}
               >
-                <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
+                <Paper
+                  elevation={3}
+                  className={mobile ? classes.mobilePaper : classes.paper}
+                  style={{ backgroundColor: darkMode ? '#424242' : 'white' }}
+                >
                   <Grid
                     container
                     direction="row"
@@ -1166,7 +1175,7 @@ class BuilderContainer extends React.Component {
                       return (
                         <Grid item key={rank}>
                           <Chip
-                            variant="outlined"
+                            variant={darkMode ? undefined : 'outlined'}
                             onClick={() => this.changeViewFilter({
                               rank,
                               type: 'UNIT'
@@ -1185,6 +1194,9 @@ class BuilderContainer extends React.Component {
                                 {rankCount}
                               </Typography>
                             )}
+                            style={{
+                              backgroundColor: darkMode ? '#848484' : undefined
+                            }}
                           />
                         </Grid>
                       );
@@ -1198,7 +1210,7 @@ class BuilderContainer extends React.Component {
                           {(provided, snapshot) => (
                             <div
                               ref={provided.innerRef}
-                              style={getListStyle(snapshot.isDraggingOver)}
+                              style={getListStyle(snapshot.isDraggingOver, darkMode)}
                             >
                               {list.units.map((unit, index) => (
                                 <div key={`${unit.name}_${index}`}>
@@ -1212,6 +1224,7 @@ class BuilderContainer extends React.Component {
                                       removeUpgrade={this.removeUpgrade}
                                       changeViewFilter={this.changeViewFilter}
                                       mobile={mobile}
+                                      darkMode={darkMode}
                                     />
                                   ) : (
                                     <Draggable key={`${unit.name}_${index}`} draggableId={`${unit.name}_${index}`} index={index}>
@@ -1234,6 +1247,7 @@ class BuilderContainer extends React.Component {
                                             removeUpgrade={this.removeUpgrade}
                                             changeViewFilter={this.changeViewFilter}
                                             mobile={mobile}
+                                            darkMode={darkMode}
                                           />
                                         </div>
                                       )}
@@ -1250,6 +1264,7 @@ class BuilderContainer extends React.Component {
                     <ListFooter
                       list={list}
                       userId={userId}
+                      darkMode={darkMode}
                       removeBattleCard={this.removeBattleCard}
                       changeListNotes={this.changeListNotes}
                       changeViewFilter={this.changeViewFilter}
@@ -1275,7 +1290,11 @@ class BuilderContainer extends React.Component {
                 direction="left"
                 timeout={250}
               >
-                <Paper elevation={3} className={mobile ? classes.mobilePaper : classes.paper}>
+                <Paper
+                  elevation={3}
+                  className={mobile ? classes.mobilePaper : classes.paper}
+                  style={{ backgroundColor: darkMode ? '#424242' : 'white' }}
+                >
                   <Grid
                     container
                     spacing={8}
@@ -1583,7 +1602,7 @@ class BuilderContainer extends React.Component {
             </Grid>
           )}
         </Grid>
-      </MuiThemeProvider>
+      </div>
     );
   }
 }

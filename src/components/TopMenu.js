@@ -51,7 +51,8 @@ class TopMenu extends React.Component {
       handleGoogleLogin,
       handleGoogleLogout,
       shiftLeftRightSizes,
-      leftRightSizes
+      leftRightSizes,
+      darkMode
     } = this.props;
     const avatarStyles = {
       margin: '0 1.2rem 0 1rem',
@@ -111,7 +112,11 @@ class TopMenu extends React.Component {
       });
       pointTotal += unit.count * unit.totalCost;
     });
-    const factionIconLocation = list.faction === 'rebels' ? '/faction/rebelsIconBlack.svg' : '/faction/empireIconBlack.svg';
+    const factionIconLocation = list.faction === 'rebels' ? (
+      darkMode ? '/faction/rebelsIconWhite.svg' : '/faction/rebelsIconBlack.svg'
+    ) : (
+      darkMode ? '/faction/empireIconWhite.svg' : '/faction/empireIconBlack.svg'
+    );
     return (
       <Slide
         in
@@ -120,7 +125,7 @@ class TopMenu extends React.Component {
         direction="down"
         timeout={500}
       >
-        <AppBar position="fixed" color="primary">
+        <AppBar position="fixed" style={{ backgroundColor: darkMode ? '#424242' : '#BDBDBD' }}>
           <Toolbar variant="dense">
             <Grid container spacing={8} alignItems="flex-end">
               <Grid item>
@@ -140,12 +145,11 @@ class TopMenu extends React.Component {
               <Grid item>
                 <Button
                   size="small"
-                  variant="contained"
-                  color="primary"
+                  variant={darkMode ? 'outlined' : 'contained'}
                   onClick={changeListMode}
                   style={buttonStyles}
                 >
-                  <Typography noWrap variant="body1">
+                  <Typography noWrap variant="body1" style={{ color: darkMode ? 'white' : 'black' }}>
                     {`${pointTotal}/${maxPoints} ${list.mode}`}
                   </Typography>
                 </Button>
@@ -177,6 +181,7 @@ class TopMenu extends React.Component {
                     styles={buttonStyles}
                     disabled={leftRightSizes[0] === 0}
                     onClick={() => shiftLeftRightSizes(-1)}
+                    style={{ color: darkMode ? '#e0e0e0' : 'black' }}
                   >
                     <FirstPageIcon />
                   </Button>
@@ -189,6 +194,7 @@ class TopMenu extends React.Component {
                     styles={buttonStyles}
                     disabled={leftRightSizes[1] === 0}
                     onClick={() => shiftLeftRightSizes(1)}
+                    style={{ color: darkMode ? '#e0e0e0' : 'black' }}
                   >
                     <LastPageIcon />
                   </Button>
