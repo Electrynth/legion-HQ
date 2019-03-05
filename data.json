@@ -1548,7 +1548,7 @@
       "id": "fh"
     },
     {
-      "cost": 85,
+      "cost": 115,
       "isUnique": true,
       "faction": "empire",
       "name": "Bossk",
@@ -2008,6 +2008,38 @@
       "faction": "empire",
       "products": [],
       "id": "fm"
+    },
+    {
+      "pips": 1,
+      "name": "Explosions!",
+      "commander": "Sabine Wren",
+      "faction": "rebels",
+      "products": [],
+      "id": "fw"
+    },
+    {
+      "pips": 1,
+      "name": "Merciless Munitions",
+      "commander": "Bossk",
+      "faction": "empire",
+      "products": [],
+      "id": "fx"
+    },
+    {
+      "pips": 2,
+      "name": "Reptilian Rampage",
+      "commander": "Bossk",
+      "faction": "empire",
+      "products": [],
+      "id": "fy"
+    },
+    {
+      "pips": 2,
+      "name": "Symbol of Rebellion",
+      "commander": "Sabine Wren",
+      "faction": "rebels",
+      "products": [],
+      "id": "fz"
     }
   ]
 }
