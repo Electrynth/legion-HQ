@@ -510,6 +510,20 @@ class BuilderContainer extends React.Component {
             style={{ width: '30px', height: '30px' }}
           />
         )
+      },
+      crew: {
+        name: 'Crew',
+        viewFilter: {
+          type: 'UPGRADE',
+          upgradeType: 'crew'
+        },
+        icon: (
+          <img
+            alt="Crew"
+            src="/upgradeTypeIcons/personnel.svg"
+            style={{ width: '30px', height: '30px' }}
+          />
+        )
       }
     };
     const allUpgradeOptions = [];

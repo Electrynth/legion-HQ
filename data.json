@@ -1450,7 +1450,7 @@
       "name": "Landspeeder",
       "type": "repulsor vehicle",
       "rank": "heavy",
-      "upgradeBar": ["pilot", "hardpoint", "comms"],
+      "upgradeBar": ["pilot", "crew", "crew", "hardpoint", "comms"],
       "products": [],
       "id": "ev"
     },
@@ -1601,6 +1601,76 @@
       "products": [],
       "requirements": ["Rebel Pathfinders"],
       "id": "fp"
+    },
+    {
+      "id": "fq",
+      "cost": 36,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "RPS-6 Rocket Gunner",
+      "displayName": "Rocket Gunner",
+      "type": "crew",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Landspeeder"]
+    },
+    {
+      "id": "fr",
+      "cost": 9,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "A-300 Rifle Gunner",
+      "displayName": "Rifle Gunner",
+      "type": "crew",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Landspeeder"]
+    },
+    {
+      "id": "fs",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "rebels",
+      "name":" Outer Rim Speeder Jockey",
+      "displayName": "Outer Rim Jockey",
+      "type": "pilot",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["repulsor vehicle"]
+    },
+    {
+      "id": "ft",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Personal Combat Shield",
+      "type": "gear",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Sabine Wren"]
+    },
+    {
+      "id": "fu",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Imperial Hammers Elite Armor Pilot",
+      "displayName": "Elite Armor Pilot",
+      "type": "pilot",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["ground vehicle"]
+    },
+    {
+      "id": "fv",
+      "cost": 22,
+      "isUnique": true,
+      "faction": "empire",
+      "name": "DT-F16",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Imperial Death Troopers"]
     }
   ],
   "objectiveCards": [
