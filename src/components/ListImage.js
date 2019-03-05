@@ -50,11 +50,13 @@ const styles = {
   },
   counterBadge: {
     marginRight: '40px',
-    marginTop: '37px'
+    marginTop: '37px',
+    backgroundColor: '#BDBDBD'
   },
   rankBadge: {
     marginTop: '8px',
-    marginRight: '40px'
+    marginRight: '40px',
+    backgroundColor: '#BDBDBD'
   },
   avatar: {
     width: '45px',
@@ -121,7 +123,7 @@ class ListImage extends React.Component {
                     <Grid item container>
                       <Grid item>
                         <Badge
-                          color="primary"
+                          color="default"
                           classes={{
                             badge: classes.rankBadge
                           }}
@@ -134,7 +136,7 @@ class ListImage extends React.Component {
                           )}
                         >
                           <Badge
-                            color="primary"
+                            color="default"
                             badgeContent={unit.count}
                             classes={{
                               badge: unit.count > 1 ? classes.counterBadge : classes.noBadge
@@ -162,7 +164,7 @@ class ListImage extends React.Component {
                         filtered.push(
                           <Chip
                             key={upgrade.name}
-                            color="primary"
+                            color="default"
                             avatar={<Avatar src={upgrade.iconLocation} />}
                             label={upgrade.displayName ? upgrade.displayName : upgrade.name}
                             className={classes.upgradeChip}
@@ -204,7 +206,7 @@ class ListImage extends React.Component {
             {list.commands.map(command => (
               <Grid item key={command.name}>
                 <Chip
-                  color="primary"
+                  color="default"
                   avatar={(
                     <Avatar
                       style={{
