@@ -1671,6 +1671,39 @@
       "rank": "upgrade",
       "products": [],
       "requirements": ["Imperial Death Troopers"]
+    },
+    {
+      "id": "fw",
+      "cost": 12,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Rebel Veteran",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Veterans"]
+    },
+    {
+      "id": "fx",
+      "cost": 48,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Rebel Veterans",
+      "type": "trooper",
+      "rank": "corps",
+      "upgradeBar": ["heavy weapon", "personnel", "training", "gear", "grenades"],
+      "products": []
+    },
+    {
+      "id": "fy",
+      "cost": 90,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Tauntaun Riders",
+      "type": "creature trooper",
+      "rank": "support",
+      "upgradeBar": ["training", "comms"],
+      "products": []
     }
   ],
   "objectiveCards": [
