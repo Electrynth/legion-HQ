@@ -1673,7 +1673,7 @@
       "requirements": ["Imperial Death Troopers"]
     },
     {
-      "id": "fw",
+      "id": "ga",
       "cost": 12,
       "isUnique": false,
       "faction": "rebels",
@@ -1684,7 +1684,7 @@
       "requirements": ["Rebel Veterans"]
     },
     {
-      "id": "fx",
+      "id": "gb",
       "cost": 48,
       "isUnique": false,
       "faction": "rebels",
@@ -1695,7 +1695,7 @@
       "products": []
     },
     {
-      "id": "fy",
+      "id": "gc",
       "cost": 90,
       "isUnique": false,
       "faction": "rebels",
