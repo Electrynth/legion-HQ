@@ -984,7 +984,6 @@ class BuilderContainer extends React.Component {
         marginLeft: '5px'
       }
     };
-    console.log(cards);
     const listViewItems = [];
     const eligibleUpgradeCards = [];
     const otherUpgradeCards = upgradesById.reduce((filtered, upgradeId, upgradeIndex) => {
