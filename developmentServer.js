@@ -27,6 +27,13 @@ app.use((req, res, next) => {
 });
 
 const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/development`;
+// mongoose.connect(connectionString, (err, db) => {
+//   const col = db.collection('cards');
+//   fs.readFile('dataToUpload.json', 'utf8', (errr, input) => {
+//     const data = JSON.parse(input);
+//     col.insertMany(data.cards);
+//   });
+// });
 mongoose.connect(connectionString);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
@@ -52,14 +59,6 @@ const ListSchema = new Schema({
 }, { minimize: false });
 const UserModel = mongoose.model('users', UserSchema);
 const ListModel = mongoose.model('lists', ListSchema);
-
-const getCardId = (index) => {
-  const mod = Math.floor(index / 26);
-  const remainder = index % 26;
-  const firstLetter = (mod + 10).toString(36);
-  const secondLetter = (remainder + 10).toString(36);
-  return `${firstLetter}${secondLetter}`;
-};
 
 app.get('/user', (req, res) => {
   if ('userId' in req.query) {
