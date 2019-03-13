@@ -902,7 +902,7 @@ class BuilderContainer extends React.Component {
       ],
       [
         'Director Krennic',
-        'Death Troopers'
+        'Imperial Death Troopers'
       ]
     ];
 
@@ -1157,7 +1157,7 @@ class BuilderContainer extends React.Component {
                             isValidCount = rankCount < 4;
                             break;
                           case 'heavy':
-                            isValidCount = rankCount < 2;
+                            isValidCount = rankCount < 3;
                             break;
                           default:
                             isValidCount = true;
