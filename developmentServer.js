@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/development`;
+const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@3.18.150.120:27017/development`;
 // mongoose.connect(connectionString, (err, db) => {
 //   const col = db.collection('cards');
 //   fs.readFile('dataToUpload.json', 'utf8', (errr, input) => {

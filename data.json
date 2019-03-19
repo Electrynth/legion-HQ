@@ -2073,6 +2073,22 @@
       "faction": "rebels",
       "products": [],
       "id": "fz"
+    },
+    {
+      "pips": 2,
+      "name": "Deploy the Garrison",
+      "commander": "Director Orson Krennic",
+      "faction": "empire",
+      "products": [],
+      "id": "gd"
+    },
+    {
+      "pips": 3,
+      "name": "Annihilation Looms",
+      "commander": "Director Orson Krennic",
+      "faction": "empire",
+      "products": [],
+      "id": "ge"
     }
   ]
 }
