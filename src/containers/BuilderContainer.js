@@ -901,7 +901,7 @@ class BuilderContainer extends React.Component {
         'Imperial Royal Guards'
       ],
       [
-        'Director Krennic',
+        'Director Orson Krennic',
         'Imperial Death Troopers'
       ]
     ];
