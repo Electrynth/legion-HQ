@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   next();
 });
 
-const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@18.218.77.64:27017/production`;
+const connectionString = `mongodb://legion-hq:${credentials.mongodb.password}@3.18.150.120:27017/production`;
 mongoose.connect(connectionString);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
