@@ -1704,6 +1704,17 @@
       "rank": "support",
       "upgradeBar": ["training", "comms"],
       "products": []
+    },
+    {
+      "id": "gf",
+      "cost": 34,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "DLT-19D",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Imperial Death Troopers"]
     }
   ],
   "objectiveCards": [
