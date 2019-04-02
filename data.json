@@ -1761,6 +1761,17 @@
       "rank": "upgrade",
       "products": [],
       "requirements": ["Landspeeder"]
+    },
+    {
+      "id": "gk",
+      "cost": 5,
+      "isUnique": true,
+      "faction": "empire",
+      "name": "First Sergeant Arbmab",
+      "type": "pilot",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["ground vehicle"]
     }
   ],
   "objectiveCards": [
