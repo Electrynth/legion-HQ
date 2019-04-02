@@ -506,7 +506,7 @@ class BuilderContainer extends React.Component {
         icon: (
           <img
             alt="Blaster"
-            src="/upgradeTypeIcons/hardpoint.svg"
+            src="/upgradeTypeIcons/armament.svg"
             style={{ width: '30px', height: '30px' }}
           />
         )

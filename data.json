@@ -1704,6 +1704,63 @@
       "rank": "support",
       "upgradeBar": ["training", "comms"],
       "products": []
+    },
+    {
+      "id": "gf",
+      "cost": 34,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "DLT-19D",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Imperial Death Troopers"]
+    },
+    {
+      "id": "gg",
+      "cost": 18,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "DLT-19 Rifle Pintle",
+      "type": "hardpoint",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Assault Tank"]
+    },
+    {
+      "id": "gh",
+      "cost": 14,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "RT-97C Rifle Pintle",
+      "type": "hardpoint",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Assault Tank"]
+    },
+    {
+      "id": "gi",
+      "cost": 38,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "M-45 Ion Blaster",
+      "displayName": "Ion Blaster",
+      "type": "hardpoint",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Landspeeder"]
+    },
+    {
+      "id": "gj",
+      "cost": 34,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Mark II Medium Blaster",
+      "displayName": "Medium Blaster",
+      "type": "hardpoint",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Landspeeder"]
     }
   ],
   "objectiveCards": [
