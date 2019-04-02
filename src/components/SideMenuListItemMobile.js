@@ -220,7 +220,7 @@ class SideMenuListItem extends React.Component {
                         <ListItemIcon>
                           {option.icon}
                         </ListItemIcon>
-                        {option.name === 'Blaster' ? 'Weapon' : option.name}
+                        {option.name === 'Blaster' ? 'Armament' : option.name}
                       </MenuItem>
                     ) : undefined
                   ))}
