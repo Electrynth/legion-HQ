@@ -110,6 +110,10 @@ class App extends Component {
     });
   }
 
+  handleGoogleLoginFailure = (googleResponse) => {
+    alert(`Error code: ${googleResponse.error} - ${googleResponse.details}`);
+  }
+
   handleGoogleLogin = (googleResponse) => {
     if ('googleId' in googleResponse) {
       const userId = md5(googleResponse.googleId);
@@ -209,6 +213,7 @@ class App extends Component {
                   userLists={userLists}
                   handleGoogleLogin={this.handleGoogleLogin}
                   handleGoogleLogout={this.handleGoogleLogout}
+                  handleGoogleLoginFailure={this.handleGoogleLoginFailure}
                   deleteList={this.deleteList}
                   refreshUserLists={this.refreshUserLists}
                   darkMode={darkMode}

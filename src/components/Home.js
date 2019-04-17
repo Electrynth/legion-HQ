@@ -47,7 +47,7 @@ const empireIconStyles = {
   ...factionIconStyles
 };
 
-const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLists, empireLists, deleteList, toggleDarkMode, darkMode }) => (
+const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGoogleLoginFailure, rebelLists, empireLists, deleteList, toggleDarkMode, darkMode }) => (
   <Grow in>
     <Grid
       container
@@ -177,7 +177,7 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, rebelLis
                   buttonText="Sign in with Google"
                   clientId="112890447494-ls135bmon2jbaj0mh3k0fnukugp9upkk.apps.googleusercontent.com"
                   onSuccess={handleGoogleLogin}
-                  onFailure={handleGoogleLogin}
+                  onFailure={handleGoogleLoginFailure}
                   className="loginButton"
                 />
               </Grid>
