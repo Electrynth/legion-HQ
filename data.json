@@ -1772,6 +1772,50 @@
       "rank": "upgrade",
       "products": [],
       "requirements": ["ground vehicle"]
+    },
+    {
+      "id": "gl",
+      "cost": 90,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Dewback Rider",
+      "type": "creature trooper",
+      "rank": "support",
+      "upgradeBar": ["training", "comms", "blaster"],
+      "products": []
+    },
+    {
+      "id": "gm",
+      "cost": 52,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Shoretroopers",
+      "type": "trooper",
+      "rank": "corps",
+      "upgradeBar": ["heavy weapon", "personnel", "training", "gear", "grenades"],
+      "products": []
+    },
+    {
+      "id": "gn",
+      "cost": 13,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Shoretrooper",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Shoretroopers"]
+    },
+    {
+      "id": "go",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "T-21 Blaster Rifle",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Dewback Rider"]
     }
   ],
   "objectiveCards": [
