@@ -14,6 +14,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Grow from '@material-ui/core/Grow';
 import ClearIcon from '@material-ui/icons/Clear';
 import SendIcon from '@material-ui/icons/Send';
+import FiberNewIcon from '@material-ui/icons/FiberNew';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import EmailIcon from '@material-ui/icons/Email';
 import Brightness2Icon from '@material-ui/icons/Brightness2';
@@ -186,10 +187,32 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
           <Grid
             container
             spacing={8}
-            direction="row"
+            direction="column"
             justify="center"
             alignItems="center"
           >
+            <Grid item>
+              <Typography
+          color="inherit"
+          variant="body2"
+          style={{
+            color: darkMode ? 'white' : 'black',
+            maxWidth: '300px'
+          }}
+        >
+          A prototype of Legion HQ 2.0 is currently being tested and will replace this builder when it is complete. A link is below to the new builder.
+        </Typography>
+            </Grid>
+	    <Grid item>
+              <Button
+                variant={darkMode ? 'outlined' : 'contained'}
+                size="small"
+                href="https://legion-hq.herokuapp.com"
+              >
+                <FiberNewIcon style={{ marginRight: '10px' }}  />
+                Legion HQ 2.0
+              </Button>
+            </Grid>
             <Grid item>
               <Button
                 variant={darkMode ? 'outlined' : 'contained'}

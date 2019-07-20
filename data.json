@@ -1816,7 +1816,138 @@
       "rank": "upgrade",
       "products": [],
       "requirements": ["Dewback Rider"]
+    },
+    {
+      "id": "gp",
+      "cost": 5,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Ryder Azadi",
+      "type": "pilot",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["repulsor vehicle"]
+    },
+    {
+      "id": "gq",
+      "cost": 5,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Electro Grappling Line",
+      "type": "gear",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Sabine Wren"]
+    },
+    {
+      "id": "gr",
+      "cost": 38,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Mark II Medium Blaster Trooper",
+      "displayName": "Medium Blaster Trooper",
+      "type": "emplacement trooper",
+      "rank": "corps",
+      "upgradeBar": ["comms"],
+      "products": []
+     },
+     {
+      "id": "gs",
+      "cost": 31,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "CM-O 93 Trooper",
+      "displayName": "CM-O/93 Trooper",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Veterans"]
+    },
+    {
+      "id": "gt",
+      "cost": 200,
+      "isUnique": true,
+      "faction": "rebels",
+      "name": "Luke Skywalker2",
+      "displayName": "Luke Skywalker",
+      "type": "trooper",
+      "rank": "operative",
+      "upgradeBar": ["force", "force", "force", "training"],
+      "products": []
+    },
+    {
+      "id": "gu",
+      "cost": 170,
+      "isUnique": true,
+      "faction": "empire",
+      "name": "Darth Vader2",
+      "displayName": "Darth Vader",
+      "type": "trooper",
+      "rank": "operative",
+      "upgradeBar": ["force", "force", "training"],
+      "products": []
+    },
+    {
+      "id": "gv",
+      "cost": 3,
+      "isUnique": false,
+      "faction": "",
+      "name": "Fear",
+      "displayName": "",
+      "type": "force",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["dark side"]
+    },
+    {
+      "id": "hd",
+      "cost": 3,
+      "isUnique": false,
+      "faction": "",
+      "name": "Hope",
+      "displayName": "",
+      "type": "force",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["light side"]
+    },
+    {
+      "id": "gy",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "",
+      "name": "Force Guidance",
+      "displayName": "",
+      "type": "force",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
+    },
+    {
+      "id": "gz",
+      "cost": 10,
+      "isUnique": false,
+      "faction": "",
+      "name": "Aggressive Tactics",
+      "displayName": "",
+      "type": "command",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
+    },
+    {
+      "id": "ha",
+      "cost": 6,
+      "isUnique": false,
+      "faction": "",
+      "name": "Smoke Grenades",
+      "displayName": "",
+      "type": "grenades",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
     }
+
   ],
   "objectiveCards": [
     "Breakthrough",
@@ -2201,6 +2332,39 @@
       "faction": "empire",
       "products": [],
       "id": "ge"
+    },
+    {
+      
+      "pips": 3,
+      "name": "I am a Jedi",
+      "commander": "Luke Skywalker2",
+      "faction": "rebels",
+      "products": [],
+      "id": "gw"
+    },
+    {
+      "pips": 3,
+      "name": "Darkness Descends",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": [],
+      "id": "gx"
+    },
+    {
+      "pips": 3,
+      "name": "Darkness Descends",
+      "commander": "Darth Vader",
+      "faction": "empire",
+      "products": [],
+      "id": "hb"
+    },
+    {
+      "pips": 3,
+      "name": "I am a Jedi",
+      "commander": "Luke Skywalker",
+      "faction": "rebels",
+      "products": [],
+      "id": "hc"
     }
   ]
 }
