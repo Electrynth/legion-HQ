@@ -1946,8 +1946,65 @@
       "rank": "upgrade",
       "products": [],
       "requirements": []
+    },
+    {
+      "id": "hf",
+      "cost": 32,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "T-21B Trooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Shoretroopers"]
+    },
+    {
+      "id": "he",
+      "cost": 36,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "DF-90 Mortar Trooper",
+      "displayName": "",
+      "type": "emplacement trooper",
+      "rank": "corps",
+      "upgradeBar": ["comms"],
+      "products": []
+    },
+    {
+      "id": "hg",
+      "cost": 5,
+      "isUnique": false,
+      "faction": "",
+      "name": "Linked Targeting Array",
+      "displayName": "",
+      "type": "comms",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
+    },
+    {
+      "id": "hh",
+      "cost": 15,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "RT-97C Blaster Rifle",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Dewback Rider"]
+    },
+    {
+      "id": "hi",
+      "cost": 20,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "CR-24 Flame Rifle",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Dewback Rider"]
     }
-
   ],
   "objectiveCards": [
     "Breakthrough",
