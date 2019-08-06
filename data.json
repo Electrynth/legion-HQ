@@ -1948,52 +1948,106 @@
       "requirements": []
     },
     {
+      "id": "hf",
+      "cost": 32,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "T-21B Trooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Shoretroopers"]
+    },
+    {
       "id": "he",
+      "cost": 36,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "DF-90 Mortar Trooper",
+      "displayName": "",
+      "type": "emplacement trooper",
+      "rank": "corps",
+      "upgradeBar": ["comms"],
+      "products": []
+    },
+    {
+      "id": "hg",
+      "cost": 5,
+      "isUnique": false,
+      "faction": "",
+      "name": "Linked Targeting Array",
+      "displayName": "",
+      "type": "comms",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
+    },
+    {
+      "id": "hh",
+      "cost": 15,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "RT-97C Blaster Rifle",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Dewback Rider"]
+    },
+    {
+      "id": "hi",
+      "cost": 20,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "CR-24 Flame Rifle",
+      "type": "blaster",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Dewback Rider"]
+    },
+    {
+      "id": "hj",
       "cost": 26,
       "isUnique": false,
       "faction": "rebels",
       "name": "DLT-20A Trooper",
-      "displayName": "",
       "type": "heavy weapon",
       "rank": "upgrade",
       "products": [],
       "requirements": ["Rebel Troopers"]
     },
     {
-      "id": "hf",
+      "id": "hk",
+      "cost": 20,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "SX-21 Trooper",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Troopers"]
+    },
+    {
+      "id": "hl",
       "cost": 26,
       "isUnique": false,
       "faction": "empire",
       "name": "RT-97C Stormtrooper",
-      "displayName": "",
       "type": "heavy weapon",
       "rank": "upgrade",
       "products": [],
       "requirements": ["Stormtroopers"]
     },
     {
-      "id": "hg",
-      "cost": 20,
-      "isUnique": false,
-      "faction": "rebels",
-      "name": "SX-21 Trooper",
-      "displayName": "",
-      "type": "heavy weapon",
-      "rank": "upgrade",
-      "products": [],
-      "requirements": ["Rebel Troopers"]
-    },
-    {
-      "id": "hh",
+      "id": "hm",
       "cost": 27,
       "isUnique": false,
       "faction": "empire",
       "name": "T-21 Stormtrooper",
-      "displayName": "",
       "type": "heavy weapon",
       "rank": "upgrade",
       "products": [],
-      "requirements": ["Stormtrooper"]
+      "requirements": ["Stormtroopers"]
     }
   ],
   "objectiveCards": [
