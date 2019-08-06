@@ -1946,8 +1946,55 @@
       "rank": "upgrade",
       "products": [],
       "requirements": []
+    },
+    {
+      "id": "he",
+      "cost": 26,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "DLT-20A Trooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Troopers"]
+    },
+    {
+      "id": "hf",
+      "cost": 26,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "RT-97C Stormtrooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Stormtroopers"]
+    },
+    {
+      "id": "hg",
+      "cost": 20,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "SX-21 Trooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Troopers"]
+    },
+    {
+      "id": "hh",
+      "cost": 27,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "T-21 Stormtrooper",
+      "displayName": "",
+      "type": "heavy weapon",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Stormtrooper"]
     }
-
   ],
   "objectiveCards": [
     "Breakthrough",
@@ -2334,7 +2381,7 @@
       "id": "ge"
     },
     {
-      
+
       "pips": 3,
       "name": "I am a Jedi",
       "commander": "Luke Skywalker2",
