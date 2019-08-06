@@ -187,23 +187,48 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
           <Grid
             container
             spacing={8}
+            direction="row"
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item style={{ textAlign: 'center' }}>
+              <a
+                href="https://imperialterrain.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                }}
+              >
+                <img
+                  alt="Imperial Terrain"
+                  src="/imperialTerrain.png"
+                  style={{
+                    maxWidth: '300px'
+                  }}
+                />
+              </a>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={8}
             direction="column"
             justify="center"
             alignItems="center"
           >
             <Grid item>
               <Typography
-          color="inherit"
-          variant="body2"
-          style={{
-            color: darkMode ? 'white' : 'black',
-            maxWidth: '300px'
-          }}
-        >
-          A prototype of Legion HQ 2.0 is currently being tested and will replace this builder when it is complete. A link is below to the new builder.
-        </Typography>
-            </Grid>
-	    <Grid item>
+                color="inherit"
+                variant="body2"
+                style={{
+                  color: darkMode ? 'white' : 'black',
+                  maxWidth: '300px'
+                }}
+              >
+                A prototype of Legion HQ 2.0 is currently being tested and will replace this builder when it is complete. A link is below to the new builder.
+              </Typography>
+                  </Grid>
+      	    <Grid item>
               <Button
                 variant={darkMode ? 'outlined' : 'contained'}
                 size="small"
