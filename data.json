@@ -575,7 +575,7 @@
         "id": "ap"
     },
     {
-        "cost": 16,
+        "cost": 20,
         "isUnique": false,
         "faction": "empire",
         "name": "Scout Troopers Strike Team",
@@ -643,7 +643,7 @@
       "id": "av"
     },
     {
-      "cost": 10,
+      "cost": 7,
       "isUnique": false,
       "name": "Overcharged Generator",
       "type": "generator",
@@ -710,7 +710,7 @@
       "id": "bb"
     },
     {
-      "cost": 10,
+      "cost": 7,
       "isUnique": false,
       "name": "Barrage Generator",
       "type": "generator",
@@ -732,7 +732,7 @@
       "id": "bd"
     },
     {
-      "cost": 16,
+      "cost": 20,
       "isUnique": false,
       "faction": "rebels",
       "name": "Rebel Commandos Strike Team",
@@ -834,7 +834,7 @@
       "id": "bm"
     },
     {
-      "cost": 175,
+      "cost": 140,
       "isUnique": false,
       "faction": "rebels",
       "name": "T-47 Airspeeder",
@@ -890,7 +890,7 @@
       "id": "br"
     },
     {
-      "cost": 90,
+      "cost": 75,
       "isUnique": false,
       "faction": "empire",
       "name": "74-Z Speeder Bikes",
@@ -902,7 +902,7 @@
       "id": "bs"
     },
     {
-      "cost": 195,
+      "cost": 170,
       "isUnique": false,
       "faction": "empire",
       "name": "AT-ST",
@@ -935,7 +935,7 @@
       "id": "bv"
     },
     {
-      "cost": 15,
+      "cost": 10,
       "isUnique": false,
       "name": "Force Reflexes",
       "type": "force",
@@ -946,7 +946,7 @@
       "id": "bw"
     },
     {
-      "cost": 10,
+      "cost": 5,
       "isUnique": false,
       "name": "Saber Throw",
       "type": "force",
@@ -979,7 +979,7 @@
       "id": "bz"
     },
     {
-      "cost": 6,
+      "cost": 4,
       "isUnique": false,
       "name": "Targeting Scopes",
       "type": "gear",
@@ -1012,7 +1012,7 @@
       "id": "cc"
     },
     {
-      "cost": 32,
+      "cost": 24,
       "isUnique": false,
       "name": "MPL-57 Ion Trooper",
       "displayName": "Ion Trooper",
@@ -1057,7 +1057,7 @@
       "id": "cg"
     },
     {
-      "cost": 34,
+      "cost": 26,
       "isUnique": false,
       "name": "HH-12 Stormtrooper",
       "type": "heavy weapon",
@@ -1123,7 +1123,7 @@
       "id": "cm"
     },
     {
-      "cost": 30,
+      "cost": 20,
       "isUnique": false,
       "name": "AT-RT Rotary Blaster",
       "displayName": "Rotary Blaster",
@@ -1135,7 +1135,7 @@
       "id": "cn"
     },
     {
-      "cost": 25,
+      "cost": 20,
       "isUnique": false,
       "name": "AT-RT Flamethrower",
       "displayName": "Flamethrower",
@@ -1147,7 +1147,7 @@
       "id": "co"
     },
     {
-      "cost": 35,
+      "cost": 20,
       "isUnique": false,
       "name": "AT-RT Laser Cannon",
       "displayName": "Laser Cannon",
@@ -1170,7 +1170,7 @@
       "id": "cq"
     },
     {
-      "cost": 20,
+      "cost": 10,
       "isUnique": false,
       "name": "Ax-108 Ground Buzzer",
       "displayName": "Ground Buzzer",
@@ -1182,7 +1182,7 @@
       "id": "cr"
     },
     {
-      "cost": 8,
+      "cost": 3,
       "isUnique": false,
       "name": "MoDk Power Harpoon",
       "displayName": "Power Harpoon",
@@ -1853,7 +1853,7 @@
      },
      {
       "id": "gs",
-      "cost": 31,
+      "cost": 26,
       "isUnique": false,
       "faction": "rebels",
       "name": "CM-O 93 Trooper",
@@ -2048,6 +2048,28 @@
       "rank": "upgrade",
       "products": [],
       "requirements": ["Stormtroopers"]
+    },
+    {
+      "id": "hn",
+      "cost": 8,
+      "isUnique": false,
+      "faction": "",
+      "name": "Electrobinoculars",
+      "type": "gear",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
+    },
+    {
+      "id": "ho",
+      "cost": 4,
+      "isUnique": false,
+      "faction": "",
+      "name": "Offensive Push",
+      "type": "training",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": []
     }
   ],
   "objectiveCards": [
@@ -2466,6 +2488,54 @@
       "faction": "rebels",
       "products": [],
       "id": "hc"
+    },
+    {
+      "pips": 1,
+      "name": "You Serve Your Master Well",
+      "commander": "Luke Skywalker",
+      "faction": "rebels",
+      "products": [],
+      "id": "hp"
+    },
+    {
+      "pips": 1,
+      "name": "You Serve Your Master Well",
+      "commander": "Luke Skywalker2",
+      "faction": "rebels",
+      "products": [],
+      "id": "hu"
+    },
+    {
+      "pips": 1,
+      "name": "Vader's Might",
+      "commander": "Darth Vader",
+      "faction": "empire",
+      "products": [],
+      "id": "hq"
+    },
+    {
+      "pips": 2,
+      "name": "Fear and Dead Men",
+      "commander": "Darth Vader",
+      "faction": "empire",
+      "products": [],
+      "id": "hr"
+    },
+    {
+      "pips": 1,
+      "name": "Vader's Might",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": [],
+      "id": "hs"
+    },
+    {
+      "pips": 2,
+      "name": "Fear and Dead Men",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": [],
+      "id": "ht"
     }
   ]
 }
