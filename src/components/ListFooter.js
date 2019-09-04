@@ -582,6 +582,7 @@ class ListFooter extends React.Component {
                 <LinkIcon />
               </IconButton>
             </Grid>
+            <Grid item style={{ height: '120px' }} />
           </Grid>
         </Grid>
       </div>
