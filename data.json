@@ -621,7 +621,7 @@
         "id": "at"
     },
     {
-        "cost": 110,
+        "cost": 95,
         "isUnique": true,
         "faction": "rebels",
         "name": "Chewbacca",
@@ -676,7 +676,7 @@
       "id": "ay"
     },
     {
-      "cost": 8,
+      "cost": 12,
       "isUnique": false,
       "name": "Emergency Stims",
       "displayName": "E. Stims",
@@ -688,7 +688,7 @@
       "id": "az"
     },
     {
-      "cost": 8,
+      "cost": 4,
       "isUnique": false,
       "name": "Duck and Cover",
       "type": "training",
@@ -846,7 +846,7 @@
       "id": "bn"
     },
     {
-      "cost": 200,
+      "cost": 190,
       "isUnique": true,
       "faction": "empire",
       "name": "Darth Vader",
@@ -913,7 +913,7 @@
       "id": "bt"
     },
     {
-      "cost": 10,
+      "cost": 5,
       "isUnique": false,
       "name": "Battle Meditation",
       "type": "force",
@@ -1101,7 +1101,7 @@
       "id": "ck"
     },
     {
-      "cost": 15,
+      "cost": 5,
       "isUnique": false,
       "name": "Comms Jammer",
       "type": "comms",
@@ -1112,7 +1112,7 @@
       "id": "cl"
     },
     {
-      "cost": 10,
+      "cost": 5,
       "isUnique": false,
       "name": "Long-Range Comlink",
       "type": "comms",
@@ -1241,7 +1241,7 @@
       "id": "cw"
     },
     {
-      "cost": 10,
+      "cost": 5,
       "isUnique": false,
       "name": "Commanding Presence",
       "type": "command",
@@ -1285,7 +1285,7 @@
       "id": "da"
     },
     {
-      "cost": 33,
+      "cost": 25,
       "isUnique": false,
       "name": "MPL-57 Barrage Trooper",
       "displayName": "Barrage Trooper",
@@ -1308,7 +1308,7 @@
       "id": "dc"
     },
     {
-      "cost": 34,
+      "cost": 26,
       "isUnique": false,
       "name": "T-7 Ion Snowtrooper",
       "displayName": "Ion Snowtrooper",
@@ -1366,7 +1366,7 @@
       "id": "ei"
     },
     {
-      "cost": 130,
+      "cost": 110,
       "isUnique": true,
       "faction": "rebels",
       "name": "Jyn Erso",
@@ -1399,7 +1399,7 @@
       "id": "el"
     },
     {
-      "cost": 6,
+      "cost": 0,
       "isUnique": false,
       "faction": "rebels",
       "name": "A-300 Config",
@@ -2130,6 +2130,14 @@
     },
     {
       "pips": 3,
+      "name": "Master of Evil",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": ["swl01"],
+      "id": "ic"
+    },
+    {
+      "pips": 3,
       "name": "Imperial Discipline",
       "commander": "General Veers",
       "faction": "empire",
@@ -2143,6 +2151,14 @@
       "faction": "empire",
       "products": ["Darth Vader"],
       "id": "dk"
+    },
+    {
+      "pips": 2,
+      "name": "New Ways to Motivate Them",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": ["Darth Vader"],
+      "id": "ib"
     },
     {
       "pips": 2,
@@ -2167,6 +2183,14 @@
       "faction": "empire",
       "products": ["swl01"],
       "id": "dn"
+    },
+    {
+      "pips": 1,
+      "name": "Implacable",
+      "commander": "Darth Vader2",
+      "faction": "empire",
+      "products": ["swl01"],
+      "id": "ia"
     },
     {
       "pips": 3,
@@ -2536,6 +2560,46 @@
       "faction": "empire",
       "products": [],
       "id": "ht"
-    }
+    },
+    {
+      "pips": 2,
+      "name": "Full of Surprises",
+      "commander": "Luke Skywalker",
+      "faction": "rebels",
+      "products": [],
+      "id": "hv"
+    },
+    {
+      "pips": 2,
+      "name": "Full of Surprises",
+      "commander": "Luke Skywalker2",
+      "faction": "rebels",
+      "products": [],
+      "id": "hw"
+    },
+    {
+  "pips": 3,
+  "name": "Return of the Jedi",
+  "commander": "Luke Skywalker2",
+  "faction": "rebels",
+  "products": ["swl01"],
+  "id": "hx"
+},
+{
+  "pips": 2,
+  "name": "My Ally is the Force",
+  "commander": "Luke Skywalker2",
+  "faction": "rebels",
+  "products": ["swl01"],
+  "id": "hy"
+},
+{
+  "pips": 1,
+  "name": "Son of Skywalker",
+  "commander": "Luke Skywalker2",
+  "faction": "rebels",
+  "products": ["swl01"],
+  "id": "hz"
+}
   ]
 }
