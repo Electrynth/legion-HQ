@@ -225,7 +225,7 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
                   maxWidth: '300px'
                 }}
               >
-                A prototype of Legion HQ 2.0 is currently being tested and will replace this builder when it is complete. A link is below to the new builder.
+                Legion-HQ will be decommissioned in late October. A link is below to the new builder. All your saved lists will be copied over the new builder.
               </Typography>
                   </Grid>
       	    <Grid item>
