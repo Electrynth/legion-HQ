@@ -187,10 +187,21 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
           <Grid
             container
             spacing={8}
-            direction="row"
+            direction="column"
             justify="center"
             alignItems="center"
           >
+            <Grid item>
+              <Button
+                variant={darkMode ? 'outlined' : 'contained'}
+                size="small"
+                href="http://invaderleague.com"
+                target="_blank"
+              >
+                <FiberNewIcon style={{ marginRight: '0px' }}  />
+                Invader League Season 4!
+              </Button>
+            </Grid>
             <Grid item style={{ textAlign: 'center' }}>
               <a
                 href="https://imperialterrain.com/"
@@ -227,14 +238,14 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
               >
                 Legion-HQ will be decommissioned in late October. A link is below to the new builder. All your saved lists will be copied over the new builder.
               </Typography>
-                  </Grid>
+            </Grid>
       	    <Grid item>
               <Button
                 variant={darkMode ? 'outlined' : 'contained'}
                 size="small"
                 href="https://legion-hq.herokuapp.com"
               >
-                <FiberNewIcon style={{ marginRight: '10px' }}  />
+                <FiberNewIcon style={{ marginRight: '0px' }}  />
                 Legion HQ 2.0
               </Button>
             </Grid>
