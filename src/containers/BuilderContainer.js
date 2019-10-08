@@ -819,7 +819,11 @@ class BuilderContainer extends React.Component {
 
   changeListMode = () => {
     const { list } = this.state;
-    list.mode = list.mode === 'standard' ? 'grand army' : 'standard';
+    const modes = ['standard', 'grand army', '500-points']
+    let modeIndex = modes.indexOf(list.mode);
+    modeIndex += 1;
+    modeIndex %= modes.length;
+    list.mode = modes[modeIndex];
     this.setState({ list });
   }
 
@@ -1037,7 +1041,7 @@ class BuilderContainer extends React.Component {
       return filtered;
     }, []);
     list.units.forEach((unit, index) => {
-      rankCounts[unit.rank] += unit.count;
+      if (unit.id !== 'ih') rankCounts[unit.rank] += unit.count;
       for (let counter = 0; counter < unit.count; counter += 1) {
         listViewItems.push(
           <Grid
@@ -1185,7 +1189,30 @@ class BuilderContainer extends React.Component {
                           default:
                             isValidCount = true;
                         }
-                      }
+                      } else if (list.mode === '500-points') {
+			 switch (rank) {
+                          case 'commander':
+                            isValidCount = rankCount > 0 && rankCount < 3;
+                            break;
+                          case 'operative':
+                            isValidCount = rankCount < 2;
+                            break;
+                          case 'corps':
+                            isValidCount = rankCount > 1 && rankCount < 6;
+                            break;
+                          case 'special':
+                            isValidCount = rankCount < 3;
+                            break;
+                          case 'support':
+                            isValidCount = rankCount < 3;
+                            break;
+                          case 'heavy':
+                            isValidCount = rankCount < 2;
+                            break;
+                          default:
+                            isValidCount = true;
+                        }
+		      }
                       return (
                         <Grid item key={rank}>
                           <Chip

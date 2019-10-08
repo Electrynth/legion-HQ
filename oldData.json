@@ -1876,30 +1876,6 @@
       "products": []
     },
     {
-      "id": "ig",
-      "cost": 35,
-      "isUnique": true,
-      "faction": "rebels",
-      "name": "R2-D2",
-      "displayName": "",
-      "type": "trooper",
-      "rank": "operative",
-      "upgradeBar": ["comms"],
-      "products": []
-    },
-    {
-      "id": "ih",
-      "cost": 15,
-      "isUnique": true,
-      "faction": "rebels",
-      "name": "C-3PO",
-      "displayName": "",
-      "type": "trooper",
-      "rank": "operative",
-      "upgradeBar": [],
-      "products": []
-    },
-    {
       "id": "gu",
       "cost": 170,
       "isUnique": true,
@@ -2616,14 +2592,6 @@
   "faction": "rebels",
   "products": ["swl01"],
   "id": "hy"
-},
-{
-  "pips": 1,
-  "name": "Blast Off!",
-  "commander": "R2-D2",
-  "faction": "rebels",
-  "products": [],
-  "id": "if"
 },
 {
   "pips": 1,
