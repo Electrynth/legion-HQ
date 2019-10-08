@@ -57,16 +57,23 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
       justify="center"
       alignItems="center"
     >
-      <Grid item>
-        <Typography
-          color="inherit"
-          variant="display3"
+      <Grid item align="center">
+        <img
+          alt="Fifth Trooper"
+          src={darkMode ? '/fifthTrooperLogo.png' : '/fifthTrooperLogoLight.png'}
           style={{
-            color: darkMode ? 'white' : 'black'
+            width: '20%'
           }}
-        >
-          Legion HQ
-        </Typography>
+        />
+      </Grid>
+      <Grid item align="center">
+        <img
+          alt="Legion HQ"
+          src={darkMode ? '/legionHQLogo.png' : '/legionHQLogoLight.png'}
+          style={{
+            width: '45%'
+          }}
+        />
       </Grid>
       <Grid
         item
