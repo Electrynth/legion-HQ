@@ -2094,6 +2094,50 @@
       "rank": "upgrade",
       "products": [],
       "requirements": []
+    },
+    {
+      "id": "ii",
+      "cost": 14,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Rebel Trooper Captain",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Troopers"]
+   },
+   {
+      "id": "ij",
+      "cost": 14,
+      "isUnique": false,
+      "faction": "rebels",
+      "name": "Rebel Trooper Specialist",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Rebel Troopers"]
+    },
+    {
+      "id": "ik",
+      "cost": 15,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Stormtrooper Captain",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Stormtroopers"]
+    },
+    {
+      "id": "il",
+      "cost": 15,
+      "isUnique": false,
+      "faction": "empire",
+      "name": "Stormtrooper Specialist",
+      "type": "personnel",
+      "rank": "upgrade",
+      "products": [],
+      "requirements": ["Stormtroopers"]
     }
   ],
   "objectiveCards": [
