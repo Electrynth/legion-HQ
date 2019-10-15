@@ -655,11 +655,23 @@ class BuilderContainer extends React.Component {
           if (card.name === 'Rebel Comms Technician' || card.name === 'Imperial Comms Technician') {
             oldUnit.upgradeBar.push('comms');
             oldUnit.upgradesEquipped.push(null);
+          } else if (card.name === 'Rebel Trooper Captain' || card.name === 'Stormtrooper Captain') {
+            oldUnit.upgradeBar.push('training');
+            oldUnit.upgradesEquipped.push(null);
+          } else if (card.name === 'Rebel Trooper Specialist' || card.name === 'Stormtrooper Specialist') {
+            oldUnit.upgradeBar.push('gear');
+            oldUnit.upgradesEquipped.push(null);
           }
         } else { // upgraded a card on a stack
           oldUnit.count -= 1; // decrease stack by 1
           if (card.name === 'Rebel Comms Technician' || card.name === 'Imperial Comms Technician') {
             newUnit.upgradeBar.push('comms');
+            newUnit.upgradesEquipped.push(null);
+          } else if (card.name === 'Rebel Trooper Captain' || card.name === 'Stormtrooper Captain') {
+            newUnit.upgradeBar.push('training');
+            newUnit.upgradesEquipped.push(null);
+          } else if (card.name === 'Rebel Trooper Specialist' || card.name === 'Stormtrooper Specialist') {
+            newUnit.upgradeBar.push('gear');
             newUnit.upgradesEquipped.push(null);
           }
           list.units.push(newUnit);
@@ -686,6 +698,18 @@ class BuilderContainer extends React.Component {
       newUnit.upgradeBar.splice(commsIndex, 1);
       newUnit.upgradesEquipped.splice(commsIndex, 1);
       newUnit.count = 1;
+    } else if (newUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Trooper Captain' || newUnit.upgradesEquipped[upgradeIndex].name === 'Stormtrooper Captain') {
+      const trainingIndex = newUnit.upgradeBar.indexOf('training');
+      newUnit.upgradesEquipped[upgradeIndex] = null;
+      newUnit.upgradeBar.splice(trainingIndex, 1);
+      newUnit.upgradesEquipped.splice(trainingIndex, 1);
+      newUnit.count = 1;
+    } else if (newUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Trooper Specialist' || newUnit.upgradesEquipped[upgradeIndex].name === 'Stormtrooper Specialist') {
+      const gearIndex = newUnit.upgradeBar.lastIndexOf('gear');
+      newUnit.upgradesEquipped[upgradeIndex] = null;
+      newUnit.upgradeBar.splice(gearIndex, 1);
+      newUnit.upgradesEquipped.splice(gearIndex, 1);
+      newUnit.count = 1;
     } else {
       newUnit.upgradesEquipped[upgradeIndex] = null;
       newUnit.count = 1;
@@ -709,6 +733,16 @@ class BuilderContainer extends React.Component {
         list.units[unitIndex].upgradeBar.splice(commsIndex, 1);
         list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
         list.units[unitIndex].upgradesEquipped.splice(commsIndex, 1);
+      } else if (oldUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Trooper Captain' || oldUnit.upgradesEquipped[upgradeIndex].name === 'Stormtrooper Captain') {
+        const trainingIndex = list.units[unitIndex].upgradeBar.indexOf('training');
+        list.units[unitIndex].upgradeBar.splice(trainingIndex, 1);
+        list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
+        list.units[unitIndex].upgradesEquipped.splice(trainingIndex, 1);
+      } else if (oldUnit.upgradesEquipped[upgradeIndex].name === 'Rebel Trooper Specialist' || oldUnit.upgradesEquipped[upgradeIndex].name === 'Stormtrooper Specialist') {
+        const gearIndex = list.units[unitIndex].upgradeBar.lastIndexOf('gear');
+        list.units[unitIndex].upgradeBar.splice(gearIndex, 1);
+        list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
+        list.units[unitIndex].upgradesEquipped.splice(gearIndex, 1);
       } else {
         list.units[unitIndex].upgradesEquipped[upgradeIndex] = null;
       }
