@@ -24,7 +24,7 @@
     "google-auth-library": "^2.0.1",
     "md5": "^2.2.1",
     "mongodb": "^3.1.6",
-    "mongoose": "^5.3.9",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.18.4",
     "npm": "^6.11.3",
     "react": "^16.4.2",
