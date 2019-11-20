@@ -2676,6 +2676,22 @@
   "faction": "rebels",
   "products": ["swl01"],
   "id": "hz"
+},
+{
+  "pips": 2,
+  "name": "Impromptu Immolation",
+  "commander": "R2-D2",
+  "faction": "rebels",
+  "products": [],
+  "id": "im"
+},
+{
+  "pips": 3,
+  "name": "Smoke Screen",
+  "commander": "R2-D2",
+  "faction": "rebels",
+  "products": [],
+  "id": "in"
 }
   ]
 }
