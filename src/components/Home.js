@@ -198,34 +198,6 @@ const Home = ({ history, userId, handleGoogleLogin, handleGoogleLogout, handleGo
             justify="center"
             alignItems="center"
           >
-            <Grid item>
-              <Button
-                variant={darkMode ? 'outlined' : 'contained'}
-                size="small"
-                href="http://invaderleague.com"
-                target="_blank"
-              >
-                <FiberNewIcon style={{ marginRight: '0px' }}  />
-                Invader League Season 4!
-              </Button>
-            </Grid>
-            <Grid item style={{ textAlign: 'center' }}>
-              <a
-                href="https://imperialterrain.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                }}
-              >
-                <img
-                  alt="Imperial Terrain"
-                  src="/imperialTerrain.png"
-                  style={{
-                    maxWidth: '300px'
-                  }}
-                />
-              </a>
-            </Grid>
           </Grid>
           <Grid
             container
